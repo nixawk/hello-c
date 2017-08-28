@@ -40,6 +40,10 @@ root@sh:~/debug/memory_layout# bash test.sh
    1484     300       8    1792     700 static_var_uninit.out  /* uninit static variable stored in .bss */
 ```
 
+![](https://user-images.githubusercontent.com/7352479/29761999-145345da-8b9a-11e7-9cff-77509f499b20.png)
+
+
 ## References
 
 1. http://www.geeksforgeeks.org/memory-layout-of-c-program/
+2. https://www.youtube.com/watch?v=0jhQBQcGnuM
