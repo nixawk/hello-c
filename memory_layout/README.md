@@ -1,3 +1,18 @@
+
+## User space VS Kernel Space
+
+A modern computer operating system usually segregates virtual memory into kernel space and user space. Primarily, this separation serves to provide memory protection and hardware protection from malicious or errant software behaviour.
+
+**Kernel space** is strictly reserved for running a privileged operating system kernel, kernel extensions, and most device drivers. In contrast, **user space** is the memory area where application software and some drivers execute.
+
+
+The term userland (or user space) refers to all code that runs outside the operating system's kernel. Userland usually refers to the various programs and libraries that the operating system uses to interact with the kernel: software that performs input/output, manipulates file system objects, application software, etc.
+
+Each user space process normally runs in its own virtual memory space, and, unless explicitly allowed, cannot access the memory of other processes. This is the basis for memory protection in today's mainstream operating systems, and a building block for privilege separation. A separate user mode can also be used to build efficient virtual machines. Depending on the privileges, processes can request the kernel to map part of another process's memory space to its own, as is the case for debuggers. Programs can also request shared memory regions with other processes, although other techniques are also available to allow inter-process communication.
+
+![](https://user-images.githubusercontent.com/7352479/29762625-6fb2630e-8b9d-11e7-9c71-ea98dd4ec1e2.png)
+
+
 ## Memory Layout In C
 
 
@@ -47,3 +62,4 @@ root@sh:~/debug/memory_layout# bash test.sh
 
 1. http://www.geeksforgeeks.org/memory-layout-of-c-program/
 2. https://www.youtube.com/watch?v=0jhQBQcGnuM
+3. https://en.wikipedia.org/wiki/User_space
