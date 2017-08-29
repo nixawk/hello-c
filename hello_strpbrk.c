@@ -11,7 +11,7 @@ This function returns a pointer to the character in str1 that matches one of the
 
 */
 
-int main()
+int main(void)
 {
     const char str1[] = "helloworld123";
     const char str2[] = "love";

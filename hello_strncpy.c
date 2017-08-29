@@ -13,7 +13,7 @@ n    - The number of characters to be copied from source.
 
 */
 
-int main()
+int main(void)
 {
     char src[256];
     char dest[256];

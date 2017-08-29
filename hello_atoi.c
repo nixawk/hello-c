@@ -14,7 +14,7 @@ If no valid conversion could be performed, it returns zero.
 
 */
 
-int main()
+int main(void)
 {
     char sn[] = "123a456";
     int n;

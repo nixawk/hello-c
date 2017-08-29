@@ -15,7 +15,7 @@ This is a set of
 
 */
 
-int main()
+int main(void)
 {
     printf("%d\n", ispunct('a'));  // false
     printf("%d\n", ispunct('&'));  // true

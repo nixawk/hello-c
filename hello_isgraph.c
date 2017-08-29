@@ -32,7 +32,7 @@ Standard white-space declartion for isspace() function.
 
 */
 
-int main()
+int main(void)
 {
     printf("%d\n", isgraph('a'));    // true
     printf("%d\n", isgraph('&'));    // true

@@ -12,7 +12,7 @@ This function returns a pointer to the error string describing error errnum.
 
 */
 
-int main()
+int main(void)
 {
     FILE *fp;
 

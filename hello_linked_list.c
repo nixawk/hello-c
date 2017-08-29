@@ -7,7 +7,7 @@ struct employee {
 };
 
 
-int main()
+int main(void)
 {
     struct employee *boss;
     struct employee *someone;

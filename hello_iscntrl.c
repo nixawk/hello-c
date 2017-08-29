@@ -11,7 +11,7 @@ In ASCII, these characters have octal codes 000 through 037, and 177 (DEL).
 
 */
 
-int main()
+int main(void)
 {
     printf("%d\n", iscntrl('\n'));   // true
     printf("%d\n", iscntrl('\t'));   // true

@@ -12,7 +12,7 @@ int toupper(int c)
 
 */
 
-int main()
+int main(void)
 {
     char aStr[] = "HELLOWORLD";
     int i = 0;

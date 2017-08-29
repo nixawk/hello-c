@@ -1,7 +1,7 @@
 #include <time.h>
 #include <stdio.h>
 
-int main()
+int main(void)
 {
     struct tm *t;
     time_t timer;

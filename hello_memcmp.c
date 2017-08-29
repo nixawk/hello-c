@@ -17,7 +17,7 @@ if Return value = 0 then it indicates str1 is equal than str2.
 
 */
 
-int main()
+int main(void)
 {
     char str1[] = "helloworld";
     char str2[] = "helloc";

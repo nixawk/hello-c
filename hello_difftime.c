@@ -9,7 +9,7 @@ returns the different of seconds between time1 and time2 i.e (time1 - time2).
 
 */
 
-int main()
+int main(void)
 {
     time_t start_t, end_t;
 

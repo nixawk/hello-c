@@ -1,7 +1,7 @@
 #include <ctype.h>
 #include <stdio.h>
 
-int main()
+int main(void)
 {
     /* int isalnum(int c) - This function checks whether the passed character is alphanumeric. */
 

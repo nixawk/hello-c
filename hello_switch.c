@@ -1,26 +1,26 @@
 #include <stdio.h>
 
-void hack_c()
+void hack_c(void)
 {
     printf("hacking c\n");
 }
 
-void hack_cpp()
+void hack_cpp(void)
 {
    printf("hacking cpp\n");
 }
 
-void hack_java()
+void hack_java(void)
 {
     printf("hacking java\n");
 }
 
-void hack_python()
+void hack_python(void)
 {
     printf("hacking python\n");
 }
 
-int main()
+int main(void)
 {
     int choice;
 

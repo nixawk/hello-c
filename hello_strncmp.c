@@ -19,7 +19,7 @@ if Return value = 0 then it indicates str1 is equal to str2.
 
 */
 
-int main()
+int main(void)
 {
     char str1[15];
     char str2[15];

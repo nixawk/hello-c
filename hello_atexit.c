@@ -12,7 +12,7 @@ otherwise a non-zero value is returned if it is failed.
 
 */
 
-void callback()
+void callback(void)
 {
     printf("callback function\n");
 }

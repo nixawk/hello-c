@@ -8,7 +8,7 @@ size_t strftime(char *str, size_t maxsize, const char *format, const struct tm *
 formats the time represented in the structure timeptr according to the formatting rules defined in format and stored into str.
 */
 
-int main()
+int main(void)
 {
     time_t rawtime;
     struct tm *info;

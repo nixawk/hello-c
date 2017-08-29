@@ -13,7 +13,7 @@ dd the day of the month,
 hh:mm:ss the time, and yyyy the year.
 */
 
-int main()
+int main(void)
 {
     time_t *timer;
     time_t rtimer;

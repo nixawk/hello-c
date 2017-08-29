@@ -8,7 +8,7 @@ int isupper(int c);
 
 */
 
-int main()
+int main(void)
 {
     printf("%d\n", islower('a'));   // true
     printf("%d\n", islower('A'));   // false

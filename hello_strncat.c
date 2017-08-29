@@ -15,7 +15,7 @@ This function returns a pointer to the resulting string dest.
 
 */
 
-int main()
+int main(void)
 {
     char dest[256];
     char src[256];

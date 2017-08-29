@@ -18,7 +18,7 @@ if Return value = 0 then it indicates str1 is equal to str2.
 
 */
 
-int main()
+int main(void)
 {
     char s1[15];
     char s2[15];

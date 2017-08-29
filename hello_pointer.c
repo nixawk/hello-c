@@ -3,7 +3,7 @@
 #include <string.h>
 
 
-void new_pointer1()
+void new_pointer1(void)
 {
     int *pointer = malloc(sizeof(*pointer));
     memset(pointer, '\x00', sizeof(int));
@@ -14,7 +14,7 @@ void new_pointer1()
     free(pointer);
 }
 
-void new_pointer2()
+void new_pointer2(void)
 {
     int x;               /* A normal integer */
     int *p;              /* A pointer to an integer ("*p") is an integer, so p must be a pointer to an integer */
@@ -27,7 +27,7 @@ void new_pointer2()
     getchar();
 }
 
-int main()
+int main(void)
 {
     new_pointer1();
     new_pointer2();

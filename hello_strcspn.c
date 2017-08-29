@@ -13,7 +13,7 @@ This function returns the number of characters in the initial segment of string 
 
 */
 
-int main()
+int main(void)
 {
     int len;
     const char str1[] = "ABCDEF4960910";

@@ -5,7 +5,7 @@
 // int isdigit(int c);
 // int isxdigit(int c);
 
-int main()
+int main(void)
 {
     printf("%d\n", isdigit('0'));  // true
     printf("%d\n", isdigit(0));    // false

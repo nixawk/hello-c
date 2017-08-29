@@ -29,7 +29,7 @@ int sum(int argc, ...)
 }
 
 
-int main()
+int main(void)
 {
     printf("1 + 2 + 3 + 4 + 5 = %d\n", sum(5, 1, 2, 3, 4, 5));
     return 0;

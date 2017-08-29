@@ -9,7 +9,7 @@ returns a pointer to a string which represents the day and time of the structure
 
 */
 
-int main()
+int main(void)
 {
     struct tm t;
 

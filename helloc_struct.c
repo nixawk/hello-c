@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 
-int main()
+int main(void)
 {
     typedef struct person {
         int age;

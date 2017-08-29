@@ -6,7 +6,7 @@ int add_demo(int x, int y)
     return x + y;
 }
 
-int main()
+int main(void)
 {
     int x, y, z;
 

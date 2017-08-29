@@ -15,7 +15,7 @@ The function returns a pointer to destination, which is str1.
 
 */
 
-int main()
+int main(void)
 {
     const char src[32] = "this is a demo string";
     char dest[32];

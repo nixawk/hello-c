@@ -13,7 +13,7 @@ n   - This is the number of bytes to be analyzed.
 This function returns a pointer to the matching byte or NULL if the character does not occur in the given memory area.
 */
 
-int main()
+int main(void)
 {
     char aStr[] = "helloworld";
     // void *pointer;

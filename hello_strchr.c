@@ -14,7 +14,7 @@ This returns a pointer to the first occurrence of the character c in the string 
 
 */
 
-int main()
+int main(void)
 {
     const char aStr[] = "helloworld";
     int c = 'e';

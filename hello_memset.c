@@ -15,7 +15,7 @@ This function returns a pointer to the memory area str.
 
 */
 
-int main()
+int main(void)
 {
     char aStr[] = "helloworld";
 

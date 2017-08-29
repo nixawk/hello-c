@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void array_x_y() {
+void array_x_y(void) {
     int x = 2;
     int y = 3;
     char astring[x][y];
@@ -20,7 +20,7 @@ void array_x_y() {
     }
 }
 
-int main()
+int main(void)
 {
     char astring[10];
     int n;

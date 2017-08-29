@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int main()
+int main(void)
 {
     FILE *fp;
     char astring[] = "this is a demo string";

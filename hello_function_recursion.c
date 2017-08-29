@@ -13,7 +13,7 @@ void recurse(int count)
     }
 }
 
-int main()
+int main(void)
 {
     recurse(1);
     return 0;

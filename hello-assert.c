@@ -14,7 +14,7 @@ void demo_assert(int i)
 }
 
 
-int main()
+int main(void)
 {
     int i;
 
