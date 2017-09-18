@@ -21,15 +21,12 @@ int x = 0x01234567;
 #include <stdio.h>
 
 typedef int _bool;
-#define TRUE 1
-#define FALSE 0
-
 typedef unsigned char *byte_ptr;
 
 _bool is_little_endian(void)
 {
     unsigned int x = 0x01234567;
-    return (*((byte_ptr)&x) == 0x01) ? FALSE : TRUE;
+    return *((byte_ptr)&x) == 0x01; // return 0 or 1;
 }
 
 int
