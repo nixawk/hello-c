@@ -8,6 +8,11 @@ status - This is the status value returned to the parent process.
 
 This function does not return any value.
 
+    * Flushes unwritten buffered data.
+    * Closes all open files.
+    * Removes temporary files.
+    * Returns an integer exit status to the operating system.
+
 */
 
 int main(int argc, char const *argv[]) {
