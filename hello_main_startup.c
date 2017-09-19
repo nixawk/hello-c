@@ -1,5 +1,12 @@
 #include <stdio.h>
 
+/*
+
+With GCC family of C compilers, we can mark some functions to execute before and after main().
+
+    void constructor(void) __attribute__((constructor));
+    void destructor(void) __attribute__((destructor));
+*/
 
 __attribute__((constructor))
 void
@@ -26,3 +33,4 @@ main(void)
 
 
 // https://stackoverflow.com/questions/2053029/how-exactly-does-attribute-constructor-work
+// http://www.geeksforgeeks.org/functions-that-are-executed-before-and-after-main-in-c/
