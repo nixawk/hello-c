@@ -21,20 +21,59 @@ This function returns a pointer to the newly allocated memory, or NULL if the re
 
 */
 
-int main(int argc, char const *argv[]) {
-  char *str;
+/*
 
-  /* Initial memory allocation*/
-  str = (char *)malloc(15);
-  strcpy(str, "www.google");
-  printf("String: %s, Address: %p\n", str, str);
+If "size" is zero, then call to realloc is equivalent to "free(ptr)".
+If "ptr" is NULL and size if non-zero then call to realloc is equivalent to "malloc(size)".
 
-  /* Reallocating memory */
-  str = (char *)realloc(str, 25);
-  strcat(str, ".com");
-  printf("String: %s, Address: %p\n", str, str);
+*/
 
-  /* Release memory */
-  free(str);
-  return 0;
+void
+realloc_malloc(void)
+{
+    int *ptr = realloc(NULL, 512);  /* eq to malloc */
+
+    printf("realloc_malloc: %p\n", ptr);
+    free(ptr);
 }
+
+void
+realloc_free(void)
+{
+    int *ptr = malloc(512);
+    int *realloc_ptr = realloc(ptr, 0);  /* eq to free(ptr) */
+
+    printf("realloc_free: %p\n", realloc_ptr);
+}
+
+void
+realloc_resize(void)
+{
+    char *str;
+
+    /* Initial memory allocation*/
+    str = (char *)malloc(15);
+    strcpy(str, "www.google");
+    printf("String: %s, Address: %p\n", str, str);
+
+    /* Reallocating memory */
+    str = (char *)realloc(str, 25);
+    strcat(str, ".com");
+    printf("String: %s, Address: %p\n", str, str);
+
+    /* Release memory */
+    free(str);
+}
+
+int
+main(void) {
+
+    realloc_malloc();
+    realloc_free();
+    realloc_resize();
+
+    return 0;
+}
+
+
+// http://www.geeksforgeeks.org/how-to-deallocate-memory-without-using-free-in-c/
