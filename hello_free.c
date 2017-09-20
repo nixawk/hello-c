@@ -1,6 +1,4 @@
 #include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
 
 /*
 
@@ -15,21 +13,43 @@ This function does not return any value.
 
 */
 
-int main(int argc, char const *argv[]) {
-  char *str;
-  int bufsize = 30;
+/*
 
-  /* Initial memory allocation */
-  str = (char *)malloc(bufsize);
-  strcpy(str, "www.google");
-  printf("String = %s, Address = %p\n", str, str);
+What is Memory Leak ?
 
-  /* Reallocating memory */
-  str = (char *)realloc(str, bufsize);
-  strcat(str, ".com");
-  printf("String = %s, Address = %p\n", str, str);
+Memory leak occurs when programmers create a memory in heap and forget to delete it.
+Memory leaks are particularly serious issues for programs like daemons and servers
+which by definition never terminate.
 
-  /* Deallocate allocated memory */
-  free(str);
-  return 0;
+To avoid memory leaks, memory allocated on heap should always be freed when no longer needed.
+
+Valgrind : http://valgrind.org/
+
+*/
+
+void
+memory_leak(void)
+{
+    int *ptr = malloc(512);
 }
+
+
+void
+avoid_memory_leak(void)
+{
+    int *ptr = malloc(512);
+    free(ptr);
+}
+
+
+int
+main(void) {
+
+    memory_leak();
+    avoid_memory_leak();
+
+    return 0;
+}
+
+
+// http://www.geeksforgeeks.org/what-is-memory-leak-how-can-we-avoid/
