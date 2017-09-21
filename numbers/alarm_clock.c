@@ -7,8 +7,8 @@
 
 #define BUFSIZE 512          /* buffer to save time string */
 
-time_t get_ctime(void);    /* get current time */
-time_t set_alarm(void);  /* set alert time */
+time_t get_ctime(void);      /* get current time */
+time_t set_alarm(void);      /* set alert time */
 
 void welcome(void);          /* alarm clock welcome message */
 void alarm(time_t);          /* alarm clock */
@@ -38,7 +38,6 @@ set_alarm(void)
 
     welcome();
 
-    /* convert a string into a (struct dm) */
     scanf("%d/%d/%d %d:%d:%d", &mon, &mday, &year, &hour, &min, &sec);
     t.tm_mon  = mon - 1;
     t.tm_mday = mday;
@@ -72,13 +71,13 @@ alarm(time_t e)
     double sec;
     time_t now;
 
-    while (1)                   /* how to make alarm clock weak custom job */
+    while (1)                     /* how to make alarm clock weak custom job */
     {
-        now = get_ctime();      /* update current time */
+        now = get_ctime();        /* update current time */
         sec = difftime(now, e);
         if (sec > 0)
         {
-            weakup();           /* custom weakup job here */
+            weakup();             /* custom weakup job here */
             break;
         }
     }
