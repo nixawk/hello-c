@@ -1,28 +1,43 @@
 #include <string.h>
+#include <stdlib.h>
 #include <stdio.h>
 
-/*
+// char * strchr(const char *s, int c);
+// char * strrchr(const char *s, int c);
 
-char *strchr(const  char *str, int c);
+// The strchr function finds the first occurrence of the byte c (converted to a char)
+// in the string beginning at string.
+// The return value is a pointer to the located byte, or a null pointer if no match was found.
 
-searches for the first occurrence of the character c (an unsigned char) in the string pointed to by the argument str.
+// char * strstr(const char *haystack, const char *needle);
 
-str    - This is the C string to be scanned.
-c      - This is the character to be searched in str.
+// char * index (const char *string, int c)
+// char * rindex (const char *string, int c) 
 
-This returns a pointer to the first occurrence of the character c in the string str, or NULL if the character is not found.
+// index is another name for [strchr]; they are exactly the same.
+// New code should always use [strchr] since the name is defined in ISO C,
+// while [index] is a BSD invention which never was available on System V derived systems.
 
-*/
+
+void
+strchr_usage(void)
+{
+    char s[] = "helloworld";
+    int c = 'l';
+
+    char *ptr = strchr(s, c);
+    if (ptr == NULL)
+    {
+        printf("strchr() failed \n");
+        exit(0);
+    }
+
+    printf("%p - %s\n", ptr, ptr);
+}
 
 int main(void)
 {
-    const char aStr[] = "helloworld";
-    int c = 'e';
-    char *pointer;
-
-    pointer = strchr(aStr, c);
-
-    printf("pointer is : %p\n", pointer);
+    strchr_usage();
 
     return 0;
 }
