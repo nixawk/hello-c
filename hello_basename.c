@@ -31,3 +31,6 @@ main(int argc, char *argv[])
 
     return 0;
 }
+
+
+// https://www.gnu.org/software/libc/manual/html_node/Finding-Tokens-in-a-String.html#Finding-Tokens-in-a-String
