@@ -18,7 +18,7 @@ memchr_usage(void)
     void *ptr = memchr(s, c, strlen(s));
     if (ptr == NULL)
     {
-        printf("strchr() failed \n");
+        printf("memchr() failed \n");
         exit(0);
     }
 
