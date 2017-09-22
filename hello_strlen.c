@@ -21,6 +21,7 @@ void
 string_array_length(void)
 {
     char string[32] = "hello, world";
+
     printf("strlen(array) = %lu\n", strlen(string));  // print 12 bytes
     printf("sizeof(array) = %lu\n", sizeof(string));  // print 32 bytes
 }
@@ -30,6 +31,7 @@ string_pointer_length(void)
 {
     char string[32] = "hello, world";
     char *ptr = string;
+
     printf("strlen(ptr) = %lu\n", strlen(ptr));  // 12 bytes
     printf("sizeof(ptr) = %lu\n", sizeof(ptr));  // 8 bytes (IA64)
 }
@@ -39,6 +41,7 @@ int main(void)
 {
     string_array_length();
     string_pointer_length();
+
     return 0;
 }
 
