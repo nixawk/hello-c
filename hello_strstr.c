@@ -1,23 +1,42 @@
 #include <string.h>
+#include <stdlib.h>
 #include <stdio.h>
 
-/*
+// char * strstr(const char *haystack, const char *needle);
 
-char *strstr(const char *haystack, const char *needle);
+// This is like [strchr], except that it searches haystack for a substring needle
+// rather than just a single byte.
+// It returns a pointer into the string haystack that is the first byte of the substring,
+// or a null pointer if no match was found.
 
-haystack - This is the main C string to be scanned.
-needle   - This is the small string to be searched with-in haystack string.
+// char * index (const char *string, int c)
+// char * rindex (const char *string, int c) 
 
-This function returns a pointer to the first occurrence in haystack of any of the entire sequence of characters specified in needle, or a null pointer if the sequence is not present in haystack.
+// rindex is another name for [strrchr]; they are exactly the same.
+// New code should always use [strrchr] since the name is defined in ISO C,
+// while [index] is a BSD invention which never was available on System V derived systems.
 
-*/
+void
+strstr_usage(void)
+{
+    char haystack[] = "helloworld";
+    char needle[] = "world";
 
-int main(int argc, char const *argv[]) {
-  const char haystack[] = "this is a demo string";
-  const char needle[] = "string";
-  char *pointer;
+    char *ptr = strstr(haystack, needle);
+    if (ptr == NULL)
+    {
+        printf("strstr() failed \n");
+        exit(0);
+    }
 
-  pointer = strstr(haystack, needle);
-  printf("pointer: %p\n", pointer);
-  return 0;
+    printf("%p - %s\n", ptr, ptr);
 }
+
+
+int
+main(void) {
+    strstr_usage();
+
+    return 0;
+}
+
