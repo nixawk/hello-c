@@ -1,28 +1,74 @@
 #include <string.h>
 #include <stdio.h>
 
-/*
 
-void memcpy(void *str1, const void *str2, size_t n);
+// void * memcpy(void *restrict dst, const void *restrict src, size_t n);
+// void * memmove(void *dst, const void *src, size_t len);
 
-copies n characters from memory area str2 memory area str1.
 
-str1  - This is pointer to the destination array where the content is to be copied, type-casted to a pointer of type void*
-str2  - This is pointer to the source of data to be copied, type-casted to a pointer of type void*.
-n     - This is the number of bytes to be copied.
+// Most of funtions do not work properly if the source and destination arrays overlap.
+// For example, if the beginning of destination array overlaps the end of the source
+// array, the original contents of that part of the source array may get overwritten
+// before it is copied. Even worse, in the case of the string functions, the null byte
+// marking the end of the string may be lost, and the copy function might get stuck
+// in a loop trashing all the memory allocated to your program.
 
-The function returns a pointer to destination, which is str1.
+    // memcpy   : 123456789abcdef | 16789abcdabcdef | 1234523456789ef |
+    // memmove  : 123456789abcdef | 123456789abcdef | 1234523456789ef |
 
-*/
 
-int main(void)
+void
+memcpy_str(void)
 {
-    const char src[32] = "this is a demo string";
-    char dest[32];
+    char string[16] = "123456789abcdef";
+    char strtmp[16];
 
-    memset(dest, 'A', sizeof(dest));
-    printf("Before memcpy dest = %s\n", dest);
-    memcpy(dest, src, sizeof(src));
-    printf("After memcpy dest = %s\n", dest);
+    strcpy(strtmp, string);
+    printf("\nmemcpy   : ");
+    printf("%s | ", strtmp);
+
+    strcpy(strtmp, string);
+    memcpy(strtmp+1, strtmp+5, 8);    /* attention here */
+    printf("%s | ", strtmp);
+
+    strcpy(strtmp, string);
+    memcpy(strtmp+5, strtmp+1, 8);
+    printf("%s | ", strtmp);
+
+}
+
+
+void
+memmove_str(void)
+{
+    char string[16] = "123456789abcdef";
+    char strmov[16];
+
+    strcpy(strmov, string);
+    printf("\nmemmove  : ");
+    printf("%s | ", strmov);
+
+    strcpy(strmov, string);
+    memmove(strmov+1, strmov+5, 8);    /* attention here */
+    printf("%s | ", string);
+
+    strcpy(strmov, string);
+    memmove(strmov+5, strmov+1, 8);
+    printf("%s | ", strmov);
+}
+
+
+int
+main(void)
+{
+    memcpy_str();
+    memmove_str();
+
     return 0;
 }
+
+
+// https://www.gnu.org/software/libc/manual/html_node/Copying-Strings-and-Arrays.html#Copying-Strings-and-Arrays
+// https://stackoverflow.com/questions/1201319/what-is-the-difference-between-memmove-and-memcpy
+// https://stackoverflow.com/questions/4415910/memcpy-vs-memmove
+// https://www.pixelstech.net/article/1302786310-memcpy%28%29-vs-memmove%28%29-in-C
