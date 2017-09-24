@@ -1,34 +1,46 @@
 #include <stdlib.h>
-#include <string.h>
 #include <stdio.h>
 
-/*
 
-void *malloc(size_t size);
+// void * malloc (size_t size)
 
-allocates the requested memory and returns a pointer to it.
-
-- size -- This is the size of the memory block, in bytes.
-
-This function returns a pointer to the allocated memory, or NULL if the request fails.
+// This function returns a pointer to a newly allocated block size bytes long,
+// or a null pointer if the block could not be allocated.
 
 
-*/
+// void free (void *ptr)
+// When you no longer need a block that you got with malloc, use the function 
+// free to make the block available to be allocated again. 
 
-int main(int argc, char const *argv[]) {
-     char *str;
 
-     /* Initial memory allocation */
-     str = (char *) malloc(15);
-     strcpy(str, "www.google");
-     printf("String = %s,  Address = %p\n", str, str);
+typedef struct person {
+    int id;
+} person_t;
 
-     /* Reallocating memory */
-     str = (char *) realloc(str, 25);
-     strcat(str, ".com");
-     printf("String = %s,  Address = %p\n", str, str);
 
-     free(str);
+void
+malloc_usage(void) {
+    person_t *p;
 
-     return(0);
-  }
+    p = (person_t *) malloc(sizeof(person_t));
+    if (p == NULL) {
+        fprintf(stderr, "malloc() failed\n");
+        exit(0);
+    }
+
+    p->id = 0xFF;
+
+    printf("ID: %#x\n", p->id);
+    free(p);
+}
+
+
+int
+main(void) {
+    malloc_usage();
+    return(0);
+}
+
+
+
+// https://www.gnu.org/software/libc/manual/html_node/Basic-Allocation.html#Basic-Allocation
