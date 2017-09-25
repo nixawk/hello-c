@@ -77,3 +77,4 @@ main(void) {
 
 
 // http://www.geeksforgeeks.org/how-to-deallocate-memory-without-using-free-in-c/
+// https://www.gnu.org/software/libc/manual/html_node/Changing-Block-Size.html#Changing-Block-Size
