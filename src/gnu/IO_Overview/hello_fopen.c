@@ -1,13 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BUFSIZE 512  /* heap memory size */
+// FILE * fopen (const char *filename, const char *opentype)
+// FILE * fopen64 (const char *filename, const char *opentype)
+
+// If the open fails, [fopen] returns a null pointer.
+
+
+#define SIZE 512  /* heap memory size */
 
 void file_write(char *, char *);
 void file_read(char *);
 
 
-/* write data into a file  */
 void
 file_write(char *filename, char *data)
 {
@@ -24,7 +29,6 @@ file_write(char *filename, char *data)
 }
 
 
-/* read data from a file */
 void
 file_read(char *filename)
 {
@@ -36,7 +40,7 @@ file_read(char *filename)
         printf("file_read - failed to read data\n");
         exit(0);
     } else {
-        ptr = (char *)calloc(BUFSIZE, sizeof(char));  /* allocate heap buffer */
+        ptr = (char *)calloc(SIZE, sizeof(char));  /* allocate heap buffer */
 
         if (ptr == NULL ) {
             printf("file_read - failed to allocate buffer\n");
@@ -44,7 +48,7 @@ file_read(char *filename)
         } else {
             while (!feof(fp))            /* end of file */
             {
-                fgets(ptr, BUFSIZE, fp); /* read byte by byte */
+                fgets(ptr, SIZE, fp); /* read byte by byte */
                 fputs(ptr, stdout);      /* output to console */
             }
         }
@@ -55,7 +59,8 @@ file_read(char *filename)
 }
 
 
-int main(void)
+int
+main(void)
 {
     file_write("/tmp/test.log", "helloworld \n");
     file_read("/etc/passwd");
@@ -64,6 +69,7 @@ int main(void)
 }
 
 
+// https://www.gnu.org/software/libc/manual/html_node/Opening-Streams.html#Opening-Streams
 // http://www.geeksforgeeks.org/fopen-for-an-existing-file-in-write-mode/
 // http://www.geeksforgeeks.org/eof-and-feof-in-c/
 // http://www.geeksforgeeks.org/g-fact-82/
