@@ -29,6 +29,16 @@ stat_usage(void)
     printf("stat.st_ino : %llu\n", buf.st_ino);
     printf("stat.st_uid : %d\n", buf.st_uid);
     printf("stat.st_gid : %d\n", buf.st_gid);
+
+    if (S_ISDIR(buf.st_mode))
+    {
+        printf("It is a directiry.\n");
+    }
+
+    if (S_ISREG(buf.st_mode))
+    {
+        printf("It is a regular file.\n");
+    }
 }
 
 
@@ -43,3 +53,4 @@ main(void)
 // https://www.gnu.org/software/libc/manual/html_node/Reading-Attributes.html#Reading-Attributes
 // https://www.gnu.org/software/libc/manual/html_node/Attribute-Meanings.html#Attribute-Meanings
 // https://www.gnu.org/software/libc/manual/html_node/Permission-Bits.html#Permission-Bits
+// https://www.gnu.org/software/libc/manual/html_node/Testing-File-Type.html#Testing-File-Type
