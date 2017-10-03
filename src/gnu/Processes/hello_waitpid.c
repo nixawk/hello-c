@@ -38,6 +38,33 @@
      // 15      TERM (software termination signal)
 
 
+// int WIFEXITED (int status)
+// This macro returns a nonzero value if the child process terminated normally with exit or _exit.
+
+// int WEXITSTATUS (int status)
+// If WIFEXITED is true of status, this macro returns the low-order 8 bits of the exit status value
+// from the child process.
+
+
+// int WIFSIGNALED (int status)
+// This macro returns a nonzero value if the child process terminated because it received a signal
+// that was not handled.
+
+// int WTERMSIG (int status)
+// If WIFSIGNALED is true of status, this macro returns the signal number of the signal that terminated the child process.
+
+
+// int WCOREDUMP (int status)
+// This macro returns a nonzero value if the child process terminated and producted a core dump.
+
+
+// int WIFSTOPPED (int status)
+// This macro returns a nonzero value if the child process id stopped.
+
+// int WSTOPSIG (int status)
+// If WIFSTOPPED is true of status, this macro returns the signal number of the signal that caused the child process to stop.
+
+
 void
 signal_handler(pid_t pid)
 {
@@ -64,6 +91,10 @@ signal_handler(pid_t pid)
         {
             printf("continued\n");
         }
+        else if (WIFSTOPPED(status))
+        {
+            printf("stopped: %d\n", WSTOPSIG(status));
+        }
     } while (!WIFEXITED(status) && !WIFSIGNALED(status));
 }
 
@@ -79,12 +110,12 @@ waitpid_usage(void)
         fprintf(stderr, "fork() failed.\n");
         exit(EXIT_FAILURE);
     }
-    else if (cpid == 0)
+    else if (cpid == 0)  /* child process */
     {
         printf("Child PID is %d\n", getpid());
         pause();
     }
-    else
+    else                /* parent process */
     {
         signal_handler(cpid);
     }
@@ -100,4 +131,5 @@ main(void)
 
 
 // https://www.gnu.org/software/libc/manual/html_node/Process-Completion.html#Process-Completion
+// https://www.gnu.org/software/libc/manual/html_node/Process-Completion-Status.html#Process-Completion-Status
 // http://www.tutorialspoint.com/unix_system_calls/waitpid.htm
