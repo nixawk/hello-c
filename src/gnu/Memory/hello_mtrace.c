@@ -49,7 +49,9 @@ mtrace_usage(void)
     // the program returns from main or calls exit and so cannot free the memory they use 
     // before this time.
 
+#ifdef DEBUGGING
     muntrace();  /* disable tracing */
+#endif
 }
 
 
