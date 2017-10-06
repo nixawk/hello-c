@@ -20,6 +20,15 @@
 // again at full speed.
 
 
+// This is all that is needed if you want to trace the calls during the whole runtime
+// of the program. Alternatively you can stop the tracing at any time with a call to 
+// muntrace. It is even possible to restart the tracing again with a new call to mtrace. 
+// But this can cause unreliable results since there may be calls of the functions which
+// are not called. Please note that not only the application uses the traced functions,
+// also libraries (including the C library itself) use these functions.
+
+
+
 #define SIZE 256
 
 
@@ -28,12 +37,19 @@ mtrace_usage(void)
 {
     char *buf;
 
-    mtrace();   /* enable tracing */
+#ifdef DEBUGGING // gcc -DDEBUGGING -o test test.c
+    mtrace();    /* enable tracing */
+#endif
 
     buf = (char *)malloc(SIZE);
     free(buf);
 
-    muntrace(); /* disable tracing */
+    // This last point is also why it is not a good idea to call [muntrace] before the program
+    // terminates. The libraries are informed about the termination of the program only after
+    // the program returns from main or calls exit and so cannot free the memory they use 
+    // before this time.
+
+    muntrace();  /* disable tracing */
 }
 
 
@@ -58,3 +74,6 @@ $ cat malloc_trace.log
 */
 
 // https://www.gnu.org/software/libc/manual/html_node/Tracing-malloc.html#Tracing-malloc
+// https://www.gnu.org/software/libc/manual/html_node/Using-the-Memory-Debugger.html#Using-the-Memory-Debugger
+// https://www.gnu.org/software/libc/manual/html_node/Tips-for-the-Memory-Debugger.html#Tips-for-the-Memory-Debugger
+// https://www.gnu.org/software/libc/manual/html_node/Interpreting-the-traces.html#Interpreting-the-traces
