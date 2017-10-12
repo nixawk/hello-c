@@ -1,34 +1,44 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <signal.h>
+#include <string.h>
+#include <stdlib.h>
+
+// void abort (void)
+
+// The [abort] function causes abnormal program termination.
+// This does not execute cleanup functions registered with [atexit] or [on_exit].
+// This function actually terminates the process by raising a [SIGABRT] signal,
+// and your program can include a handler to interrupt this signal;
 
 /*
 
-void abort(void);
-
-abort the program execution and comes out directly from the place of the call.
-
-This function does not return any value.
-
-Unlike exit() function, abort() may not close files that are open.
-It may also not delete temporary files and may not flush stream buffer.
-Also, it does not call functions registered with atexit().
-
-This function actually terminates the process by raising a SIGABRT signal,
+$ ./a.out
+signal_callback, Abort trap: 6
+[1]    85681 abort      ./a.out
 
 */
 
-int main(int argc, char const *argv[]) {
-    FILE *fp;
+void
+signal_callback(int signum)
+{
+    printf("signal_callback, %s\n", strsignal(signum));
+}
 
-    fp = fopen("nofile.txt", "r");
-    if (fp == NULL)
-    {
-        printf("Going to abort the program\n");
-        abort();
-    }
 
-    printf("Going to close nofile.txt\n");
-    fclose(fp);
+void
+abort_usage(void)
+{
+    signal(SIGABRT, signal_callback);
+    abort();   // raise a [SIGABRT] signal;
+}
 
+
+int
+main(void)
+{
+    abort_usage();
     return 0;
 }
+
+// https://www.gnu.org/software/libc/manual/html_node/Aborting-a-Program.html#Aborting-a-Program
