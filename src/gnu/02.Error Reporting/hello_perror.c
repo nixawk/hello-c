@@ -3,29 +3,45 @@
 #include <stdio.h>
 #include <errno.h>
 
+    // void perror (const char *message)
 
-// void perror (const char *message)
+// This function prints an error message to the stream [stderr]; The orientation of
+// [stderr] is not changed.
 
-// Using [perror] has the advantage that the function is portable and
-// available on all systems implementating ISO C. But often the text 
-// perror generates is not what is wanted and there is no way to extend 
-// or change what perror does. The GNU coding standard, for instance, 
-// requires error messages to be preceded by the program name and programs 
-// which read some input files should provide information about the input 
-// file name and the line number in case an error is encountered while 
-// reading the file. For these occasions there are two functions available 
-// which are widely used throughout the GNU project. 
+// If you call [perror] with a message that is either a null pointer or an empty string,
+// [perror] just prints the error message corresponding to [errno], adding a trailling
+// newline.
+
+// If you supply a non-null message argument, then [perror] prefixs its output with this
+// string, It adds a colon and a space character to separate the [message] from the error
+// string corresponding to [errno].
+
+// The function [perror] is declared in stdio.h.
+
+
+void
+perror_usage(void)
+{
+    errno = 1;
+    perror(NULL);
+    perror("xxxx");
+}
+
 
 int
 main(void)
 {
-    int c;
-
-    for (c = 108; c > 0; c--)
-    {
-        errno = c;
-        perror(NULL);
-    }
+    perror_usage();
+    return 0;
 }
+
+
+/*
+
+$ ./hello_perror
+Operation not permitted
+xxxx: Operation not permitted
+
+*/
 
 // https://www.gnu.org/software/libc/manual/html_node/Error-Messages.html#Error-Messages
