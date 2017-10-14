@@ -1,17 +1,23 @@
 #include <stdlib.h>
 
-/*
+    // void free (void *ptr)
 
-void free(void *ptr);
+// When you no longer need a block that you got with [malloc], use the function [free]
+// to make the block available to be allocated again.
 
-deallocates the memory previously allocated by a call to calloc, malloc, or realloc.
+// The [free] function deallocates the block of memory pointed at by ptr.
 
-- ptr -- This is the pointer to a memory block previously allocated with malloc,
-         calloc or realloc to be deallocated. If a null pointer is passed as argument, no action occurs.
+// Freeing a block alters the contents of the block. Do not expect to find any data
+// (such as a pointer to the next block in a chain of blocks) in the block after
+// freeing it. Copy whatever you need out of the block before freeing it!
 
-This function does not return any value.
+// Occasionally, free can actually return memory to the operating system and make
+// the process smaller. Usually, all it can do is allow a later call to malloc to
+// reuse the space. In the meantime, the space remains in your program as part of
+// a free-list used internally by malloc.
 
-*/
+// There is no point in freeing blocks at the end of a program, because all of the
+// program’s space is given back to the system when the process terminates.
 
 /*
 
@@ -52,4 +58,5 @@ main(void) {
 }
 
 
+// https://www.gnu.org/software/libc/manual/html_node/Freeing-after-Malloc.html#Freeing-after-Malloc
 // http://www.geeksforgeeks.org/what-is-memory-leak-how-can-we-avoid/
