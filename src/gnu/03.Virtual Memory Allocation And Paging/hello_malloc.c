@@ -46,7 +46,7 @@ malloc_usage(void) {
     }
 
     memset(ptr, 0, sizeof(foo_t));
-    printf("foo.id = %d\n", ptr->x);
+    printf("foo.x = %d\n", ptr->x);
 
     free(ptr);
 }
