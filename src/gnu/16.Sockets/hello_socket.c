@@ -23,12 +23,11 @@
 void
 socket_usage(void)
 {
-    int sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
+    int sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (sock < 0)
     {
         fprintf(stderr, "socket() failed: %s\n.", strerror(errno));
     }
-    printf("create a new socket\n");
     
     // When you have finished using a socket, you can simply close its file descriptor with close;
     close(sock);
