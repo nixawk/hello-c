@@ -6,6 +6,24 @@
 
 // The function [calloc] allocates memory and clears it to zero. Iti is declared in [stdlib.h]
 
+// But in general, it is not guaranteed that calloc calls malloc internally.
+// Therefore, if an application provides its own malloc/realloc/free outside
+// the C library, it should always define calloc, too.
+
+/*
+
+void *
+calloc(size_t count, size_t eltsize)
+{
+    size_t size = count * eltsize;
+    void *value = malloc(size);
+    if (value != 0)
+        memset(value, 0, size);
+    return value;
+}
+
+*/
+
 void
 calloc_usage(void)
 {
