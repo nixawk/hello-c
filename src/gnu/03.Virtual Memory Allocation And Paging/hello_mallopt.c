@@ -7,25 +7,104 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-    // int mallopt (int param, int value)
 
-// When calling [mallopt], the param argument specifies the parameter to be set,
-// and value the new value to be set.
+// int mallopt (int param, int value)
 
-    // M_MMAP_MAX
+    // When calling [mallopt], the param argument specifies the parameter
+    // to be set, and value the new value to be set.
 
-    // The maximum number of chunks to allocate with [mmap]. Setting this to zero
-    // disables all use of [mmap].
+
+// M_MMAP_MAX
+
+    // The maximum number of chunks to allocate with [mmap]. Setting this to 
+    // zero disables all use of [mmap].
     // The default value of this parameter is 65536.
     // This parameter can also be set for the process at startup by setting the
     // environment variable [MALLOC_MMAP_MAX_] to the desired value.
 
-    // M_MMAP_THRESHOLD
-    // M_PERTURB
-    // M_TOP_PAD
-    // M_TRIM_THRESHOLD
-    // M_ARENA_TEST
-    // M_ARENA_MAX
+// M_MMAP_THRESHOLD
+
+    // All chunks larger than this value are allocated outside the normal heap,
+    // using the mmap system call. This way it is guaranteed that the memory
+    // for these chunks can be returned to the system on free. Note that 
+    // requests smaller that this threshold might still be allocated via mmap.
+
+    // If this parameter is not set, the default value is 128KiB and the 
+    // threshold is adjusted dynamically to suite the allocation patterns of
+    // the program. If the parameter is set, the dynamic adjustment is 
+    // disabled and the value is set statically to the input value.
+
+    // The parameter can also be set for the process at startup by setting the
+    // environemnt variable [MALLOC_MMAP_THRESHOLD_] to the desired value.
+
+// M_PERTURB
+
+    // If non-zero, memory blocks are filled with values depending on some low
+    // order bits of this parameter when they are allocated (except when 
+    // allocated by calloc) and freed. This can be used to debug the use of 
+    // uninitialized or freed heap memory. Note that this option does not 
+    // guarantee that the freed block will have any specific values. It only
+    // guarantees that the content the block had before it was freed will be
+    // overwritten.
+
+    // The default value of this parameter is 0.
+
+    // This parameter can also be set for the process at startup by setting
+    // the environment variable [MALLOC_MMAP_PERTURB_] to the desired value.
+
+// M_TOP_PAD
+
+    // This parameter determines the amount of extra memory to obtain from
+    // the system when an arena needs to be extended. If also specifies the
+    // number of bytes to retain when shrinking an arena. This provides the
+    // necessary hysteresis in heap size such that excessive amounts of system
+    // calls can be avoided.
+
+    // The default value of this parameter is 0.
+
+    // This parameter can also be set for the process at startup by setting 
+    // the environment variable [MALLOC_TOP_PAD_] to the desired value.
+
+// M_TRIM_THRESHOLD
+
+    // This is the minimum size (in bytes) of the top-most, releasable chunk
+    // that will trigger a system call in order to return memory to the system.
+
+    // If this parameter is not set, the default value is set as 128KiB and
+    // the threshold is adjusted dynamically to suit the allocation patterns
+    // of the program. If the parameter is set, the dynamic adjustment is 
+    // disabled and the value is set statically to the provided input.
+
+    // This parameter can also be set for the process at startup by setting
+    // the environment variable [MALLOC_TRIM_THRESHOLD_] to the desired value.
+
+// M_ARENA_TEST
+
+    // This parameter sepcifies the number of arenas that can be created before
+    // the test on the limit to the number of arenas is conducted. The value is
+    // ignored if [M_ARENA_MAX] is set.
+
+    // The default value of this parameter is 2 on 32-bit systems and 8 on
+    // 64-bit systems.
+
+    // This parameter can also be set for the process at startup by setting the
+    // environment [MALLOC_ARENA_TEST] to the desired value.
+
+// M_ARENA_MAX
+
+    // This parameter sets the number of arenas to use regardless of the number
+    // of cores in the system.
+
+    // The default value of this tunable is 0, meaning that the limit on the
+    // number of arenas by the number of of CPU cores online. For 32-bit
+    // systems the limit is twice the number of cores online and on 64-bit 
+    // systems, it is eight times the number of cores online. Note that the
+    // default value is not derived from the default value of [M_ARENA_TEST]
+    // and is computed independently.
+
+    // This parameter can also be set for the process at startup by setting
+    // the environment variable [MALLOC_ARENA_MAX] to the desired value.
+
 
 void
 mmap_usage(void)
