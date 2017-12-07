@@ -42,7 +42,7 @@ malloc_usage(void) {
 
     ptr = (foo_t *) malloc(sizeof(foo_t));
     if (ptr != NULL) {
-    error(EXIT_FAILURE, errno, "malloc() failed");
+        error(EXIT_FAILURE, errno, "malloc() failed");
     }
 
     memset(ptr, 0, sizeof(foo_t));
