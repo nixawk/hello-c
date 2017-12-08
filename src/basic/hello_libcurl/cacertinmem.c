@@ -29,7 +29,7 @@
 #include <stdio.h>
 
 
-// gcc -lcurl -I /usr/local/opt/openssl/include -L /usr/local/opt/openssl/lib cacertinmem.c
+// gcc cacertinmem.c -L/usr/lib -lssl -lcrypto -lcurl
 
 
 size_t
