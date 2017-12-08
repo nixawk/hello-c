@@ -79,6 +79,9 @@ url2file(const char *url)
     /* set HTTP HEADER */
     curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Dark Secret Ninja/1.0");
 
+    /* enable URL REDIRECT */
+    curl_easy_setopt(curl_handle, CURLOPT_FOLLOWLOCATION, 1L);
+
     /* set URL to get here */
     curl_easy_setopt(curl_handle, CURLOPT_URL, url);
 
@@ -128,4 +131,5 @@ main(int argc, const char *argv[])
 // https://curl.haxx.se/libcurl/c/CURLOPT_USERAGENT.html
 // https://curl.haxx.se/libcurl/c/CURLOPT_WRITEDATA.html
 // https://curl.haxx.se/libcurl/c/CURLOPT_WRITEFUNCTION.html
+// https://curl.haxx.se/libcurl/c/CURLOPT_FOLLOWLOCATION.html
 // http://www.cplusplus.com/reference/cstdio/fwrite/
