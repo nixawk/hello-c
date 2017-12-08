@@ -68,6 +68,7 @@ void
 url2file(const char *url)
 {
     CURL *curl_handle;
+    CURLcode res;
     static const char *pagefilename = "page.out";
     FILE *pagefile;
 
@@ -76,39 +77,51 @@ url2file(const char *url)
     /* init the curl session */
     curl_handle = curl_easy_init();
 
-    /* set HTTP HEADER */
-    curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Dark Secret Ninja/1.0");
+    if (curl_handle)
+    {
+        /* set HTTP HEADER */
+        curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Ninja/1.0");
 
-    /* enable URL REDIRECT */
-    curl_easy_setopt(curl_handle, CURLOPT_FOLLOWLOCATION, 1L);
+        /* enable URL REDIRECT */
+        curl_easy_setopt(curl_handle, CURLOPT_FOLLOWLOCATION, 1L);
 
-    /* set URL to get here */
-    curl_easy_setopt(curl_handle, CURLOPT_URL, url);
+        /* set URL to get here */
+        curl_easy_setopt(curl_handle, CURLOPT_URL, url);
 
-    /* switch on full protocol/debug output while testing */
-    curl_easy_setopt(curl_handle, CURLOPT_VERBOSE, 1L);
+        /* switch on full protocol/debug output while testing */
+        curl_easy_setopt(curl_handle, CURLOPT_VERBOSE, 1L);
 
-    /* disable progress meter, set to 0L to enable and disable debug output */
-    curl_easy_setopt(curl_handle, CURLOPT_NOPROGRESS, 1L);
+        /* disable progress meter, set to 0L to enable and disable debug output */
+        curl_easy_setopt(curl_handle, CURLOPT_NOPROGRESS, 1L);
 
-    /* send all data to this function */
-    curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, write_data);
+        /* send all data to this function */
+        curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, write_data);
 
-    /* open the file */
-    pagefile = fopen(pagefilename, "wb");
-    if (pagefile) {
-        /* write the page body to this file handle */
-        curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, pagefile);
+        /* open the file */
+        pagefile = fopen(pagefilename, "wb");
+        if (pagefile) {
+            /* write the page body to this file handle */
+            curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, pagefile);
 
-        /* get it */
-        curl_easy_perform(curl_handle);
+            /* get it */
+            res = curl_easy_perform(curl_handle);
+            if (res != CURLE_OK)
+            {
+                fprintf(
+                    stderr,
+                    "curl_easy_perform() failed: %s\n",
+                    curl_easy_strerror(res)
+                );
+            }
 
-        /* close the heander file */
-        fclose(pagefile);
+            /* close the heander file */
+            fclose(pagefile);
+        }
+
+        /* cleanup curl stuff */
+        curl_easy_cleanup(curl_handle);
     }
 
-    /* cleanup curl stuff */
-    curl_easy_cleanup(curl_handle);
 }
 
 
@@ -128,6 +141,7 @@ main(int argc, const char *argv[])
 }
 
 // https://curl.haxx.se/libcurl/c/url2file.html
+// https://curl.haxx.se/libcurl/c/curl_easy_perform.html
 // https://curl.haxx.se/libcurl/c/CURLOPT_USERAGENT.html
 // https://curl.haxx.se/libcurl/c/CURLOPT_WRITEDATA.html
 // https://curl.haxx.se/libcurl/c/CURLOPT_WRITEFUNCTION.html
