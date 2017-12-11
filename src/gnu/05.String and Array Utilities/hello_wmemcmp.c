@@ -16,21 +16,21 @@
 void
 wmemcmp_usage(void)
 {
-	wchar_t *ws1 = L"hello, world";
-	wchar_t *ws2 = L"hello, c";
+    wchar_t *ws1 = L"hello, world";
+    wchar_t *ws2 = L"hello, c";
 
-	if (0 == wmemcmp(ws1, ws2, 5))
-	{
-		wprintf(L"ws1 == ws2\n");
-	}
+    if (0 == wmemcmp(ws1, ws2, 5))
+    {
+        wprintf(L"ws1 == ws2\n");
+    }
 }
 
 
 int
 main(void)
 {
-	wmemcmp_usage();
-	return 0;
+    wmemcmp_usage();
+    return 0;
 }
 
 
