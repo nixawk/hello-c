@@ -16,6 +16,14 @@
 // an int.
 // Calling localtime also sets the current time zone as if tzset were called.
 
+
+// Function: struct tm * gmtime (const time_t *time)
+
+// This function is similar to localtime, except that the broken-down time
+// is expressed as Coordinated Universal Time (UTC) (formerly called
+// Greewich Mean Time (GMT) rather than relative to a local time zone.)
+
+
 void
 localtime_usage(void)
 {
