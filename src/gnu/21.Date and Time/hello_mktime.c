@@ -15,6 +15,30 @@
 // of the brokentime structure, including the members that were initially
 // ignored.
 
+
+// time_t timelocal (struct tm *brokentime)
+
+// timelocal is functionally identical to mktime, but more mnermonically named.
+// Note that it is the inverse of the localtime function.
+
+// Protability note: mktime is essentially universally available. timelocal
+// is rather than rare.
+
+
+// Function: time_t timegm (struct tm *brokentime)
+
+// timegm is functionally identical to mktime except it always takes the input
+// values to be Coordinated Universal Time (UTC) regardless of any local time
+// zone setting.
+
+// Note that timegm is the inverse of gmtime.
+
+// Portability note: mktime is essentially universally available. timegm is
+// rather rare. For the most portable conversion from a UTC broken-down time
+// to a simple time, set the TZ environment variable to UTC, call mktime,
+// then set TZ back.
+
+
 void
 mktime_usage(void)
 {
