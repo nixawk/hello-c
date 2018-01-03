@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <stdlib.h>
+#include <errno.h>
 #include <stdio.h>
 
 
@@ -15,10 +16,19 @@ void
 sysconf_usage(void)
 {
     long lim = sysconf(_SC_ARG_MAX);
-    if (lim == (long) -1)
+    errno = 0;
+
+    if (lim == (long) -1) /* Call successded, limit determinate */
     {
-        perror("sysconf");
-        exit(EXIT_FAILURE);
+        if (errno == 0)   /* Call succeeded, limit indeterminate */
+        {
+            printf("indeterminate");
+        }
+        else              /* Call failed */
+        {
+            perror("sysconf");
+            exit(EXIT_FAILURE);
+        }
     }
     printf("NAME_MAX = %ld\n", lim);
 }
