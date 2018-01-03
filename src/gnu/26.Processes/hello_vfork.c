@@ -4,35 +4,37 @@
 
 // The [fork] function creates a new process.
 
-// If the operation is successful, there are then both parent and child processes
-// and both see [fork] return, but with different values: it returns a value of
-// 0 in the child process and returns the child's ID in the parent process.
+// If the operation is successful, there are then both parent and child
+// processes and both see [fork] return, but with different values: it
+// returns a value of 0 in the child process and returns the child's ID
+// in the parent process.
 
-// If process creation failed, [fork] returns a value of -1 in the parent process.
-// The following [errno] error conditions are defined for [fork].
+// If process creation failed, [fork] returns a value of -1 in the parent
+// process. The following [errno] error conditions are defined for [fork].
 
-int x = 0;
+// fork VS vfork
 
 void
 vfork_usage(void)
 {
-    pid_t pid = vfork();
+    int istack = 222;
 
-    if (pid < 0)
+    switch (vfork())
     {
-        printf("vfork() failed\n");
-        exit(1);
-    }
-    else if (pid == 0)
-    {
-        x += 1;
-        printf("child  process, x = %d\n", x);
-        exit(0);  // Child process must exit, and parent process continues
-    }
-    else
-    {
-        x += 1;
-        printf("parent process, x = %d\n", x);
+        case -1:
+            perror("vfork");
+            exit(EXIT_FAILURE);
+
+        case 0:        /* Child executes first, in parent's memory space */
+            sleep(3);  /* Even if we sleep for a while, parent still is not scheduled. */
+            write(STDOUT_FILENO, "Child executing\n", 16);
+            istack *= 3;
+            exit(EXIT_SUCCESS);
+
+        default:
+            write(STDOUT_FILENO, "Parent executing\n", 17);
+            printf("istack=%d\n", istack);
+            exit(EXIT_SUCCESS);
     }
 }
 
