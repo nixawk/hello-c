@@ -6,9 +6,11 @@
 int
 main(void)
 {
-    setbuf(stdout, NULL);  /* Fix: disable buffer cache */
+    // setbuf(stdout, NULL);  /* Fix1: disable buffer cache */
 
     printf("Hello, World\n");
+    fflush(stdout);           /* Fix2: flush buf cache before fork() */
+
     write(STDOUT_FILENO, "Ciao\n", 5);
 
     if (fork() == (int) -1)
