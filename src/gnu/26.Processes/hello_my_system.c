@@ -1,44 +1,62 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 
 /* Execute the command using this shell program.  */
+
 #define SHELL "/bin/sh"
+
+/* similar to system in stdlib.h */
 
 int
 my_system (const char *command)
 {
-  int status;
-  pid_t pid;
+    int status;
+    pid_t pid;
 
-  pid = fork ();
-  if (pid == 0)
+    if (command == NULL)
+        return 1;
+
+    switch (pid = fork())
     {
-      /* This is the child process.  Execute the shell command. */
-      execl (SHELL, SHELL, "-c", command, NULL); // not an error
-      _exit (EXIT_FAILURE);
+        case -1:
+            return -1;
+
+        case 0:  /* child process */
+            execl(SHELL, SHELL, "-c", command, (char *) NULL);
+            _exit(127);   /* Failed exec */
+
+        default: /* parent process */
+            if (waitpid(pid, &status, 0) == -1)
+                return -1;
+            else
+                return status;
     }
-  else if (pid < 0)
-    /* The fork failed.  Report failure.  */
-    status = -1;
-  else
-    /* This is the parent process.  Wait for the child to complete.  */
-    if (waitpid (pid, &status, 0) != pid)
-      status = -1;
-  return status;
 }
 
-
 int
-main(void)
+main(int argc, char *argv[])
 {
-  char command[] = "id";
-  my_system(command);
+    int i;
 
-  return 0;
+    if (argc < 2)
+    {
+        printf("[*] %s <command> <command> ...\n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
+
+    for (i = 1; i < argc; i++)
+    {
+        printf("$ %s\n", argv[i]);
+        my_system(argv[i]);
+    }
+
+    exit(EXIT_SUCCESS);
 }
 
 
 // https://www.gnu.org/software/libc/manual/html_node/Process-Creation-Example.html#Process-Creation-Example
+// http://pubs.opengroup.org/onlinepubs/009695399/functions/system.html
