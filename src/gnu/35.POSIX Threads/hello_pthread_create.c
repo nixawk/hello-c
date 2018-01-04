@@ -1,6 +1,6 @@
 #include <pthread.h>
-#include <unistd.h>
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 
 
@@ -21,47 +21,54 @@
 // On success, [pthread_create()] returns 0; on error, it returns an
 // error number, and the contents of [*thread] are undefined.
 
-pthread_t ntid;
 
+/* job for every thread */
 
-void
-printids(const char *s)
+static void *
+thread_job(void *arg)
 {
-    pid_t pid;
-    pthread_t tid;
+    char *s = (char *) arg;
 
-    pid = getpid();
-    tid = pthread_self();
-    printf("%s pid %lu tid %lu (0x%lx)\n", s,
-        (unsigned long)pid,
-        (unsigned long)tid,  (unsigned long)tid,  (unsigned long)tid);
+    printf("%s\n", s);
+
+    return (void *) strlen(s);
 }
-
-
-void*
-thread_func(void *arg)
-{
-    printids("new  thread:");
-    return ((void *)0);
-}
-
 
 int
 main(void)
 {
-    int err;
+    pthread_t thread;
+    void *retval;
 
-    err = pthread_create(&ntid, NULL, thread_func, NULL);
-    if (err != 0)
+    if ((pthread_create(&thread, NULL, thread_job, "Hello, World\n")) != 0)
     {
-        fprintf(stderr, "pthread_create() failed.");
-        exit(0);
+        perror("pthread_create");
+        exit(EXIT_FAILURE);
     }
 
-    printids("main thread:");
-    sleep(1);
-    return 0;
+    printf("Message from main()\n");
+
+    if ((pthread_join(thread, &retval)) != 0)
+    {
+        perror("pthread_join");
+        exit(EXIT_FAILURE);
+    }
+
+    printf("Thread returned: %ld\n", (long) retval);
+
+    exit(EXIT_SUCCESS);
 }
 
+
+/*
+
+$ gcc -pthread hello_pthread_create.c
+$ ./a.out
+Message from main()
+Hello, World
+
+Thread returned: 13
+
+*/
 
 // http://man7.org/linux/man-pages/man3/pthread_create.3.html
