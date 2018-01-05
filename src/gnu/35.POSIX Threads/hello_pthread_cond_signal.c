@@ -52,7 +52,7 @@ int
 main(int argc, char *argv[])
 {
     pthread_t thread;
-    int s, j;
+    int j;
     int totRequired;   /* Total number of units that all threads
                           will produce */
     int numConsumed;   /* Total units so far consumed */
