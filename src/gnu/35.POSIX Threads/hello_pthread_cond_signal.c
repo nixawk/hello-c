@@ -17,7 +17,7 @@ void *
 thread_job(void *arg)
 {
     int cnt = atoi((char *) arg);
-    int s, j;
+    int j;
 
     for (j = 0; j < cnt; j++)
     {
@@ -69,10 +69,6 @@ main(int argc, char *argv[])
 
     /* Create all threads */
 
-#ifdef DEBUG
-    printf("main - pthread_create start\n");
-#endif
-
     totRequired = 0;
     for (j = 1; j < argc; j++)
     {
@@ -85,10 +81,6 @@ main(int argc, char *argv[])
         }
     }
 
-#ifdef DEBUG
-    printf("main - pthread_create finished\n");
-#endif
-
     /* Loop to consume available units */
     numConsumed = 0;
     done = FALSE;
@@ -96,23 +88,12 @@ main(int argc, char *argv[])
     for (;;)
     {
 
-#ifdef DEBUG
-    printf("main - pthread_mutex_lock start\n");
-#endif
         if (pthread_mutex_lock(&mutex) != 0)
         {
             perror("pthread_mutex_lock");
             exit(EXIT_FAILURE);
         }
 
-#ifdef DEBUG
-    printf("main - pthread_mutex_lock end\n");
-#endif
-
-
-#ifdef DEBUG
-    printf("main - pthread_cond_wait start\n");
-#endif
         while (avail == 0)  /* Wait for something to consume */
         {
             if (pthread_cond_wait(&cond, &mutex) != 0)
@@ -122,10 +103,6 @@ main(int argc, char *argv[])
             }
         }
 
-#ifdef DEBUG
-    printf("main - pthread_cond_wait end\n");
-#endif
-
         while (avail > 0)
         {
             numConsumed++;
@@ -134,19 +111,11 @@ main(int argc, char *argv[])
             done = (numConsumed >= totRequired);
         }
 
-#ifdef DEBUG
-    printf("main - pthread_mutex_unlock start\n");
-#endif
-
         if (pthread_mutex_unlock(&mutex))
         {
             perror("pthread_mutex_lock");
             exit(EXIT_FAILURE);
         }
-
-#ifdef DEBUG
-    printf("main - pthread_mutex_unlock end\n");
-#endif
 
         if (done)
             break;
