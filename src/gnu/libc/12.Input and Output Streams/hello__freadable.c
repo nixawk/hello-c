@@ -7,7 +7,7 @@
 #include <stdio_ext.h>
 
 void
-is_stdin_reabable(void)
+is_stdin_readable(void)
 {
     if (__freadable(stdin))
     {
@@ -37,7 +37,7 @@ is_stdout_writeable(void)
 int
 main(void)
 {
-    is_stdin_reabable();
+    is_stdin_readable();
     is_stdout_writeable();
     return 0;
 }
