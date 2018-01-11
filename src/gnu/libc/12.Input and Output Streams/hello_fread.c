@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifndef BUF_SIZE      /* overwritten with 'cc -D' */
 #define BUF_SIZE 4096
+#endif
 
 // size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);
 // size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream);
