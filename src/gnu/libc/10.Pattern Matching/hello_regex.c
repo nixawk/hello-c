@@ -1,94 +1,93 @@
+// The GNU C Library supports two interfaces for matching regular expressions.
+// One is the standard POSIX.2 interface, and the other is what the GNU C
+// Library has had for many years.
+
+// Both interfaces are declared in the header file regex.h.
+// If you define _POSIX_C_SOURCE, then only the POSIX.2 functions,
+// structures, and constants are declared.
+
+// int regcomp (regex_t *restrict compiled, const char *restrict pattern, int cflags)
+
+// int regexec(const regex_t *preg, const char *string, size_t nmatch, regmatch_t pmatch[], int eflags);
+
 #include <regex.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-    // int regcomp (regex_t *restrict compiled, const char *restrict pattern, int cflags)
-
-// The function [regcomp] compiles a regular expression into a data structure
-// that you can use with [regexec] to match against a string. The compiled
-// regular expression format is designed for efficient matching. [regcomp]
-// stores it into [*compiled].
-
-// The argument [cflags] lets you specify various options that control the syntax and
-// semantics of regular expressions.
-
-// [regcomp] returns 0 if it succeeds in compiling the regular expression; otherwise,
-// it returns a nonzero error code. You can use [regerror] to produce an error message
-// string describing the reason for a nonzero value. Here are the possible nonzero values
-// that [regcomp] can return:
-
-    // REG_BADBR
-    // REG_BADPAT
-    // REG_BADRPT
-    // REG_ECOLLATE
-    // REG_ECTYPE
-    // REG_EESCAPE
-    // REG_ESUBREG
-    // REG_EBRACK
-    // REG_EPAREN
-    // REG_EBRACE
-    // REG_ERANGE
-    // REG_ESPACE
-
-//////////
-
-    // int regexec (const regex_t *restrict compiled, const char *restrict string, size_t nmatch, regmatch_t matchptr[restrict], int eflags)
-
-// This function tries to match the compiled regular expression [*compiled] against string.
-// [regexec] returns 0 if the regular expression matches; otherwise, it returns a nonzero value.
-
-// The argument [eflags] is a word of bit flags that enable various options.
-
-    // REG_NOTBOL
-    // REG_NOTEOL
-
-// If you want to get information about what part of string actually matched the regular expression or its subexpressions, 
-// use the arguments matchptr and nmatch. Otherwise, pass 0 for nmatch, and NULL for matchptr.
-
-    // void regfree (regex_t *compiled)
-
-
 void
-regex_usage(void)
+regex_match(const char *regex, const char *string, const int maxmatched)
 {
-    regex_t    preg;
-    char       *string = "a simple string";
-    char       *pattern = ".*(simple).*";
-    int        rc;
-    size_t     nmatch = 2;
-    regmatch_t pmatch[2];
+    regex_t regbuf;                 /* regex expression buf */
+    // size_t nmatch = maxmatched;     /* num of matched */
+    regmatch_t pmatch[maxmatched];  /* pmatch inclues regex start/end  */
+    int i;                          /* for loop */
 
-    if ((rc = regcomp(&preg, pattern, REG_EXTENDED)) != 0) {
-        printf("regcomp() failed, returning nonzero (%d)\n", rc);
-        exit(1);
+    /* regcomp() is used to compile a regular expression into a form that is
+       suitable for subsequent regexec() searches. */
+
+    if (regcomp(&regbuf, regex, REG_EXTENDED | REG_ICASE) != 0)
+    {
+        perror("regcomp");
+        exit(EXIT_FAILURE);
     }
 
-    if ((rc = regexec(&preg, string, nmatch, pmatch, 0)) != 0) {
-        printf("failed to ERE match '%s' with '%s',returning %d.\n", string, pattern, rc);
+    /* regexec() tries to match the compiled regular expression against str */
+
+    if (regexec(&regbuf, string, maxmatched, pmatch, 0) != 0)
+    {
+        perror("regexec");
+        exit(EXIT_FAILURE);
     }
 
-    printf(
-        "a matched substring \"%.*s\" is found at position %d to %d.\n",
-        pmatch[1].rm_eo - pmatch[1].rm_so, &string[pmatch[1].rm_so],
-        pmatch[1].rm_so,
-        pmatch[1].rm_eo - 1); 
+    /* output regex matched */
 
-    regfree(&preg);
+    // regmatch_t.rm_so - The offset in string of the beginning of a substring.
+    //                    Add this value to string to get the address of that
+    //                    part.
+
+    // regmatch_t.rm_eo - The offset in string of the end of the substring.
+
+    for (i = 0; i < maxmatched; i++)
+    {
+        printf(
+            "a matched substring \"%.*s\" is found at position %d to %d.\n",
+            pmatch[i].rm_eo - pmatch[i].rm_so, &string[pmatch[i].rm_so],
+            pmatch[i].rm_so,
+            pmatch[i].rm_eo - 1); 
+    }
+
+    /* free compiled regular expression */
+
+    regfree(&regbuf);
 }
 
 
 int
-main(void)
+main(int argc, const char *argv[])
 {
-    regex_usage();
+    if (argc != 4)
+    {
+        printf("[*] Usage: %s regex string regex_max_matched\n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
+
+    regex_match(argv[1], argv[2], atoi(argv[3]));
     return 0;
 }
 
+/*
 
+$ ./a.out "hello(.*)" helloworld 6
+a matched substring "helloworld" is found at position 0 to 9.
+a matched substring "world" is found at position 5 to 9.
+a matched substring "" is found at position -1 to -2.
+a matched substring "" is found at position -1 to -2.
+a matched substring "" is found at position -1 to -2.
+a matched substring "" is found at position -1 to -2.
+
+*/
+
+// http://man7.org/linux/man-pages/man3/regex.3.html
 // https://www.gnu.org/software/libc/manual/html_node/POSIX-Regexp-Compilation.html#POSIX-Regexp-Compilation
-// https://www.gnu.org/software/libc/manual/html_node/Flags-for-POSIX-Regexps.html#Flags-for-POSIX-Regexps
 // https://www.gnu.org/software/libc/manual/html_node/Matching-POSIX-Regexps.html#Matching-POSIX-Regexps
 // https://www.gnu.org/software/libc/manual/html_node/Regexp-Subexpressions.html#Regexp-Subexpressions
-// https://www.gnu.org/software/libc/manual/html_node/Regexp-Cleanup.html#Regexp-Cleanup
-// https://www.ibm.com/support/knowledgecenter/SSLTBW_1.13.0/com.ibm.zos.r13.bpxbd00/regexep.htm
-// https://stackoverflow.com/questions/17764422/regmatch-t-how-can-i-get-match-only
