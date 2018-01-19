@@ -1,5 +1,6 @@
 #include <time.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 // Data Type: time_t
 
@@ -15,21 +16,36 @@
 
 
 void
-show_time(void)
+time_and_gettimeofday(void)
 {
-    time_t result;
+    time_t tloc;
+    struct timeval tv;
 
-    result = time(NULL);
-    printf("current time: %lu\n", result);
+    if ((tloc = time(NULL)) == (time_t) -1)
+    {
+        perror("time");
+        exit(EXIT_FAILURE);
+    }
+
+    if (gettimeofday(&tv, NULL) == -1)
+    {
+        perror("gettimeofday");
+        exit(EXIT_FAILURE);
+    }
+
+    printf("time() = %ld\n", tloc);
+    printf("gettimeofday() = %ld\n", tv.tv_sec);
 }
 
 
 int
 main(void)
 {
-    show_time();
+    time_and_gettimeofday();
     return 0;
 }
 
+
+// warning: implicit declaration of function ‘gettimeofday’ [-Wimplicit-function-declaration]
 
 // https://www.gnu.org/software/libc/manual/html_node/Simple-Calendar-Time.html#Simple-Calendar-Time
