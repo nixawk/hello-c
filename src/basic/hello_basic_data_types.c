@@ -18,6 +18,16 @@ main(void)
 
     */
 
+    /*
+        printf is not part of the C language; there is not input
+        or output defined in C itself.
+
+        printf is just a useful function from the standard library
+        of functions that are normally accessible to C programs.
+        The behavior of printf is defined in the ANSI standard.
+
+    */
+
     printf("sizeof(char) = %lu\n", sizeof(char));
     printf("sizeof(int) = %lu\n", sizeof(int));
     printf("sizeof(short) = %lu\n", sizeof(short));
