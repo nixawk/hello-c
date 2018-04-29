@@ -18,7 +18,7 @@ __init module_put_init(void)
         if (kmodule != NULL)
         {
                 printk(KERN_INFO "before module refcount: %d\n", module_refcount(kmodule));
-                module_refcount(kmodule);
+                module_put(kmodule);
                 printk(KERN_INFO "after  module refcount: %d\n", module_refcount(kmodule));
         }
         else
