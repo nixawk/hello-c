@@ -19,8 +19,8 @@ __init find_symbol_init(void)
         bool enable_gpl = true;
         bool enable_warn = true;
 
-        const char *module_name = "ext4";
-        const char *symbol_name = "ext4_init_security";
+        const char *module_name = "EXPORT_SYMBOL";
+        const char *symbol_name = "func_symbol";
 
         kmodule = find_module(module_name);
         if (kmodule != NULL) {
@@ -55,3 +55,18 @@ __exit find_symbol_exit(void)
 
 module_init(find_symbol_init);
 module_exit(find_symbol_exit);
+
+/*
+
+# insmod EXPORT_SYMBOL.ko
+# insmod find_symbol.ko
+
+[ 4120.903032] kmodule->name: EXPORT_SYMBOL
+[ 4120.903036] ksymbol->value: ffffffffc0627000
+[ 4120.903036] ksymbol->name: func_symbol
+[ 4120.903037] *crc : 1d869a4b
+
+# rmmod find_symbol.ko
+# rmmod EXPORT_SYMBOL.ko
+
+*/
