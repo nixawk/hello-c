@@ -8,6 +8,7 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("security");
 MODULE_DESCRIPTION("Just for educational purpose");
 
+#define KERN_PERMBITS 0666   // permission bits -> /proc/mod/bdm
 #define KERN_PROCROOT "mod"
 #define KERN_PROCFILE "bdm"
 #define KERN_PASSWORD "password"
@@ -82,7 +83,7 @@ static int
 mymodule_procfs_attach(void)
 {
         proc_root = proc_mkdir(KERN_PROCROOT, NULL);
-        proc_file = proc_create(KERN_PROCFILE, 0666, proc_root, &proc_fops);
+        proc_file = proc_create(KERN_PROCFILE, KERN_PERMBITS, proc_root, &proc_fops);
 
         printk(KERN_INFO "proc_create successfully\n");
 
