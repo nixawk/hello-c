@@ -13,7 +13,7 @@ static void __exit __print_symbol_exit(void);
 int
 a_symbol(void)
 {
-    return 0;
+        return 0;
 }
 
 EXPORT_SYMBOL(a_symbol);
@@ -21,38 +21,38 @@ EXPORT_SYMBOL(a_symbol);
 static int
 __init __print_symbol_init(void)
 {
-    char * fmt;
-    unsigned long addr;
-    char *name;
-    struct module * fmodule = NULL;
+        char * fmt;
+        unsigned long addr;
+        char *name;
+        struct module * fmodule = NULL;
 
-    addr = (unsigned long) __builtin_return_address(0);
-    fmt = "it's the first part,\n %s";
-    __print_symbol(fmt, addr);
-    printk(KERN_INFO "\n\n");
+        addr = (unsigned long) __builtin_return_address(0);
+        fmt = "it's the first part,\n %s";
+        __print_symbol(fmt, addr);
+        printk(KERN_INFO "\n\n");
 
-    name = "ext4";
-    fmodule = find_module(name);
+        name = "ext4";
+        fmodule = find_module(name);
 
-    if (fmodule != NULL)
-    {
-    printk("fmodule->name: %s\n", fmodule->name);
-    addr = (unsigned long)fmodule->init;
-    fmt = "it's the second part,\n %s";
-    __print_symbol(fmt, addr);
-    }
+        if (fmodule != NULL)
+        {
+                printk("fmodule->name: %s\n", fmodule->name);
+                addr = (unsigned long)fmodule->init;
+                fmt = "it's the second part,\n %s";
+                __print_symbol(fmt, addr);
+        }
 
-    addr = (unsigned long)a_symbol + 5;
-    fmt = "it's the third part,\n %s";
-    __print_symbol(fmt, addr);
+        addr = (unsigned long)a_symbol + 5;
+        fmt = "it's the third part,\n %s";
+        __print_symbol(fmt, addr);
 
-    return 0;
+        return 0;
 }
 
 static void
 __exit __print_symbol_exit(void)
 {
-    printk(KERN_INFO "module exit ok !\n");
+        printk(KERN_INFO "module exit ok !\n");
 }
 
 module_init(__print_symbol_init);
