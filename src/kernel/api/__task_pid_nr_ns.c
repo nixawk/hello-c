@@ -1,5 +1,6 @@
 #include <linux/module.h>
 #include <linux/sched.h>
+#include <linux/pid.h>
 #include <linux/init.h>
 
 MODULE_LICENSE("GPL");
