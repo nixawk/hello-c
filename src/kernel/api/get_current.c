@@ -19,6 +19,7 @@ get_current_init(void)
         {
                 printk("task_struct->stack: %p\n", current_task->stack);
                 printk("task_struct->cpu: %d\n", current_task->cpu);
+                printk("task_struct->pid: %d\n", current_task->pid);
         }
         else
         {
@@ -36,3 +37,6 @@ get_current_exit(void)
 
 module_init(get_current_init);
 module_exit(get_current_exit);
+
+// https://elixir.bootlin.com/linux/v4.16.5/source/arch/arm64/include/asm/current.h#L15
+// https://elixir.bootlin.com/linux/v4.16.5/source/include/linux/sched.h#L524
