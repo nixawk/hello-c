@@ -37,9 +37,10 @@ __init __tasklet_hi_schedule_init(void)
         printk("The state of the tasklet1 is: %ld\n", tasklet1.state);
         printk("The state of the tasklet2 is: %ld\n", tasklet2.state);
 
-        // if (!test_and_set_bit(TASKLET_STATE_SCHED, &tasklet1.state))
-        //     __tasklet_hi_schedule(&tasklet1);
         tasklet_hi_schedule(&tasklet1);
+        if (!test_and_set_bit(TASKLET_STATE_SCHED, &tasklet2.state))
+                __tasklet_hi_schedule(&tasklet2);
+        // tasklet_hi_schedule(&tasklet2);
 
         tasklet_kill(&tasklet1);
         tasklet_kill(&tasklet2);
