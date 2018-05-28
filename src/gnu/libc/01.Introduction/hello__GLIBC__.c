@@ -1,8 +1,20 @@
 #include <stdio.h>
 
+/*
+
+There are two means by which an application program can determine the version of
+the GNU C library on the system: by testing constants or by calling a library
+function. From version 2.0 onward, glibc defines two constants, __GLIBC__ and
+__GLIBC_MINOR__, that can be tested at compile time (in #ifdef statements).
+However, these constants are of limited use in a program that is compiled on one
+system but run on another system with a different glibc. To handle this
+possibility, a program can call the gnu_get_glibc_version() function to determine
+the version of glibc available at run time.
+
+*/
 
 void
-glibc(void)
+glibc_version(void)
 {
     printf("__GLIBC__ == %d\n", __GLIBC__);
     printf("__GLIBC_MINOR__ == %d\n", __GLIBC_MINOR__);
@@ -12,7 +24,7 @@ glibc(void)
 int
 main(void)
 {
-    glibc();
+    glibc_version();
     return 0;
 }
 
