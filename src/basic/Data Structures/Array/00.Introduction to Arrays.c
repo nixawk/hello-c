@@ -30,22 +30,24 @@
 
 #include <stdio.h>
 
-void
-data_structure_Array()
-{
-    int intAry[] = {0, 1, 2, 3, 4, 5};
-    int i;
 
-    for (i = 0; i < (sizeof(intAry) / sizeof(*intAry)); i++)
-    {
-        printf("%p - %d\n", &intAry[i], intAry[i]);
-    }
+void
+printarray(int arylst[], int arylen)
+{
+	int i;
+
+	for (i = 0; i < arylen; i++)
+	{
+		printf("%p - %d\n", &arylst[i], arylst[i]);
+	}
 }
 
 int
 main(void)
 {
-    data_structure_Array();
+	int arylst[] = {0, 1, 2, 3, 4, 5};
+
+	printarray(arylst, sizeof(arylst) / sizeof(*arylst));
     return 0;
 }
 
