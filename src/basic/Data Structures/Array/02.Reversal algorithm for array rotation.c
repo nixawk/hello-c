@@ -2,67 +2,27 @@
 
 #include <stdio.h>
 
+void swap(int*, int*);
+void reverse(int[], int, int);
+void leftrotation(int[], int, int);
+void rightrotation(int [], int, int);
+void printarray(int[], int);
+
 
 void
-leftRotate2(int arylst[], int d, int n)
+swap(int *a, int *b)
 {
-    int i, j, temp;
-
-    for (i = 0; i < d; i++)
-    {
-        temp = arylst[0];
-        for (j = 0; j < n - 1; j++)
-        {
-            arylst[j] = arylst[j + 1];
-        }
-        arylst[j] = temp;
-    }
-}
-
-int gcd(int a, int b)
-{
-    if (b == 0)
-        return a;
-    else
-        return gcd(b, a % b);
+    *a ^= *b;
+    *b ^= *a;
+    *a ^= *b;
 }
 
 void
-leftRotate3(int arylst[], int d, int n)
+reverse(int arylst[], int start, int end)
 {
-    // A Juggling Algorithm
-    int i, j, k, temp;
-
-    for (i = 0; i < gcd(d, n); i++)
-    {
-        temp = arylst[i];
-        j = i;
-        while (1)
-        {
-            k = j + d;
-            if (k >= n)
-                k = k - n;
-
-            if (k == i)
-                break;
-
-            arylst[j] = arylst[k];
-            j = k;
-        }
-        arylst[j] = temp;
-    }
-}
-
-void
-revreseAry(int arylst[], int start, int end)
-{
-    int temp;
-
     while (start < end)
     {
-        temp = arylst[start];
-        arylst[start] = arylst[end];
-        arylst[end] = temp;
+        swap(&arylst[start], &arylst[end]);
 
         start++;
         end--;
@@ -70,36 +30,60 @@ revreseAry(int arylst[], int start, int end)
 }
 
 void
-leftRotate4(int arylst[], int d, int n)
+leftrotation(int arylst[], int arylen, int index)
 {
-    revreseAry(arylst, 0, d-1);
-    revreseAry(arylst, d, n-1);
-    revreseAry(arylst, 0, n-1);
+    reverse(arylst, 0, index-1);
+    reverse(arylst, index, arylen-1);
+    reverse(arylst, 0, arylen-1);
 }
 
-void printAry(int *arylst, int n)
+void
+rightrotation(int arylst[], int arylen, int index)
+{
+    reverse(arylst, 0, arylen - index - 1);
+    reverse(arylst, arylen - index, arylen - 1);
+    reverse(arylst, 0, arylen - 1);
+}
+
+void
+printarray(int arylst[], int arylen)
 {
     int i;
 
-    for (i = 0; i < n; i++)
+    for (i = 0; i < arylen; i++)
     {
-        printf("%d ", arylst[i]);
+        printf(" %d ", arylst[i]);
     }
+    printf("\n");
 }
 
 int
 main(int argc, const char *argv[])
 {
     int arylst[] = {1, 2, 3, 4, 5, 6, 7};
-    int arylen;
+    int arylen = sizeof(arylst) / sizeof(*arylst);
 
-    arylen = sizeof(arylst) / sizeof(*arylst);
-    leftRotate4(arylst, 2, arylen);
+    printf("original array    : ");
+    printarray(arylst, arylen);
 
-    printAry(arylst, arylen);
+    printf("left  rotation(2) : ");
+    leftrotation(arylst, arylen, 2);
+    printarray(arylst, arylen);
+
+    printf("right rotation(2) : ");
+    rightrotation(arylst, arylen, 2);
+    printarray(arylst, arylen);
 
     return 0;
 }
 
+/*
+
+$ ./a.out
+original array    :  1  2  3  4  5  6  7
+left  rotation(2) :  3  4  5  6  7  1  2
+right rotation(2) :  1  2  3  4  5  6  7
+
+*/
 
 // https://www.geeksforgeeks.org/program-for-array-rotation-continued-reversal-algorithm/
