@@ -2,83 +2,87 @@
 
 #include <stdio.h>
 
-
-// METHOD 1: Using temp array
-// METHOD 2: Rotate one by one
-// METHOD 3: A Juggling Algorithm
-
-// Method 2: Rotate one by one
+void leftrotation_one(int[], int);
+void leftrotation(int[], int, int);
+void rightrotation_one(int[], int);
+void rightrotation(int[], int, int);
+void printarray(int[], int);
 
 void
-leftRotate2(int arylst[], int d, int n)
+leftrotation_one(int arylst[], int arylen)
 {
-    int i, j, temp;
+    int i, temp;
 
-    for (i = 0; i < d; i++)
+    temp = arylst[0];
+    for (i = 0; i < arylen - 1; i++)
     {
-        temp = arylst[0];
-        for (j = 0; j < n - 1; j++)
-        {
-            arylst[j] = arylst[j + 1];
-        }
-        arylst[j] = temp;
+        arylst[i] = arylst[i + 1];
     }
-}
-
-int gcd(int a, int b)
-{
-    if (b == 0)
-        return a;
-    else
-        return gcd(b, a % b);
+    arylst[i] = temp;
 }
 
 void
-leftRotate3(int arylst[], int d, int n)
-{
-    // A Juggling Algorithm
-    int i, j, k, temp;
-
-    for (i = 0; i < gcd(d, n); i++)
-    {
-        temp = arylst[i];
-        j = i;
-        while (1)
-        {
-            k = j + d;
-            if (k >= n)
-                k = k - n;
-
-            if (k == i)
-                break;
-
-            arylst[j] = arylst[k];
-            j = k;
-        }
-        arylst[j] = temp;
-    }
-}
-
-void printAry(int *arylst, int n)
+leftrotation(int arylst[], int arylen, int index)
 {
     int i;
 
-    for (i = 0; i < n; i++)
+    for (i = 0; i < index; i++)
     {
-        printf("%d ", arylst[i]);
+        leftrotation_one(arylst, arylen);
     }
+}
+
+void
+rightrotation_one(int arylst[], int arylen)
+{
+    int i, temp;
+
+    temp = arylst[arylen - 1];
+    for (i = arylen; i > 0; i--)
+    {
+        arylst[i] = arylst[i - 1];
+    }
+    arylst[0] = temp;
+}
+
+void
+rightrotation(int arylst[], int arylen, int index)
+{
+    int i;
+
+    for (i = 0; i < index; i++)
+    {
+        rightrotation_one(arylst, arylen);
+    }
+}
+
+void printarray(int arylst[], int arylen)
+{
+    int i;
+
+    for (i = 0; i < arylen; i++)
+    {
+        printf(" %d ", arylst[i]);
+    }
+    printf("\n");
 }
 
 int
 main(int argc, const char *argv[])
 {
     int arylst[] = {1, 2, 3, 4, 5, 6, 7};
-    int arylen;
+    int arylen = sizeof(arylst) / sizeof(*arylst);
 
-    arylen = sizeof(arylst) / sizeof(*arylst);
-    leftRotate3(arylst, 2, arylen);
+    printf("original array    : ");
+    printarray(arylst, arylen);
 
-    printAry(arylst, arylen);
+    printf("left  rotation(2) : ");
+    leftrotation(arylst, arylen, 2);
+    printarray(arylst, arylen);
+
+    printf("right rotation(2) : ");
+    rightrotation(arylst, arylen, 2);
+    printarray(arylst, arylen);
 
     return 0;
 }
