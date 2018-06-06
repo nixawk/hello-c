@@ -50,6 +50,36 @@
 // 5. Otherwise, both operands are converted to the unsigned integer
 //    type corresponding to the type of the operand with signed integer type.
 
+// --------------------------------------------------------
+
+// 1. Implicit Type Conversion (Automatic Type Conversion)
+
+// - Done by the compiler on its own, without any external trigger from
+//   the user.
+
+// - Generally takes place when in an expression more than one data type
+//   is present. In such condition type conversion (type promotion) takes
+//   place to avoid lose of data.
+
+// - All the data types of the variables are upgraded to the data type
+//   of the variable with largest data type.
+
+      // bool -> char -> short int -> int ->
+      // unsigned int -> long -> unsigned ->
+      // long long -> float -> double -> long double
+
+// - It is possible for implicit conversions to lose information,
+//   signs can be lost (when signed is implicity converted to unsigned)
+//   , and overflow can occur (when long long is implicity converted to
+//   float).
+
+// 2. Explicit Type Conversion
+
+// - This process is also called type casting and it is user defined.
+
+      // (type) expression
+
+
 void
 type_conversion(void)
 {
@@ -102,6 +132,7 @@ Dump of assembler code for function type_conversion:
 */
 
 // https://www.geeksforgeeks.org/c-language-2-gq/data-types-gq/
+// https://www.geeksforgeeks.org/type-conversion-c/
 // https://en.wikipedia.org/wiki/Type_conversion#Implicit_type_conversion
 // https://wiki.sei.cmu.edu/confluence/display/c/INT02-C.+Understand+integer+conversion+rules
 
