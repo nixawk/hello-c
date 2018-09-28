@@ -19,6 +19,7 @@ default:
 	$(call compile,hello_sodium_compare.c)
 	$(call compile,hello_sodium_is_zero.c)
 	$(call compile,hello_sodium_stackzero.c)
+	$(call compile,hello_sodium_pad.c)
 
 clean:
 	rm -rf hello_sodium_init \
@@ -32,7 +33,8 @@ clean:
 		hello_sodium_add \
 		hello_sodium_compare \
 		hello_sodium_is_zero \
-		hello_sodium_stackzero
+		hello_sodium_stackzero \
+		hello_sodium_pad
 
 # https://www.gnu.org/software/make/manual/make.html#Call-Function
 # https://www.gnu.org/software/make/manual/html_node/Suffix-Rules.html
