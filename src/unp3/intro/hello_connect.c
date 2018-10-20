@@ -8,11 +8,32 @@
 
 // $ ./a.out xxx.xxx.xxx.xxx port
 
+#define MAXLINE 255
+
+
+void
+print_host_port(struct sockaddr_in sin)
+{
+    char ipbuff[MAXLINE] = { 0 };
+
+    inet_ntop(AF_INET, &sin.sin_addr, ipbuff, sizeof(ipbuff));
+
+    printf(
+        "%s:%d\n",
+        ipbuff,
+        ntohs(sin.sin_port)
+    );
+}
+
+
 int
 main(int argc, const char *argv[])
 {
     int sockfd;
     struct sockaddr_in servaddr_in;
+    struct sockaddr_in sockname_in;  // getsockname
+    struct sockaddr_in peername_in;  // getpeername
+    int l = sizeof(sockname_in);
 
     if (argc != 3)
     {
@@ -45,6 +66,21 @@ main(int argc, const char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    printf("[*] connected to %s:%s\n", argv[1], argv[2]);
+    printf("[*] getsockname\n");  // local
+    if (getsockname(sockfd, (struct sockaddr *)&sockname_in, (socklen_t *)&l) == -1)
+    {
+        perror("getsockname()");
+        exit(EXIT_FAILURE);
+    }
+    print_host_port(sockname_in);
+
+    printf("[*] getpeername\n");  // remote
+    if (getpeername(sockfd, (struct sockaddr *)&peername_in, (socklen_t *)&l) == -1)
+    {
+        perror("getpeername()");
+        exit(EXIT_FAILURE);
+    }
+    print_host_port(peername_in);
+
     exit(EXIT_SUCCESS);
 }
