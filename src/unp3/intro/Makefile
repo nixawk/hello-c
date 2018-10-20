@@ -10,10 +10,12 @@ all:
 	gcc -o hello_socket hello_socket.c
 	gcc -o hello_connect hello_connect.c
 	gcc -o hello_bind_listen_accept hello_bind_listen_accept.c
+	gcc -o hello_concurrent_server hello_concurrent_server.c
 
 
 clean:
 	rm -rf daytimetcpcli_v4 daytimetcpsrv_v4 daytimetcpcli_v6 \
 		daytimetcpsrv_v6 byteorder htons_ntohs \
 		inet_aton-inet_ntoa inet_pton-inet_ntop \
-		hello_socket hello_connect hello_bind_listen_accept
+		hello_socket hello_connect hello_bind_listen_accept \
+		hello_concurrent_server
