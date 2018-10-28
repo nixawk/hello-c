@@ -8,7 +8,7 @@ void new_pointer1(void)
     int *pointer = malloc(sizeof(*pointer));
     memset(pointer, '\x00', sizeof(int));
 
-    printf("new_pointer1 - Please enter a number: ");
+    printf("new_pointer1 - Please enter a number:\n ");
     scanf("%d", pointer);
     printf("number is : %d\n", *pointer);
     free(pointer);
@@ -24,7 +24,7 @@ void new_pointer2(void)
     printf("new_pointer2 - Please enter a number: ");
     scanf("%d", &x);     /* Put a value in x, we could also use p here */
     printf("number is : %d\n", *p);  /* Note the use of the * to get the value */
-    getchar();
+    getch();
 }
 
 int main(void)
