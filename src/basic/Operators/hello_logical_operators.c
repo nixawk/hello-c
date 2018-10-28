@@ -3,8 +3,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-void
-logical_operators(void)
+void logical_operators(void)
 {
     bool b1 = false;
     bool b2 = true;
@@ -20,8 +19,7 @@ logical_operators(void)
         printf("b1 is true, or b2 is true\n");
 }
 
-int
-main(void)
+int main(void)
 {
     logical_operators();
     return 0;
