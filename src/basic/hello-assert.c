@@ -1,26 +1,52 @@
+/*
+ * assert -- expression verification macro.
+ *
+ * The assert() macro tests the given expression and if it is false, the
+ * calling process is terminated. A diagnostic message is written to stderr and
+ * the abort(3) function is called, effectively terminating the program.
+ *
+ * If expression is true, the assert() macro does nothing.
+ * The assert() macro may be removed at compile time with the cc option -DNDEBUG
+ */
+
+// gcc -DNDEBUG hello_assert.c
+
+
 #include <assert.h>
 #include <stdio.h>
 
-/*
-The assert.h header file of the C standard Library provides a macro called assert which can be used to verify assumptions made by the program and print a diagnostic message if this assumptions is false.
 
-The defined macro assert refers to another macro NDEBUG which is not a part of <assert.h>. If NDEBUG is defined as a macro name in the source file, at the point where <assert.h> is included, the assert macro is defined as follows.
-*/
-
-void demo_assert(int i)
+void assert_usage(void)
 {
-    assert (i == 2);
-    printf("Number is : %d\n", i);
+    int n;
+
+    printf("[*] please a num: ");
+    scanf("%d", &n);
+
+    assert(n == 10);  /* gcc -DNDEBUG hello-assert.c */
+    printf("[*] n = %d\n", n);
 }
 
 
 int main(void)
 {
-    int i;
-
-    printf("Pleae enter a number: ");
-    scanf("%d", &i);
-    demo_assert(i);
+    assert_usage();
+    return 0;
 }
 
-// Assertion failed: (i == 2), function demo_assert, file hello-assert.c, line 12.
+/*
+
+$ gcc hello-assert.c
+$ ./a.out
+[*] please a num: 1
+Assertion failed: (n == 10), function assert_usage, file hello-assert.c, line 26.
+Abort trap: 6
+
+
+$ gcc -DNDEBUG hello-assert.c
+$ ./a.out
+[*] please a num: 1
+[*] n = 1
+
+*/
+
