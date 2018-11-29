@@ -14,61 +14,53 @@
 // The fnmatch() function checks whether the string argument matches the
 // pattern argument, which is a shell wildcard pattern.
 
-
-void
-fnmatch_const_print(void)
+void fnmatch_const_print(void)
 {
-    printf("FNM_NOESCAPE = %d\n", FNM_NOESCAPE);
-    printf("FNM_PATHNAME = %d\n", FNM_PATHNAME);
-    printf("FNM_PERIOD = %d\n", FNM_PERIOD);
-    printf("FNM_FILE_NAME = %d\n", FNM_FILE_NAME);
-    printf("FNM_LEADING_DIR = %d\n", FNM_LEADING_DIR);
-    printf("FNM_CASEFOLD = %d\n", FNM_CASEFOLD);
-    printf("FNM_EXTMATCH = %d\n", FNM_EXTMATCH);
+	printf("FNM_NOESCAPE = %d\n", FNM_NOESCAPE);
+	printf("FNM_PATHNAME = %d\n", FNM_PATHNAME);
+	printf("FNM_PERIOD = %d\n", FNM_PERIOD);
+	printf("FNM_FILE_NAME = %d\n", FNM_FILE_NAME);
+	printf("FNM_LEADING_DIR = %d\n", FNM_LEADING_DIR);
+	printf("FNM_CASEFOLD = %d\n", FNM_CASEFOLD);
+	printf("FNM_EXTMATCH = %d\n", FNM_EXTMATCH);
 }
 
-void
-fnmatch_ls(const char *filename, const char *pattern)
+void fnmatch_ls(const char *filename, const char *pattern)
 {
-    DIR *dir;
-    struct dirent *dirent;
+	DIR *dir;
+	struct dirent *dirent;
 
-    dir = opendir(filename);
-    if (dir == NULL)
-    {
-        perror("opendir");
-        exit(EXIT_FAILURE);
-    }
+	dir = opendir(filename);
+	if (dir == NULL) {
+		perror("opendir");
+		exit(EXIT_FAILURE);
+	}
 
-    while ((dirent = readdir(dir)) != NULL)
-    {
-        if (! fnmatch(pattern, dirent->d_name, FNM_PATHNAME | FNM_PERIOD))
-        {
-            printf("%s\n", dirent->d_name);
-        }
-    }
+	while ((dirent = readdir(dir)) != NULL) {
+		if (!fnmatch
+		    (pattern, dirent->d_name, FNM_PATHNAME | FNM_PERIOD)) {
+			printf("%s\n", dirent->d_name);
+		}
+	}
 
-    if (closedir(dir) == -1)
-    {
-        perror("closedir");
-        exit(EXIT_FAILURE);
-    }
+	if (closedir(dir) == -1) {
+		perror("closedir");
+		exit(EXIT_FAILURE);
+	}
 
 }
 
-int
-main(int argc, const char *argv[])
+int main(int argc, const char *argv[])
 {
-    if (argc != 3)
-    {
-        printf("[*] %s FILENAME PATTERN\n", argv[0]);
-        exit(EXIT_FAILURE);
-    }
+	if (argc != 3) {
+		printf("[*] %s FILENAME PATTERN\n", argv[0]);
+		exit(EXIT_FAILURE);
+	}
 
-    fnmatch_const_print();
-    fnmatch_ls(argv[1], argv[2]);
+	fnmatch_const_print();
+	fnmatch_ls(argv[1], argv[2]);
 
-    return 0;
+	return 0;
 }
 
 /*

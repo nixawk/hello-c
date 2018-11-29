@@ -1,5 +1,5 @@
 #include <time.h>
-#include <unistd.h>  // sleep
+#include <unistd.h>		// sleep
 #include <stdio.h>
 
 /*
@@ -11,12 +11,12 @@ returns the different of seconds between time1 and time2 i.e (time1 - time2).
 
 int main(void)
 {
-    time_t start_t, end_t;
+	time_t start_t, end_t;
 
-    time(&start_t);  // return a new time_t
-    sleep(5);
-    time(&end_t);    // return a new time_t
+	time(&start_t);		// return a new time_t
+	sleep(5);
+	time(&end_t);		// return a new time_t
 
-    printf("cost time : %f\n", difftime(end_t, start_t));
-    return 0;
+	printf("cost time : %f\n", difftime(end_t, start_t));
+	return 0;
 }

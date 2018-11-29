@@ -13,32 +13,28 @@ From ftp://ftp.gnu.org/gnu/macchanger/
 
 */
 
-static void
-random_seed (void)
+static void random_seed(void)
 {
-  int            fd;
-  struct timeval tv;
-  unsigned int seed;
+	int fd;
+	struct timeval tv;
+	unsigned int seed;
 
-  if ((fd = open("/dev/urandom", O_RDONLY)) >= 0 ||
-      (fd = open("/dev/random", O_RDONLY))  >= 0)
-  {
-    read(fd, &seed, sizeof(seed));
-    close(fd);
-  } else {
-    gettimeofday(&tv, NULL);
-    seed = (getpid() << 16) ^ tv.tv_sec ^ tv.tv_usec;
-  }
+	if ((fd = open("/dev/urandom", O_RDONLY)) >= 0 ||
+	    (fd = open("/dev/random", O_RDONLY)) >= 0) {
+		read(fd, &seed, sizeof(seed));
+		close(fd);
+	} else {
+		gettimeofday(&tv, NULL);
+		seed = (getpid() << 16) ^ tv.tv_sec ^ tv.tv_usec;
+	}
 
-  srandom(seed);
+	srandom(seed);
 }
 
-
-int
-main(int argc, const char *argv[])
+int main(int argc, const char *argv[])
 {
-  random_seed();
+	random_seed();
 
-  printf("%ld\n", random());
-  return 0;
+	printf("%ld\n", random());
+	return 0;
 }

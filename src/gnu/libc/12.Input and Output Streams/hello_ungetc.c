@@ -9,20 +9,18 @@
 // ungetc with the return value of getc without needing to check for an error
 // from getc.
 
-void
-ungetc_usage(void)
+void ungetc_usage(void)
 {
-    int ch = 'A';
+	int ch = 'A';
 
-    ungetc(ch, stdin);
-    putchar(getc(stdin));
+	ungetc(ch, stdin);
+	putchar(getc(stdin));
 }
 
-int
-main(void)
+int main(void)
 {
-    ungetc_usage();
-    return 0;
+	ungetc_usage();
+	return 0;
 }
 
 // http://man7.org/linux/man-pages/man3/ungetc.3.html

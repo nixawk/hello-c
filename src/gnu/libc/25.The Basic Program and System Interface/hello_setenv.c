@@ -16,12 +16,10 @@
 // If the function is successful it returns 0. Otherwise the environment is unchanged
 // and the return value is -1 and errno is set.
 
-
     // int unsetenv (const char *name)
 
 // The function returns -1 if name is a null pointer, points to an empty string, 
 // or points to a string containing a = character. It returns 0 if the call succeeded.
-
 
     // int clearenv (void)
 
@@ -29,25 +27,19 @@
 // Using [putenv] and [setenv] new entries can be added again later.
 // If the function is successful it returns 0. Otherwise the return value is nonzero.
 
-
-void
-setenv_usage(void)
+void setenv_usage(void)
 {
-    if (0 == setenv("LL", "'ls -l'", 0))
-    {
-        printf("LL=%s\n", getenv("LL"));  // output: LL='ls -l'
-        unsetenv("LL");
-        printf("LL=%s\n", getenv("LL"));  // output: LL=(null)
-    }
+	if (0 == setenv("LL", "'ls -l'", 0)) {
+		printf("LL=%s\n", getenv("LL"));	// output: LL='ls -l'
+		unsetenv("LL");
+		printf("LL=%s\n", getenv("LL"));	// output: LL=(null)
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    setenv_usage();
-    return 0;
+	setenv_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Environment-Access.html#Environment-Access

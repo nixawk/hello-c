@@ -1,11 +1,10 @@
 #include <stdio.h>
 
-int
-main(void)
+int main(void)
 {
 #if VERBOSE >= 2
-    printf("Trace Message");
-    return 0;
+	printf("Trace Message");
+	return 0;
 #endif
 }
 

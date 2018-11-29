@@ -13,12 +13,12 @@ This function returns a pointer to the character in str1 that matches one of the
 
 int main(void)
 {
-    const char str1[] = "helloworld123";
-    const char str2[] = "love";
-    char *pointer;
+	const char str1[] = "helloworld123";
+	const char str2[] = "love";
+	char *pointer;
 
-    pointer = strpbrk(str1, str2);
-    printf("pointer: %p - %c\n", pointer, *pointer);
+	pointer = strpbrk(str1, str2);
+	printf("pointer: %p - %c\n", pointer, *pointer);
 
-    return 0;
+	return 0;
 }

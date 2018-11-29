@@ -14,14 +14,12 @@ int main(int argc, const char *argv[])
 
 	scanf("%s", command);
 
-	if (!(in = popen(command, "r")))
-	{
-	    return 1;
+	if (!(in = popen(command, "r"))) {
+		return 1;
 	}
 
-	while(fgets(buff, sizeof(buff), in) != NULL)
-	{
-			printf("%s", buff);
+	while (fgets(buff, sizeof(buff), in) != NULL) {
+		printf("%s", buff);
 	}
 
 	pclose(in);

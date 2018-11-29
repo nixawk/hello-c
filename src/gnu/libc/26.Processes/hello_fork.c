@@ -12,37 +12,33 @@
 
 // If process creation failed, fork returns a value of -1 in the parent process.
 
-void
-fork_usage(void)
+void fork_usage(void)
 {
-    pid_t childpid;
+	pid_t childpid;
 
-    switch (childpid = fork())
-    {
-        case -1:  /* fork() failed */
-            perror("fork()");
-            exit(EXIT_FAILURE);
+	switch (childpid = fork()) {
+	case -1:		/* fork() failed */
+		perror("fork()");
+		exit(EXIT_FAILURE);
 
-        case 0:   /* child process */
-            printf("Child's  processID: %d\n", getpid());
-            printf("Parent's processID: %d\n", getppid());
-            break;
+	case 0:		/* child process */
+		printf("Child's  processID: %d\n", getpid());
+		printf("Parent's processID: %d\n", getppid());
+		break;
 
-        default:  /* parent process*/
-            sleep(3);  // Give child a chance to execute
-            printf("default processID: %d\n", getpid());
-            break;
-    }
+	default:		/* parent process */
+		sleep(3);	// Give child a chance to execute
+		printf("default processID: %d\n", getpid());
+		break;
+	}
 
-    exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    fork_usage();
-    return 0;
+	fork_usage();
+	return 0;
 }
 
 /*

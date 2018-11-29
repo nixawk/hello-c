@@ -12,22 +12,17 @@
 // If the function is successful it returns 0. Otherwise the return value is
 // nonzero and [errno] is set to indicate the error.
 
-void
-putenv_usage(void)
+void putenv_usage(void)
 {
-    if (0 == putenv("LL='ls -l'"))
-    {
-        printf("LL=%s\n", getenv("LL"));
-    }
+	if (0 == putenv("LL='ls -l'")) {
+		printf("LL=%s\n", getenv("LL"));
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    putenv_usage();
-    return 0;
+	putenv_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Environment-Access.html#Environment-Access

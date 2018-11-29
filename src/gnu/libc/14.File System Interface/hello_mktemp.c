@@ -1,7 +1,6 @@
 #include <unistd.h>
 #include <stdio.h>
 
-
 // char * mktemp (char *template)
 
 // The [mktemp] function generates a unique file name by modifying template as described above.
@@ -20,25 +19,19 @@
 
 // The [mkdtemp] function creates a directory with a unique name.
 
-
-void
-mktemp_usage(void)
+void mktemp_usage(void)
 {
-    char *tempfile = mktemp("XXXXXX");
-    if (tempfile != NULL)
-    {
-        printf("temp file: %s\n", tempfile);
-    }
+	char *tempfile = mktemp("XXXXXX");
+	if (tempfile != NULL) {
+		printf("temp file: %s\n", tempfile);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    mktemp_usage();
-    return 0;
+	mktemp_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Temporary-Files.html#Temporary-Files
 // http://man7.org/linux/man-pages/man3/mktemp.3.html

@@ -14,38 +14,33 @@
 #include <stdlib.h>
 #include <dirent.h>
 
-int
-errfunc(const char *filename, int errorcode)
+int errfunc(const char *filename, int errorcode)
 {
-    fprintf(stderr, "filename: %s, errorcode: %d\n", filename, errorcode);
-    return 0;   /* let glob keep going */
+	fprintf(stderr, "filename: %s, errorcode: %d\n", filename, errorcode);
+	return 0;		/* let glob keep going */
 }
 
-void
-glob_usage(const char *pattern)
+void glob_usage(const char *pattern)
 {
-    glob_t globbuf;
-    int i;
+	glob_t globbuf;
+	int i;
 
-    if (glob(pattern, GLOB_MARK, errfunc, &globbuf) != 0)
-    {
-        perror("glob");
-        exit(EXIT_FAILURE);
-    }
+	if (glob(pattern, GLOB_MARK, errfunc, &globbuf) != 0) {
+		perror("glob");
+		exit(EXIT_FAILURE);
+	}
 
-    for (i = 0; i < (globbuf.gl_pathc); i++)
-    {
-        printf("%s\n", globbuf.gl_pathv[i]);  
-    }
+	for (i = 0; i < (globbuf.gl_pathc); i++) {
+		printf("%s\n", globbuf.gl_pathv[i]);
+	}
 
-    globfree(&globbuf);
+	globfree(&globbuf);
 }
 
-int
-main(void)
+int main(void)
 {
-    glob_usage("*");
-    return 0;
+	glob_usage("*");
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Calling-Glob.html#Calling-Glob

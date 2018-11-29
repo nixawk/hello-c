@@ -5,83 +5,73 @@
 #include <unistd.h>
 #include <string.h>
 
-#ifndef BUF_SIZE /* Allow "cc -D" to override definition */
+#ifndef BUF_SIZE		/* Allow "cc -D" to override definition */
 #define BUF_SIZE 4096
 #endif
 
-void
-copyfile(const char *src, const char *dst)
+void copyfile(const char *src, const char *dst)
 {
-    char buf[BUF_SIZE];
+	char buf[BUF_SIZE];
 
-    int sfd, dfd;         /* file descriptor */
-    int sflags, dflags;   /* file flags */
-    mode_t smode, dmode;  /* file mode */
+	int sfd, dfd;		/* file descriptor */
+	int sflags, dflags;	/* file flags */
+	mode_t smode, dmode;	/* file mode */
 
-    int rc, wc;           /* count for read/write */
+	int rc, wc;		/* count for read/write */
 
-    /* read data from src file */
+	/* read data from src file */
 
-    sflags = O_RDONLY;
-    smode = S_IRUSR | S_IRGRP | S_IROTH;
+	sflags = O_RDONLY;
+	smode = S_IRUSR | S_IRGRP | S_IROTH;
 
-    sfd = open(src, sflags, smode);
-    if (sfd == -1)
-    {
-        perror("open() src file");
-        exit(EXIT_FAILURE);
-    }
+	sfd = open(src, sflags, smode);
+	if (sfd == -1) {
+		perror("open() src file");
+		exit(EXIT_FAILURE);
+	}
 
-    /* write data into dst file */
+	/* write data into dst file */
 
-    dflags = O_RDWR | O_TRUNC | O_CREAT;
-    dmode = S_IRUSR | S_IRGRP | S_IROTH;
+	dflags = O_RDWR | O_TRUNC | O_CREAT;
+	dmode = S_IRUSR | S_IRGRP | S_IROTH;
 
-    dfd = open(dst, dflags, dmode);
-    if (dfd == -1)
-    {
-        perror("open() dst file");
-        exit(EXIT_FAILURE);
-    }
+	dfd = open(dst, dflags, dmode);
+	if (dfd == -1) {
+		perror("open() dst file");
+		exit(EXIT_FAILURE);
+	}
 
-    while ((rc = read(sfd, buf, BUF_SIZE)) > 0)
-    {
-        wc = (rc < BUF_SIZE) ? rc : BUF_SIZE;
-        if ((wc = write(dfd, buf, wc)) == -1)
-        {
-            perror("write() dst file");
-            exit(EXIT_FAILURE);
-        }
-    }
+	while ((rc = read(sfd, buf, BUF_SIZE)) > 0) {
+		wc = (rc < BUF_SIZE) ? rc : BUF_SIZE;
+		if ((wc = write(dfd, buf, wc)) == -1) {
+			perror("write() dst file");
+			exit(EXIT_FAILURE);
+		}
+	}
 
-    /* close file descriptor, and avoid memory leak */
+	/* close file descriptor, and avoid memory leak */
 
-    if (close(sfd) == -1)
-    {
-        perror("close() src file");
-        exit(EXIT_FAILURE);
-    }
+	if (close(sfd) == -1) {
+		perror("close() src file");
+		exit(EXIT_FAILURE);
+	}
 
-    if (close(dfd) == -1)
-    {
-        perror("close() dst file");
-        exit(EXIT_FAILURE);
-    }
+	if (close(dfd) == -1) {
+		perror("close() dst file");
+		exit(EXIT_FAILURE);
+	}
 }
 
-int
-main(int argc, const char *argv[])
+int main(int argc, const char *argv[])
 {
-    if ((argc != 3) || (strcmp("--help", argv[1]) == 0))
-    {
-        printf("[*] %s <src-file> <dst-file>\n", argv[0]);
-        exit(EXIT_FAILURE);
-    }
+	if ((argc != 3) || (strcmp("--help", argv[1]) == 0)) {
+		printf("[*] %s <src-file> <dst-file>\n", argv[0]);
+		exit(EXIT_FAILURE);
+	}
 
-    copyfile(argv[1], argv[2]);
-    exit(EXIT_SUCCESS);
+	copyfile(argv[1], argv[2]);
+	exit(EXIT_SUCCESS);
 }
-
 
 /*
 

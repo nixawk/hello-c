@@ -11,27 +11,24 @@
 
 // gcc -DNDEBUG hello_assert.c
 
-
 #include <assert.h>
 #include <stdio.h>
 
-
 void assert_usage(void)
 {
-    int n;
+	int n;
 
-    printf("[*] please a num: ");
-    scanf("%d", &n);
+	printf("[*] please a num: ");
+	scanf("%d", &n);
 
-    assert(n == 10);  /* gcc -DNDEBUG hello-assert.c */
-    printf("[*] n = %d\n", n);
+	assert(n == 10);	/* gcc -DNDEBUG hello-assert.c */
+	printf("[*] n = %d\n", n);
 }
-
 
 int main(void)
 {
-    assert_usage();
-    return 0;
+	assert_usage();
+	return 0;
 }
 
 /*
@@ -42,11 +39,9 @@ $ ./a.out
 Assertion failed: (n == 10), function assert_usage, file hello-assert.c, line 26.
 Abort trap: 6
 
-
 $ gcc -DNDEBUG hello-assert.c
 $ ./a.out
 [*] please a num: 1
 [*] n = 1
 
 */
-

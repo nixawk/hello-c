@@ -8,20 +8,16 @@
 
 // except that the global variables error respects and modifies are not used.
 
-
-void
-warn_usage(void)
+void warn_usage(void)
 {
-    warn("this is a warn message");
-    warn("this is another warn message");
+	warn("this is a warn message");
+	warn("this is another warn message");
 }
 
-
-int
-main(void)
+int main(void)
 {
-    warn_usage();
-    return 0;
+	warn_usage();
+	return 0;
 }
 
 /*

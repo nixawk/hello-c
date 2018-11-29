@@ -49,45 +49,37 @@ static clock_t en_time;
 static struct tms st_cpu;
 static struct tms en_cpu;
 
-
-void
-start_clock(void)
+void start_clock(void)
 {
-    st_time = times(&st_cpu);
+	st_time = times(&st_cpu);
 }
 
-
-void
-end_clock(char *msg)
+void end_clock(char *msg)
 {
-    en_time = times(&en_cpu);
+	en_time = times(&en_cpu);
 
-    fputs(msg, stdout);
-    printf("Real Time: %jd, User Time: %jd, System Time: %jd\n",
-        (intmax_t)(en_time - st_time),
-        (intmax_t)(en_cpu.tms_utime - st_cpu.tms_utime),
-        (intmax_t)(en_cpu.tms_stime - st_cpu.tms_stime));
+	fputs(msg, stdout);
+	printf("Real Time: %jd, User Time: %jd, System Time: %jd\n",
+	       (intmax_t) (en_time - st_time),
+	       (intmax_t) (en_cpu.tms_utime - st_cpu.tms_utime),
+	       (intmax_t) (en_cpu.tms_stime - st_cpu.tms_stime));
 }
 
-
-void
-wait_foo(void)
+void wait_foo(void)
 {
-    int seconds = 5;
-    printf("sleeping %d ...\n", seconds);
-    sleep(seconds);
+	int seconds = 5;
+	printf("sleeping %d ...\n", seconds);
+	sleep(seconds);
 }
 
-int
-main(void)
+int main(void)
 {
-    start_clock();
-    wait_foo();
-    end_clock("What's CPU and Processs times ?\n");
+	start_clock();
+	wait_foo();
+	end_clock("What's CPU and Processs times ?\n");
 
-    return 0;
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Processor-Time.html#Processor-Time
 // http://pubs.opengroup.org/onlinepubs/009695399/functions/times.html

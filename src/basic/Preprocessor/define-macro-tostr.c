@@ -6,9 +6,8 @@ A token passed to macro can be converted to a string literal by using # before i
 
 #define tostr(a)  #a
 
-int
-main(void)
+int main(void)
 {
-    printf("%s\n", tostr(Hello World));
-    return 0;
+	printf("%s\n", tostr(Hello World));
+	return 0;
 }

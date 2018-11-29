@@ -31,38 +31,30 @@
 #define OLDNAME "/tmp/oldfile"
 #define NEWFILE "/tmp/newfile"
 
-
-void
-link_usage(void)
+void link_usage(void)
 {
-    if (link(OLDNAME, NEWFILE) != 0)
-    {
-        fprintf(stderr, "link() failed: %s\n", strerror(errno));
-        exit(EXIT_FAILURE);
-    }
-    printf("link() successful: %s\n", NEWFILE);
+	if (link(OLDNAME, NEWFILE) != 0) {
+		fprintf(stderr, "link() failed: %s\n", strerror(errno));
+		exit(EXIT_FAILURE);
+	}
+	printf("link() successful: %s\n", NEWFILE);
 }
 
-
-void
-unlink_usage(void)
+void unlink_usage(void)
 {
-    if (unlink(OLDNAME) != 0)
-    {
-        fprintf(stderr, "unlink() failed: %s\n", strerror(errno));
-        exit(EXIT_FAILURE);
-    }
-    printf("unlink() successful: %s\n", OLDNAME);
+	if (unlink(OLDNAME) != 0) {
+		fprintf(stderr, "unlink() failed: %s\n", strerror(errno));
+		exit(EXIT_FAILURE);
+	}
+	printf("unlink() successful: %s\n", OLDNAME);
 }
 
-int
-main(void)
+int main(void)
 {
-    link_usage();
-    unlink_usage();
-    return 0;
+	link_usage();
+	unlink_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Hard-Links.html#Hard-Links
 // https://linux.die.net/man/3/link

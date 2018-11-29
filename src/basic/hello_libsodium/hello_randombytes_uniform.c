@@ -9,23 +9,20 @@
 // when upper_bound is not a power of 2. Note that an upper_bound < 2 leaves
 // only a single element to be chosen, namely 0.
 
-int
-main(void)
+int main(void)
 {
-    const uint32_t upper_bound = 1000;
+	const uint32_t upper_bound = 1000;
 
-    if (sodium_init() < 0) {
-        /* panic! the library couldn't be initialized, it is not safe to use */
-        exit(EXIT_FAILURE);
-    }
+	if (sodium_init() < 0) {
+		/* panic! the library couldn't be initialized, it is not safe to use */
+		exit(EXIT_FAILURE);
+	}
 
-    printf(
-        "randombytes_uniform(const uint32_t) = %d\n",
-        randombytes_uniform(upper_bound)
-    );
+	printf("randombytes_uniform(const uint32_t) = %d\n",
+	       randombytes_uniform(upper_bound)
+	    );
 
-    return 0;
+	return 0;
 }
-
 
 // https://download.libsodium.org/doc/generating_random_data

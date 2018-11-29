@@ -4,8 +4,7 @@
  * Nonfatal error related to a system call.
  * Print a message and return.
  */
-void
-err_ret(const char *fmt, ...)
+void err_ret(const char *fmt, ...)
 {
 	va_list ap;
 
@@ -18,8 +17,7 @@ err_ret(const char *fmt, ...)
  * Fatal error related to a system call.
  * Print a message and terminate.
  */
-void
-err_sys(const char *fmt, ...)
+void err_sys(const char *fmt, ...)
 {
 	va_list ap;
 
@@ -34,8 +32,7 @@ err_sys(const char *fmt, ...)
  * Error code passed as explicit parameter.
  * Print a message and return
  */
-void
-err_cont(int error, const char *fmt, ...)
+void err_cont(int error, const char *fmt, ...)
 {
 	va_list ap;
 
@@ -49,8 +46,7 @@ err_cont(int error, const char *fmt, ...)
  * Error code passed as explict parameter.
  * Print a message and terminate.
  */
-void
-err_exit(int error, const char *fmt, ...)
+void err_exit(int error, const char *fmt, ...)
 {
 	va_list ap;
 
@@ -64,24 +60,22 @@ err_exit(int error, const char *fmt, ...)
  * Fatal error related to a system call.
  * Print a message, dump core, and terminate.
  */
-void
-err_dump(const char *fmt, ...)
+void err_dump(const char *fmt, ...)
 {
 	va_list ap;
 
 	va_start(ap, fmt);
 	err_doit(1, errno, fmt, ap);
 	va_end(ap);
-	abort();          /* dump core and terminate */
-	exit(1);          /* shouldn't get here */
+	abort();		/* dump core and terminate */
+	exit(1);		/* shouldn't get here */
 }
 
 /*
  * Nonfatal error unrelated to a system call.
  * Print a message and return.
  */
-void
-err_msg(const char *fmt, ...)
+void err_msg(const char *fmt, ...)
 {
 	va_list ap;
 
@@ -94,8 +88,7 @@ err_msg(const char *fmt, ...)
  * Fatal error unrelated to a system call.
  * Print a message and terminate.
  */
-void
-err_quit(const char *fmt, ...)
+void err_quit(const char *fmt, ...)
 {
 	va_list ap;
 
@@ -111,16 +104,16 @@ err_quit(const char *fmt, ...)
  *
  */
 
-static void
-err_doit(int errnoflag, int error, const char *fmt, va_list ap)
+static void err_doit(int errnoflag, int error, const char *fmt, va_list ap)
 {
 	char buf[LINE_MAX];
 
-	vsnprintf(buf, LINE_MAX-1, fmt, ap);
+	vsnprintf(buf, LINE_MAX - 1, fmt, ap);
 	if (errnoflag)
-		snprintf(buf+strlen(buf), LINE_MAX-strlen(buf)-1, ": %s", strerror(error));
+		snprintf(buf + strlen(buf), LINE_MAX - strlen(buf) - 1, ": %s",
+			 strerror(error));
 	strcat(buf, "\n");
-	fflush(stdout);          /* in case stdout and stderr are the same */
+	fflush(stdout);		/* in case stdout and stderr are the same */
 	fputs(buf, stderr);
-	fflush(NULL);            /* flushes all stdio output streams */
+	fflush(NULL);		/* flushes all stdio output streams */
 }

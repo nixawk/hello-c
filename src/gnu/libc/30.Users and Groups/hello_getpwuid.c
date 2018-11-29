@@ -11,7 +11,6 @@
 // information about the user whose user ID is uid.
 // A null pointer value indicates there is no user in the data base with user ID uid.
 
-
 // The passwd structure is defined in <pwd.h> as follows:
 
 //    struct passwd {
@@ -24,7 +23,6 @@
 //        char   *pw_shell;      /* shell program */
 //    };
 
-
 // $ ./hello_getpwuid /etc/passwd
 // passwd.pw_name   : root
 // passwd.pw_passwd : *
@@ -32,45 +30,38 @@
 // passwd.pwdir     : /var/root
 // passwd.pw_shell  : /bin/sh
 
-void
-getpwuid_usage(const char *filename)
+void getpwuid_usage(const char *filename)
 {
-    struct stat st;
-    struct passwd *pw;
+	struct stat st;
+	struct passwd *pw;
 
-    if (stat(filename, &st) != 0)
-    {
-        fprintf(stderr, "stat() failed.\n");
-        exit(1);
-    }
+	if (stat(filename, &st) != 0) {
+		fprintf(stderr, "stat() failed.\n");
+		exit(1);
+	}
 
-    pw = getpwuid(st.st_uid);
-    if (pw == NULL)
-    {
-        fprintf(stderr, "getpwuid() failed.\n");
-        exit(1);
-    }
+	pw = getpwuid(st.st_uid);
+	if (pw == NULL) {
+		fprintf(stderr, "getpwuid() failed.\n");
+		exit(1);
+	}
 
-    printf("passwd.pw_name   : %s\n", pw->pw_name);
-    printf("passwd.pw_passwd : %s\n", pw->pw_passwd);
-    printf("passwd.pw_gecos  : %s\n", pw->pw_gecos);
-    printf("passwd.pwdir     : %s\n", pw->pw_dir);
-    printf("passwd.pw_shell  : %s\n", pw->pw_shell);
+	printf("passwd.pw_name   : %s\n", pw->pw_name);
+	printf("passwd.pw_passwd : %s\n", pw->pw_passwd);
+	printf("passwd.pw_gecos  : %s\n", pw->pw_gecos);
+	printf("passwd.pwdir     : %s\n", pw->pw_dir);
+	printf("passwd.pw_shell  : %s\n", pw->pw_shell);
 }
 
-
-int
-main(int argc, const char *argv[])
+int main(int argc, const char *argv[])
 {
-    if (argc != 2)
-    {
-        printf("[*] Usage: %s </path/to/file>\n", argv[0]);
-        exit(1);
-    }
+	if (argc != 2) {
+		printf("[*] Usage: %s </path/to/file>\n", argv[0]);
+		exit(1);
+	}
 
-    getpwuid_usage(argv[1]);
-    return 0;
+	getpwuid_usage(argv[1]);
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Lookup-User.html

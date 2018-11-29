@@ -21,29 +21,24 @@
 
 #define BUFFSIZE    512
 
-
-void
-strerror_r_usage(void)
+void strerror_r_usage(void)
 {
-    char buf[BUFFSIZE] = {0};
+	char buf[BUFFSIZE] = { 0 };
 
-    errno = 1;
-    strerror_r(errno, buf, BUFFSIZE);
-    fprintf(stderr, "errno: %d, %s\n", errno, buf);
+	errno = 1;
+	strerror_r(errno, buf, BUFFSIZE);
+	fprintf(stderr, "errno: %d, %s\n", errno, buf);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    strerror_r_usage();
-    return 0;
+	strerror_r_usage();
+	return 0;
 }
 
 /*
 $ ./hello_strerror_r
 errno: 1, Operation not permitted
 */
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Error-Messages.html#Error-Messages

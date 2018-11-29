@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-
 // int fgetc (FILE *stream)
 
 // This function reads the next character as an unsigned char from the stream stream and returns its value, 
@@ -8,19 +7,15 @@
 
 // int fgetc_unlocked (FILE *stream)
 
-void
-fgetc_usage(void)
+void fgetc_usage(void)
 {
-    putchar(fgetc(stdin));
+	putchar(fgetc(stdin));
 }
 
-
-int
-main(void)
+int main(void)
 {
-    fgetc_usage();
-    return 0;
+	fgetc_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Character-Input.html#Character-Input

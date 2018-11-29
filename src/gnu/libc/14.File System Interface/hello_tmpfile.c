@@ -5,7 +5,6 @@
 
 // FILE *tmpfile(void);
 
-
 /* Define outside of namespace so the C++ is happy.  */
 // struct _IO_FILE;
 
@@ -16,39 +15,34 @@
 #define BUFSIZE 1024
 #endif
 
-void
-tmpfile_usage(void)
+void tmpfile_usage(void)
 {
-    FILE *stream;
-    char fdpath[BUFSIZE];  // path to fd
-    char fnpath[BUFSIZE];  // path to filename
+	FILE *stream;
+	char fdpath[BUFSIZE];	// path to fd
+	char fnpath[BUFSIZE];	// path to filename
 
-    stream = tmpfile();
-    if (stream == NULL)
-    {
-        perror("tmpfile()");
-        exit(EXIT_FAILURE);
-    }
+	stream = tmpfile();
+	if (stream == NULL) {
+		perror("tmpfile()");
+		exit(EXIT_FAILURE);
+	}
 
-    printf("FILE._fileno = %d\n", stream->_fileno);
-    printf("fileno(FILE) = %d\n", fileno(stream));
+	printf("FILE._fileno = %d\n", stream->_fileno);
+	printf("fileno(FILE) = %d\n", fileno(stream));
 
-    sprintf(fdpath, "/proc/self/fd/%d", fileno(stream));
-    memset(fnpath, 0, sizeof(fnpath));
-    readlink(fdpath, fnpath, BUFSIZE);
-    printf("filename: %s\n", fnpath);
+	sprintf(fdpath, "/proc/self/fd/%d", fileno(stream));
+	memset(fnpath, 0, sizeof(fnpath));
+	readlink(fdpath, fnpath, BUFSIZE);
+	printf("filename: %s\n", fnpath);
 
-    fclose(stream);
+	fclose(stream);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    tmpfile_usage();
-    return 0;
+	tmpfile_usage();
+	return 0;
 }
-
 
 // $ ./a.out
 // FILE._fileno = 3

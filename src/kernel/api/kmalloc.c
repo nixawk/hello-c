@@ -14,26 +14,24 @@ void *addr = NULL;
 static int
 __init kmalloc_init(void)
 {
-        addr = kmalloc(SIZE, GFP_KERNEL);
-        if (!addr)
-        {
-                printk("failed to kmalloc\n");
-                return -ENOMEM;
-        }
-        printk("kmalloc successfully\naddr=0x%p\n", addr);
+	addr = kmalloc(SIZE, GFP_KERNEL);
+	if (!addr) {
+		printk("failed to kmalloc\n");
+		return -ENOMEM;
+	}
+	printk("kmalloc successfully\naddr=0x%p\n", addr);
 
-        return 0;
+	return 0;
 }
 
 static void
 __exit kmalloc_exit(void)
 {
-        if (addr)
-        {
-                kfree(addr);
-                printk("kfree successfully\n");
-        }
-        printk("module exits ok !\n");
+	if (addr) {
+		kfree(addr);
+		printk("kfree successfully\n");
+	}
+	printk("module exits ok !\n");
 }
 
 module_init(kmalloc_init);

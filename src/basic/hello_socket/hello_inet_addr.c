@@ -1,24 +1,20 @@
 #include <arpa/inet.h>
 #include <stdio.h>
 
-
 // in_addr_t - An unsigned integral type of exactly 32 bits.
 
-void
-inet_addr_usage(void)
+void inet_addr_usage(void)
 {
-    char *ip = "192.168.1.100";
-    in_addr_t addr = inet_addr(ip);
+	char *ip = "192.168.1.100";
+	in_addr_t addr = inet_addr(ip);
 
-    printf("%x\n", addr); // 6401a8c0
+	printf("%x\n", addr);	// 6401a8c0
 }
 
-
-int
-main(void)
+int main(void)
 {
-    inet_addr_usage();
-    return 0;
+	inet_addr_usage();
+	return 0;
 }
 
 /*

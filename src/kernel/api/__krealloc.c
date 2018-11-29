@@ -12,64 +12,59 @@ MODULE_DESCRIPTION("Module for __krealloc");
 static int __init __krealloc_init(void);
 static void __exit __krealloc_exit(void);
 struct page *pages = NULL;
-#define PAGE_NUM 0   // 2 ** 0
+#define PAGE_NUM 0		// 2 ** 0
 #define NEW_SIZE 26
 
 static int
 __init __krealloc_init(void)
 {
-        char *temp, *addr;
-        char ch;
-        int i;
+	char *temp, *addr;
+	char ch;
+	int i;
 
-        pages = alloc_pages(GFP_KERNEL, PAGE_NUM);
-        if (!pages)
-        {
-                printk("alloc_pages failed!\n");
-                return -ENOMEM;
-        }
+	pages = alloc_pages(GFP_KERNEL, PAGE_NUM);
+	if (!pages) {
+		printk("alloc_pages failed!\n");
+		return -ENOMEM;
+	}
 
-        temp = (char *)page_address(pages);
-        *temp = 'a';
+	temp = (char *)page_address(pages);
+	*temp = 'a';
 
-        for (i = 0; i < NEW_SIZE; i++)
-        {
-                ch = *temp;
-                temp++;
-                *temp = ch + 1;  // 'b' = 'a' + 1;
-        }
+	for (i = 0; i < NEW_SIZE; i++) {
+		ch = *temp;
+		temp++;
+		*temp = ch + 1;	// 'b' = 'a' + 1;
+	}
 
-        addr = __krealloc(page_address(pages), NEW_SIZE, GFP_KERNEL);
-        if (!addr)
-        {
-                printk("__krealloc failed!\n");
-                return -ENOMEM;
-        }
+	addr = __krealloc(page_address(pages), NEW_SIZE, GFP_KERNEL);
+	if (!addr) {
+		printk("__krealloc failed!\n");
+		return -ENOMEM;
+	}
 
-        printk("addr = 0x%lx\n", (unsigned long)addr);
-        printk("*addr = %c\n", *addr);
-        printk("*addr + 4 = %c\b", *(addr + 4));
+	printk("addr = 0x%lx\n", (unsigned long)addr);
+	printk("*addr = %c\n", *addr);
+	printk("*addr + 4 = %c\b", *(addr + 4));
 
-        temp = addr;
-        for (i = 0; i < NEW_SIZE; i++)
-        {
-                printk("%c", *temp);
-                temp++;
-        }
+	temp = addr;
+	for (i = 0; i < NEW_SIZE; i++) {
+		printk("%c", *temp);
+		temp++;
+	}
 
-        return 0;
+	return 0;
 }
 
 static void
 __exit __krealloc_exit(void)
 {
-        if (pages)
-        {
-                __free_pages(pages, PAGE_NUM);
-                printk("__free_pages\n");
-        }
+	if (pages) {
+		__free_pages(pages, PAGE_NUM);
+		printk("__free_pages\n");
+	}
 
-        printk("module exits ok !\n");
+	printk("module exits ok !\n");
 }
 
 module_init(__krealloc_init);

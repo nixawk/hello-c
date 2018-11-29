@@ -12,25 +12,23 @@
 
 int sum(int argc, ...)
 {
-    int total = 0;
-    int i;
+	int total = 0;
+	int i;
 
-    va_list arguments;
-    va_start(arguments, argc);
+	va_list arguments;
+	va_start(arguments, argc);
 
-    for (i = 0; i < argc; ++i)
-    {
-        total += va_arg(arguments, int);
-    }
+	for (i = 0; i < argc; ++i) {
+		total += va_arg(arguments, int);
+	}
 
-    va_end(arguments);
+	va_end(arguments);
 
-    return total;
+	return total;
 }
-
 
 int main(void)
 {
-    printf("1 + 2 + 3 + 4 + 5 = %d\n", sum(5, 1, 2, 3, 4, 5));
-    return 0;
+	printf("1 + 2 + 3 + 4 + 5 = %d\n", sum(5, 1, 2, 3, 4, 5));
+	return 0;
 }

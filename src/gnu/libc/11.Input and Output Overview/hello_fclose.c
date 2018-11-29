@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 // int fclose (FILE *stream)
 
 // This function causes stream to be closed and the connection to the corresponding
@@ -17,29 +16,24 @@
 
 // int fcloseall (void)
 
-void
-fclose_usage(void)
+void fclose_usage(void)
 {
-    FILE *fp;
+	FILE *fp;
 
-    fp = fopen("/etc/passwd", "r");
-    if (fp == NULL)
-    {
-        printf("fopen() failed.\n");
-        exit(0);
-    }
+	fp = fopen("/etc/passwd", "r");
+	if (fp == NULL) {
+		printf("fopen() failed.\n");
+		exit(0);
+	}
 
-    fclose(fp);
+	fclose(fp);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    fclose_usage();
-    return 0;
+	fclose_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Closing-Streams.html#Closing-Streams
 // https://stackoverflow.com/questions/1954273/fclose-return-value-check

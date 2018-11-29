@@ -17,28 +17,24 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void
-size_t_sizeof(void)
+void size_t_sizeof(void)
 {
-    printf("sizeof(size_t) = %ld\n", sizeof(size_t));
+	printf("sizeof(size_t) = %ld\n", sizeof(size_t));
 }
 
-void
-size_t_signed_or_unsigned(void)
+void size_t_signed_or_unsigned(void)
 {
-    size_t i = -1;
+	size_t i = -1;
 
-    printf("size_t i = -1; i = %zX\n", i);
+	printf("size_t i = -1; i = %zX\n", i);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    size_t_sizeof();
-    size_t_signed_or_unsigned();
+	size_t_sizeof();
+	size_t_signed_or_unsigned();
 
-    return 0;
+	return 0;
 }
 
 /* Tested on 64 bit platform

@@ -17,29 +17,23 @@
 // char * getwd (char *buffer)          /* Deprecated Function */
 // char * get_current_dir_name (void)
 
-#define PATH_MAX        4096            /* #include <linux/limits.h> */
+#define PATH_MAX        4096	/* #include <linux/limits.h> */
 
-
-void
-getcwd_usage(void)
+void getcwd_usage(void)
 {
-    char path[PATH_MAX] = "";
+	char path[PATH_MAX] = "";
 
-    if (getcwd(path, PATH_MAX) == path)
-    {
-        printf("current directory: %s\n", path);
-    } else {
-        fprintf(stderr, "getcwd() failed.\n");
-    }
+	if (getcwd(path, PATH_MAX) == path) {
+		printf("current directory: %s\n", path);
+	} else {
+		fprintf(stderr, "getcwd() failed.\n");
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    getcwd_usage();
-    return 0;
+	getcwd_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Working-Directory.html#Working-Directory

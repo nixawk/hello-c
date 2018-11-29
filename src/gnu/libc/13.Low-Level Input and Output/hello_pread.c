@@ -17,42 +17,35 @@
 
 #define SIZE 512
 
-
-void
-pread_usage(void)
+void pread_usage(void)
 {
-    int fd;
-    char *ptr;
-    ssize_t n;
+	int fd;
+	char *ptr;
+	ssize_t n;
 
-    off_t offset = 64;
+	off_t offset = 64;
 
-    fd = open("/etc/passwd", O_RDONLY, S_IRWXU);
-    if (fd == -1)
-    {
-        fprintf(stderr, "open() failed\n");
-    } else {
-        ptr = (char *)calloc(SIZE, sizeof(char));
-        if (ptr == NULL)
-        {
-            fprintf(stderr, "calloc() failed\n");
-        } else {
-            n = pread(fd, ptr, SIZE, offset);
-            printf("read bytes: [%lu]\noutput: %s\n", n, ptr);
-            free(ptr);
-        }
-        close(fd);
-    }
+	fd = open("/etc/passwd", O_RDONLY, S_IRWXU);
+	if (fd == -1) {
+		fprintf(stderr, "open() failed\n");
+	} else {
+		ptr = (char *)calloc(SIZE, sizeof(char));
+		if (ptr == NULL) {
+			fprintf(stderr, "calloc() failed\n");
+		} else {
+			n = pread(fd, ptr, SIZE, offset);
+			printf("read bytes: [%lu]\noutput: %s\n", n, ptr);
+			free(ptr);
+		}
+		close(fd);
+	}
 
 }
 
-
-int
-main(void)
+int main(void)
 {
-    pread_usage();
-    return 0;
+	pread_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/I_002fO-Primitives.html#I_002fO-Primitives

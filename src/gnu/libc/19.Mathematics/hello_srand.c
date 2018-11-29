@@ -2,7 +2,6 @@
 #include <time.h>
 #include <stdio.h>
 
-
 // Function: void srand(unsigned int seed)
 
 // This function establishes seed as the seed for a new series of pseudo-random
@@ -12,28 +11,23 @@
 // To produce a different pseudo-random series each time your program is run,
 // do srand(time(0))
 
-
-void
-srand_usage(void)
+void srand_usage(void)
 {
-    int i;
-    time_t t;
+	int i;
+	time_t t;
 
-    t = time(NULL);
-    srand(t);   // random seed
+	t = time(NULL);
+	srand(t);		// random seed
 
-    for (i = 0; i < 10; i++)
-    {
-        printf("%d. rand num: %d\n", i, rand());
-    }
+	for (i = 0; i < 10; i++) {
+		printf("%d. rand num: %d\n", i, rand());
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    srand_usage();
-    return 0;
+	srand_usage();
+	return 0;
 }
 
 // https://stackoverflow.com/questions/471248/what-is-ultimately-a-time-t-typedef-to

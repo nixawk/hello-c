@@ -8,14 +8,12 @@
 // lock the stream. The thread will block until the lock is acquired. An explicit
 // call to funlockfile has to be used to release the lock.
 
-
 // int ftrylockfile (FILE *stream)
 
 // The [ftrylockfile] function tries to acquire the internal locking object associated
 // with the stream just like [flockfile]. But unlike [flockfile] this function does not
 // block if the lock is not available. [ftrylockfile] returns zero if the lock was
 // successfully acquired. Otherwise the stream is locked by another thread.
-
 
 // void funlockfile (FILE *stream)
 
@@ -26,32 +24,26 @@
 // behavior of a call for a stream which is not locked by the current thread is
 // undefined.
 
-
 // int __fsetlocking (FILE *stream, int type)
 
-
-void
-flockfile_usage(FILE *fp)
+void flockfile_usage(FILE * fp)
 {
-    flockfile(fp);
-    fputs("This is a flockfile test.\n", fp);
-    funlockfile(fp);
+	flockfile(fp);
+	fputs("This is a flockfile test.\n", fp);
+	funlockfile(fp);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    FILE *fp;
+	FILE *fp;
 
-    fp = fopen("/tmp/testfile", "w");
-    if (fp != NULL)
-    {
-        flockfile_usage(fp);   /* pleaes try it in multi-threads modes */
-        fclose(fp); 
-    }
+	fp = fopen("/tmp/testfile", "w");
+	if (fp != NULL) {
+		flockfile_usage(fp);	/* pleaes try it in multi-threads modes */
+		fclose(fp);
+	}
 
-    return 0;
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Streams-and-Threads.html#Streams-and-Threads

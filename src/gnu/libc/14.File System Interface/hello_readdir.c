@@ -17,7 +17,6 @@
     //     char           d_name[256]; /* filename */
     // };
 
-
 // struct dirent * readdir (DIR *dirstream)
 
 // The function reads the next entry from the directory. It normally returns a pointer
@@ -31,37 +30,30 @@
 
 // struct dirent64 * readdir64 (DIR *dirstream)
 
-
-void
-readdir_usage(void)
+void readdir_usage(void)
 {
-    char *dirpath = "/tmp/";
-    DIR *dirstream;
-    struct dirent *entry;
+	char *dirpath = "/tmp/";
+	DIR *dirstream;
+	struct dirent *entry;
 
-    dirstream = opendir(dirpath);
-    if (dirstream == NULL)
-    {
-        fprintf(stderr, "opendir() failed: %s\n", strerror(errno));
-        exit(EXIT_FAILURE);
-    }
+	dirstream = opendir(dirpath);
+	if (dirstream == NULL) {
+		fprintf(stderr, "opendir() failed: %s\n", strerror(errno));
+		exit(EXIT_FAILURE);
+	}
 
-    while ((entry = readdir(dirstream)) != NULL)
-    {
-        printf("%s\n", entry->d_name);
-    }
+	while ((entry = readdir(dirstream)) != NULL) {
+		printf("%s\n", entry->d_name);
+	}
 
-    closedir(dirstream);
+	closedir(dirstream);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    readdir_usage();
-    return 0;
+	readdir_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Reading_002fClosing-Directory.html#Reading_002fClosing-Directory
 // https://www.gnu.org/software/libc/manual/html_node/Directory-Entries.html#Directory-Entries

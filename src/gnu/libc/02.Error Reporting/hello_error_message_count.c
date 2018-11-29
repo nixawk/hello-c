@@ -16,21 +16,17 @@ err msg count: 2
 
 */
 
-void
-error_message_count_usage(void)
+void error_message_count_usage(void)
 {
-    error_at_line(0, 0, NULL, 0, "1st err msg");
-    error_at_line(0, 0, NULL, 0, "2nd err msg");
-    printf("err msg count: %d\n", error_message_count);
+	error_at_line(0, 0, NULL, 0, "1st err msg");
+	error_at_line(0, 0, NULL, 0, "2nd err msg");
+	printf("err msg count: %d\n", error_message_count);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    error_message_count_usage();
-    return 0;
+	error_message_count_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_mono/libc.html#Error-Reporting

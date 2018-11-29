@@ -1,18 +1,15 @@
 #include <stdio.h>
 
-
 size_t mystrlen(const char *);
 void myexchange(char *, char *);
 void myreverse(char *);
 
-
-size_t
-mystrlen(const char *str)
+size_t mystrlen(const char *str)
 {
-    register const char *s;   // Registers are faster than memory to access.
+	register const char *s;	// Registers are faster than memory to access.
 
-    for (s = str; *s; ++s);
-    return (size_t)(s - str);
+	for (s = str; *s; ++s) ;
+	return (size_t) (s - str);
 }
 
 // size_t
@@ -30,43 +27,35 @@ mystrlen(const char *str)
 //   return (int) (eos - s - 1);
 // }
 
-
-void
-myexchange(char *x, char *y)
+void myexchange(char *x, char *y)
 {
-    *x ^= *y;                 // csapp.3e
-    *y ^= *x;
-    *x ^= *y;
+	*x ^= *y;		// csapp.3e
+	*y ^= *x;
+	*x ^= *y;
 }
 
-
-void
-myreverse(char *str)
+void myreverse(char *str)
 {
-    size_t length, i;
+	size_t length, i;
 
-    for (i = 0, length = mystrlen(str); i < (length / 2); i++)
-    {
-        myexchange(&str[i], &str[length - 1 - i]);
-    }
+	for (i = 0, length = mystrlen(str); i < (length / 2); i++) {
+		myexchange(&str[i], &str[length - 1 - i]);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    /*
-     * Exception: char *str = "hello,world";
-     * [str] must be writable. */
-    char str[] = "hello,world";
+	/*
+	 * Exception: char *str = "hello,world";
+	 * [str] must be writable. */
+	char str[] = "hello,world";
 
-    printf("%s\n", str);
-    myreverse(str);
-    printf("%s\n", str);
+	printf("%s\n", str);
+	myreverse(str);
+	printf("%s\n", str);
 
-    return 0;
+	return 0;
 }
-
 
 // https://opensource.apple.com/source/Libc/Libc-167/gen.subproj/i386.subproj/strlen.c
 // http://www.geeksforgeeks.org/understanding-register-keyword/

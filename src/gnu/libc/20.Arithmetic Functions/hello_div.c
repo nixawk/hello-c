@@ -1,14 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
 // This section describes functions for performing integer division.
 // These functions are redundant when GNU CC is used, because in GNU
 // C the ‘/’ operator always rounds towards zero. But in other C
 // implementations, ‘/’ may round differently with negative arguments.
 // div and ldiv are useful because they specify how to round the
 // quotient: towards zero. The remainder has the same sign as the numerator.
-
 
 // Data Type: div_t
 
@@ -25,36 +23,28 @@
 // div_t. If the result cannot be represented (as in a division by zero),
 // the behavior is undefined.
 
-
 // Data Type: ldiv_t
 // Function: ldiv_t ldiv (long int numerator, long int denominator)
-
 
 // Data Type: lldiv_t
 // Function: lldiv_t lldiv (long long int numerator, long long int denominator)
 
-
 // Data Type: imaxdiv_t
 // Function: imaxdiv_t imaxdiv (intmax_t numerator, intmax_t denominator)
 
-
-void
-div_usage(void)
+void div_usage(void)
 {
-    int x = 5, y = 2;
-    div_t r = div(x, y);
+	int x = 5, y = 2;
+	div_t r = div(x, y);
 
-    printf("r.quot = %d\n", r.quot);
-    printf("r.rem  = %d\n", r.rem);
+	printf("r.quot = %d\n", r.quot);
+	printf("r.rem  = %d\n", r.rem);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    div_usage();
-    return 0;
+	div_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Integer-Division.html#Integer-Division

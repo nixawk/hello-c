@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stdio.h>
 
-
 // char * strfry (char *string)
 
 // strfry creates a pseudorandom anagram of a string, replacing the input
@@ -15,9 +14,7 @@
 
 #define SIZE 512
 
-
-void
-strfry_usage(void)
+void strfry_usage(void)
 {
 	char seed[SIZE] = "abcdefgh";
 	char *s = strfry(seed);
@@ -25,13 +22,10 @@ strfry_usage(void)
 	printf("%s\n", s);
 }
 
-
-int
-main(void)
+int main(void)
 {
 	strfry_usage();
 	return 0;
 }
-
 
 // http://www.gnu.org/software/libc/manual/html_mono/libc.html#Representation-of-Strings

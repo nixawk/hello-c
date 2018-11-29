@@ -9,40 +9,33 @@
 // conventionally called xrealloc, that takes care of the error message as 
 // xmalloc does for malloc:
 
-
-static void
-fatal(char *fmt, ...)
+static void fatal(char *fmt, ...)
 {
-    va_list list;
+	va_list list;
 
-    va_start(list, fmt);
-    vfprintf(stderr, fmt, list);
-    va_end(list);
+	va_start(list, fmt);
+	vfprintf(stderr, fmt, list);
+	va_end(list);
 
-    exit(1);
+	exit(1);
 }
 
-
-void *
-xrealloc (void *ptr, size_t size)
+void *xrealloc(void *ptr, size_t size)
 {
-    void *value = realloc (ptr, size);
-    if (value == 0)
-        fatal ("Virtual memory exhausted");
-    return value;
+	void *value = realloc(ptr, size);
+	if (value == 0)
+		fatal("Virtual memory exhausted");
+	return value;
 }
 
-
-int
-main(void)
+int main(void)
 {
-    char *ptr = NULL;
+	char *ptr = NULL;
 
-    xrealloc(ptr, 32);
-    free(ptr);
+	xrealloc(ptr, 32);
+	free(ptr);
 
-    return 0;
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_mono/libc.html#Malloc-Examples

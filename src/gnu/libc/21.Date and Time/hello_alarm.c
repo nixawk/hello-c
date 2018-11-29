@@ -3,36 +3,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void
-handler(int signum)
+void handler(int signum)
 {
-    if (signum == SIGALRM)
-    {
-        printf("SIGALRM received.\n");
-        exit(EXIT_SUCCESS);
-    }
+	if (signum == SIGALRM) {
+		printf("SIGALRM received.\n");
+		exit(EXIT_SUCCESS);
+	}
 }
 
-int
-main(void)
+int main(void)
 {
-    unsigned int seconds = 5;   /* alarm seconds */
+	unsigned int seconds = 5;	/* alarm seconds */
 
-    if (signal(SIGALRM, handler) == SIG_ERR)
-    {
-        perror("signal");
-        exit(EXIT_FAILURE);
-    }
+	if (signal(SIGALRM, handler) == SIG_ERR) {
+		perror("signal");
+		exit(EXIT_FAILURE);
+	}
 
-    alarm(seconds); /* alarm - set an alarm clock for delivery of a signal */
+	alarm(seconds);		/* alarm - set an alarm clock for delivery of a signal */
 
-    for (;;)
-    {
-        printf("waiting for signal...\n");
-        sleep(1);
-    }
+	for (;;) {
+		printf("waiting for signal...\n");
+		sleep(1);
+	}
 
-    exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
 
 /*

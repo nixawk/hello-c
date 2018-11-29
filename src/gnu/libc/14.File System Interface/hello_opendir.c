@@ -25,7 +25,6 @@
     //     char data[0] __attribute__ ((aligned (__alignof__ (void*))));
     //   };
 
-
 // DIR * opendir (const char *dirname)
 
 // The [opendir] function opens and returns a directory stream for reading
@@ -39,40 +38,32 @@
     // ENFILE
     // ENOMEM
 
-
 // int closedir (DIR *dirstream)
 // This function closes the directory stream [dirstream].
 // It returns 0 on success and -1 on failure.
 
-
-void
-opendir_usage(void)
+void opendir_usage(void)
 {
-    char *dirpath = "/tmp/";
-    DIR *dirstream;  /* DIR Structure details */
+	char *dirpath = "/tmp/";
+	DIR *dirstream;		/* DIR Structure details */
 
-    dirstream = opendir(dirpath);
-    if (dirstream == NULL)
-    {
-        fprintf(stderr, "opendir() failed: %s\n", strerror(errno));
-    }
+	dirstream = opendir(dirpath);
+	if (dirstream == NULL) {
+		fprintf(stderr, "opendir() failed: %s\n", strerror(errno));
+	}
 
-    printf("opendir() successfully - [%s]\n", dirpath);
-    
-    if (closedir(dirstream) == -1)
-    {
-        fprintf(stderr, "closedir() failedL %s\n", strerror(errno));
-    }
+	printf("opendir() successfully - [%s]\n", dirpath);
+
+	if (closedir(dirstream) == -1) {
+		fprintf(stderr, "closedir() failedL %s\n", strerror(errno));
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    opendir_usage();
-    return 0;
+	opendir_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Opening-a-Directory.html#Opening-a-Directory
 // http://man7.org/linux/man-pages/man3/readdir.3.html

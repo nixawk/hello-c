@@ -16,38 +16,36 @@ This function can be used with nonces, in order to prevent replay attacks.
 
 */
 
-void
-sodium_compare_usage(void)
+void sodium_compare_usage(void)
 {
-    unsigned char a[crypto_generichash_BYTES];
-    unsigned char b[crypto_generichash_BYTES];
-    char ahex[crypto_generichash_BYTES * 2 + 1];
-    char bhex[crypto_generichash_BYTES * 2 + 1];
-    int sodium_compare_retval;
+	unsigned char a[crypto_generichash_BYTES];
+	unsigned char b[crypto_generichash_BYTES];
+	char ahex[crypto_generichash_BYTES * 2 + 1];
+	char bhex[crypto_generichash_BYTES * 2 + 1];
+	int sodium_compare_retval;
 
-    if (sodium_init() < 0)
-    {
-        exit(EXIT_FAILURE);
-    }
+	if (sodium_init() < 0) {
+		exit(EXIT_FAILURE);
+	}
 
-    randombytes_buf(a, crypto_generichash_BYTES);
-    randombytes_buf(b, crypto_generichash_BYTES);
+	randombytes_buf(a, crypto_generichash_BYTES);
+	randombytes_buf(b, crypto_generichash_BYTES);
 
-    sodium_compare_retval = sodium_compare(a, b, crypto_generichash_BYTES);
+	sodium_compare_retval = sodium_compare(a, b, crypto_generichash_BYTES);
 
-    sodium_bin2hex(ahex, crypto_generichash_BYTES * 2 + 1, a, crypto_generichash_BYTES);
-    sodium_bin2hex(bhex, crypto_generichash_BYTES * 2 + 1, b, crypto_generichash_BYTES);
+	sodium_bin2hex(ahex, crypto_generichash_BYTES * 2 + 1, a,
+		       crypto_generichash_BYTES);
+	sodium_bin2hex(bhex, crypto_generichash_BYTES * 2 + 1, b,
+		       crypto_generichash_BYTES);
 
-    printf("a = %s\nb = %s\n", ahex, bhex);
-    printf("sodium_compare(a, b) = %d\n", sodium_compare_retval);
+	printf("a = %s\nb = %s\n", ahex, bhex);
+	printf("sodium_compare(a, b) = %d\n", sodium_compare_retval);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    sodium_compare_usage();
-    return 0;
+	sodium_compare_usage();
+	return 0;
 }
 
 /*

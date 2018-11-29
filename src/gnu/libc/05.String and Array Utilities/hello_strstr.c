@@ -16,27 +16,23 @@
 // New code should always use [strrchr] since the name is defined in ISO C,
 // while [index] is a BSD invention which never was available on System V derived systems.
 
-void
-strstr_usage(void)
+void strstr_usage(void)
 {
-    char haystack[] = "helloworld";
-    char needle[] = "world";
+	char haystack[] = "helloworld";
+	char needle[] = "world";
 
-    char *ptr = strstr(haystack, needle);
-    if (ptr == NULL)
-    {
-        printf("strstr() failed \n");
-        exit(0);
-    }
+	char *ptr = strstr(haystack, needle);
+	if (ptr == NULL) {
+		printf("strstr() failed \n");
+		exit(0);
+	}
 
-    printf("%p - %s\n", ptr, ptr);
+	printf("%p - %s\n", ptr, ptr);
 }
 
+int main(void)
+{
+	strstr_usage();
 
-int
-main(void) {
-    strstr_usage();
-
-    return 0;
+	return 0;
 }
-

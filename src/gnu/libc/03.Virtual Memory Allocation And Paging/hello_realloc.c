@@ -28,53 +28,49 @@ If "ptr" is NULL and size if non-zero then call to realloc is equivalent to "mal
 
 */
 
-void
-realloc_malloc(void)
+void realloc_malloc(void)
 {
-    int *ptr = realloc(NULL, 512);  /* eq to malloc */
+	int *ptr = realloc(NULL, 512);	/* eq to malloc */
 
-    printf("realloc_malloc: %p\n", ptr);
-    free(ptr);
+	printf("realloc_malloc: %p\n", ptr);
+	free(ptr);
 }
 
-void
-realloc_free(void)
+void realloc_free(void)
 {
-    int *ptr = malloc(512);
-    int *realloc_ptr = realloc(ptr, 0);  /* eq to free(ptr) */
+	int *ptr = malloc(512);
+	int *realloc_ptr = realloc(ptr, 0);	/* eq to free(ptr) */
 
-    printf("realloc_free: %p\n", realloc_ptr);
+	printf("realloc_free: %p\n", realloc_ptr);
 }
 
-void
-realloc_resize(void)
+void realloc_resize(void)
 {
-    char *str;
+	char *str;
 
-    /* Initial memory allocation*/
-    str = (char *)malloc(15);
-    strcpy(str, "www.google");
-    printf("String: %s, Address: %p\n", str, str);
+	/* Initial memory allocation */
+	str = (char *)malloc(15);
+	strcpy(str, "www.google");
+	printf("String: %s, Address: %p\n", str, str);
 
-    /* Reallocating memory */
-    str = (char *)realloc(str, 25);
-    strcat(str, ".com");
-    printf("String: %s, Address: %p\n", str, str);
+	/* Reallocating memory */
+	str = (char *)realloc(str, 25);
+	strcat(str, ".com");
+	printf("String: %s, Address: %p\n", str, str);
 
-    /* Release memory */
-    free(str);
+	/* Release memory */
+	free(str);
 }
 
-int
-main(void) {
+int main(void)
+{
 
-    realloc_malloc();
-    realloc_free();
-    realloc_resize();
+	realloc_malloc();
+	realloc_free();
+	realloc_resize();
 
-    return 0;
+	return 0;
 }
-
 
 // http://www.geeksforgeeks.org/how-to-deallocate-memory-without-using-free-in-c/
 // https://www.gnu.org/software/libc/manual/html_node/Changing-Block-Size.html#Changing-Block-Size

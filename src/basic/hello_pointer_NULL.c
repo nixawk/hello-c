@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-
 /*
 
 NULL pointer:
@@ -15,21 +14,19 @@ NULL pointer is different from uninitialized and dangling pointer.
 
 */
 
-
-int
-main(void)
+int main(void)
 {
-    int *intptr;
-    int *nulptr = NULL;
+	int *intptr;
+	int *nulptr = NULL;
 
-    printf("%p\n", intptr);           /* print a valid memory address */
-    printf("%p\n", nulptr);           /* print 0 */
+	printf("%p\n", intptr);	/* print a valid memory address */
+	printf("%p\n", nulptr);	/* print 0 */
 
-    printf("%lu\n", sizeof(intptr));  /* print pointer length */
-    printf("%lu\n", sizeof(nulptr));  /* print pointer length */
+	printf("%lu\n", sizeof(intptr));	/* print pointer length */
+	printf("%lu\n", sizeof(nulptr));	/* print pointer length */
 
-    printf("%#x\n", *intptr);         /* print memory value */
-    printf("%#x\n", *nulptr);         /* exception here */
+	printf("%#x\n", *intptr);	/* print memory value */
+	printf("%#x\n", *nulptr);	/* exception here */
 
-    return 0;
+	return 0;
 }

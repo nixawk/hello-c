@@ -12,14 +12,14 @@ static void __exit find_task_size_exit(void);
 static int
 __init find_task_size_init(void)
 {
-        printk(KERN_INFO "Memory TASK_SIZE: 0x%lx\n", TASK_SIZE);
-        return 0;
+	printk(KERN_INFO "Memory TASK_SIZE: 0x%lx\n", TASK_SIZE);
+	return 0;
 }
 
 static void
 __exit find_task_size_exit(void)
 {
-        printk(KERN_INFO "module exits ok !\n");
+	printk(KERN_INFO "module exits ok !\n");
 }
 
 module_init(find_task_size_init);

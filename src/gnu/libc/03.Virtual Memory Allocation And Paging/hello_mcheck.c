@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <mcheck.h>
 
-
 // int mcheck (void (*abortfn) (enum mcheck_status status))
 
 // Calling mcheck tells malloc to perform occasional consistency checks.
@@ -27,29 +26,25 @@
 // call to mcheck whenever the program is started, for example these gdb
 // commands will automatically call mcheck whenever the program starts.
 
-
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-    char *p;
+	char *p;
 
-    if (mcheck(NULL) != 0)
-    {
-        fprintf(stderr, "mcheck() failed\n");
-        exit(EXIT_FAILURE);
-    }
+	if (mcheck(NULL) != 0) {
+		fprintf(stderr, "mcheck() failed\n");
+		exit(EXIT_FAILURE);
+	}
 
-    p = malloc(32);
+	p = malloc(32);
 
-    fprintf(stderr, "About to free\n");
-    free(p);
+	fprintf(stderr, "About to free\n");
+	free(p);
 
-    fprintf(stderr, "About to free a second time\n");
-    free(p);
+	fprintf(stderr, "About to free a second time\n");
+	free(p);
 
-    exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_mono/libc.html#Heap-Consistency-Checking
 // http://man7.org/linux/man-pages/man3/mcheck.3.html

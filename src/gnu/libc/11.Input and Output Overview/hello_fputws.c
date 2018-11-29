@@ -8,22 +8,17 @@
 // The terminating null character is not written. This function does not add a newline character,
 // either. It outputs only the characters in the string.
 
-
-void
-fputws_usage(void)
+void fputws_usage(void)
 {
-    wchar_t string[] = L"hello, world\n";
+	wchar_t string[] = L"hello, world\n";
 
-    fputws(string, stdout);
+	fputws(string, stdout);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    fputws_usage();
-    return 0;
+	fputws_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Simple-Output.html#Simple-Output

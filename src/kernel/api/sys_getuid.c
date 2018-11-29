@@ -13,23 +13,23 @@ static void __exit sys_getuid_exit(void);
 static int
 __init sys_getuid_init(void)
 {
-        long uid;
+	long uid;
 
-        printk(KERN_INFO "sys_getuid_init\n");
+	printk(KERN_INFO "sys_getuid_init\n");
 
-        uid = sys_getuid();
-        // make an error: Unknown symbol sys_getuid (err 0)
-        // This means that the kernel isn't allowing modules to see that variable.
+	uid = sys_getuid();
+	// make an error: Unknown symbol sys_getuid (err 0)
+	// This means that the kernel isn't allowing modules to see that variable.
 
-        printk(KERN_INFO "current uid = %ld\n", uid);
+	printk(KERN_INFO "current uid = %ld\n", uid);
 
-        return 0;
+	return 0;
 }
 
 static void
 __exit sys_getuid_exit(void)
 {
-        printk(KERN_INFO "sys_getuid_exit\n");
+	printk(KERN_INFO "sys_getuid_exit\n");
 }
 
 module_init(sys_getuid_init);

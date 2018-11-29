@@ -1,21 +1,16 @@
 #include <gnu/libc-version.h>
 #include <stdio.h>
 
-
-void
-glibc_ver(void)
+void glibc_ver(void)
 {
-    printf("gnu_get_libc_version() = %s\n", gnu_get_libc_version());
+	printf("gnu_get_libc_version() = %s\n", gnu_get_libc_version());
 }
 
-
-int
-main(void)
+int main(void)
 {
-    glibc_ver();
-    return 0;
+	glibc_ver();
+	return 0;
 }
-
 
 /*
 

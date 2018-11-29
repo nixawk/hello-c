@@ -10,12 +10,10 @@ long or you just need a short-hand notation of a per-existig data type.
 typedef unsigned char u_char;
 typedef u_char *bytepointer;
 
-
-int
-main(void)
+int main(void)
 {
-    bytepointer s = "helloworld";
-    printf("%s\n", s);
+	bytepointer s = "helloworld";
+	printf("%s\n", s);
 
-    return 0;
+	return 0;
 }

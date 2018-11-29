@@ -14,112 +14,97 @@ extern char **environ;
 /* custom cmd data structure */
 
 typedef struct {
-    char *prog;  /* executable programe */
-    char *argv;  /* program argv */
-    int cmdlen;  /* command length */
+	char *prog;		/* executable programe */
+	char *argv;		/* program argv */
+	int cmdlen;		/* command length */
 } cmd;
-
 
 /* Parse program from command line */
 
-cmd
-parse_command(char *command)  /* del command arguments */
-{
-    cmd c;       /* custom cmd data structure */
+cmd parse_command(char *command)
+{				/* del command arguments */
+	cmd c;			/* custom cmd data structure */
 
-    c.cmdlen = strlen(command);
+	c.cmdlen = strlen(command);
 
-    if ((c.cmdlen = strlen(command)) <= 0)
-    {
-        perror("no available command");
-        exit(EXIT_FAILURE);
-    }
-
+	if ((c.cmdlen = strlen(command)) <= 0) {
+		perror("no available command");
+		exit(EXIT_FAILURE);
+	}
 #ifdef DEBUG
-    printf("cmdlen: %d\n", cmdlen);
+	printf("cmdlen: %d\n", cmdlen);
 #endif
 
-    if ((c.prog = malloc(c.cmdlen)) == NULL)
-    {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
+	if ((c.prog = malloc(c.cmdlen)) == NULL) {
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
 
-    memset(c.prog, '\0', c.cmdlen);  /* clear buffer with 0*/
-    strcpy(c.prog, command);
+	memset(c.prog, '\0', c.cmdlen);	/* clear buffer with 0 */
+	strcpy(c.prog, command);
 
-    if ((c.argv = strchr(c.prog, ' ')) != NULL)
-    {
-        *(c.argv) = '\0';
+	if ((c.argv = strchr(c.prog, ' ')) != NULL) {
+		*(c.argv) = '\0';
 
 #ifdef DEBUG
-    printf("cmdprog: %s\n", c.prog);
-    printf("cmdarg : %s\n", c.argv + 1);
+		printf("cmdprog: %s\n", c.prog);
+		printf("cmdarg : %s\n", c.argv + 1);
 #endif
 
-    }
+	}
 
-    return c;
+	return c;
 }
 
 /* Execute program with execve */
 
-void
-execve_command(char *command)
+void execve_command(char *command)
 {
-    cmd c;
-    c = parse_command(command);
+	cmd c;
+	c = parse_command(command);
 
-    char *argv[] = {
-        c.prog,
-        NULL
-    };
+	char *argv[] = {
+		c.prog,
+		NULL
+	};
 
-    switch (fork())
-    {
-        case -1:
-            perror("fork");
-            exit(EXIT_FAILURE);
+	switch (fork()) {
+	case -1:
+		perror("fork");
+		exit(EXIT_FAILURE);
 
-        case 0:  /* child process */
-            if (execve(c.prog, argv, environ) == -1)
-            {
-                perror("execve");
-                exit(EXIT_FAILURE);
-            }
-            break;
+	case 0:		/* child process */
+		if (execve(c.prog, argv, environ) == -1) {
+			perror("execve");
+			exit(EXIT_FAILURE);
+		}
+		break;
 
-        default:
-            if (wait(NULL) == -1)
-            {
-                perror("wait");
-                exit(EXIT_FAILURE);
-            }
-            break;
-    }
+	default:
+		if (wait(NULL) == -1) {
+			perror("wait");
+			exit(EXIT_FAILURE);
+		}
+		break;
+	}
 }
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-    int i;
+	int i;
 
-    if (argc < 2)
-    {
-        printf("[*] Usage: %s <prog> <prog> ...", argv[0]);
-        exit(EXIT_FAILURE);
-    }
-    else
-    {
-        for (i = 1; i < argc; i++)
-        {
-            printf("[cmd]: %s\n", argv[i]);
-            execve_command(argv[i]);
-            printf("\n");
-        }
-    }
+	if (argc < 2) {
+		printf("[*] Usage: %s <prog> <prog> ...", argv[0]);
+		exit(EXIT_FAILURE);
+	} else {
+		for (i = 1; i < argc; i++) {
+			printf("[cmd]: %s\n", argv[i]);
+			execve_command(argv[i]);
+			printf("\n");
+		}
+	}
 
-    return 0;
+	return 0;
 }
 
 /*

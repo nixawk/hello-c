@@ -9,42 +9,36 @@
 // The atexit() function returns the value 0 if successful; otherwise it
 // returns a nonzero value.
 
-void
-atexit_handler1(void)
+void atexit_handler1(void)
 {
-    printf("1st atexit handler called\n");
+	printf("1st atexit handler called\n");
 }
 
-void
-atexit_handler2(void)
+void atexit_handler2(void)
 {
-    printf("2nd atexit handler called\n");
+	printf("2nd atexit handler called\n");
 }
 
-void
-atexit_usage(void)
+void atexit_usage(void)
 {
 
-    printf("_SC_ATEXIT_MAX: %ld\n", sysconf(_SC_ATEXIT_MAX));
+	printf("_SC_ATEXIT_MAX: %ld\n", sysconf(_SC_ATEXIT_MAX));
 
-    atexit(atexit_handler1);
-    atexit(atexit_handler2);
+	atexit(atexit_handler1);
+	atexit(atexit_handler2);
 
-    printf("atexit demo func\n");
-    exit(EXIT_SUCCESS);
+	printf("atexit demo func\n");
+	exit(EXIT_SUCCESS);
 
-    /* If _exit, atexit hander will not be called. */
-    // _exit(EXIT_SUCCESS);
+	/* If _exit, atexit hander will not be called. */
+	// _exit(EXIT_SUCCESS);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    atexit_usage();
-    return 0;
+	atexit_usage();
+	return 0;
 }
-
 
 /*
 

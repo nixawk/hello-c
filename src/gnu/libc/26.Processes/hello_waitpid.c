@@ -37,14 +37,12 @@
      // 14      ALRM (alarm clock)
      // 15      TERM (software termination signal)
 
-
 // int WIFEXITED (int status)
 // This macro returns a nonzero value if the child process terminated normally with exit or _exit.
 
 // int WEXITSTATUS (int status)
 // If WIFEXITED is true of status, this macro returns the low-order 8 bits of the exit status value
 // from the child process.
-
 
 // int WIFSIGNALED (int status)
 // This macro returns a nonzero value if the child process terminated because it received a signal
@@ -53,10 +51,8 @@
 // int WTERMSIG (int status)
 // If WIFSIGNALED is true of status, this macro returns the signal number of the signal that terminated the child process.
 
-
 // int WCOREDUMP (int status)
 // This macro returns a nonzero value if the child process terminated and producted a core dump.
-
 
 // int WIFSTOPPED (int status)
 // This macro returns a nonzero value if the child process id stopped.
@@ -64,71 +60,50 @@
 // int WSTOPSIG (int status)
 // If WIFSTOPPED is true of status, this macro returns the signal number of the signal that caused the child process to stop.
 
-
-void
-signal_handler(pid_t pid)
+void signal_handler(pid_t pid)
 {
-    pid_t wpid;
-    int status;
+	pid_t wpid;
+	int status;
 
-    do
-    {
-        wpid = waitpid(pid, &status, WUNTRACED | WCONTINUED);
-        if (wpid < 0)
-        {
-            fprintf(stderr, "fork() failed.\n");
-            exit(EXIT_FAILURE);
-        }
-        else if (WIFEXITED(status))
-        {
-            printf("exited, status=%d\n", WEXITSTATUS(status));
-        }
-        else if (WIFSIGNALED(status))
-        {
-            printf("killed by signal %d\n", WTERMSIG(status));
-        }
-        else if (WIFCONTINUED(status))
-        {
-            printf("continued\n");
-        }
-        else if (WIFSTOPPED(status))
-        {
-            printf("stopped: %d\n", WSTOPSIG(status));
-        }
-    } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+	do {
+		wpid = waitpid(pid, &status, WUNTRACED | WCONTINUED);
+		if (wpid < 0) {
+			fprintf(stderr, "fork() failed.\n");
+			exit(EXIT_FAILURE);
+		} else if (WIFEXITED(status)) {
+			printf("exited, status=%d\n", WEXITSTATUS(status));
+		} else if (WIFSIGNALED(status)) {
+			printf("killed by signal %d\n", WTERMSIG(status));
+		} else if (WIFCONTINUED(status)) {
+			printf("continued\n");
+		} else if (WIFSTOPPED(status)) {
+			printf("stopped: %d\n", WSTOPSIG(status));
+		}
+	} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 }
 
-
-void
-waitpid_usage(void)
+void waitpid_usage(void)
 {
-    pid_t cpid;
+	pid_t cpid;
 
-    cpid = fork();
-    if (cpid < 0)
-    {
-        fprintf(stderr, "fork() failed.\n");
-        exit(EXIT_FAILURE);
-    }
-    else if (cpid == 0)  /* child process */
-    {
-        printf("Child PID is %d\n", getpid());
-        pause();
-    }
-    else                /* parent process */
-    {
-        signal_handler(cpid);
-    }
+	cpid = fork();
+	if (cpid < 0) {
+		fprintf(stderr, "fork() failed.\n");
+		exit(EXIT_FAILURE);
+	} else if (cpid == 0) {	/* child process */
+		printf("Child PID is %d\n", getpid());
+		pause();
+	} else {		/* parent process */
+
+		signal_handler(cpid);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    waitpid_usage();
-    return 0;
+	waitpid_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Process-Completion.html#Process-Completion
 // https://www.gnu.org/software/libc/manual/html_node/Process-Completion-Status.html#Process-Completion-Status

@@ -1,7 +1,6 @@
 #include <stdint.h>
 #include <stdio.h>
 
-
 // The C language defines several integer data types: integer, short integer,
 // long integer, and character, all in both signed and unsigned varieties.
 // The GNU C compiler extends the language to contain long long integers.
@@ -23,23 +22,19 @@
 // uint32_t
 // uint64_t
 
-void
-show_integers(void)
+void show_integers(void)
 {
-    int8_t i8b;
-    int16_t i16b;
+	int8_t i8b;
+	int16_t i16b;
 
-    printf("sizeof(int8_t) = %lu\n", sizeof(i8b)); // 8 bits = 1 byte
-    printf("sizeof(int16_t) = %lu\n", sizeof(i16b));
+	printf("sizeof(int8_t) = %lu\n", sizeof(i8b));	// 8 bits = 1 byte
+	printf("sizeof(int16_t) = %lu\n", sizeof(i16b));
 }
 
-
-int
-main(void)
+int main(void)
 {
-    show_integers();
-    return 0;
+	show_integers();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Integers.html#Integers

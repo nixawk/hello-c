@@ -12,26 +12,22 @@ overwrites a with the result.
 
 */
 
-void
-sodium_add_uage(void)
+void sodium_add_uage(void)
 {
-    unsigned char a[crypto_generichash_BYTES];
-    unsigned char b[crypto_generichash_BYTES];
+	unsigned char a[crypto_generichash_BYTES];
+	unsigned char b[crypto_generichash_BYTES];
 
-    if (sodium_init() < 0)
-    {
-        exit(EXIT_FAILURE);
-    }
+	if (sodium_init() < 0) {
+		exit(EXIT_FAILURE);
+	}
 
-    sodium_add(a, b, crypto_generichash_BYTES);
+	sodium_add(a, b, crypto_generichash_BYTES);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    sodium_add_uage();
-    return 0;
+	sodium_add_uage();
+	return 0;
 }
 
 // reference

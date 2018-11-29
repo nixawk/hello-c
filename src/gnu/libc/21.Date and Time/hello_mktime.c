@@ -15,7 +15,6 @@
 // of the brokentime structure, including the members that were initially
 // ignored.
 
-
 // time_t timelocal (struct tm *brokentime)
 
 // timelocal is functionally identical to mktime, but more mnermonically named.
@@ -23,7 +22,6 @@
 
 // Protability note: mktime is essentially universally available. timelocal
 // is rather than rare.
-
 
 // Function: time_t timegm (struct tm *brokentime)
 
@@ -38,42 +36,35 @@
 // to a simple time, set the TZ environment variable to UTC, call mktime,
 // then set TZ back.
 
-
-void
-mktime_usage(void)
+void mktime_usage(void)
 {
-    struct tm brokentime;
-    time_t t;
+	struct tm brokentime;
+	time_t t;
 
-    brokentime.tm_sec = 48;
-    brokentime.tm_min = 15;
-    brokentime.tm_hour = 4;
-    brokentime.tm_mday = 27;
-    brokentime.tm_year = 117;
-    brokentime.tm_wday = 3;
-    brokentime.tm_yday = 360;
+	brokentime.tm_sec = 48;
+	brokentime.tm_min = 15;
+	brokentime.tm_hour = 4;
+	brokentime.tm_mday = 27;
+	brokentime.tm_year = 117;
+	brokentime.tm_wday = 3;
+	brokentime.tm_yday = 360;
 
-    t = mktime(&brokentime);
+	t = mktime(&brokentime);
 
-    if (t != (time_t)(-1))
-    {
-        printf("time_t t = %ld\n", t);
-    }
+	if (t != (time_t) (-1)) {
+		printf("time_t t = %ld\n", t);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    mktime_usage();
-    return 0;
+	mktime_usage();
+	return 0;
 }
-
 
 // $ ./a.out
 // time_t t = 1485508548
 // $ date -r 1485508548
 // Fri Jan 27 04:15:48 EST 2017
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Broken_002ddown-Time.html#Broken_002ddown-Time

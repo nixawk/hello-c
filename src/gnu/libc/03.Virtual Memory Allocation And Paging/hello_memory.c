@@ -69,5 +69,4 @@
     // The stack segment contains a program stack. It grows as the stack grows, but doesn’t shrink
     // when the stack shrinks.
 
-
 // https://www.gnu.org/software/libc/manual/html_node/Memory-Concepts.html#Memory-Concepts

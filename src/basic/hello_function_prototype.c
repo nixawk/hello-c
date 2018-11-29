@@ -26,20 +26,19 @@ the result is segmentation fault.
 */
 int main(int argc, char *argv[])
 {
-    FILE *fp;
- 
-    fp = fopen(argv[1], "r");
-    if (fp == NULL) {
-        fprintf(stderr, "%s\n", strerror(errno));  /* IA86 - works good, IA64 - Segmentation fault (core dumped) */
-        return errno;
-    }
- 
-    printf("file exist\n");
- 
-    fclose(fp);
- 
-    return 0;
-}
+	FILE *fp;
 
+	fp = fopen(argv[1], "r");
+	if (fp == NULL) {
+		fprintf(stderr, "%s\n", strerror(errno));	/* IA86 - works good, IA64 - Segmentation fault (core dumped) */
+		return errno;
+	}
+
+	printf("file exist\n");
+
+	fclose(fp);
+
+	return 0;
+}
 
 // http://www.geeksforgeeks.org/importance-of-function-prototype-in-c/

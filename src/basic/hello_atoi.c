@@ -16,11 +16,11 @@ If no valid conversion could be performed, it returns zero.
 
 int main(void)
 {
-    char sn[] = "123a456";
-    int n;
+	char sn[] = "123a456";
+	int n;
 
-    n = atoi(sn);
-    if (n != 0)
-        printf("String: %s -> Integer: %d", sn, n);  // output: 123
-    return 0;
+	n = atoi(sn);
+	if (n != 0)
+		printf("String: %s -> Integer: %d", sn, n);	// output: 123
+	return 0;
 }

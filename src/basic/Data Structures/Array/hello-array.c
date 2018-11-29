@@ -19,7 +19,6 @@
 // negative index values and other scalar data types like enumerations,
 // or characters may be used as an array index.
 
-
 // Advantages of using arrays:
 
 // 1. Arrays allow random access of elements. This makes accessing elements
@@ -30,25 +29,21 @@
 
 #include <stdio.h>
 
-
-void
-printarray(int arylst[], int arylen)
+void printarray(int arylst[], int arylen)
 {
-    int i;
+	int i;
 
-    for (i = 0; i < arylen; i++)
-    {
-        printf("%p - %d\n", &arylst[i], arylst[i]);
-    }
+	for (i = 0; i < arylen; i++) {
+		printf("%p - %d\n", &arylst[i], arylst[i]);
+	}
 }
 
-int
-main(void)
+int main(void)
 {
-    int arylst[] = {0, 1, 2, 3, 4, 5};
+	int arylst[] = { 0, 1, 2, 3, 4, 5 };
 
-    printarray(arylst, sizeof(arylst) / sizeof(*arylst));
-    return 0;
+	printarray(arylst, sizeof(arylst) / sizeof(*arylst));
+	return 0;
 }
 
 /*

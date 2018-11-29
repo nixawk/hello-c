@@ -28,27 +28,24 @@
 // signed long long
 // signed long long int
 
-void
-int_sizeof(void)
+void int_sizeof(void)
 {
-    // The size of these objects are also machine-dependent.
-    printf("sizeof(int) = %lu byte(s)\n", sizeof(int));
+	// The size of these objects are also machine-dependent.
+	printf("sizeof(int) = %lu byte(s)\n", sizeof(int));
 }
 
-void
-int_min_or_max(void)
+void int_min_or_max(void)
 {
-    printf("INT_MIN = %d\n", INT_MIN);
-    printf("INT_MAX = %d\n", INT_MAX);
+	printf("INT_MIN = %d\n", INT_MIN);
+	printf("INT_MAX = %d\n", INT_MAX);
 }
 
-int
-main(void)
+int main(void)
 {
-    int_sizeof();
-    int_min_or_max();
+	int_sizeof();
+	int_min_or_max();
 
-    return 0;
+	return 0;
 }
 
 /*

@@ -20,27 +20,22 @@ if Return value = 0 then it indicates str1 is equal to str2.
 
 int main(void)
 {
-    char s1[15];
-    char s2[15];
+	char s1[15];
+	char s2[15];
 
-    int ret;
+	int ret;
 
-    strcpy(s1, "abcdef");
-    strcpy(s2, "ABCDEF");
+	strcpy(s1, "abcdef");
+	strcpy(s2, "ABCDEF");
 
-    ret = strcoll(s1, s2);
-    if (ret < 0)
-    {
-        printf("s1 is less than s2");
-    }
-    else if (ret > 0)
-    {
-        printf("s2 is less than s1");
-    }
-    else
-    {
-        printf("s1 is equal to s2");
-    }
+	ret = strcoll(s1, s2);
+	if (ret < 0) {
+		printf("s1 is less than s2");
+	} else if (ret > 0) {
+		printf("s2 is less than s1");
+	} else {
+		printf("s1 is equal to s2");
+	}
 
-    return 0;
+	return 0;
 }

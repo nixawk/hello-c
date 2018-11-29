@@ -4,23 +4,19 @@
 // use enum rather than ‘#define’. 
 
 typedef enum {
-    false,
-    true
+	false,
+	true
 } bool;
 
-
-int
-main(void)
+int main(void)
 {
-    bool ret = true;
+	bool ret = true;
 
-    if (ret)
-    {
-        printf("condition is true;\n");
-    }
+	if (ret) {
+		printf("condition is true;\n");
+	}
 
-    return 0;
+	return 0;
 }
-
 
 // https://www.gnu.org/prep/standards/standards.html#Names

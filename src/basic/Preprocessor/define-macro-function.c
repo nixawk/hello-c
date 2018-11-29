@@ -7,14 +7,12 @@ checked for data type.
 
 #define INCREMENT(x) ++x
 
-
-int
-main(void)
+int main(void)
 {
-    char *ptr = "1234567890";
-    int x = 10;
+	char *ptr = "1234567890";
+	int x = 10;
 
-    printf("%s ", INCREMENT(ptr));
-    printf("%d", INCREMENT(x));
-    return 0;
+	printf("%s ", INCREMENT(ptr));
+	printf("%d", INCREMENT(x));
+	return 0;
 }

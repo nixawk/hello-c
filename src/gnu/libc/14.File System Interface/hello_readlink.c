@@ -17,50 +17,41 @@
 
 #define SYMLINK "/tmp/symlink"
 
-
-char *
-readlink_malloc(const char *filename)
+char *readlink_malloc(const char *filename)
 {
-    int size = 100;
-    char *buffer = NULL;
+	int size = 100;
+	char *buffer = NULL;
 
-    while (1)
-    {
-        buffer = (char *) realloc(buffer, size);
-        int nchars = readlink(filename, buffer, size);
-        if (nchars < 0)
-        {
-            free(buffer);
-            return NULL;
-        }
+	while (1) {
+		buffer = (char *)realloc(buffer, size);
+		int nchars = readlink(filename, buffer, size);
+		if (nchars < 0) {
+			free(buffer);
+			return NULL;
+		}
 
-        if (nchars < size)
-        {
-            return buffer;
-        }
+		if (nchars < size) {
+			return buffer;
+		}
 
-        size *= 2;
-    }
+		size *= 2;
+	}
 }
 
-
-void
-readlink_usage(void)
+void readlink_usage(void)
 {
-    char *buffer = readlink_malloc(SYMLINK);
-    if ( buffer == NULL)
-    {
-        fprintf(stderr, "readlink_malloc() failed: %s\n", strerror(errno));
-    }
-    printf("symlink filename: %s\n", buffer);
+	char *buffer = readlink_malloc(SYMLINK);
+	if (buffer == NULL) {
+		fprintf(stderr, "readlink_malloc() failed: %s\n",
+			strerror(errno));
+	}
+	printf("symlink filename: %s\n", buffer);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    readlink_usage();
-    return 0;
+	readlink_usage();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Symbolic-Links.html#Symbolic-Links

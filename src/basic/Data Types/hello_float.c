@@ -6,67 +6,63 @@
 
 #include <stdio.h>
 
-void
-float_sizeof(void)
+void float_sizeof(void)
 {
-    printf("sizeof(float) = %lu byte(s)\n", sizeof(float));
+	printf("sizeof(float) = %lu byte(s)\n", sizeof(float));
 }
 
-void
-float_mismatch(void)
+void float_mismatch(void)
 {
-    float f1 = 0.1;
-    float f2 = 0.5;
+	float f1 = 0.1;
+	float f2 = 0.5;
 
-    if (f1 == 0.1)
-        printf("f1 == 0.1\n");
-    else if (f1 == 0.1f)
-        printf("f1 == 0.1f\n");   // ---> outout
-    else
-        printf("f1 != 0.1 or 0.1f\n");
+	if (f1 == 0.1)
+		printf("f1 == 0.1\n");
+	else if (f1 == 0.1f)
+		printf("f1 == 0.1f\n");	// ---> outout
+	else
+		printf("f1 != 0.1 or 0.1f\n");
 
-    // Note that the promotion of float or double can only cause mismatch
-    // when a value (like 0.1) uses more precision bits of single precision.
+	// Note that the promotion of float or double can only cause mismatch
+	// when a value (like 0.1) uses more precision bits of single precision.
 
-    if (f2 == 0.5)
-        printf("f2 == 0.5\n");    // ----> output
-    else if (f2 == 0.5f)
-        printf("f2 == 0.5f\n");
-    else
-        printf("f2 != 0.5 or 0.5f\n");
+	if (f2 == 0.5)
+		printf("f2 == 0.5\n");	// ----> output
+	else if (f2 == 0.5f)
+		printf("f2 == 0.5f\n");
+	else
+		printf("f2 != 0.5 or 0.5f\n");
 
-    printf("f1   = %.30f\n", f1);
-    printf("0.1  = %.30f\n", 0.1);
-    printf("0.1f = %.30f\n", 0.1f);
+	printf("f1   = %.30f\n", f1);
+	printf("0.1  = %.30f\n", 0.1);
+	printf("0.1f = %.30f\n", 0.1f);
 
-    printf("f2   = %.30f\n", f2);
-    printf("0.5  = %.30f\n", 0.5);
-    printf("0.5f = %.30f\n", 0.5f);
+	printf("f2   = %.30f\n", f2);
+	printf("0.5  = %.30f\n", 0.5);
+	printf("0.5f = %.30f\n", 0.5f);
 }
 
-void
-float_compare(void)
+void float_compare(void)
 {
-    float f1 = 0.1;
-    float f2 = 0.1;
+	float f1 = 0.1;
+	float f2 = 0.1;
 
-    // You should never compare floating point values for equality
-    // due to known precision and rounding issues.
+	// You should never compare floating point values for equality
+	// due to known precision and rounding issues.
 
-    if (f1 == f2)
-        printf("f1 == f2\n");
-    else
-        printf("f1 != f2\n");
+	if (f1 == f2)
+		printf("f1 == f2\n");
+	else
+		printf("f1 != f2\n");
 }
 
-int
-main(void)
+int main(void)
 {
-    float_sizeof();
-    float_mismatch();
-    float_compare();
+	float_sizeof();
+	float_mismatch();
+	float_compare();
 
-    return 0;
+	return 0;
 }
 
 /*

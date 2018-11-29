@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <wchar.h>
 
-
 // wint_t putwc (wchar_t wc, FILE *stream)
 
 // This is just like [fputwc], except that it can be implement as a macto,
@@ -15,19 +14,15 @@
 // The [putwc_unlocked] function is equivlent to the [putwc] function
 // except that it does not implicitly lock the stream.
 
-
-void
-putwc_usage(void)
+void putwc_usage(void)
 {
-    wchar_t ch = L'A';
+	wchar_t ch = L'A';
 
-    putwc(ch, stdout);
+	putwc(ch, stdout);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    putwc_usage();
-    return 0;
+	putwc_usage();
+	return 0;
 }

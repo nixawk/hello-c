@@ -13,7 +13,6 @@
 // minimize surprises in the rest of the computation. Prestandard C usually
 // preferred to preserve signedness of the type.
 
-
 // Integer Conversion Rank
 
 // Every integer type has an integer conversion rank that determines how
@@ -21,7 +20,6 @@
 // integer type contains at least as many bits as the types ranked below it.
 // The following rules for determining integer conversion rank are defined
 // in the C Standard, subclause 6.3.1.1 [ISO/IEC 9899:2011]
-
 
 // Usual Arithmetic Conversions
 
@@ -79,24 +77,21 @@
 
       // (type) expression
 
-
-void
-type_conversion(void)
+void type_conversion(void)
 {
-    unsigned int x = -1;
-    int y = ~0;
+	unsigned int x = -1;
+	int y = ~0;
 
-    // When comparing signed with unsigned, the compiler converts
-    // the signed value to unsigned.
+	// When comparing signed with unsigned, the compiler converts
+	// the signed value to unsigned.
 
-    (x == y) ? printf("Equal\n") : printf("Not equal\n");
+	(x == y) ? printf("Equal\n") : printf("Not equal\n");
 }
 
-int
-main(void)
+int main(void)
 {
-    type_conversion();
-    return 0;
+	type_conversion();
+	return 0;
 }
 
 /*
@@ -135,4 +130,3 @@ Dump of assembler code for function type_conversion:
 // https://www.geeksforgeeks.org/type-conversion-c/
 // https://en.wikipedia.org/wiki/Type_conversion#Implicit_type_conversion
 // https://wiki.sei.cmu.edu/confluence/display/c/INT02-C.+Understand+integer+conversion+rules
-

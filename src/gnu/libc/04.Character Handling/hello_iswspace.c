@@ -17,25 +17,19 @@
 
     // iswctype (wc, wctype ("space"))
 
-
-void
-iswspace_usage(void)
+void iswspace_usage(void)
 {
-    wchar_t ch = L'\t';
+	wchar_t ch = L'\t';
 
-    if (iswspace(ch))
-    {
-        printf("[\\t] is a whitespace character.\n");
-    }
+	if (iswspace(ch)) {
+		printf("[\\t] is a whitespace character.\n");
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    iswspace_usage();
-    return 0;
+	iswspace_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Classification-of-Wide-Characters.html#Classification-of-Wide-Characters

@@ -15,12 +15,13 @@ This function does not return any value.
 
 */
 
-int main(int argc, char const *argv[]) {
-  printf("Start the program...\n");
-  printf("Exiting  the program...\n");
+int main(int argc, char const *argv[])
+{
+	printf("Start the program...\n");
+	printf("Exiting  the program...\n");
 
-  exit(0);
+	exit(0);
 
-  printf("End of the program...\n");
-  return 0;
+	printf("End of the program...\n");
+	return 0;
 }

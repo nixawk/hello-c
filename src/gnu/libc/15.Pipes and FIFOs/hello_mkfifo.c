@@ -29,87 +29,70 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
 #define SIZE 1024
 
-
 /* Create a fifo file with mkfifo */
-void
-create_fifo_file(const char *fifo)
+void create_fifo_file(const char *fifo)
 {
-    if (mkfifo(fifo, S_IWUSR | S_IRUSR | S_IRUSR) != 0)
-    {
-        fprintf(stderr, "mkfifo failed\n");
-        exit(EXIT_FAILURE);
-    }
+	if (mkfifo(fifo, S_IWUSR | S_IRUSR | S_IRUSR) != 0) {
+		fprintf(stderr, "mkfifo failed\n");
+		exit(EXIT_FAILURE);
+	}
 }
 
 /* Write data into fifo file */
-void
-write_data(const char *fifo)
+void write_data(const char *fifo)
 {
-    FILE *stream;
-    if ((stream = fopen(fifo, "w")) == NULL)
-    {
-        fprintf(stderr, "fopen failed\n");
-        exit(EXIT_FAILURE);
-    }
-    fputs("hello, fifo\n", stream);
-    fclose(stream);
+	FILE *stream;
+	if ((stream = fopen(fifo, "w")) == NULL) {
+		fprintf(stderr, "fopen failed\n");
+		exit(EXIT_FAILURE);
+	}
+	fputs("hello, fifo\n", stream);
+	fclose(stream);
 }
 
 /* Read data from fifo file */
-void
-read_data(const char *fifo)
+void read_data(const char *fifo)
 {
-    FILE *stream;
-    char buf[SIZE] = {'\0'};
+	FILE *stream;
+	char buf[SIZE] = { '\0' };
 
-    if ((stream = fopen(fifo, "r")) == NULL)
-    {
-        fprintf(stderr, "fopen failed\n");
-        exit(EXIT_FAILURE);
-    }
-    
-    if (fgets(buf, SIZE, stream) == NULL)
-    {
-        fprintf(stderr, "fgets failed\n");
-        exit(EXIT_FAILURE);
-    }
+	if ((stream = fopen(fifo, "r")) == NULL) {
+		fprintf(stderr, "fopen failed\n");
+		exit(EXIT_FAILURE);
+	}
 
-    printf("%s\n", buf);
-    fclose(stream);
+	if (fgets(buf, SIZE, stream) == NULL) {
+		fprintf(stderr, "fgets failed\n");
+		exit(EXIT_FAILURE);
+	}
+
+	printf("%s\n", buf);
+	fclose(stream);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    pid_t pid;
-    const char *fifo = "fifo";
+	pid_t pid;
+	const char *fifo = "fifo";
 
-    create_fifo_file(fifo);
+	create_fifo_file(fifo);
 
-    pid = fork();
-    if (pid > (pid_t)0)
-    {
-        // printf("parent process\n");
-        write_data(fifo);
-    }
-    else if (pid == (pid_t) 0)
-    {
-        // printf("child process\n");
-        read_data(fifo);
-    }
-    else
-    {
-        fprintf(stderr, "fork() failed\n");
-        exit(EXIT_FAILURE);
-    }
+	pid = fork();
+	if (pid > (pid_t) 0) {
+		// printf("parent process\n");
+		write_data(fifo);
+	} else if (pid == (pid_t) 0) {
+		// printf("child process\n");
+		read_data(fifo);
+	} else {
+		fprintf(stderr, "fork() failed\n");
+		exit(EXIT_FAILURE);
+	}
 
-    return 0;
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/FIFO-Special-Files.html#FIFO-Special-Files
 // http://pubs.opengroup.org/onlinepubs/7908799/xsh/sysstat.h.html

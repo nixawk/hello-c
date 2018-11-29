@@ -14,12 +14,13 @@ If no valid conversion could be performed, it returns zero.
 
 */
 
-int main(int argc, char const *argv[]) {
-  long lnum;
-  char snum[] = "123123123";
+int main(int argc, char const *argv[])
+{
+	long lnum;
+	char snum[] = "123123123";
 
-  lnum = atol(snum);
-  if (lnum != 0)
-      printf("String: %s -> Long int: %ld", snum, lnum);
-  return 0;
+	lnum = atol(snum);
+	if (lnum != 0)
+		printf("String: %s -> Long int: %ld", snum, lnum);
+	return 0;
 }

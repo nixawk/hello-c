@@ -14,18 +14,16 @@
 // To remind you of this, the linker (if using GNU ld) will issue a warning
 // whenever you use gets.
 
-void
-gets_usage(void)
+void gets_usage(void)
 {
-    char buf_overflow[32];
-    puts(gets(buf_overflow));
+	char buf_overflow[32];
+	puts(gets(buf_overflow));
 }
 
-int
-main(void)
+int main(void)
 {
-    gets_usage();
-    return 0;
+	gets_usage();
+	return 0;
 }
 
 /*
@@ -37,7 +35,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 [1]    1450 abort      ./a.out
 
 */
-
 
 // http://man7.org/linux/man-pages/man3/gets.3.html
 // https://www.gnu.org/software/libc/manual/html_node/Line-Input.html#Line-Input

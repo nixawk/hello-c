@@ -8,53 +8,49 @@
 #include <stdio.h>
 #include <limits.h>
 
-void
-char_sizeof(void)
+void char_sizeof(void)
 {
-    printf("sizeof(char) = %lu byte(s), %d bit(s)\n", sizeof(char), CHAR_BIT);
+	printf("sizeof(char) = %lu byte(s), %d bit(s)\n", sizeof(char),
+	       CHAR_BIT);
 }
 
-void
-char_readonly_or_writable(void)
+void char_readonly_or_writable(void)
 {
-    char *sr = "I'm readonly !";
-    char sw[] = "I'm writable !";
+	char *sr = "I'm readonly !";
+	char sw[] = "I'm writable !";
 
-    printf("sr = %p\n", sr);
-    printf("sw = %p\n", sw);
+	printf("sr = %p\n", sr);
+	printf("sw = %p\n", sw);
 }
 
-void
-char_signed_or_unsigned(void)
+void char_signed_or_unsigned(void)
 {
-    char ch = 0x80;
-    signed char sc = 0x80;
-    unsigned char uc = 0x80; 
+	char ch = 0x80;
+	signed char sc = 0x80;
+	unsigned char uc = 0x80;
 
-    if (ch == sc)
-        printf("char == signed char\n");
+	if (ch == sc)
+		printf("char == signed char\n");
 
-    if (ch == uc)
-        printf("char == unsigned char\n");
+	if (ch == uc)
+		printf("char == unsigned char\n");
 }
 
-void
-char_min_or_max(void)
+void char_min_or_max(void)
 {
-    printf("CHAR_MIN  = %d\n", CHAR_MIN);
-    printf("CHAR_MAX  = %d\n", CHAR_MAX);
-    printf("UCHAR_MAX = %d\n", UCHAR_MAX);
+	printf("CHAR_MIN  = %d\n", CHAR_MIN);
+	printf("CHAR_MAX  = %d\n", CHAR_MAX);
+	printf("UCHAR_MAX = %d\n", UCHAR_MAX);
 }
 
-int
-main(void)
+int main(void)
 {
-    char_sizeof();
-    char_readonly_or_writable();
-    char_signed_or_unsigned();
-    char_min_or_max();
+	char_sizeof();
+	char_readonly_or_writable();
+	char_signed_or_unsigned();
+	char_min_or_max();
 
-    return 0;
+	return 0;
 }
 
 /*

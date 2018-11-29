@@ -9,5 +9,4 @@
 // data structure (residing in Data or Stack section) while linked list
 // is taken as a dynamic data structure (residing in Heap section).
 
-
 // https://www.geeksforgeeks.org/programmers-approach-looking-array-vs-linked-list/

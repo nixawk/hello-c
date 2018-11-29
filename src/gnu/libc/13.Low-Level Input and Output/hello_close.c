@@ -26,26 +26,21 @@
     // EIO
     // EDQUOT
 
-void
-close_usage(void)
+void close_usage(void)
 {
-    int fd, cret;
+	int fd, cret;
 
-    fd = creat("/tmp/testfile", S_IRWXU);
-    if (fd != -1)
-    {
-        cret = close(fd);
-        printf("close status: %d\n", cret);
-    }
+	fd = creat("/tmp/testfile", S_IRWXU);
+	if (fd != -1) {
+		cret = close(fd);
+		printf("close status: %d\n", cret);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    close_usage();
-    return 0;
+	close_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Opening-and-Closing-Files.html#Opening-and-Closing-Files

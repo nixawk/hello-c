@@ -3,31 +3,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-    int flags;
+	int flags;
 
-    if (argc > 1)
-    {
-        flags = fcntl(STDOUT_FILENO, F_GETFD);
-        if (flags == -1)
-        {
-        perror("fcntl - F_GETFD");
-        exit(EXIT_FAILURE);
-        }
+	if (argc > 1) {
+		flags = fcntl(STDOUT_FILENO, F_GETFD);
+		if (flags == -1) {
+			perror("fcntl - F_GETFD");
+			exit(EXIT_FAILURE);
+		}
 
-        flags |= FD_CLOEXEC;  /* Turn on FD_CLOEXEC, not CLOSEXEC */
-        if (fcntl(STDOUT_FILENO, F_SETFD, flags) == -1)
-        {
-        perror("fcntl - F_SETFD");
-        exit(EXIT_FAILURE);
-        }
-    
-    }
+		flags |= FD_CLOEXEC;	/* Turn on FD_CLOEXEC, not CLOSEXEC */
+		if (fcntl(STDOUT_FILENO, F_SETFD, flags) == -1) {
+			perror("fcntl - F_SETFD");
+			exit(EXIT_FAILURE);
+		}
 
-    execlp("ls", "ls", "-l", argv[0], (char *)NULL);
-    exit(EXIT_SUCCESS);
+	}
+
+	execlp("ls", "ls", "-l", argv[0], (char *)NULL);
+	exit(EXIT_SUCCESS);
 }
 
 /*

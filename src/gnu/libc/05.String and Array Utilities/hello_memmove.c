@@ -17,11 +17,11 @@ This function returns a pointer to the destination, which is str1.
 
 int main(void)
 {
-    char dest[256];
-    const char src[] = "this is a demo string";
+	char dest[256];
+	const char src[] = "this is a demo string";
 
-    memset(dest, 0, sizeof(dest));
-    memmove(dest, src, sizeof(src));
-    printf("destination string: %s\n", dest);
-    return 0;
+	memset(dest, 0, sizeof(dest));
+	memmove(dest, src, sizeof(src));
+	printf("destination string: %s\n", dest);
+	return 0;
 }

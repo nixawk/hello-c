@@ -9,21 +9,17 @@
 // can use it afterwards in calls to towctrans. If the return value is zero no such mapping
 // is known in the current locale.
 
-void
-wctrans_usage(void)
+void wctrans_usage(void)
 {
-    wchar_t ch = L'A';
+	wchar_t ch = L'A';
 
-    printf("[%c] -> [%c]", ch, towctrans(ch, wctrans("tolower")));
+	printf("[%c] -> [%c]", ch, towctrans(ch, wctrans("tolower")));
 }
 
-
-int
-main(void)
+int main(void)
 {
-    wctrans_usage();
-    return 0;
+	wctrans_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Wide-Character-Case-Conversion.html#Wide-Character-Case-Conversionh

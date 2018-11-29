@@ -1,29 +1,27 @@
 #include <stdio.h>
 
-int
-main(void)
+int main(void)
 {
-    /*
+	/*
 
-        printf never supplies a newline automatically
+	   printf never supplies a newline automatically
 
-        \n represents only a single character. An escape sequence
-        like \n provides a general and extension mechanism for
-        represneting hard-to-type or invisible characters.
+	   \n represents only a single character. An escape sequence
+	   like \n provides a general and extension mechanism for
+	   represneting hard-to-type or invisible characters.
 
-           \n for newline
-           \t for tab
-           \b for backspace
-           \" for double quote
-           \\ for the backslash itself
+	   \n for newline
+	   \t for tab
+	   \b for backspace
+	   \" for double quote
+	   \\ for the backslash itself
 
-    */
+	 */
 
-    printf("hello, world\n");
+	printf("hello, world\n");
 
-    return 0;
+	return 0;
 }
-
 
 /*
 

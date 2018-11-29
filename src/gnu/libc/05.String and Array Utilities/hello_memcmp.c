@@ -19,20 +19,19 @@ if Return value = 0 then it indicates str1 is equal than str2.
 
 int main(void)
 {
-    char str1[] = "helloworld";
-    char str2[] = "helloc";
-    int ret;
+	char str1[] = "helloworld";
+	char str2[] = "helloc";
+	int ret;
 
-    if (sizeof(str2) < sizeof(str1))
-    {
-        ret = memcmp(str1, str2, sizeof(str2));
-        printf("(sizeof(str1) > sizeof(str2)) - return value : %d\n", ret);
-        printf("%c - %c = %d\n", 'w', 'c', 'w' - 'c');
-    }
-    else
-    {
-        ret = memcmp(str1, str2, sizeof(str1));
-        printf("(sizeof(str1) < sizeof(str2)) - return value : %d\n", ret);
-    }
-    return 0;
+	if (sizeof(str2) < sizeof(str1)) {
+		ret = memcmp(str1, str2, sizeof(str2));
+		printf("(sizeof(str1) > sizeof(str2)) - return value : %d\n",
+		       ret);
+		printf("%c - %c = %d\n", 'w', 'c', 'w' - 'c');
+	} else {
+		ret = memcmp(str1, str2, sizeof(str1));
+		printf("(sizeof(str1) < sizeof(str2)) - return value : %d\n",
+		       ret);
+	}
+	return 0;
 }

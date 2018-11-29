@@ -6,39 +6,34 @@
 
 #define selfproc "/proc/self/fd"
 
-void
-list_fd()
+void list_fd()
 {
-    DIR *dirp = NULL;
-    struct dirent *dp = NULL;
+	DIR *dirp = NULL;
+	struct dirent *dp = NULL;
 
-    dirp = opendir(selfproc);
-    if (dirp == NULL)
-    {
-        printf("failed to opendir %s\n", selfproc);
-        exit(EXIT_FAILURE);
-    }
+	dirp = opendir(selfproc);
+	if (dirp == NULL) {
+		printf("failed to opendir %s\n", selfproc);
+		exit(EXIT_FAILURE);
+	}
 
-    while ((dp = readdir(dirp)) != NULL)
-    {
-        if (strstr(dp->d_name, ".") == NULL)  // excude ".", ".."
-        {
-            printf("file descriptor: %s\n", dp->d_name);
-        }
-    }
+	while ((dp = readdir(dirp)) != NULL) {
+		if (strstr(dp->d_name, ".") == NULL)	// excude ".", ".."
+		{
+			printf("file descriptor: %s\n", dp->d_name);
+		}
+	}
 
-    if (closedir(dirp) == -1)
-    {
-        printf("failed to closedir %s\n", selfproc);
-        exit(EXIT_FAILURE);
-    }
+	if (closedir(dirp) == -1) {
+		printf("failed to closedir %s\n", selfproc);
+		exit(EXIT_FAILURE);
+	}
 }
 
-int
-main(int argc, const char *argv[])
+int main(int argc, const char *argv[])
 {
-    list_fd();
-    return 0;
+	list_fd();
+	return 0;
 }
 
 // https://en.wikipedia.org/wiki/File_descriptor

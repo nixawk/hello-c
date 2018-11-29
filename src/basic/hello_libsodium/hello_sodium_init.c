@@ -23,15 +23,13 @@ has been properly seeded.
 
 */
 
-int
-main(void)
+int main(void)
 {
-    if (sodium_init() < 0)
-    {
-        exit(EXIT_FAILURE);
-    }
+	if (sodium_init() < 0) {
+		exit(EXIT_FAILURE);
+	}
 
-    return 0;
+	return 0;
 }
 
 // reference

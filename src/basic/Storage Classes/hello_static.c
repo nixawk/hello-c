@@ -8,26 +8,23 @@
 
 #include <stdio.h>
 
-void
-storage_class_static()
+void storage_class_static()
 {
-    static int i = 0;
+	static int i = 0;
 
-    printf("static int i = %d\n", i);
-    i++;
+	printf("static int i = %d\n", i);
+	i++;
 }
 
-int
-main(void)
+int main(void)
 {
-    int i;
+	int i;
 
-    for (i = 0; i < 4; i++)
-    {
-        storage_class_static();
-    }
+	for (i = 0; i < 4; i++) {
+		storage_class_static();
+	}
 
-    return 0;
+	return 0;
 }
 
 /*
@@ -39,7 +36,6 @@ static int i = 2
 static int i = 3
 
 */
-
 
 /*
 

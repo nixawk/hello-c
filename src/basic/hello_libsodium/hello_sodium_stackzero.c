@@ -9,27 +9,22 @@ to overwrite sensitive values that may have been temporarily stored on the stack
 
 */
 
-void
-sodium_stackzero_usage(void)
+void sodium_stackzero_usage(void)
 {
-    const size_t len = 1024;
+	const size_t len = 1024;
 
-    if (sodium_init() < 0)
-    {
-        exit(EXIT_FAILURE);
-    }
+	if (sodium_init() < 0) {
+		exit(EXIT_FAILURE);
+	}
 
-    sodium_stackzero(len);
+	sodium_stackzero(len);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    sodium_stackzero_usage();
-    return 0;
+	sodium_stackzero_usage();
+	return 0;
 }
-
 
 // reference
 // https://download.libsodium.org/doc/helpers#clearing-the-stack

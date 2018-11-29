@@ -8,7 +8,6 @@
 // the interval you want to time, subtract the values, and then divide by
 // CLOCKS_PER_SEC (the number of clock ticks per second) to get processor time,
 
-
 // Macro: int CLOCKS_PER_SEC
 
 // The value of this macro is the number of clock ticks per second measured by
@@ -26,41 +25,33 @@
 // is not available or cannot be represented, clock returns the value
 // (clock_t)(-1).
 
-
-void
-foo(void)
+void foo(void)
 {
-    int i;
+	int i;
 
-    for (i = 0; i < 10; i++)
-        ;  // do nothing
+	for (i = 0; i < 10; i++) ;	// do nothing
 }
 
-
-void
-show_cpu_time(void)
+void show_cpu_time(void)
 {
-    clock_t start, end;
-    double cpu_time_used;
+	clock_t start, end;
+	double cpu_time_used;
 
-    start = clock();
+	start = clock();
 
-    /* do something you want */
-    foo();
+	/* do something you want */
+	foo();
 
-    end = clock();
-    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+	end = clock();
+	cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 
-    printf("CPU Time: %f\n", cpu_time_used);
+	printf("CPU Time: %f\n", cpu_time_used);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    show_cpu_time();
-    return 0;
+	show_cpu_time();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/CPU-Time.html#CPU-Time

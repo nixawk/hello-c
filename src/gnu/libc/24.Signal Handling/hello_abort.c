@@ -19,26 +19,21 @@ signal_callback, Abort trap: 6
 
 */
 
-void
-signal_callback(int signum)
+void signal_callback(int signum)
 {
-    printf("signal_callback, %s\n", strsignal(signum));
+	printf("signal_callback, %s\n", strsignal(signum));
 }
 
-
-void
-abort_usage(void)
+void abort_usage(void)
 {
-    signal(SIGABRT, signal_callback);
-    abort();   // raise a [SIGABRT] signal;
+	signal(SIGABRT, signal_callback);
+	abort();		// raise a [SIGABRT] signal;
 }
 
-
-int
-main(void)
+int main(void)
 {
-    abort_usage();
-    return 0;
+	abort_usage();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Aborting-a-Program.html#Aborting-a-Program

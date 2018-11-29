@@ -1,26 +1,23 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-bool
-is_true(void)
+bool is_true(void)
 {
-    return true;
+	return true;
 }
 
-bool
-is_false(void)
+bool is_false(void)
 {
-    return false;
+	return false;
 }
 
-int
-main(void)
+int main(void)
 {
-    if (is_true())
-        printf("condition is true.\n");
+	if (is_true())
+		printf("condition is true.\n");
 
-    if (!is_false())
-        printf("condition is false.\n");
+	if (!is_false())
+		printf("condition is false.\n");
 
-    return 0;
+	return 0;
 }

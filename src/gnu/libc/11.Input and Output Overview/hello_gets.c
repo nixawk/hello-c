@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-
 // char * gets (char *s)
 
 // The function gets reads characters from the stream stdin up to the next newline character, 
@@ -13,24 +12,19 @@
 // You should always use fgets or getline instead. To remind you of this, 
 // the linker (if using GNU ld) will issue a warning whenever you use gets.
 
-void
-gets_usage(void)
+void gets_usage(void)
 {
-    char *s = NULL;
+	char *s = NULL;
 
-    if (gets(s) != NULL)
-    {
-        printf("%s\n", s);
-    }
+	if (gets(s) != NULL) {
+		printf("%s\n", s);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    gets_usage();  /* warning: this program uses gets(), which is unsafe. */
-    return 0;
+	gets_usage();		/* warning: this program uses gets(), which is unsafe. */
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Line-Input.html#Line-Input

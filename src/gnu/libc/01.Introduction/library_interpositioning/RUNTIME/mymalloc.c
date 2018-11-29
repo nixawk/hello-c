@@ -7,42 +7,39 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 /* malloc wrapper function */
 void *malloc(size_t size)
 {
-  void *(*mallocp)(size_t size);
-  void *ptr;
+	void *(*mallocp) (size_t size);
+	void *ptr;
 
-  mallocp = dlsym(RTLD_NEXT, "malloc");  /* Get address of libc malloc */
-  if (mallocp == NULL)
-    {
-      // fprintf(stderr, "%s:%d:%s", __FILE__, __LINE__, strerror(errno));
-      exit(1);
-    }
+	mallocp = dlsym(RTLD_NEXT, "malloc");	/* Get address of libc malloc */
+	if (mallocp == NULL) {
+		// fprintf(stderr, "%s:%d:%s", __FILE__, __LINE__, strerror(errno));
+		exit(1);
+	}
 
-  ptr = mallocp(size);
-  // printf("malloc(%zu) = %p\n", size, ptr);  // Segmentation fault
-  return ptr;
+	ptr = mallocp(size);
+	// printf("malloc(%zu) = %p\n", size, ptr);  // Segmentation fault
+	return ptr;
 }
 
 /* free wrapper function */
 void free(void *ptr)
 {
-  void (*freecp)(void *) = NULL;
+	void (*freecp) (void *) = NULL;
 
-  if (!ptr)
-    return;
+	if (!ptr)
+		return;
 
-  freecp = dlsym(RTLD_NEXT, "free");  /* Get address of libc free */
-  if (freecp == NULL)
-  {
-      // fprintf(stderr, "%s:%d:%s", __FILE__, __LINE__, strerror(errno));
-      exit(1);
-  }
+	freecp = dlsym(RTLD_NEXT, "free");	/* Get address of libc free */
+	if (freecp == NULL) {
+		// fprintf(stderr, "%s:%d:%s", __FILE__, __LINE__, strerror(errno));
+		exit(1);
+	}
 
-  freecp(ptr);
-  // printf("free(%p)\n", ptr);
+	freecp(ptr);
+	// printf("free(%p)\n", ptr);
 }
 
 #endif

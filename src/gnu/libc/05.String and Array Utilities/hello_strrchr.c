@@ -11,14 +11,15 @@ This function returns a pointer to the last occurrence of character in str. If t
 
 */
 
-int main(int argc, char const *argv[]) {
-  const char str[] = "helloworld";
-  int c = 'l';
-  char *pointer;
+int main(int argc, char const *argv[])
+{
+	const char str[] = "helloworld";
+	int c = 'l';
+	char *pointer;
 
-  pointer = strrchr(str, c);
+	pointer = strrchr(str, c);
 
-  printf("str  pointer: %p\n", str);
-  printf("char pointer: %p\n", pointer);
-  return 0;
+	printf("str  pointer: %p\n", str);
+	printf("char pointer: %p\n", pointer);
+	return 0;
 }

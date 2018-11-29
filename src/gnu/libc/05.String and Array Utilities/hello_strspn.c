@@ -11,13 +11,14 @@ This function returns the number of characters in the initial segment of str1 wh
 
 */
 
-int main(int argc, char const *argv[]) {
-  const char str1[] = "helloworld";
-  const char str2[] = "heyman";
+int main(int argc, char const *argv[])
+{
+	const char str1[] = "helloworld";
+	const char str2[] = "heyman";
 
-  int num;
+	int num;
 
-  num = strspn(str1, str2);
-  printf("match number: %d\n", num); // matches: 2
-  return 0;
+	num = strspn(str1, str2);
+	printf("match number: %d\n", num);	// matches: 2
+	return 0;
 }

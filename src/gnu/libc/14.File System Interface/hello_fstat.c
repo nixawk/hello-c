@@ -37,38 +37,32 @@
 // #define st_ctime st_ctim.tv_sec
 // };
 
-
-void
-fstat_usage(void)
+void fstat_usage(void)
 {
-    int fd, err;
-    struct stat st;
+	int fd, err;
+	struct stat st;
 
-    fd = open("/etc/passwd", O_RDONLY);
-    if (fd == -1)
-    {
-        fprintf(stderr, "open() failed: %s\n", strerror(errno));
-        exit(1);
-    }
+	fd = open("/etc/passwd", O_RDONLY);
+	if (fd == -1) {
+		fprintf(stderr, "open() failed: %s\n", strerror(errno));
+		exit(1);
+	}
 
-    err = fstat(fd, &st);
-    if (err == -1)
-    {
-        fprintf(stderr, "fstat() failed: %s\n", strerror(errno));
-        exit(1);
-    }
+	err = fstat(fd, &st);
+	if (err == -1) {
+		fprintf(stderr, "fstat() failed: %s\n", strerror(errno));
+		exit(1);
+	}
 
-    printf("total size: %lld bytes\n", st.st_size);
+	printf("total size: %lld bytes\n", st.st_size);
 
-    close(fd);
+	close(fd);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    fstat_usage();
-    return 0;
+	fstat_usage();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Reading-Attributes.html

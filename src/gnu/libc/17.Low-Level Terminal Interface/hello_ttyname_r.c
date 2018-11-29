@@ -15,29 +15,22 @@
     // ENOTTY - The filedes is not associated with a terminal.
     // ERANGE - The buffer length len is too small to store the string to be returned.
 
-
 #define SIZE 1024
 
-
-void
-ttyname_r_usage(void)
+void ttyname_r_usage(void)
 {
-    char buf[SIZE] = {'\0'};
-    int filedes = 0;
+	char buf[SIZE] = { '\0' };
+	int filedes = 0;
 
-    if ((ttyname_r(filedes, buf, SIZE)) == 0)
-    {
-        printf("fd: %d, ttyname: %s\n", filedes, buf);
-    }    
+	if ((ttyname_r(filedes, buf, SIZE)) == 0) {
+		printf("fd: %d, ttyname: %s\n", filedes, buf);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    ttyname_r_usage();
-    return 0;
+	ttyname_r_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Is-It-a-Terminal.html#Is-It-a-Terminal

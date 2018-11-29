@@ -21,88 +21,77 @@
 // Release:    18.04
 // Codename:   bionic
 
-
-int
-main(int argc, const char *argv[])
+int main(int argc, const char *argv[])
 {
 
-    int listenfd;
-    int connfd;
-    int backlog = 5;
+	int listenfd;
+	int connfd;
+	int backlog = 5;
 
-    struct sockaddr_in servaddr;
-    time_t ticks;
-    char buff[MAXLINE];
-    ssize_t nwrite;
+	struct sockaddr_in servaddr;
+	time_t ticks;
+	char buff[MAXLINE];
+	ssize_t nwrite;
 
-
-    if (argc != 2)
-    {
-        printf("[*] Usage: %s <port>\n", argv[0]);
-        exit(EXIT_FAILURE);
-    }
-
+	if (argc != 2) {
+		printf("[*] Usage: %s <port>\n", argv[0]);
+		exit(EXIT_FAILURE);
+	}
 #ifdef DEBUG
-    printf("socket()\n");
+	printf("socket()\n");
 #endif
 
-    listenfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (listenfd == -1)
-    {
-        perror("socket()");
-        exit(EXIT_FAILURE);
-    }
+	listenfd = socket(AF_INET, SOCK_STREAM, 0);
+	if (listenfd == -1) {
+		perror("socket()");
+		exit(EXIT_FAILURE);
+	}
 
-    servaddr.sin_family = AF_INET;
-    servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    servaddr.sin_port = htons(atoi(argv[1]));
-
-#ifdef DEBUG
-    printf("bind()\n");
-#endif
-
-    if (bind(listenfd, (struct sockaddr *)&servaddr, sizeof(servaddr)) == -1)
-    {
-        perror("bind()");
-        exit(EXIT_FAILURE);
-    }
+	servaddr.sin_family = AF_INET;
+	servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+	servaddr.sin_port = htons(atoi(argv[1]));
 
 #ifdef DEBUG
-    printf("listen()\n");
+	printf("bind()\n");
 #endif
 
-    if (listen(listenfd, backlog) == -1)
-    {
-        perror("listen");
-        exit(EXIT_FAILURE);
-    }
+	if (bind(listenfd, (struct sockaddr *)&servaddr, sizeof(servaddr)) ==
+	    -1) {
+		perror("bind()");
+		exit(EXIT_FAILURE);
+	}
+#ifdef DEBUG
+	printf("listen()\n");
+#endif
 
-    printf("[*] listening on 0.0.0.0:%s\n", argv[1]);
+	if (listen(listenfd, backlog) == -1) {
+		perror("listen");
+		exit(EXIT_FAILURE);
+	}
 
-    for (;;)
-    {
+	printf("[*] listening on 0.0.0.0:%s\n", argv[1]);
+
+	for (;;) {
 
 #ifdef DEBUG
-        printf("accept()\n");
+		printf("accept()\n");
 #endif
 
-        connfd = accept(listenfd, NULL, NULL);
-        if (connfd == -1)
-        {
-            perror("accept");
-            exit(EXIT_FAILURE);
-        }
+		connfd = accept(listenfd, NULL, NULL);
+		if (connfd == -1) {
+			perror("accept");
+			exit(EXIT_FAILURE);
+		}
 
-        ticks = time(NULL);
-        snprintf(buff, sizeof(buff), "%.24s\r\n", ctime(&ticks));
-        if ((nwrite = write(connfd, buff, strlen(buff))) == -1)
-        {
-            perror("write()");
-            exit(EXIT_FAILURE);
-        }
+		ticks = time(NULL);
+		snprintf(buff, sizeof(buff), "%.24s\r\n", ctime(&ticks));
+		if ((nwrite = write(connfd, buff, strlen(buff))) == -1) {
+			perror("write()");
+			exit(EXIT_FAILURE);
+		}
 
-        close(connfd);
-    }
+		close(connfd);
+	}
 
-    exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }

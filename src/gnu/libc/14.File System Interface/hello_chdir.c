@@ -14,44 +14,34 @@
 void getcwd_usage(void);
 void chdir_usage(void);
 
-
 #define PATH_MAX 4096
 
-
-void
-getcwd_usage(void)
+void getcwd_usage(void)
 {
-    char path[PATH_MAX] = "";
-    if (path == getcwd(path, PATH_MAX))
-    {
-        printf("current directory: %s\n", path);
-    } else {
-        fprintf(stderr, "getcwd() failed: %s.\n", strerror(errno));
-    }
+	char path[PATH_MAX] = "";
+	if (path == getcwd(path, PATH_MAX)) {
+		printf("current directory: %s\n", path);
+	} else {
+		fprintf(stderr, "getcwd() failed: %s.\n", strerror(errno));
+	}
 }
 
-
-void
-chdir_usage(void)
+void chdir_usage(void)
 {
-    int ret;
+	int ret;
 
-    getcwd_usage();
-    ret = chdir("/tmp/");
-    if (ret != 0)
-    {
-        fprintf(stderr, "chdir() failed: %s", strerror(errno));
-    }
-    getcwd_usage();
+	getcwd_usage();
+	ret = chdir("/tmp/");
+	if (ret != 0) {
+		fprintf(stderr, "chdir() failed: %s", strerror(errno));
+	}
+	getcwd_usage();
 }
 
-
-int
-main(void)
+int main(void)
 {
-    chdir_usage();
-    return 0;
+	chdir_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Working-Directory.html#Working-Directory

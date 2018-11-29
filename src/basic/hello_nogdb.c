@@ -8,72 +8,59 @@
 #include <sys/types.h>
 #include <sys/procfs.h>
 
-
-void
-nogdb(char *filename)
+void nogdb(char *filename)
 {
-    int f;
-    static Elf32_Ehdr* elfhdr;
+	int f;
+	static Elf32_Ehdr *elfhdr;
 
-    if ((f = open(filename, O_RDWR)) < 0)
-    {
-        perror("open");
-        exit(1);
-    }
+	if ((f = open(filename, O_RDWR)) < 0) {
+		perror("open");
+		exit(1);
+	}
+	//MAP_SHARED is required to actually update the file
+	elfhdr = (Elf32_Ehdr *) mmap(NULL,
+				     sizeof(elfhdr),
+				     PROT_READ | PROT_WRITE, MAP_SHARED, f, 0);
 
-    //MAP_SHARED is required to actually update the file
-    elfhdr = (Elf32_Ehdr *) mmap(
-        NULL,
-        sizeof(elfhdr),
-        PROT_READ | PROT_WRITE, MAP_SHARED,
-        f,
-        0
-    );
+	if (elfhdr == MAP_FAILED) {
+		perror("mmap");
+		close(f);
+		exit(1);
+	}
 
-    if (elfhdr == MAP_FAILED)
-    {
-        perror("mmap");
-        close(f);
-        exit(1);
-    }
+	printf("[*] Current elfhdr values:\n");
+	printf("\te_shoff:%d\n\te_shnum:%d\n\te_shstrndx:%d\n",
+	       elfhdr->e_shoff, elfhdr->e_shnum, elfhdr->e_shstrndx);
 
-    printf("[*] Current elfhdr values:\n");
-    printf("\te_shoff:%d\n\te_shnum:%d\n\te_shstrndx:%d\n",
-            elfhdr->e_shoff, elfhdr->e_shnum, elfhdr->e_shstrndx);
+	elfhdr->e_shoff = 0xffff;
+	elfhdr->e_shnum = 0xffff;
+	elfhdr->e_shstrndx = 0xffff;
 
-    elfhdr->e_shoff = 0xffff;
-    elfhdr->e_shnum = 0xffff;
-    elfhdr->e_shstrndx = 0xffff;
+	printf("[*] Patched elfhdr values:\n");
+	printf("\te_shoff:%d\n\te_shnum:%d\n\te_shstrndx:%d\n",
+	       elfhdr->e_shoff, elfhdr->e_shnum, elfhdr->e_shstrndx);
 
-    printf("[*] Patched elfhdr values:\n");
-    printf("\te_shoff:%d\n\te_shnum:%d\n\te_shstrndx:%d\n",
-            elfhdr->e_shoff, elfhdr->e_shnum, elfhdr->e_shstrndx);
+	if (msync(NULL, 0, MS_SYNC) == -1) {
+		perror("msync");
+		close(f);
+		exit(1);
+	}
 
-    if (msync(NULL, 0, MS_SYNC) == -1)
-    {
-        perror("msync");
-        close(f);
-        exit(1);
-    }
-
-    close(f);
-    munmap(elfhdr, 0);
+	close(f);
+	munmap(elfhdr, 0);
 }
 
-
-int
-main(int argc, char** argv)
+int main(int argc, char **argv)
 {
-    if(argc < 2) {
-        printf("Usage: %s file\n", argv[0]);
-        return 1;
-    }
+	if (argc < 2) {
+		printf("Usage: %s file\n", argv[0]);
+		return 1;
+	}
 
-    nogdb(argv[1]);
+	nogdb(argv[1]);
 
-    return 0;
+	return 0;
 }
-
 
 /*
 

@@ -16,8 +16,7 @@
 // (such as a TCP or UDP port number) and l as a
 // 32-bit value (such as an IPv4 address).
 
-int
-main(int argc, const char *argv[])
+int main(int argc, const char *argv[])
 {
 	int port = 8090;
 

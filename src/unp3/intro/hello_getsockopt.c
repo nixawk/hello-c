@@ -6,63 +6,54 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-
-void
-hello_getsockopt(int sockfd)
+void hello_getsockopt(int sockfd)
 {
-    int optval;
-    socklen_t optlen;
+	int optval;
+	socklen_t optlen;
 
-    optlen = sizeof(optval);
-    if (getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &optval, &optlen) == -1)
-    {
-        perror("getsockopt()");
-        exit(EXIT_FAILURE);
-    }
+	optlen = sizeof(optval);
+	if (getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &optval, &optlen) ==
+	    -1) {
+		perror("getsockopt()");
+		exit(EXIT_FAILURE);
+	}
 
-   printf("SO_KEEPALIVE is %s\n", (optval ? "ON" : "OFF"));
+	printf("SO_KEEPALIVE is %s\n", (optval ? "ON" : "OFF"));
 }
 
-
-void
-hello_setsockopt(int sockfd)
+void hello_setsockopt(int sockfd)
 {
-    int optval;
-    socklen_t optlen;
+	int optval;
+	socklen_t optlen;
 
-    optval = 1;
-    if (setsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &optval, optlen) == -1)
-    {
-        perror("setsockopt()");
-        exit(EXIT_FAILURE);
-    }
+	optval = 1;
+	if (setsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &optval, optlen) == -1) {
+		perror("setsockopt()");
+		exit(EXIT_FAILURE);
+	}
 }
 
-
-int
-main(int argc, const char *argv[])
+int main(int argc, const char *argv[])
 {
-    int sockfd;
-    struct sockaddr_in servaddr;
+	int sockfd;
+	struct sockaddr_in servaddr;
 
-    sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    if (sockfd == -1)
-    {
-        perror("socket()");
-        exit(EXIT_FAILURE);
-    }
+	sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	if (sockfd == -1) {
+		perror("socket()");
+		exit(EXIT_FAILURE);
+	}
 
-    hello_getsockopt(sockfd);
-    hello_setsockopt(sockfd);
-    hello_getsockopt(sockfd);
+	hello_getsockopt(sockfd);
+	hello_setsockopt(sockfd);
+	hello_getsockopt(sockfd);
 
-    if (close(sockfd) == -1)
-    {
-        perror("close()");
-        exit(EXIT_FAILURE);
-    }
+	if (close(sockfd) == -1) {
+		perror("close()");
+		exit(EXIT_FAILURE);
+	}
 
-    exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
 
 // references

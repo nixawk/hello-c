@@ -7,33 +7,28 @@
 // size_t strnlen (const char *s, size_t maxlen)
 // size_t wcsnlen (const wchar_t *ws, size_t maxlen)
 
-void
-wchar_array_length(void)
+void wchar_array_length(void)
 {
-    wchar_t string[32] = L"hello, world";
+	wchar_t string[32] = L"hello, world";
 
-    printf("wcslen(array) = %ld\n", wcslen(string));  // x64: 12 bytes
-    printf("sizeof(array) = %ld\n", sizeof(string));  // x64: 128 bytes
+	printf("wcslen(array) = %ld\n", wcslen(string));	// x64: 12 bytes
+	printf("sizeof(array) = %ld\n", sizeof(string));	// x64: 128 bytes
 }
 
-
-void
-wchat_pointer_length(void)
+void wchat_pointer_length(void)
 {
-    wchar_t string[32] = L"hello, world";
-    wchar_t *ptr = string;
+	wchar_t string[32] = L"hello, world";
+	wchar_t *ptr = string;
 
-    printf("wcslen(ptr) = %ld\n", wcslen(ptr));    // x64: 12 bytes
-    printf("sizeof(ptr) = %ld\n", sizeof(ptr));    // x64: 8 bytes
-    printf("sizeof(*ptr) = %ld\n", sizeof(*ptr));  // x64: 4 bytes * *
+	printf("wcslen(ptr) = %ld\n", wcslen(ptr));	// x64: 12 bytes
+	printf("sizeof(ptr) = %ld\n", sizeof(ptr));	// x64: 8 bytes
+	printf("sizeof(*ptr) = %ld\n", sizeof(*ptr));	// x64: 4 bytes * *
 }
 
-
-int
-main(void)
+int main(void)
 {
-    wchar_array_length();
-    wchat_pointer_length();
+	wchar_array_length();
+	wchat_pointer_length();
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/String-Length.html#String-Length

@@ -2,26 +2,24 @@
 
 #include <stdio.h>
 
-void
-bitwise_operators(void)
+void bitwise_operators(void)
 {
-    int i = 1;
-    int j = 2;
+	int i = 1;
+	int j = 2;
 
-    printf("i = %d, j = %d\n", i, j);
-    printf("~i = %d\n", ~i);           /* bitwise NOT */
-    printf("i & j = %d\n", i & j);     /* bitwise AND */
-    printf("i | j = %d\n", i | j);     /* bitwise OR */
-    printf("i ^ j = %d\n", i ^ j);     /* bitwise XOR */
-    printf("i << j = %d\n", i << j);   /* bitwise left shift */
-    printf("i >> j = %d\n", i >> j);   /* bitwise right shift */
+	printf("i = %d, j = %d\n", i, j);
+	printf("~i = %d\n", ~i);	/* bitwise NOT */
+	printf("i & j = %d\n", i & j);	/* bitwise AND */
+	printf("i | j = %d\n", i | j);	/* bitwise OR */
+	printf("i ^ j = %d\n", i ^ j);	/* bitwise XOR */
+	printf("i << j = %d\n", i << j);	/* bitwise left shift */
+	printf("i >> j = %d\n", i >> j);	/* bitwise right shift */
 }
 
-int
-main(void)
+int main(void)
 {
-    bitwise_operators();
-    return 0;
+	bitwise_operators();
+	return 0;
 }
 
 /*

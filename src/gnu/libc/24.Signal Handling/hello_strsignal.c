@@ -21,7 +21,6 @@
 // If you supply a non-null message argument, then psignal prefixes its output with this string.
 // It adds a colon and a space character to separate the message from the string corresponding to signum.
 
-
 //    SIGFPE - Floating point exception: 8
 //   SIGTERM - Terminated: 15
 //    SIGINT - Interrupt: 2
@@ -49,60 +48,52 @@
 
 #define SIGCUSTOM 0xFF
 
-
-void
-print_text(char *signal_name, char *signal_value)
+void print_text(char *signal_name, char *signal_value)
 {
-    printf("%12s - %s\n", signal_name, signal_value);
+	printf("%12s - %s\n", signal_name, signal_value);
 }
 
-
-void
-psignal_usage(void)
+void psignal_usage(void)
 {
-    psignal(SIGCUSTOM, "This is a custom signal message.");
+	psignal(SIGCUSTOM, "This is a custom signal message.");
 }
 
-
-void
-signal_usage(void)
+void signal_usage(void)
 {
-    print_text("SIGFPE", strsignal(SIGFPE));
-    print_text("SIGTERM", strsignal(SIGTERM));
-    print_text("SIGINT", strsignal(SIGINT));
-    print_text("SIGQUIT", strsignal(SIGQUIT));
-    print_text("SIGKILL", strsignal(SIGKILL));
-    print_text("SIGHUP", strsignal(SIGHUP));
-    print_text("SIGALRM", strsignal(SIGALRM));
-    print_text("SIGVTALRM", strsignal(SIGVTALRM));
-    print_text("SIGPROF", strsignal(SIGPROF));
-    print_text("SIGIO", strsignal(SIGIO));
-    print_text("SIGURG", strsignal(SIGURG));
-    // print_text("SIGPOLL", strsignal(SIGPOLL));
-    print_text("SIGCHLD", strsignal(SIGCHLD));
-    // print_text("SIGCLD", strsignal(SIGCLD));
-    print_text("SIGCONT", strsignal(SIGCONT));
-    print_text("SIGSTOP", strsignal(SIGSTOP));
-    print_text("SIGTSTP", strsignal(SIGTSTP));
-    print_text("SIGTTIN", strsignal(SIGTTIN));
-    print_text("SIGTTOU", strsignal(SIGTTOU));
-    print_text("SIGPIPE", strsignal(SIGPIPE));
-    // print_text("SIGLOST", strsignal(SIGLOST));
-    print_text("SIGXCPU", strsignal(SIGXCPU));
-    print_text("SIGXFSZ", strsignal(SIGXFSZ));
-    print_text("SIGUSR1", strsignal(SIGUSR1));
-    print_text("SIGUSR2", strsignal(SIGUSR2));
-    print_text("SIGWINCH", strsignal(SIGWINCH));
-    print_text("SIGINFO", strsignal(SIGINFO));
+	print_text("SIGFPE", strsignal(SIGFPE));
+	print_text("SIGTERM", strsignal(SIGTERM));
+	print_text("SIGINT", strsignal(SIGINT));
+	print_text("SIGQUIT", strsignal(SIGQUIT));
+	print_text("SIGKILL", strsignal(SIGKILL));
+	print_text("SIGHUP", strsignal(SIGHUP));
+	print_text("SIGALRM", strsignal(SIGALRM));
+	print_text("SIGVTALRM", strsignal(SIGVTALRM));
+	print_text("SIGPROF", strsignal(SIGPROF));
+	print_text("SIGIO", strsignal(SIGIO));
+	print_text("SIGURG", strsignal(SIGURG));
+	// print_text("SIGPOLL", strsignal(SIGPOLL));
+	print_text("SIGCHLD", strsignal(SIGCHLD));
+	// print_text("SIGCLD", strsignal(SIGCLD));
+	print_text("SIGCONT", strsignal(SIGCONT));
+	print_text("SIGSTOP", strsignal(SIGSTOP));
+	print_text("SIGTSTP", strsignal(SIGTSTP));
+	print_text("SIGTTIN", strsignal(SIGTTIN));
+	print_text("SIGTTOU", strsignal(SIGTTOU));
+	print_text("SIGPIPE", strsignal(SIGPIPE));
+	// print_text("SIGLOST", strsignal(SIGLOST));
+	print_text("SIGXCPU", strsignal(SIGXCPU));
+	print_text("SIGXFSZ", strsignal(SIGXFSZ));
+	print_text("SIGUSR1", strsignal(SIGUSR1));
+	print_text("SIGUSR2", strsignal(SIGUSR2));
+	print_text("SIGWINCH", strsignal(SIGWINCH));
+	print_text("SIGINFO", strsignal(SIGINFO));
 }
 
-
-int
-main(void)
+int main(void)
 {
-    signal_usage();
-    psignal_usage();
-    return 0;
+	signal_usage();
+	psignal_usage();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Standard-Signals.html#Standard-Signals

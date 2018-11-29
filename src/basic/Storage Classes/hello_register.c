@@ -14,27 +14,24 @@
 
 #include <stdio.h>
 
-void
-storage_class_register(void)
+void storage_class_register(void)
 {
-    register int i = 10;
+	register int i = 10;
 
-    // However, if a variable is declared register, the unary & (address of)
-    // operator may not be applied to it,
+	// However, if a variable is declared register, the unary & (address of)
+	// operator may not be applied to it,
 
-    // int *p = &i;    // error: address of register variable requested
+	// int *p = &i;    // error: address of register variable requested
 
-    for (i = 0; i < 5; i++)
-    {
-        printf("i = %d\n", i);
-    }
+	for (i = 0; i < 5; i++) {
+		printf("i = %d\n", i);
+	}
 }
 
-int
-main(void)
+int main(void)
 {
-    storage_class_register();
-    return 0;
+	storage_class_register();
+	return 0;
 }
 
 /*

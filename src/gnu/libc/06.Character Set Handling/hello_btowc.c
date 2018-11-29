@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <wchar.h>
 
-
 // wint_t btowc (int c)
 
 // The btowc function ("byte to wide character") converts a valid single byte
@@ -12,22 +11,18 @@
 // If (unsigned char) c is no valid single byte multibyte character or if c is
 // EOF, the function returns WEOF.
 
-void
-btowc_usage(void)
+void btowc_usage(void)
 {
-    int c = 1234;
-    wint_t wc = btowc(c);
+	int c = 1234;
+	wint_t wc = btowc(c);
 
-    wprintf(L"%ld\n", wc);
+	wprintf(L"%ld\n", wc);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    btowc_usage();
-    return 0;
+	btowc_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_mono/libc.html#Character-Handling

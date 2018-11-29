@@ -2,40 +2,35 @@
 #include <ctype.h>
 #include <errno.h>
 
-char *
-capitalize(char *buf)
+char *capitalize(char *buf)
 {
-    int c;
+	int c;
 
-    if (buf == NULL)
-    {
-        errno = EFAULT;
-        return NULL;
-    }
+	if (buf == NULL) {
+		errno = EFAULT;
+		return NULL;
+	}
 
-    c = (unsigned char)*buf;
-    *buf = toupper(c);
+	c = (unsigned char)*buf;
+	*buf = toupper(c);
 
-    return buf;
+	return buf;
 }
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-    int i;
+	int i;
 
-    if (argc < 2)
-    {
-        printf("%s <str1> <str2> ...\n", argv[0]);
-        return -1;
-    }
+	if (argc < 2) {
+		printf("%s <str1> <str2> ...\n", argv[0]);
+		return -1;
+	}
 
-    for (i = 1; i < argc; i++)
-    {
-        printf("%s\n", capitalize(argv[i]));
-    }
+	for (i = 1; i < argc; i++) {
+		printf("%s\n", capitalize(argv[i]));
+	}
 
-    return 0;
+	return 0;
 }
 
 // https://stackoverflow.com/questions/20036553/c-function-to-capitalize-first-letter-of-words-in-an-array

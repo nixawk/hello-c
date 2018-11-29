@@ -9,25 +9,20 @@
 // is NULL, an empty string, or contains no ’/’ bytes, then "." is returned.
 // The prototype for this function can be found in libgen.h.
 
-
-void
-dirname_usage(void)
+void dirname_usage(void)
 {
-    char *path = "/usr/bin/id";
-    char *dirp = dirname(path);
+	char *path = "/usr/bin/id";
+	char *dirp = dirname(path);
 
-    printf("path: %s\n", dirp);
+	printf("path: %s\n", dirp);
 
-    // Ubuntu 17.04 - Segmentation fault (core dumped)
+	// Ubuntu 17.04 - Segmentation fault (core dumped)
 }
 
-
-int
-main(void)
+int main(void)
 {
-    dirname_usage();
-    return 0;
+	dirname_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_mono/libc.html#Character-Handling

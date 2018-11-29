@@ -13,29 +13,27 @@ void *addr = NULL;
 static int
 __init my_vmalloc_init(void)
 {
-        unsigned long size = 4096;
+	unsigned long size = 4096;
 
-        addr = vmalloc(size);
-        if (!addr)
-        {
-                printk("failed to vmalloc\n");
-                return -ENOMEM;
-        }
+	addr = vmalloc(size);
+	if (!addr) {
+		printk("failed to vmalloc\n");
+		return -ENOMEM;
+	}
 
-        printk("vmalloc successfully,\naddr=0x%p\n", addr);
+	printk("vmalloc successfully,\naddr=0x%p\n", addr);
 
-        return 0;
+	return 0;
 }
 
 static void
 __exit my_vmalloc_exit(void)
 {
-        if (addr)
-        {
-                vfree(addr);
-                printk("vfree successfully\n");
-        }
-        printk("module exits ok !\n");
+	if (addr) {
+		vfree(addr);
+		printk("vfree successfully\n");
+	}
+	printk("module exits ok !\n");
 }
 
 module_init(my_vmalloc_init);

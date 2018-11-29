@@ -48,22 +48,17 @@
     // Locale names which are longer than an implementation-defined limit are
     // invalid and cause setlocale to fail.
 
-
-void
-setlocale_usage(void)
+void setlocale_usage(void)
 {
-    char *locale = setlocale(LC_ALL, NULL);
+	char *locale = setlocale(LC_ALL, NULL);
 
-    printf("current locale: %s\n", locale); // current locale: C
+	printf("current locale: %s\n", locale);	// current locale: C
 }
 
-
-int
-main(void)
+int main(void)
 {
-    setlocale_usage();
-    return 0;
+	setlocale_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_mono/libc.html#Locales

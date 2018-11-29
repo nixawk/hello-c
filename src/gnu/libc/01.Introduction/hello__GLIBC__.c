@@ -13,21 +13,17 @@ the version of glibc available at run time.
 
 */
 
-void
-glibc_version(void)
+void glibc_version(void)
 {
-    printf("__GLIBC__ == %d\n", __GLIBC__);
-    printf("__GLIBC_MINOR__ == %d\n", __GLIBC_MINOR__);
+	printf("__GLIBC__ == %d\n", __GLIBC__);
+	printf("__GLIBC_MINOR__ == %d\n", __GLIBC_MINOR__);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    glibc_version();
-    return 0;
+	glibc_version();
+	return 0;
 }
-
 
 /*
 

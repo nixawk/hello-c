@@ -8,22 +8,18 @@
 // initiali state is exactly one byte long, the return value of this function
 // is this character. Otherwise the return value is EOF.
 
-void
-wctob_usage(void)
+void wctob_usage(void)
 {
-    wint_t wc = 210L;
-    int c = wctob(wc);
+	wint_t wc = 210L;
+	int c = wctob(wc);
 
-    printf("%d\n", c);   
+	printf("%d\n", c);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    wctob_usage();
-    return 0;
+	wctob_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_mono/libc.html#Character-Handling

@@ -9,22 +9,20 @@ union
 */
 
 union endian {
-    char ch;
-    unsigned int i;
+	char ch;
+	unsigned int i;
 };
 
-
-int
-main(void)
+int main(void)
 {
-    union endian e;
+	union endian e;
 
-    e.i = 0x01020304;
-    if (e.ch == 0x4) {
-        printf("little endian\n");
-    } else {
-        printf("big endian\n");
-    }
+	e.i = 0x01020304;
+	if (e.ch == 0x4) {
+		printf("little endian\n");
+	} else {
+		printf("big endian\n");
+	}
 
-    return 0;
+	return 0;
 }

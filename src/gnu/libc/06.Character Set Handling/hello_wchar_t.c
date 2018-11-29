@@ -35,25 +35,20 @@
     // wint_t WCHAR_MAX
     // wint_t WEOF
 
-
-void
-wchar_t_usage(void)
+void wchar_t_usage(void)
 {
-    wchar_t wc = L'A';
-    wint_t wi = L'A';
+	wchar_t wc = L'A';
+	wint_t wi = L'A';
 
-    printf("WCHAR_MIN: %d\n", WCHAR_MIN);
-    printf("WCHAR_MAX: %d\n", WCHAR_MAX);
-    printf("WEOF     : %d\n", WEOF);
+	printf("WCHAR_MIN: %d\n", WCHAR_MIN);
+	printf("WCHAR_MAX: %d\n", WCHAR_MAX);
+	printf("WEOF     : %d\n", WEOF);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    wchar_t_usage();
-    return 0;
+	wchar_t_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Extended-Char-Intro.html#Extended-Char-Intro

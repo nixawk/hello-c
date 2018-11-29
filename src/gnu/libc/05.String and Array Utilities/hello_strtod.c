@@ -18,13 +18,14 @@ zero value (0.0) is returned.
 
 */
 
-int main(int argc, char const *argv[]) {
-  char sn[] = "3.1415926 This is a demo string.";
-  char *ptr;
-  double ret;
+int main(int argc, char const *argv[])
+{
+	char sn[] = "3.1415926 This is a demo string.";
+	char *ptr;
+	double ret;
 
-  ret = strtod(sn, &ptr);
-  printf("String: %s -> Double: %lf\n", sn, ret);
-  printf("Double: %s", ptr);  // output: This is a demo string.
-  return 0;
+	ret = strtod(sn, &ptr);
+	printf("String: %s -> Double: %lf\n", sn, ret);
+	printf("Double: %s", ptr);	// output: This is a demo string.
+	return 0;
 }

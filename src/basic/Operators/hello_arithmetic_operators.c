@@ -2,32 +2,29 @@
 
 #include <stdio.h>
 
-void
-arithmetic_operators(void)
+void arithmetic_operators(void)
 {
-    int i = 2;                      /* basic assignment */
-    int j = 2;                      /* basic assignment */
+	int i = 2;		/* basic assignment */
+	int j = 2;		/* basic assignment */
 
-    printf("i + j = %d\n", i + j);  /* addition */
-    printf("i - j = %d\n", i - j);  /* subtraction */
-    printf("i * j = %d\n", i * j);  /* multiplication */
-    printf("i / j = %d\n", i / j);  /* division */
-    printf("i %% j = %d\n", i % j);  /* modulo */
+	printf("i + j = %d\n", i + j);	/* addition */
+	printf("i - j = %d\n", i - j);	/* subtraction */
+	printf("i * j = %d\n", i * j);	/* multiplication */
+	printf("i / j = %d\n", i / j);	/* division */
+	printf("i %% j = %d\n", i % j);	/* modulo */
 
-    printf("i++ : %d\n", i++);      /* increment */
-    printf("++j : %d\n", ++j);
+	printf("i++ : %d\n", i++);	/* increment */
+	printf("++j : %d\n", ++j);
 
-    printf("i-- : %d\n", i--);      /* decrement */
-    printf("--j : %d\n", --j);
+	printf("i-- : %d\n", i--);	/* decrement */
+	printf("--j : %d\n", --j);
 }
 
-int
-main(void)
+int main(void)
 {
-    arithmetic_operators();
-    return 0;
+	arithmetic_operators();
+	return 0;
 }
-
 
 /*
 

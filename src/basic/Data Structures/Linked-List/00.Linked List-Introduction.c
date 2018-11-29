@@ -17,12 +17,10 @@
 //     because room has to be created for the new elements and to create
 //     room existing elements have to shifted.
 
-
 // Advantages over arrays
 
 // 1) Dynamic size
 // 2) Ease of insertion/deletion
-
 
 // Drawbacks:
 
@@ -36,47 +34,40 @@
 #include <stdlib.h>
 #include <dirent.h>
 
-void
-dir(const char *path)
+void dir(const char *path)
 {
-    DIR *dp = NULL;
-    struct dirent *dt = NULL;
+	DIR *dp = NULL;
+	struct dirent *dt = NULL;
 
-    dp = opendir(path);
-    if (dp == NULL)
-    {
-        printf("failed to opendir\n");
-        exit(EXIT_FAILURE);
-    }
+	dp = opendir(path);
+	if (dp == NULL) {
+		printf("failed to opendir\n");
+		exit(EXIT_FAILURE);
+	}
 
-    while ((dt = readdir(dp)) != NULL)
-    {
-        if (strcmp(dt->d_name, ".") != 0 && \
-            strcmp(dt->d_name, "..") != 0)
-        {
-            printf("%s\n", dt->d_name);
-        }
+	while ((dt = readdir(dp)) != NULL) {
+		if (strcmp(dt->d_name, ".") != 0 &&
+		    strcmp(dt->d_name, "..") != 0) {
+			printf("%s\n", dt->d_name);
+		}
 
-    }
+	}
 
-    closedir(dp);
+	closedir(dp);
 }
 
-int
-main(int argc, const char *argv[])
+int main(int argc, const char *argv[])
 {
-    int i;
+	int i;
 
-    if (argc < 2)
-    {
-        printf("Usage: %s </path/to/dir/> ...\n", argv[0]);
-        return -1;
-    }
+	if (argc < 2) {
+		printf("Usage: %s </path/to/dir/> ...\n", argv[0]);
+		return -1;
+	}
 
-    for (i = 1; i < argc; i++)
-    {
-        dir(argv[i]);
-    }
+	for (i = 1; i < argc; i++) {
+		dir(argv[i]);
+	}
 }
 
 // https://www.geeksforgeeks.org/linked-list-set-1-introduction/

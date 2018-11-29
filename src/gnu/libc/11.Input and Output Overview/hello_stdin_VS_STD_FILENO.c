@@ -15,37 +15,29 @@
 // #define stdout stdout
 // #define stderr stderr
 
-
 // -> /usr/include/unistd.h
 // /* Standard file descriptors.  */
 // #define STDIN_FILENO    0       /* Standard input.  */
 // #define STDOUT_FILENO   1       /* Standard output.  */
 // #define STDERR_FILENO   2       /* Standard error output.  */
 
-
-void
-stdin_VS_STDIN_FILENO(void)
+void stdin_VS_STDIN_FILENO(void)
 {
-    printf("stdin->_flags = %hd\n", stdin->_flags);
-    printf("STDIN_FILENO  = %d\n", STDIN_FILENO);
+	printf("stdin->_flags = %hd\n", stdin->_flags);
+	printf("STDIN_FILENO  = %d\n", STDIN_FILENO);
 }
 
-
-void
-file_descriptor_MAX(void)
+void file_descriptor_MAX(void)
 {
-    printf("OPEN_MAX  : %d\n", OPEN_MAX);
+	printf("OPEN_MAX  : %d\n", OPEN_MAX);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    stdin_VS_STDIN_FILENO();
-    file_descriptor_MAX();
-    return 0;
+	stdin_VS_STDIN_FILENO();
+	file_descriptor_MAX();
+	return 0;
 }
-
 
 // http://man7.org/linux/man-pages/man3/stdin.3.html
 // http://pubs.opengroup.org/onlinepubs/009695399/functions/stdin.html

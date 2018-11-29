@@ -12,24 +12,21 @@
 
 extern int i;
 
-void
-storage_class_extern(void)
+void storage_class_extern(void)
 {
-    // When we use extern specifier the variable cannot be
-    // initialize because with extern specifier variable is
-    // declared, not defined.
+	// When we use extern specifier the variable cannot be
+	// initialize because with extern specifier variable is
+	// declared, not defined.
 
-    printf("i = %d\n", i);
+	printf("i = %d\n", i);
 
 }
 
-int
-main(void)
+int main(void)
 {
-    storage_class_extern();
+	storage_class_extern();
 
-
-    return 0;
+	return 0;
 }
 
 int i = 10;

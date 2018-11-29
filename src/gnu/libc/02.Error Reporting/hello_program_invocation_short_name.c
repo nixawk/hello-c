@@ -3,7 +3,6 @@
 #include <errno.h>
 #include <stdio.h>
 
-
 // char * program_invocation_short_name
 
 // The variable is the name that was used to invoke the program running
@@ -20,20 +19,16 @@ $ ~/src/glibc/hello_program_invocation_short_name
 hello_program_invocation_short_name
 */
 
-void
-show_program_invocation_short_name(void)
+void show_program_invocation_short_name(void)
 {
-    printf("%s\n", program_invocation_short_name);
+	printf("%s\n", program_invocation_short_name);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    show_program_invocation_short_name();
-    return 0;
+	show_program_invocation_short_name();
+	return 0;
 }
-
 
 /*
 

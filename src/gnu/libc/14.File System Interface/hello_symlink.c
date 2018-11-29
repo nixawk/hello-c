@@ -21,33 +21,25 @@
 #define FILENAME "/tmp/filename"
 #define SYMFNAME "/tmp/symlink"
 
-
-void
-print_MAXSYMLINKS(void)
+void print_MAXSYMLINKS(void)
 {
-    printf("MAXSYMLINKS: %d\n", MAXSYMLINKS);
+	printf("MAXSYMLINKS: %d\n", MAXSYMLINKS);
 }
 
-
-void
-symlink_usage(void)
+void symlink_usage(void)
 {
-    if (symlink(FILENAME, SYMFNAME) != 0)
-    {
-        fprintf(stderr, "symlink() failed: %s\n", strerror(errno));
-    }
-    printf("symlink() successful : %s\n", SYMFNAME);
+	if (symlink(FILENAME, SYMFNAME) != 0) {
+		fprintf(stderr, "symlink() failed: %s\n", strerror(errno));
+	}
+	printf("symlink() successful : %s\n", SYMFNAME);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    print_MAXSYMLINKS();
-    symlink_usage();
-    return 0;
+	print_MAXSYMLINKS();
+	symlink_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Symbolic-Links.html#Symbolic-Links
 // https://unix.stackexchange.com/questions/53087/how-do-you-increase-maxsymlinks

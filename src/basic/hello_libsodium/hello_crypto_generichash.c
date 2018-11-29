@@ -16,7 +16,6 @@ int crypto_generichash(unsigned char *out, size_t outlen,
                        const unsigned char *in, unsigned long long inlen,
                        const unsigned char *key, size_t keylen);
 
-
 The crypto_generichash() function puts a fingerprint of the message in whose
 length is inlen bytes into out. The output size can be chosen by the application.
 
@@ -40,91 +39,79 @@ it practically impossible for two messages to produce the same application.
 
 #define MESSAGE_PART2_LEN 23
 
-
 /* Single-part example without a key */
-void
-crypto_generichash_usage1()
+void crypto_generichash_usage1()
 {
-    unsigned char hash[crypto_generichash_BYTES];
-    char hex[crypto_generichash_BYTES * 2 + 1];
+	unsigned char hash[crypto_generichash_BYTES];
+	char hex[crypto_generichash_BYTES * 2 + 1];
 
-    if (sodium_init() < 0)
-    {
-        exit(EXIT_FAILURE);
-    }
+	if (sodium_init() < 0) {
+		exit(EXIT_FAILURE);
+	}
 
-    crypto_generichash(
-        hash, sizeof hash,
-        MESSAGE_PART1, MESSAGE_PART1_LEN,
-        NULL, 0
-    );
+	crypto_generichash(hash, sizeof hash,
+			   MESSAGE_PART1, MESSAGE_PART1_LEN, NULL, 0);
 
-    sodium_bin2hex(hex, crypto_generichash_BYTES * 2 + 1, hash, sizeof hash);
-    printf("%s\n", hex);
+	sodium_bin2hex(hex, crypto_generichash_BYTES * 2 + 1, hash,
+		       sizeof hash);
+	printf("%s\n", hex);
 
 }
 
 /* Single-part example with a key*/
-void
-crypto_generichash_usage2()
+void crypto_generichash_usage2()
 {
-    unsigned char hash[crypto_generichash_BYTES];
-    unsigned char key[crypto_generichash_KEYBYTES];
-    char hex[crypto_generichash_BYTES];
+	unsigned char hash[crypto_generichash_BYTES];
+	unsigned char key[crypto_generichash_KEYBYTES];
+	char hex[crypto_generichash_BYTES];
 
-    if (sodium_init() < 0)
-    {
-        exit(EXIT_FAILURE);
-    }
+	if (sodium_init() < 0) {
+		exit(EXIT_FAILURE);
+	}
 
-    crypto_generichash(
-        hash, sizeof hash,
-        MESSAGE_PART1, MESSAGE_PART1_LEN,
-        key, sizeof key
-    );
+	crypto_generichash(hash, sizeof hash,
+			   MESSAGE_PART1, MESSAGE_PART1_LEN, key, sizeof key);
 
-    sodium_bin2hex(hex, crypto_generichash_BYTES * 2 + 1, hash, sizeof hash);
-    printf("%s\n", hex);
+	sodium_bin2hex(hex, crypto_generichash_BYTES * 2 + 1, hash,
+		       sizeof hash);
+	printf("%s\n", hex);
 }
 
 /* Multi-part example with a key */
-void
-crypto_generichash_usage3()
+void crypto_generichash_usage3()
 {
-    unsigned char hash[crypto_generichash_BYTES];
-    unsigned char key[crypto_generichash_KEYBYTES];
-    crypto_generichash_state state;
-    char hex[crypto_generichash_BYTES];
+	unsigned char hash[crypto_generichash_BYTES];
+	unsigned char key[crypto_generichash_KEYBYTES];
+	crypto_generichash_state state;
+	char hex[crypto_generichash_BYTES];
 
-    if (sodium_init() < 0)
-    {
-        exit(EXIT_FAILURE);
-    }
+	if (sodium_init() < 0) {
+		exit(EXIT_FAILURE);
+	}
+	// randombytes_buf(key, sizeof key);
 
-    // randombytes_buf(key, sizeof key);
+	// The crypto_generichash_keygen() function creates a key k of the
+	// recommended length crypto_generichash_KEYBYTES
 
-    // The crypto_generichash_keygen() function creates a key k of the
-    // recommended length crypto_generichash_KEYBYTES
+	crypto_generichash_keygen(key);
 
-    crypto_generichash_keygen(key);
+	crypto_generichash_init(&state, key, sizeof key, sizeof hash);
+	crypto_generichash_update(&state, MESSAGE_PART1, MESSAGE_PART1_LEN);
+	crypto_generichash_update(&state, MESSAGE_PART2, MESSAGE_PART2_LEN);
+	crypto_generichash_final(&state, hash, sizeof hash);
 
-    crypto_generichash_init(&state, key, sizeof key, sizeof hash);
-    crypto_generichash_update(&state, MESSAGE_PART1, MESSAGE_PART1_LEN);
-    crypto_generichash_update(&state, MESSAGE_PART2, MESSAGE_PART2_LEN);
-    crypto_generichash_final(&state, hash, sizeof hash);
-
-    sodium_bin2hex(hex, crypto_generichash_BYTES * 2 + 1, hash, sizeof hash);
-    printf("%s\n", hex);
+	sodium_bin2hex(hex, crypto_generichash_BYTES * 2 + 1, hash,
+		       sizeof hash);
+	printf("%s\n", hex);
 }
 
-int
-main(void)
+int main(void)
 {
-    crypto_generichash_usage1();
-    crypto_generichash_usage2();
-    crypto_generichash_usage3();
+	crypto_generichash_usage1();
+	crypto_generichash_usage2();
+	crypto_generichash_usage3();
 
-    return 0;
+	return 0;
 }
 
 // reference

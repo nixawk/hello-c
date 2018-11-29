@@ -7,32 +7,26 @@
 // Returns true if c is a punctuation character. This means any printing
 // character that is not alphanumeric or a space character.
 
-
-void
-ispunct_usage(void)
+void ispunct_usage(void)
 {
-    char string[] = ";? ";
-    int i;
+	char string[] = ";? ";
+	int i;
 
-    for (i = 0; i < strlen(string); i++)
-    {
-        if (ispunct(string[i]))
-        {
-            printf("[%c] is a punctuation character.\n", string[i]);
-        } else {
-            printf("[%c] is not a punctuation character.\n", string[i]);
-        }
-    }
+	for (i = 0; i < strlen(string); i++) {
+		if (ispunct(string[i])) {
+			printf("[%c] is a punctuation character.\n", string[i]);
+		} else {
+			printf("[%c] is not a punctuation character.\n",
+			       string[i]);
+		}
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    ispunct_usage();
-    return 0;
+	ispunct_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Classification-of-Characters.html#Classification-of-Characters
 // https://www.gnu.org/software/libc/manual/html_node/Classification-of-Wide-Characters.html#Classification-of-Wide-Characters

@@ -26,34 +26,27 @@ jmp_buf state;
 
 int x = 12;
 
-
-void
-longjmp_usage(void)
+void longjmp_usage(void)
 {
-    x = 34;
-    longjmp(state, 1);
+	x = 34;
+	longjmp(state, 1);
 }
 
-
-void
-setjmp_usage(void)
+void setjmp_usage(void)
 {
-    if (setjmp(state) != 0)
-    {
-        printf("after longjmp\n");
-        printf("x = %d\n", x);
-        exit(0);
-    }
-    printf("x = %d\n", x);
-    longjmp_usage();
+	if (setjmp(state) != 0) {
+		printf("after longjmp\n");
+		printf("x = %d\n", x);
+		exit(0);
+	}
+	printf("x = %d\n", x);
+	longjmp_usage();
 }
 
-
-int
-main(void)
+int main(void)
 {
-    setjmp_usage();
-    return 0;
+	setjmp_usage();
+	return 0;
 }
 
 /*

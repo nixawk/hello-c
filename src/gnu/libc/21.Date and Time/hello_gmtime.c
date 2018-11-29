@@ -21,63 +21,54 @@ struct tm {
 
 */
 
-void
-time_ctime_gmtime(void)
+void time_ctime_gmtime(void)
 {
-    time_t t;       /* time()   return value */
-    char *s;        /* ctime()  return value */
-    struct tm *tm;  /* gmtime() return value */
+	time_t t;		/* time()   return value */
+	char *s;		/* ctime()  return value */
+	struct tm *tm;		/* gmtime() return value */
 
-    /* get time in seconds */
+	/* get time in seconds */
 
-    if ((t = time(NULL)) == (time_t) -1)
-    {
-        perror("time");
-        exit(EXIT_FAILURE);
-    }
+	if ((t = time(NULL)) == (time_t) - 1) {
+		perror("time");
+		exit(EXIT_FAILURE);
+	}
 
-    /* convert a time value to a date and time string */
+	/* convert a time value to a date and time string */
 
-    if ((s = ctime(&t)) == NULL)
-    {
-        perror("ctime");
-        exit(EXIT_FAILURE);
-    }
+	if ((s = ctime(&t)) == NULL) {
+		perror("ctime");
+		exit(EXIT_FAILURE);
+	}
 
-    /* convert a time value to a broken-down UTC time */
+	/* convert a time value to a broken-down UTC time */
 
-    if ((tm = gmtime(&t)) == NULL)
-    {
-        perror("gmtime");
-        exit(EXIT_FAILURE);
-    }
+	if ((tm = gmtime(&t)) == NULL) {
+		perror("gmtime");
+		exit(EXIT_FAILURE);
+	}
 
-    printf("%s\n", s);
-    printf("tm_sec = %d\n"
-           "tm_min = %d\n"
-           "tm_hour = %d\n"
-           "tm_mday = %d\n"
-           "tm_mon = %d\n"
-           "tm_year = %d\n"
-           "tm_wday = %d\n"
-           "tm_yday = %d\n"
-           "tm_isdst = %d\n",
-           tm->tm_sec,
-           tm->tm_min,
-           tm->tm_hour,
-           tm->tm_mday,
-           tm->tm_mon,
-           tm->tm_year,
-           tm->tm_wday,
-           tm->tm_yday,
-           tm->tm_isdst);
+	printf("%s\n", s);
+	printf("tm_sec = %d\n"
+	       "tm_min = %d\n"
+	       "tm_hour = %d\n"
+	       "tm_mday = %d\n"
+	       "tm_mon = %d\n"
+	       "tm_year = %d\n"
+	       "tm_wday = %d\n"
+	       "tm_yday = %d\n"
+	       "tm_isdst = %d\n",
+	       tm->tm_sec,
+	       tm->tm_min,
+	       tm->tm_hour,
+	       tm->tm_mday,
+	       tm->tm_mon, tm->tm_year, tm->tm_wday, tm->tm_yday, tm->tm_isdst);
 }
 
-int
-main(void)
+int main(void)
 {
-    time_ctime_gmtime();
-    return 0;
+	time_ctime_gmtime();
+	return 0;
 }
 
 /*

@@ -11,26 +11,20 @@
 
 // strcmp VS strcasecmp
 
-
-void
-strcasecmp_usage(void)
+void strcasecmp_usage(void)
 {
-    char *s1 = "Hello";
-    char *s2 = "hello";
+	char *s1 = "Hello";
+	char *s2 = "hello";
 
-    if (0 == strcasecmp(s1, s2))
-    {
-        printf("s1 == s2\n");
-    }
+	if (0 == strcasecmp(s1, s2)) {
+		printf("s1 == s2\n");
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    strcasecmp_usage();
-    return 0;
+	strcasecmp_usage();
+	return 0;
 }
-
 
 // http://www.gnu.org/software/libc/manual/html_mono/libc.html#Representation-of-Strings

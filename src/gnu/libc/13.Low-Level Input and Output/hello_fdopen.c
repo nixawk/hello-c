@@ -2,7 +2,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-
 // FILE * fdopen (int filedes, const char *opentype)
 
 // The [fdopen] function returns a new stream for the file descriptor [filedes].
@@ -18,7 +17,6 @@
 // the modes for the file indicated by the file descriptor do not permit the access
 // specified by the [opentype] argument), a null pointer is returned instead.
 
-
 // int fileno (FILE *stream)
 
 // This function returns the file descriptor associated with the stream stream. 
@@ -29,74 +27,58 @@ void read_from_pipe(int);
 void write_to_pipe(int);
 void fdopen_usage(void);
 
-
-void
-read_from_pipe(int file)
+void read_from_pipe(int file)
 {
-    FILE *stream;
-    int c;
+	FILE *stream;
+	int c;
 
-    stream = fdopen(file, "r");
-    while ((c = fgetc(stream)) != EOF)
-    {
-        putchar(c);
-    }
-    fclose(stream);
+	stream = fdopen(file, "r");
+	while ((c = fgetc(stream)) != EOF) {
+		putchar(c);
+	}
+	fclose(stream);
 }
 
-
-void
-write_to_pipe(int file)
+void write_to_pipe(int file)
 {
-    FILE *stream;
+	FILE *stream;
 
-    stream = fdopen(file, "w");
-    fprintf(stream, "hello, world!\n");
-    fprintf(stream, "goodbye, world!\n");
-    fclose(stream);
+	stream = fdopen(file, "w");
+	fprintf(stream, "hello, world!\n");
+	fprintf(stream, "goodbye, world!\n");
+	fclose(stream);
 }
 
-
-void
-fdopen_usage(void)
+void fdopen_usage(void)
 {
-    pid_t pid;
-    int mypipe[2];
+	pid_t pid;
+	int mypipe[2];
 
-    if (pipe(mypipe))     /* Create the pipe */
-    {
-        fprintf(stderr, "pipe() failed.\n");
-        exit(EXIT_FAILURE);
-    }
+	if (pipe(mypipe)) {	/* Create the pipe */
+		fprintf(stderr, "pipe() failed.\n");
+		exit(EXIT_FAILURE);
+	}
 
-    pid = fork();          /* Create the child process */
-    if (pid == (pid_t) 0)
-    {
-        close(mypipe[1]);  /* This is the child process, Close other end first. */
-        read_from_pipe(mypipe[0]);
-        exit(EXIT_SUCCESS);
-    }
-    else if (pid < (pid_t) 0)
-    {
-        fprintf(stderr, "fork() failed.\n");
-        exit(EXIT_FAILURE);
-    }
-    else
-    {
-        close(mypipe[0]);
-        write_to_pipe(mypipe[1]);
-        exit(EXIT_SUCCESS);   
-    }
+	pid = fork();		/* Create the child process */
+	if (pid == (pid_t) 0) {
+		close(mypipe[1]);	/* This is the child process, Close other end first. */
+		read_from_pipe(mypipe[0]);
+		exit(EXIT_SUCCESS);
+	} else if (pid < (pid_t) 0) {
+		fprintf(stderr, "fork() failed.\n");
+		exit(EXIT_FAILURE);
+	} else {
+		close(mypipe[0]);
+		write_to_pipe(mypipe[1]);
+		exit(EXIT_SUCCESS);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    fdopen_usage();
-    return 0;
+	fdopen_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Descriptors-and-Streams.html#Descriptors-and-Streams
 // https://www.gnu.org/software/libc/manual/html_node/Creating-a-Pipe.html#Creating-a-Pipe

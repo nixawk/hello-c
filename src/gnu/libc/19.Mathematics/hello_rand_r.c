@@ -13,28 +13,23 @@
 // GNU extensions to the SVID random number generator. The POSIX.1 interface
 // should only be used when the GNU extensions are not available.
 
-void
-rand_r_usage(void)
+void rand_r_usage(void)
 {
-    int i, n;
-    unsigned int seed;
+	int i, n;
+	unsigned int seed;
 
-    seed = (unsigned int)time(NULL);
+	seed = (unsigned int)time(NULL);
 
-    for (i = 0; i < 10; i++)
-    {
-        n = rand_r(&seed);
-        printf("%02d. random num: %d\n", i, n);
-    }
+	for (i = 0; i < 10; i++) {
+		n = rand_r(&seed);
+		printf("%02d. random num: %d\n", i, n);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    rand_r_usage();
-    return 0;
+	rand_r_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/ISO-Random.html#ISO-Random

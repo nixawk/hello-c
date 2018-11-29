@@ -14,37 +14,30 @@
 // In the GNU C Library, time_t is equivalent to long int. In other
 // systems, time_t might be either an integer or floating-point type.
 
-
-void
-time_and_gettimeofday(void)
+void time_and_gettimeofday(void)
 {
-    time_t tloc;
-    struct timeval tv;
+	time_t tloc;
+	struct timeval tv;
 
-    if ((tloc = time(NULL)) == (time_t) -1)
-    {
-        perror("time");
-        exit(EXIT_FAILURE);
-    }
+	if ((tloc = time(NULL)) == (time_t) - 1) {
+		perror("time");
+		exit(EXIT_FAILURE);
+	}
 
-    if (gettimeofday(&tv, NULL) == -1)
-    {
-        perror("gettimeofday");
-        exit(EXIT_FAILURE);
-    }
+	if (gettimeofday(&tv, NULL) == -1) {
+		perror("gettimeofday");
+		exit(EXIT_FAILURE);
+	}
 
-    printf("time() = %ld\n", tloc);
-    printf("gettimeofday() = %ld\n", tv.tv_sec);
+	printf("time() = %ld\n", tloc);
+	printf("gettimeofday() = %ld\n", tv.tv_sec);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    time_and_gettimeofday();
-    return 0;
+	time_and_gettimeofday();
+	return 0;
 }
-
 
 // warning: implicit declaration of function ‘gettimeofday’ [-Wimplicit-function-declaration]
 

@@ -10,28 +10,24 @@
 // to localeconv, or by calls to setlocale, but no other function in the
 // function in the library overwrites this value.
 
-void
-localeconv_usage(void)
+void localeconv_usage(void)
 {
-    struct lconv *lc;
+	struct lconv *lc;
 
-    setlocale(LC_ALL, "en_US.UTF-8");
-    lc = localeconv();
-    printf("en_US currency_symbol: %s\n", lc->currency_symbol);
+	setlocale(LC_ALL, "en_US.UTF-8");
+	lc = localeconv();
+	printf("en_US currency_symbol: %s\n", lc->currency_symbol);
 
-    // $ gcc hello_localeconv.c
-    // $ ./a.out
-    // en_US currency_symbol: $
+	// $ gcc hello_localeconv.c
+	// $ ./a.out
+	// en_US currency_symbol: $
 }
 
-
-int
-main(void)
+int main(void)
 {
-    localeconv_usage();
-    return 0;
+	localeconv_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_mono/libc.html#Locales
 // http://en.cppreference.com/w/c/locale/lconv

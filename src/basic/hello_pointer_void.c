@@ -6,17 +6,15 @@ void pointer:
     A void pointer can hold address of any type and can be typcasted to any type.
 */
 
-int
-main(void)
+int main(void)
 {
-    int  x       = 1234;
-    void *p      = &x;
-    int  *intptr = (int  *)p;  /* typecast */
+	int x = 1234;
+	void *p = &x;
+	int *intptr = (int *)p;	/* typecast */
 
-    printf("%p\n", intptr);
-    return 0;
+	printf("%p\n", intptr);
+	return 0;
 }
-
 
 // http://www.geeksforgeeks.org/void-pointer-c/
 // http://stackoverflow.com/questions/20967868/should-the-compiler-warn-on-pointer-arithmetic-with-a-void-pointer

@@ -15,13 +15,13 @@ n    - The number of characters to be copied from source.
 
 int main(void)
 {
-    char src[256];
-    char dest[256];
-    char *pointer;
+	char src[256];
+	char dest[256];
+	char *pointer;
 
-    memset(dest, '\0', sizeof(dest));
-    strcpy(src, "This is a demo string");
-    strncpy(dest, src, 10);
-    printf("string : %s\n", dest);
-    return 0;
+	memset(dest, '\0', sizeof(dest));
+	strcpy(src, "This is a demo string");
+	strncpy(dest, src, 10);
+	printf("string : %s\n", dest);
+	return 0;
 }

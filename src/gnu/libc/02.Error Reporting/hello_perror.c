@@ -18,23 +18,18 @@
 
 // The function [perror] is declared in stdio.h.
 
-
-void
-perror_usage(void)
+void perror_usage(void)
 {
-    errno = 1;
-    perror(NULL);
-    perror("xxxx");
+	errno = 1;
+	perror(NULL);
+	perror("xxxx");
 }
 
-
-int
-main(void)
+int main(void)
 {
-    perror_usage();
-    return 0;
+	perror_usage();
+	return 0;
 }
-
 
 /*
 

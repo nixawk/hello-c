@@ -9,20 +9,16 @@
 
 void program_entry(void);
 
-
-void
-_start(void)
-{ 
-    program_entry();
-}
-
-void
-program_entry(void)
+void _start(void)
 {
-    printf("custom program entry\n");
-    exit(0);
+	program_entry();
 }
 
+void program_entry(void)
+{
+	printf("custom program entry\n");
+	exit(0);
+}
 
 /*
 
@@ -32,18 +28,15 @@ program_entry(void)
 
 // Tested on Mac OSX
 
-
 #include <stdio.h>
 
 void program_entry(void);
-
 
 void
 _start(void)
 { 
     program_entry();
 }
-
 
 void
 program_entry(void)

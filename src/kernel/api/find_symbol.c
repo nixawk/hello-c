@@ -11,46 +11,45 @@ static void __exit find_symbol_exit(void);
 static int
 __init find_symbol_init(void)
 {
-        struct module *kmodule;
-        const struct kernel_symbol *ksymbol;
+	struct module *kmodule;
+	const struct kernel_symbol *ksymbol;
 
-        const s32 *crc;
+	const s32 *crc;
 
-        bool enable_gpl = true;
-        bool enable_warn = true;
+	bool enable_gpl = true;
+	bool enable_warn = true;
 
-        const char *module_name = "EXPORT_SYMBOL";
-        const char *symbol_name = "func_symbol";
+	const char *module_name = "EXPORT_SYMBOL";
+	const char *symbol_name = "func_symbol";
 
-        kmodule = find_module(module_name);
-        if (kmodule != NULL) {
-                printk(KERN_INFO "kmodule->name: %s\n", kmodule->name);
-                ksymbol = find_symbol(symbol_name, &kmodule, &crc, enable_gpl, enable_warn);
-                if (ksymbol != NULL)
-                {
-                        printk(KERN_INFO "ksymbol->value: %lx\n", ksymbol->value);
-                        printk(KERN_INFO "ksymbol->name: %s\n", ksymbol->name);
-                }
-                else {
-                        printk(KERN_ERR "failed to find_symbol\n");
-                }
+	kmodule = find_module(module_name);
+	if (kmodule != NULL) {
+		printk(KERN_INFO "kmodule->name: %s\n", kmodule->name);
+		ksymbol =
+		    find_symbol(symbol_name, &kmodule, &crc, enable_gpl,
+				enable_warn);
+		if (ksymbol != NULL) {
+			printk(KERN_INFO "ksymbol->value: %lx\n",
+			       ksymbol->value);
+			printk(KERN_INFO "ksymbol->name: %s\n", ksymbol->name);
+		} else {
+			printk(KERN_ERR "failed to find_symbol\n");
+		}
 
-        if (crc != NULL)
-        {
-                printk(KERN_INFO "*crc: %d\n", *crc);
-        }
-        }
-        else {
-                printk(KERN_ERR "failed to find_module\n");
-        }
+		if (crc != NULL) {
+			printk(KERN_INFO "*crc: %d\n", *crc);
+		}
+	} else {
+		printk(KERN_ERR "failed to find_module\n");
+	}
 
-        return 0;
+	return 0;
 }
 
 static void
 __exit find_symbol_exit(void)
 {
-        printk(KERN_INFO "module exits ok!\n");
+	printk(KERN_INFO "module exits ok!\n");
 }
 
 module_init(find_symbol_init);

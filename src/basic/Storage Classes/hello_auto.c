@@ -8,31 +8,28 @@
 
 #include <stdio.h>
 
-
-void
-storage_class_auto(void)
+void storage_class_auto(void)
 {
-    auto int i = 1;
-    {
-        auto int i = 2;
-        {
-            auto int i = 3;
-            {
-                auto int i = 4;
-                printf("i = %d\n", i);
-            }
-            printf("i = %d\n", i);
-        }
-        printf("i = %d\n", i);
-    }
-    printf("i = %d\n", i);
+	auto int i = 1;
+	{
+		auto int i = 2;
+		{
+			auto int i = 3;
+			{
+				auto int i = 4;
+				printf("i = %d\n", i);
+			}
+			printf("i = %d\n", i);
+		}
+		printf("i = %d\n", i);
+	}
+	printf("i = %d\n", i);
 }
 
-int
-main(void)
+int main(void)
 {
-    storage_class_auto();
-    return 0;
+	storage_class_auto();
+	return 0;
 }
 
 // http://cs-fundamentals.com/c-programming/storage-classes-in-c-and-storage-class-specifiers.php

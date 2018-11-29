@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-
 // int rename (const char *oldname, const char *newname)
 
 // If [oldname] is not a directory, then any existing file named [newname] is removed during
@@ -15,25 +14,19 @@
 
 // If rename fails, it returns -1.
 
-
-void
-rename_usage(void)
+void rename_usage(void)
 {
-    if (-1 == rename("/tmp/oldfile", "/tmp/newfile"))
-    {
-        fprintf(stderr, "rename() failed: %s\n", strerror(errno));
-        exit(EXIT_FAILURE);
-    }
-    printf("rename successfully\n");
+	if (-1 == rename("/tmp/oldfile", "/tmp/newfile")) {
+		fprintf(stderr, "rename() failed: %s\n", strerror(errno));
+		exit(EXIT_FAILURE);
+	}
+	printf("rename successfully\n");
 }
 
-
-int
-main(void)
+int main(void)
 {
-    rename_usage();
-    return 0;
+	rename_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Renaming-Files.html#Renaming-Files

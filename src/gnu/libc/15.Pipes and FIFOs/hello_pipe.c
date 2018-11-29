@@ -25,7 +25,6 @@
 // child processes. The pipe is then used for communication either between
 // the parent or child processes, or between two sibling processes.
 
-
     // int pipe (int filedes[2])
 
 // The pipe function creates a pipe and puts the file descriptors for the
@@ -45,69 +44,56 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 /* Read characters from the pipe and echo them to stdout */
-void
-read_from_pipe(int fd)
+void read_from_pipe(int fd)
 {
-    FILE *stream;
-    int c;
-    stream = fdopen(fd, "r");
-    while ((c = fgetc(stream)) != EOF)
-    {
-        putchar(c);
-    }
-    fclose(stream);
+	FILE *stream;
+	int c;
+	stream = fdopen(fd, "r");
+	while ((c = fgetc(stream)) != EOF) {
+		putchar(c);
+	}
+	fclose(stream);
 }
-
 
 /* Write some random text to the pipe */
-void
-write_to_pipe(int fd)
+void write_to_pipe(int fd)
 {
-    FILE *stream;
-    stream = fdopen(fd, "w");
-    fprintf(stream, "hello, world\n");
-    fprintf(stream, "goodbye !\n");
-    fclose(stream);
+	FILE *stream;
+	stream = fdopen(fd, "w");
+	fprintf(stream, "hello, world\n");
+	fprintf(stream, "goodbye !\n");
+	fclose(stream);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    pid_t pid;
-    int mypipe[2];
+	pid_t pid;
+	int mypipe[2];
 
-    /* Create the pipe */
-    if (pipe(mypipe))
-    {
-        fprintf(stderr, "Pipe failed.\n");
-        return EXIT_FAILURE;
-    }
+	/* Create the pipe */
+	if (pipe(mypipe)) {
+		fprintf(stderr, "Pipe failed.\n");
+		return EXIT_FAILURE;
+	}
 
-    /* Create the child process */
-    pid = fork();
-    if (pid == (pid_t) 0)
-    {
-        /* This is the child process, Close other end first */
-        close(mypipe[1]);
-        read_from_pipe(mypipe[0]);
-        return EXIT_SUCCESS;
-    }
-    else if (pid < (pid_t) 0)
-    {
-        /* The fork failed. */
-        fprintf(stderr, "Fork failed.\n");
-        return EXIT_FAILURE;
-    }
-    else
-    {
-        /* This is the parent process. Close other end first */
-        close(mypipe[0]);
-        write_to_pipe(mypipe[1]);
-        return EXIT_SUCCESS;
-    }
+	/* Create the child process */
+	pid = fork();
+	if (pid == (pid_t) 0) {
+		/* This is the child process, Close other end first */
+		close(mypipe[1]);
+		read_from_pipe(mypipe[0]);
+		return EXIT_SUCCESS;
+	} else if (pid < (pid_t) 0) {
+		/* The fork failed. */
+		fprintf(stderr, "Fork failed.\n");
+		return EXIT_FAILURE;
+	} else {
+		/* This is the parent process. Close other end first */
+		close(mypipe[0]);
+		write_to_pipe(mypipe[1]);
+		return EXIT_SUCCESS;
+	}
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Creating-a-Pipe.html#Creating-a-Pipe

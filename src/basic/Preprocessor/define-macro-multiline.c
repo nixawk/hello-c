@@ -10,10 +10,9 @@
                             i++; \
                         }
 
-int
-main(void)
+int main(void)
 {
-    int i = 0;
-    PRINT(i, 5);
-    return 0;
+	int i = 0;
+	PRINT(i, 5);
+	return 0;
 }

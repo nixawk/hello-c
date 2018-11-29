@@ -17,35 +17,27 @@
 // system handler returns, this has no effect on [pause]; it always fails
 // when a signal is handled.
 
-
-void
-signal_callback(int signum)
+void signal_callback(int signum)
 {
-    printf("%s\n", strsignal(signum));
+	printf("%s\n", strsignal(signum));
 }
 
-
-unsigned int
-mysleep(unsigned int seconds)
+unsigned int mysleep(unsigned int seconds)
 {
-    printf("sleeping... %d seconds\n", seconds);
-    if (signal(SIGALRM, signal_callback) == SIG_ERR)
-    {
-        return seconds;
-    }
+	printf("sleeping... %d seconds\n", seconds);
+	if (signal(SIGALRM, signal_callback) == SIG_ERR) {
+		return seconds;
+	}
 
-    alarm(seconds);    /* start the timer */
-    pause();           /* next caught signal wakes us up */
-    return(alarm(0));  /* turn off timer, return unslept time */
+	alarm(seconds);		/* start the timer */
+	pause();		/* next caught signal wakes us up */
+	return (alarm(0));	/* turn off timer, return unslept time */
 }
 
-
-int
-main(void)
+int main(void)
 {
-    mysleep(3);
-    return 0;
+	mysleep(3);
+	return 0;
 }
-
 
 // https://www.gnu.org/s/libc/manual/html_node/Using-Pause.html

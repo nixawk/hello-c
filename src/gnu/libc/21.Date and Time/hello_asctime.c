@@ -12,7 +12,6 @@
 // overwritten by subsequent calls to asctime or ctime. (But no other library
 // function overwrites the contents of this string.)
 
-
 // Function: char * asctime_r (const struct tm *brokentime, char *buffer)
 
 // This function is similar to asctime but instead of placing the result
@@ -22,29 +21,24 @@
 // a pointer to the string the result was written into, it returns buffer.
 // Otherwise it returns NULL.
 
-void
-asctime_usage(void)
+void asctime_usage(void)
 {
-    struct tm *tm;
-    char *timestr;
-    const time_t time = 1514366148;
+	struct tm *tm;
+	char *timestr;
+	const time_t time = 1514366148;
 
-    tm = localtime(&time);
-    timestr = asctime(tm);
+	tm = localtime(&time);
+	timestr = asctime(tm);
 
-    if (timestr != NULL)
-    {
-        printf("%s\n", timestr);
-    }
+	if (timestr != NULL) {
+		printf("%s\n", timestr);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    asctime_usage();
-    return 0;
+	asctime_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Formatting-Calendar-Time.html#Formatting-Calendar-Time

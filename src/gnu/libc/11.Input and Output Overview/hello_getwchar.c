@@ -7,21 +7,15 @@
 
 //  wint_t getwchar_unlocked (void)
 
-m
-void
-getwchar_usage(void)
+m void getwchar_usage(void)
 {
-    putwchar(getwchar());
+	putwchar(getwchar());
 }
 
-
-int
-main(void)
+int main(void)
 {
-    getwchar_usage();
-    return 0;
+	getwchar_usage();
+	return 0;
 }
-
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Character-Input.html#Character-Input

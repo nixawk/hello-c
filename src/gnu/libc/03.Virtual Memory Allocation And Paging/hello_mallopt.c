@@ -7,12 +7,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
 // int mallopt (int param, int value)
 
     // When calling [mallopt], the param argument specifies the parameter
     // to be set, and value the new value to be set.
-
 
 // M_MMAP_MAX
 
@@ -105,52 +103,42 @@
     // This parameter can also be set for the process at startup by setting
     // the environment variable [MALLOC_ARENA_MAX] to the desired value.
 
-
-void
-mmap_usage(void)
+void mmap_usage(void)
 {
-    void *map;
-    int fd, err;
-    struct stat stbuf;
+	void *map;
+	int fd, err;
+	struct stat stbuf;
 
-    fd = open("/etc/passwd", O_RDONLY);
-    if (fd < 0)
-    {
-        error(EXIT_FAILURE, errno, "open() failed");
-    }
+	fd = open("/etc/passwd", O_RDONLY);
+	if (fd < 0) {
+		error(EXIT_FAILURE, errno, "open() failed");
+	}
 
-    err = fstat(fd, &stbuf);
-    if (err != 0)
-    {
-        error(EXIT_FAILURE, errno, "fstat() failed");
-    }
+	err = fstat(fd, &stbuf);
+	if (err != 0) {
+		error(EXIT_FAILURE, errno, "fstat() failed");
+	}
 
-    map = mmap(NULL, stbuf.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
-    if (mmap == MAP_FAILED)
-    {
-        error(EXIT_FAILURE, errno, "mmap() failed");
-    }
+	map = mmap(NULL, stbuf.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
+	if (mmap == MAP_FAILED) {
+		error(EXIT_FAILURE, errno, "mmap() failed");
+	}
 
-    munmap(map, stbuf.st_size);
-    close(fd);
+	munmap(map, stbuf.st_size);
+	close(fd);
 }
 
-
-void
-mallopt_usage(void)
+void mallopt_usage(void)
 {
-    mallopt(M_MMAP_MAX, 0);   // disable all use of mmap
+	mallopt(M_MMAP_MAX, 0);	// disable all use of mmap
 }
 
-
-int
-main(void)
+int main(void)
 {
-    mallopt_usage();
-    mmap_usage();
-    return 0;
+	mallopt_usage();
+	mmap_usage();
+	return 0;
 }
-
 
 /*
 

@@ -18,23 +18,18 @@
 
 // EPERM - The process is not superuser.
 
-
-void
-stime_usage(void)
+void stime_usage(void)
 {
-    time_t t;
-    t = 0;
-    stime(&t);
+	time_t t;
+	t = 0;
+	stime(&t);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    stime_usage();
-    return 0;
+	stime_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Simple-Calendar-Time.html#Simple-Calendar-Time
 // https://stackoverflow.com/questions/43298594/difference-between-time-and-stime

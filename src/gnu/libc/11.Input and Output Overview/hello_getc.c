@@ -1,23 +1,18 @@
 #include <stdio.h>
 
-
 // int getc (FILE *stream)
 // wint_t getwc (FILE *stream)
 
 // int getc_unlocked (FILE *stream)
 // wint_t getwc_unlocked (FILE *stream)
 
-
-void
-getc_usage(void)
+void getc_usage(void)
 {
-    putchar(getc(stdin));
+	putchar(getc(stdin));
 }
 
-
-int
-main(void)
+int main(void)
 {
-    getc_usage();
-    return 0;
+	getc_usage();
+	return 0;
 }

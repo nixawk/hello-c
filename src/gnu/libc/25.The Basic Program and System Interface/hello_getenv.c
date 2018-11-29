@@ -13,19 +13,15 @@
 // libraries should always prefer this function over [getenv] to avoid vulnerabilities if the
 // library is referenced from a SUID/SGID program.
 
-
-void
-getenv_usage(void)
+void getenv_usage(void)
 {
-    printf("[env] SHELL = %s\n", getenv("SHELL"));
+	printf("[env] SHELL = %s\n", getenv("SHELL"));
 }
 
-
-int
-main(void)
+int main(void)
 {
-    getenv_usage();
-    return 0;
+	getenv_usage();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Environment-Access.html#Environment-Access

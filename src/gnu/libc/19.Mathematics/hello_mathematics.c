@@ -13,22 +13,18 @@
 #include <math.h>
 #include <stdio.h>
 
-
-void
-sin_usage(void)
+void sin_usage(void)
 {
-    double x = 30.0;
-    double s = sin(x);
+	double x = 30.0;
+	double s = sin(x);
 
-    printf("sin(30.0) = %lf\n", s);
+	printf("sin(30.0) = %lf\n", s);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    sin_usage();
-    return 0;
+	sin_usage();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Mathematics.html#Mathematics

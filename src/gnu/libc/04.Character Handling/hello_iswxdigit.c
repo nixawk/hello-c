@@ -1,7 +1,6 @@
 #include <wctype.h>
 #include <stdio.h>
 
-
 // int iswxdigit (wint_t wc)
 
 // Returns true if wc is a hexadecimal digit. Hexadecimal digits include the normal 
@@ -11,24 +10,19 @@
 
     // iswctype (wc, wctype ("xdigit"))
 
-void
-iswxdigit_usage(void)
+void iswxdigit_usage(void)
 {
-    wchar_t ch = L'f';
+	wchar_t ch = L'f';
 
-    if (iswxdigit(ch))
-    {
-        printf("[%c] is a hexadecimal digit.\n", ch);
-    }
+	if (iswxdigit(ch)) {
+		printf("[%c] is a hexadecimal digit.\n", ch);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    iswxdigit_usage();
-    return 0;
+	iswxdigit_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Classification-of-Wide-Characters.html#Classification-of-Wide-Characters

@@ -2,7 +2,7 @@
 #include <locale.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <libintl.h>   // gettext
+#include <libintl.h>		// gettext
 
 // int rpmatch (const char *response)
 
@@ -18,49 +18,41 @@
 
 #define _POSIX2_LINE_MAX        2048
 
-
 typedef enum {
-    false,
-    true
+	false,
+	true
 } bool;
 
-
-void
-rpmatch_usage(void)
+void rpmatch_usage(void)
 {
-    /* Use a safe default */
-    bool doit = false;
-    char *line = NULL;
-    size_t len = 0;
+	/* Use a safe default */
+	bool doit = false;
+	char *line = NULL;
+	size_t len = 0;
 
-    fputs(gettext("Do you really want to do this ? "), stdout);
-    fflush(stdout);
+	fputs(gettext("Do you really want to do this ? "), stdout);
+	fflush(stdout);
 
-    /* Prepare the getline call */
-    line = (char *) malloc(_POSIX2_LINE_MAX);
-    while (getline(&line, &len, stdin) >= 0)
-    {
-        /*check the response*/
-        int res = rpmatch(line);
-        if (res > 0)
-        {
-            printf("doit\n");
-            doit = true;
-            break;
-        }
-    }
+	/* Prepare the getline call */
+	line = (char *)malloc(_POSIX2_LINE_MAX);
+	while (getline(&line, &len, stdin) >= 0) {
+		/*check the response */
+		int res = rpmatch(line);
+		if (res > 0) {
+			printf("doit\n");
+			doit = true;
+			break;
+		}
+	}
 
-    /* free what getline allocated */
-    free(line);
+	/* free what getline allocated */
+	free(line);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    rpmatch_usage();
-    return 0;
+	rpmatch_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_mono/libc.html#Locales

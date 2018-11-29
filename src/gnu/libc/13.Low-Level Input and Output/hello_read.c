@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
 // ssize_t read (int filedes, void *buffer, size_t size)
 
 // The read function reads up to [size] bytes from the file with descriptor fiedes,
@@ -28,42 +27,34 @@
     // EIO
     // EINVAL 
 
-
 #define SIZE 8192
 
-
-void
-read_usage(void)
+void read_usage(void)
 {
-    int fd;
-    char *ptr;
-    ssize_t n;
+	int fd;
+	char *ptr;
+	ssize_t n;
 
-    fd = open("/etc/passwd", O_RDONLY, S_IRWXU);
-    if (fd == -1)
-    {
-        fprintf(stderr, "creat() failed\n");
-    } else {
-        ptr = (char *)calloc(SIZE, sizeof(char));
-        if (ptr == NULL)
-        {
-            fprintf(stderr, "calloc() failed\n");
-        } else {
-            n = read(fd, ptr, SIZE);
-            printf("read bytes: [%lu]\noutput: %s\n", n, ptr);
-            free(ptr);
-        }
-        close(fd);
-    }
+	fd = open("/etc/passwd", O_RDONLY, S_IRWXU);
+	if (fd == -1) {
+		fprintf(stderr, "creat() failed\n");
+	} else {
+		ptr = (char *)calloc(SIZE, sizeof(char));
+		if (ptr == NULL) {
+			fprintf(stderr, "calloc() failed\n");
+		} else {
+			n = read(fd, ptr, SIZE);
+			printf("read bytes: [%lu]\noutput: %s\n", n, ptr);
+			free(ptr);
+		}
+		close(fd);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    read_usage();
-    return 0;
+	read_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/I_002fO-Primitives.html#I_002fO-Primitives

@@ -23,30 +23,30 @@ int add_by_refer(int *, int *);
 */
 int add_by_value(int x, int y)
 {
-    return x + y;
+	return x + y;
 }
 
 int add_by_refer(int *x, int *y)
 {
-    *x = 11;
-    *y = 22;
-    return *x + *y;
+	*x = 11;
+	*y = 22;
+	return *x + *y;
 }
 
 int main(void)
 {
-    /*
-        The parameters passed to function are called (actual parameters). Ex: 10, 20
-        The parameters received by function are called formal parameters.
-    */
+	/*
+	   The parameters passed to function are called (actual parameters). Ex: 10, 20
+	   The parameters received by function are called formal parameters.
+	 */
 
-    int x = 10, y = 20, z;
+	int x = 10, y = 20, z;
 
-    z = add_by_value(x, y);
-    printf("%d + %d = %d\n", x, y, z);
+	z = add_by_value(x, y);
+	printf("%d + %d = %d\n", x, y, z);
 
-    z = add_by_refer(&x, &y);
-    printf("%d + %d = %d\n", x, y, z);
+	z = add_by_refer(&x, &y);
+	printf("%d + %d = %d\n", x, y, z);
 
-    return 0;
+	return 0;
 }

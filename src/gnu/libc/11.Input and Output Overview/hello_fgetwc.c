@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <wchar.h>
 
-
 // wint_t fgetwc (FILE *stream)
 
 // This function reads the next wide character from the stream stream and returns its value.
@@ -9,20 +8,15 @@
 
 // wint_t fgetwc_unlocked (FILE *stream)
 
-
-void
-fgetwc_usage(void)
+void fgetwc_usage(void)
 {
-    putwc(fgetwc(stdin), stdout);
+	putwc(fgetwc(stdin), stdout);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    fgetwc_usage();
-    return 0;
+	fgetwc_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Character-Input.html#Character-Input

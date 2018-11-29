@@ -6,30 +6,27 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-void
-bool_sizeof(void)
+void bool_sizeof(void)
 {
-    printf("sizeof(bool) = %lu\n", sizeof(bool));
+	printf("sizeof(bool) = %lu\n", sizeof(bool));
 }
 
-void
-bool_true_or_false(void)
+void bool_true_or_false(void)
 {
-    bool bc = true;
+	bool bc = true;
 
-    if (bc)
-        printf("Condition is true\n");
-    else
-        printf("Condition is false\n");
+	if (bc)
+		printf("Condition is true\n");
+	else
+		printf("Condition is false\n");
 }
 
-int
-main(void)
+int main(void)
 {
-    bool_sizeof();
-    bool_true_or_false();
+	bool_sizeof();
+	bool_true_or_false();
 
-    return 0;
+	return 0;
 }
 
 // https://www.geeksforgeeks.org/bool-in-c/

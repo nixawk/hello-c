@@ -18,27 +18,21 @@
 // people from retrieving the information, use stronger encryption such
 // as that described in See [Cryptographic Functions].
 
-
 #define SIZE 512
 
-
-void
-memfrob_usage(void)
+void memfrob_usage(void)
 {
-    char string[SIZE] = "hello";
-    printf("%p - %s\n", string, string);
+	char string[SIZE] = "hello";
+	printf("%p - %s\n", string, string);
 
-    char *s = memfrob(string, strlen(string));
-    printf("%p - %s\n", s, s);
+	char *s = memfrob(string, strlen(string));
+	printf("%p - %s\n", s, s);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    memfrob_usage();
-    return 0;
+	memfrob_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_mono/libc.html#Character-Handling

@@ -13,23 +13,19 @@
 // This type is defined in wchar.h and was introduced in Amendment 1 to
 // ISO C90
 
-void
-show_wint_t(void)
+void show_wint_t(void)
 {
-    wint_t wd = 1234;
+	wint_t wd = 1234;
 
-    wprintf(L"wint_t wd: %lu\n", wd);
-    wprintf(L"WCHAR_MIN: %lu\n", WCHAR_MIN);
-    wprintf(L"WCHAR_MAX: %lu\n", WCHAR_MAX);
+	wprintf(L"wint_t wd: %lu\n", wd);
+	wprintf(L"WCHAR_MIN: %lu\n", WCHAR_MIN);
+	wprintf(L"WCHAR_MAX: %lu\n", WCHAR_MAX);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    show_wint_t();
-    return 0;
+	show_wint_t();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_mono/libc.html#Character-Handling

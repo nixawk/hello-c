@@ -16,49 +16,49 @@ static void __exit __wake_up_exit(void);
 struct wait_queue_head head;
 struct task_struct *old_thread;
 
-int
-my_func(void *argc)
+int my_func(void *argc)
 {
-        printk("in the kernel thread of function!\n");
-        printk("the current pid is: %d\n", current->pid);
-        printk("the state of the init function is: %ld\n", old_thread->state);
-        __wake_up(&head, TASK_ALL, 0, NULL);
-        printk("the state of the init function __wake_up is: %ld\n", old_thread->state);
-        printk("out the kernel thread function\n");
+	printk("in the kernel thread of function!\n");
+	printk("the current pid is: %d\n", current->pid);
+	printk("the state of the init function is: %ld\n", old_thread->state);
+	__wake_up(&head, TASK_ALL, 0, NULL);
+	printk("the state of the init function __wake_up is: %ld\n",
+	       old_thread->state);
+	printk("out the kernel thread function\n");
 
-        return 0;
+	return 0;
 }
 
 static
 int __init __wake_up_init(void)
 {
-        char namefrm[] = "__wake_up.c%s";
-        long time_out;
-        struct task_struct *result;
-        struct wait_queue_entry data;
+	char namefrm[] = "__wake_up.c%s";
+	long time_out;
+	struct task_struct *result;
+	struct wait_queue_entry data;
 
-        printk("init __wake_up_init.\n");
-        result = kthread_create_on_node(my_func, NULL, -1, namefrm);
-        printk("the pid of the new thread is: %d\n", result->pid);
-        printk("the current pid is: %d\n", current->pid);
+	printk("init __wake_up_init.\n");
+	result = kthread_create_on_node(my_func, NULL, -1, namefrm);
+	printk("the pid of the new thread is: %d\n", result->pid);
+	printk("the current pid is: %d\n", current->pid);
 
-        init_waitqueue_head(&head);
-        init_waitqueue_entry(&data, current);
-        add_wait_queue(&head, &data);
-        old_thread = current;
-        wake_up_process(result);
+	init_waitqueue_head(&head);
+	init_waitqueue_entry(&data, current);
+	add_wait_queue(&head, &data);
+	old_thread = current;
+	wake_up_process(result);
 
-        time_out = schedule_timeout_uninterruptible(1000 * 10);
-        printk("the schedule timeout is: %ld\n", time_out);
-        printk("out __wake_up_init.\n");
+	time_out = schedule_timeout_uninterruptible(1000 * 10);
+	printk("the schedule timeout is: %ld\n", time_out);
+	printk("out __wake_up_init.\n");
 
-        return 0;
+	return 0;
 }
 
 static
 void __wake_up_exit(void)
 {
-        printk("module exits ok !\n");
+	printk("module exits ok !\n");
 }
 
 module_init(__wake_up_init);
@@ -84,4 +84,3 @@ $ dmesg -k -w
 [17647.490118] module exits ok !
 
 */
-

@@ -38,26 +38,21 @@
 #include <termios.h>
 #include <stdio.h>
 
-
-void
-show_termios(void)
+void show_termios(void)
 {
-    struct termios tos;
+	struct termios tos;
 
-    printf("c_iflag: %#lx\n", tos.c_iflag);
-    printf("c_oflag: %#lx\n", tos.c_oflag);
-    printf("c_cflag: %#lx\n", tos.c_cflag);
-    printf("c_lflag: %#lx\n", tos.c_lflag);
-} 
-
-
-int
-main(void)
-{
-    show_termios();
-    return 0;
+	printf("c_iflag: %#lx\n", tos.c_iflag);
+	printf("c_oflag: %#lx\n", tos.c_oflag);
+	printf("c_cflag: %#lx\n", tos.c_cflag);
+	printf("c_lflag: %#lx\n", tos.c_lflag);
 }
 
+int main(void)
+{
+	show_termios();
+	return 0;
+}
 
 // https://www.gnu.org/software/libc/manual/html_node/Mode-Data-Types.html#Mode-Data-Types
 // https://www.gnu.org/software/libc/manual/html_node/Input-Modes.html#Input-Modes

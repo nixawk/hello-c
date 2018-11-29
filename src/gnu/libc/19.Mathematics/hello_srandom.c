@@ -11,27 +11,21 @@
 // To produce a different set of pseudo-random numbers each time your program
 // runs, do srandom (time(0))
 
-
-void
-srandom_usage(void)
+void srandom_usage(void)
 {
-    int i, n;
-    srandom(time(0));
+	int i, n;
+	srandom(time(0));
 
-    for (i = 0; i < 10; i++)
-    {
-        n = random();
-        printf("%d. random num: %d\n", i, n);
-    }
+	for (i = 0; i < 10; i++) {
+		n = random();
+		printf("%d. random num: %d\n", i, n);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    srandom_usage();
-    return 0;
+	srandom_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/BSD-Random.html#BSD-Random

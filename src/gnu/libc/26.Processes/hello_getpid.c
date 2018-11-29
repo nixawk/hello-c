@@ -26,23 +26,19 @@
 
 // The [getpid] function returns the process ID of the parent of the current process.
 
-
-void
-getpid_usage(void)
+void getpid_usage(void)
 {
-    pid_t pid = getpid();    /* current process id */
-    pid_t ppid = getppid();  /* parent  process id */
+	pid_t pid = getpid();	/* current process id */
+	pid_t ppid = getppid();	/* parent  process id */
 
-    printf("current process id: %d\n", pid);
-    printf("parent  process id: %d\n", ppid);
+	printf("current process id: %d\n", pid);
+	printf("parent  process id: %d\n", ppid);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    getpid_usage();
-    return 0;
+	getpid_usage();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Process-Creation-Concepts.html#Process-Creation-Concepts

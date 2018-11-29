@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <obstack.h>
 
-
 // struct obstack          /* control current object in current chunk */
 // {
 //   long chunk_size;              /* preferred size to allocate chunks in */
@@ -31,7 +30,6 @@
 //                                      compatibility.  */
 // };
 
-
 // An obstack is represented by a data structure of type struct obstack.
 // This structure has a small fixed size; it records the status of the
 // obstack and how to find the space in which objects are allocated.
@@ -44,18 +42,15 @@
 // number of different stacks. (You can even allocate an obstack structure
 // in another obstack, but this is rarely useful.)
 
-void
-obstack_usage(void)
+void obstack_usage(void)
 {
-    struct obstack obs;
-    printf("%lu\n", sizeof(obs));
-    printf("%lu\n", obs.chunk_size);
+	struct obstack obs;
+	printf("%lu\n", sizeof(obs));
+	printf("%lu\n", obs.chunk_size);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    obstack_usage();
-    return 0;
+	obstack_usage();
+	return 0;
 }

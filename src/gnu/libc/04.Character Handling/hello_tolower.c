@@ -6,21 +6,17 @@
 // If c is an upper-case letter, tolower returns the corresponding lower-case letter.
 // If c is not an upper-case letter, c is returned unchanged.
 
-void
-tolower_usage(void)
+void tolower_usage(void)
 {
-    char ch = 'A';
+	char ch = 'A';
 
-    printf("[%c] tolower [%c].\n", ch, tolower(ch));
+	printf("[%c] tolower [%c].\n", ch, tolower(ch));
 }
 
-
-int
-main(void)
+int main(void)
 {
-    tolower_usage();
-    return 0;
+	tolower_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Case-Conversion.html#Case-Conversion

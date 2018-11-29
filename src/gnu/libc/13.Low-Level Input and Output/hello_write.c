@@ -13,39 +13,32 @@
 // but can always be smaller. You program should always call write in a loop,
 // iterating until all the data is written.
 
-
 // ssize_t pwrite (int filedes, const void *buffer, size_t size, off_t offset)
 // ssize_t pwrite64 (int filedes, const void *buffer, size_t size, off64_t offset)
 
-
-void
-write_usage(void)
+void write_usage(void)
 {
-    int fd;
-    ssize_t n;
+	int fd;
+	ssize_t n;
 
-    char *path = "/tmp/testfile";
-    char *data = "hello, world\n";
+	char *path = "/tmp/testfile";
+	char *data = "hello, world\n";
 
-    fd = open(path, O_WRONLY | O_CREAT, S_IRWXU);
-    if (fd == -1)
-    {
-        fprintf(stderr, "open() failed\n");
-    } else {
-        n = write(fd, data, strlen(data));
-        printf("write [%lu] bytes into [%s]\n", n, path);
-        close(fd);
-    }
+	fd = open(path, O_WRONLY | O_CREAT, S_IRWXU);
+	if (fd == -1) {
+		fprintf(stderr, "open() failed\n");
+	} else {
+		n = write(fd, data, strlen(data));
+		printf("write [%lu] bytes into [%s]\n", n, path);
+		close(fd);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    write_usage();
-    return 0;
+	write_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/I_002fO-Primitives.html#I_002fO-Primitives
 // http://man7.org/linux/man-pages/man2/open.2.html

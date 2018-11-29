@@ -3,36 +3,31 @@
 
 // Function: FILE * fopen (const char *filename, const char *opentype)
 
-
 #include <stdio.h>
 #include <stdlib.h>
 
-void
-fopen_usage(void)
+void fopen_usage(void)
 {
-    FILE *s;
+	FILE *s;
 
-    s = fopen("/etc/passwd", "r");
-    if (s == NULL)
-    {
-        perror("fopen");
-        exit(EXIT_FAILURE);
-    }
+	s = fopen("/etc/passwd", "r");
+	if (s == NULL) {
+		perror("fopen");
+		exit(EXIT_FAILURE);
+	}
 
-    printf("FILE._fileno = %d\n", s->_fileno);
+	printf("FILE._fileno = %d\n", s->_fileno);
 
-    if (fclose(s) != 0)
-    {
-        perror("fclose");
-        exit(EXIT_FAILURE);
-    }
+	if (fclose(s) != 0) {
+		perror("fclose");
+		exit(EXIT_FAILURE);
+	}
 }
 
-int
-main(void)
+int main(void)
 {
-    fopen_usage();
-    return 0;
+	fopen_usage();
+	return 0;
 }
 
 // http://man7.org/linux/man-pages/man3/fopen.3.html

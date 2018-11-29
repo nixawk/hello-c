@@ -57,19 +57,17 @@
 
 #include <stdio.h>
 
-void
-show_FILE(void)
+void show_FILE(void)
 {
-    FILE *stream;
+	FILE *stream;
 
-    printf("FILE._fileno = %x\n", stream->_fileno);  /* Tested on Linux */
+	printf("FILE._fileno = %x\n", stream->_fileno);	/* Tested on Linux */
 }
 
-int
-main(void)
+int main(void)
 {
-    show_FILE();
-    return 0;
+	show_FILE();
+	return 0;
 }
 
 // typedef struct _IO_FILE FILE;

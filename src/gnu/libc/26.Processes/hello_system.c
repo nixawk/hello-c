@@ -27,20 +27,16 @@
 // status of a shell is the termination status of the last command it
 // executes.)
 
-
-void
-system_usage(void)
+void system_usage(void)
 {
-    const char *command = "whoami";
-    system(command);
+	const char *command = "whoami";
+	system(command);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    system_usage();
-    return 0;
+	system_usage();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Running-a-Command.html#Running-a-Command

@@ -13,50 +13,43 @@
 //    uint32_t       s_addr;     /* address in network byte order */
 // };
 
-
 /* convert IPv4 and IPv6 addresses from text to binary form. */
 
-void
-inet_pton_demo(void)
+void inet_pton_demo(void)
 {
-    char src[] = "8.8.8.8";
-    struct in_addr dst;    /* dst is a stucture, and not an integer here */
+	char src[] = "8.8.8.8";
+	struct in_addr dst;	/* dst is a stucture, and not an integer here */
 
-    if (inet_pton(AF_INET, src, (void *)&dst) != 1)
-    {
-        perror("inet_pton");
-        exit(EXIT_FAILURE);
-    }
-    
-    printf("IP: %s -> %#x\n", src, dst.s_addr);
+	if (inet_pton(AF_INET, src, (void *)&dst) != 1) {
+		perror("inet_pton");
+		exit(EXIT_FAILURE);
+	}
+
+	printf("IP: %s -> %#x\n", src, dst.s_addr);
 }
 
 /* convert IPv4 and IPv6 addresses from binary to text */
 
-void
-inet_ntop_demo(void)
+void inet_ntop_demo(void)
 {
-    struct in_addr src;
-    char buf[256];
+	struct in_addr src;
+	char buf[256];
 
-    src.s_addr = 0x8080808;
+	src.s_addr = 0x8080808;
 
-    if (inet_ntop(AF_INET, (void *) &src, buf, 256) == NULL)
-    {
-        perror("inet_ntop");
-        exit(EXIT_FAILURE);
-    }
+	if (inet_ntop(AF_INET, (void *)&src, buf, 256) == NULL) {
+		perror("inet_ntop");
+		exit(EXIT_FAILURE);
+	}
 
-    printf("IP: %#x -> %s", src.s_addr, buf);
+	printf("IP: %#x -> %s", src.s_addr, buf);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    inet_pton_demo();
-    inet_ntop_demo();
-    return 0;
+	inet_pton_demo();
+	inet_ntop_demo();
+	return 0;
 }
 
 /*

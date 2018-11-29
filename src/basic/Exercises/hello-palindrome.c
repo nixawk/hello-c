@@ -11,58 +11,50 @@ void reverse(char *);
 bool is_prefix(char *, char *);
 bool is_palindrome(char *);
 
-void
-swap(char *s1, char *s2)
+void swap(char *s1, char *s2)
 {
-    *s1 ^= *s2;
-    *s2 ^= *s1;
-    *s1 ^= *s2;
+	*s1 ^= *s2;
+	*s2 ^= *s1;
+	*s1 ^= *s2;
 }
 
-void
-reverse(char *s)
+void reverse(char *s)
 {
-    int i, l;
+	int i, l;
 
-    for (i = 0, l = strlen(s); i < l / 2; i++)
-    {
-        swap(s + i, s + l - 1 - i);
-    }
+	for (i = 0, l = strlen(s); i < l / 2; i++) {
+		swap(s + i, s + l - 1 - i);
+	}
 }
 
-bool
-is_prefix(char *s, char *p)
+bool is_prefix(char *s, char *p)
 {
-    return strncmp(s, p, strlen(p)) == 0;  // p -> prefix
+	return strncmp(s, p, strlen(p)) == 0;	// p -> prefix
 }
 
-bool
-is_palindrome(char *s)
+bool is_palindrome(char *s)
 {
-    char *copystr = NULL;
+	char *copystr = NULL;
 
-    if (s == NULL)
-    {
-        perror("palindrome: nullptr");
-        return false;
-    }
+	if (s == NULL) {
+		perror("palindrome: nullptr");
+		return false;
+	}
 
-    copystr = strdup(s);
-    if (copystr == NULL)
-    {
-        perror("palindrome: strdup");
-        return false;
-    }
+	copystr = strdup(s);
+	if (copystr == NULL) {
+		perror("palindrome: strdup");
+		return false;
+	}
 
-    reverse(copystr);
-    return is_prefix(s, copystr);
+	reverse(copystr);
+	return is_prefix(s, copystr);
 }
 
-int
-main(void)
+int main(void)
 {
-    is_palindrome("abc") ? printf("yes\n") : printf("no\n");
-    is_palindrome("aba") ? printf("yes\n") : printf("no\n");
+	is_palindrome("abc") ? printf("yes\n") : printf("no\n");
+	is_palindrome("aba") ? printf("yes\n") : printf("no\n");
 
-    return 0;
+	return 0;
 }

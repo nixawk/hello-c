@@ -16,25 +16,22 @@ pnt, even if optimizations are being applied to the code.
 #define BUFSIZE 32
 #endif
 
-void
-sodium_memzero_usage(void)
+void sodium_memzero_usage(void)
 {
-    char buf[BUFSIZE] = "helloworld";
+	char buf[BUFSIZE] = "helloworld";
 
-    if (sodium_init() < 0)
-    {
-        exit(EXIT_FAILURE);
-    }
-    printf("%s\n", buf);
-    sodium_memzero(buf, BUFSIZE);
-    printf("%s\n", buf);
+	if (sodium_init() < 0) {
+		exit(EXIT_FAILURE);
+	}
+	printf("%s\n", buf);
+	sodium_memzero(buf, BUFSIZE);
+	printf("%s\n", buf);
 }
 
-int
-main(void)
+int main(void)
 {
-    sodium_memzero_usage();
-    return 0;
+	sodium_memzero_usage();
+	return 0;
 }
 
 // reference

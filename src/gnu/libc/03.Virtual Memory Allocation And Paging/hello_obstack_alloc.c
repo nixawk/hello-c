@@ -16,39 +16,32 @@
 
 struct obstack string_obstack;
 
-
-char *
-copystring(char *string)
+char *copystring(char *string)
 {
-    size_t len = strlen(string) + 1;
-    printf("str len : %lu\n", len);
+	size_t len = strlen(string) + 1;
+	printf("str len : %lu\n", len);
 
-    // If not init, prog crashes.
-    obstack_init(&string_obstack);
+	// If not init, prog crashes.
+	obstack_init(&string_obstack);
 
-    char *s = (char *)obstack_alloc(&string_obstack, len);
-    printf("str addr: %p\n", s);
-    memcpy(s, string, len);
-    return s;
+	char *s = (char *)obstack_alloc(&string_obstack, len);
+	printf("str addr: %p\n", s);
+	memcpy(s, string, len);
+	return s;
 }
 
-
-void
-obstack_alloc_usage(void)
+void obstack_alloc_usage(void)
 {
-    char *src = "hello, world";
-    char *dst = copystring(src);
+	char *src = "hello, world";
+	char *dst = copystring(src);
 
-    printf("dst string: %s\n", dst);
+	printf("dst string: %s\n", dst);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    obstack_alloc_usage();
-    return 0;
+	obstack_alloc_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_mono/libc.html#Allocation-in-an-Obstack

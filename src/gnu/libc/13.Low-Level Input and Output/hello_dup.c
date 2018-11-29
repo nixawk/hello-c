@@ -12,7 +12,6 @@
 
     // fcntl(old, F_DUPFD, 0) 
 
-
 // int dup2(int oldfd, int newfd);
 
 // This function copies the descriptor [old] to descriptor number [new].
@@ -26,61 +25,53 @@
     // close(new);
     // fcntl(old, F_DUPFD, 0);
 
-
-void
-dup_usage(void)
+void dup_usage(void)
 {
-    int oldfd, newfd;
-    char buf[] = "hello,world";
+	int oldfd, newfd;
+	char buf[] = "hello,world";
 
-    oldfd = creat("/tmp/filename", S_IRWXU);
-    if (oldfd != -1)
-    {
-        printf("old file descriptor: %d\n", oldfd);
+	oldfd = creat("/tmp/filename", S_IRWXU);
+	if (oldfd != -1) {
+		printf("old file descriptor: %d\n", oldfd);
 
-        newfd = dup(oldfd);  // Be equivalent to ` dup2(oldfd, newfd); `
-        close(oldfd);
+		newfd = dup(oldfd);	// Be equivalent to ` dup2(oldfd, newfd); `
+		close(oldfd);
 
-        printf("new file descriptor: %d\n", newfd);
+		printf("new file descriptor: %d\n", newfd);
 
-        write(newfd, buf, strlen(buf));
-        close(newfd);
-    }
+		write(newfd, buf, strlen(buf));
+		close(newfd);
+	}
 }
 
-
-void
-dup2_usage(void)
+void dup2_usage(void)
 {
-    int oldfd, newfd;
-    char buf[] = "hello,world";
+	int oldfd, newfd;
+	char buf[] = "hello,world";
 
-    oldfd = creat("/tmp/filename2", S_IRWXU);
-    if (oldfd != -1)
-    {
-        printf("old file descriptor: %d\n", oldfd);
+	oldfd = creat("/tmp/filename2", S_IRWXU);
+	if (oldfd != -1) {
+		printf("old file descriptor: %d\n", oldfd);
 
-        // 1. if [oldfd] is opened,
-            // 1.1 if [oldfd == newfd], return [oldfd],
-            // 1.2 if [oldfd != newfd], close [oldfd], and return [newfd], 
-        // 2. if [oldfd] is closed, [FD_CLOEXEC] flag is cleared.
+		// 1. if [oldfd] is opened,
+		// 1.1 if [oldfd == newfd], return [oldfd],
+		// 1.2 if [oldfd != newfd], close [oldfd], and return [newfd], 
+		// 2. if [oldfd] is closed, [FD_CLOEXEC] flag is cleared.
 
-        dup2(oldfd, newfd);
+		dup2(oldfd, newfd);
 
-        printf("new file descriptor: %d\n", newfd);
+		printf("new file descriptor: %d\n", newfd);
 
-        write(newfd, buf, strlen(buf));
-        close(newfd);
-    }
+		write(newfd, buf, strlen(buf));
+		close(newfd);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    dup_usage();
-    dup2_usage();
-    return 0;
+	dup_usage();
+	dup2_usage();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Duplicating-Descriptors.html#Duplicating-Descriptors

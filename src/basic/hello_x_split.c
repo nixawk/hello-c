@@ -2,29 +2,23 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void
-split(void)
+void split(void)
 {
-    char s[] = "aaa.bbb,ccc;ddd:eee!fff-";
-    char sep[] = " .,;:!-";
+	char s[] = "aaa.bbb,ccc;ddd:eee!fff-";
+	char sep[] = " .,;:!-";
 
-    char *token;
+	char *token;
 
-    for (
-        token = strtok(s, sep);
-        token;
-        token = strtok(NULL, sep))
-    {
-        printf("%s\n", token);
-    }
+	for (token = strtok(s, sep); token; token = strtok(NULL, sep)) {
+		printf("%s\n", token);
+	}
 
-    if (token)
-        free(token);
+	if (token)
+		free(token);
 }
 
-int
-main(void)
+int main(void)
 {
-    split();
-    return 0;
+	split();
+	return 0;
 }

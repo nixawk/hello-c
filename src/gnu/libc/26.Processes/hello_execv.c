@@ -58,36 +58,27 @@
     // Pending signals.
     // Elapsed processor time associated with the process.
 
-
-void
-execv_usage(void)
+void execv_usage(void)
 {
-    pid_t pid = fork();
-    char *argv[] = {
-        "/bin/",
-        NULL
-    };
+	pid_t pid = fork();
+	char *argv[] = {
+		"/bin/",
+		NULL
+	};
 
-    if (pid == (pid_t) 0)  /* child process */
-    {
-        execv("/bin/ls", argv);
-    }
-    else if (pid > (pid_t) 0)
-    {
-        printf("parent process ID: %d\n", pid);
-    }
-    else
-    {
-        fprintf(stderr, "fork() failed.\n");
-    }
+	if (pid == (pid_t) 0) {	/* child process */
+		execv("/bin/ls", argv);
+	} else if (pid > (pid_t) 0) {
+		printf("parent process ID: %d\n", pid);
+	} else {
+		fprintf(stderr, "fork() failed.\n");
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    execv_usage();
-    return 0;
+	execv_usage();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Executing-a-File.html#Executing-a-File

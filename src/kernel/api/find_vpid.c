@@ -13,28 +13,26 @@ static void __init find_vpid_exit(void);
 static int
 __init find_vpid_init(void)
 {
-        struct pid *vpid = find_vpid(current->pid);
+	struct pid *vpid = find_vpid(current->pid);
 
-        if (vpid != NULL)
-        {
-                printk("the find_vpid result's count is: %d\n", vpid->count.counter);
-                printk("the find_vpid result's level is: %d\n", vpid->level);
-        }
-        else
-        {
-                printk("failed to find_vpid");
-        }
+	if (vpid != NULL) {
+		printk("the find_vpid result's count is: %d\n",
+		       vpid->count.counter);
+		printk("the find_vpid result's level is: %d\n", vpid->level);
+	} else {
+		printk("failed to find_vpid");
+	}
 
-        return 0;
+	return 0;
 }
 
 static void __init find_vpid_exit(void)
 {
-        printk(KERN_INFO "my module exit\n");
+	printk(KERN_INFO "my module exit\n");
 }
 
 module_init(find_vpid_init);
-module_exit(find_vpid_exit);  // please try to del ';', and recompile it 
+module_exit(find_vpid_exit);	// please try to del ';', and recompile it 
 
 /*
 

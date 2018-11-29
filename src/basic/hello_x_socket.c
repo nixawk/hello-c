@@ -14,112 +14,103 @@ int connect_to(char *, int);
 ssize_t send_all(int, char *);
 ssize_t recv_all(int, int);
 
-int
-connect_to(host, port)
-    char *host;
-    short int port;
+int connect_to(host, port)
+char *host;
+short int port;
 {
-    int socket_fd;
-    int s;
-    struct sockaddr_in addr;     // struct sockaddr address;
+	int socket_fd;
+	int s;
+	struct sockaddr_in addr;	// struct sockaddr address;
 
-    socket_fd = socket(AF_INET, SOCK_STREAM, 0);
-    if (socket_fd == -1)
-        exit(EXIT_FAILURE);
+	socket_fd = socket(AF_INET, SOCK_STREAM, 0);
+	if (socket_fd == -1)
+		exit(EXIT_FAILURE);
 
-    addr.sin_addr.s_addr = inet_addr(host);
-    addr.sin_family = AF_INET;
-    addr.sin_port = htons(port);
+	addr.sin_addr.s_addr = inet_addr(host);
+	addr.sin_family = AF_INET;
+	addr.sin_port = htons(port);
 
-    // s = inet_pton(AF_INET, host, &addr.sin_addr);
-    // if (s <= 0)
-    //     exit(EXIT_FAILURE);
+	// s = inet_pton(AF_INET, host, &addr.sin_addr);
+	// if (s <= 0)
+	//     exit(EXIT_FAILURE);
 
-    s = connect(socket_fd, (struct sockaddr *)&addr, sizeof(struct sockaddr));
-    if (s == -1)
-        exit(EXIT_FAILURE);
+	s = connect(socket_fd, (struct sockaddr *)&addr,
+		    sizeof(struct sockaddr));
+	if (s == -1)
+		exit(EXIT_FAILURE);
 
-    return socket_fd;
+	return socket_fd;
 }
 
-ssize_t
-send_all(socket_fd, data)
-    int socket_fd;
-    char *data;
+ssize_t send_all(socket_fd, data)
+int socket_fd;
+char *data;
 {
-    ssize_t ns;
-    int i, l;
+	ssize_t ns;
+	int i, l;
 
-    // struct timeval timeout;
-    // timeout.tv_sec = 10;
-    // timeout.tv_usec = 0;
+	// struct timeval timeout;
+	// timeout.tv_sec = 10;
+	// timeout.tv_usec = 0;
 
-    // set send timeout
-    // if (setsockopt (socket_fd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout,
-    //             sizeof(timeout)) < 0)
-    //     perror("setsockopt failed\n");
+	// set send timeout
+	// if (setsockopt (socket_fd, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout,
+	//             sizeof(timeout)) < 0)
+	//     perror("setsockopt failed\n");
 
-    // strlen(data) < CHUNK_SIZE
-    // strlen(data) = CHUNK_SIZE
-    // strlen(data) > CHUNK_SIZE
+	// strlen(data) < CHUNK_SIZE
+	// strlen(data) = CHUNK_SIZE
+	// strlen(data) > CHUNK_SIZE
 
-    for (i = 0, ns = 0, l = strlen(data); i < l; i += CHUNK_SIZE)
-    {
-        ns += send(
-            socket_fd,
-            data + i,
-            (l - i > CHUNK_SIZE) ? CHUNK_SIZE : (l - i),
-            0
-        );
-    }
+	for (i = 0, ns = 0, l = strlen(data); i < l; i += CHUNK_SIZE) {
+		ns += send(socket_fd,
+			   data + i,
+			   (l - i > CHUNK_SIZE) ? CHUNK_SIZE : (l - i), 0);
+	}
 
-    return ns;
+	return ns;
 }
 
-ssize_t
-recv_all(socket_fd, timeout_sec)
-    int socket_fd;
-    int timeout_sec;  // seconds
+ssize_t recv_all(socket_fd, timeout_sec)
+int socket_fd;
+int timeout_sec;		// seconds
 {
-    char chunk[CHUNK_SIZE] = {0};
-    ssize_t i, nr;
-    struct timeval timeout;
+	char chunk[CHUNK_SIZE] = { 0 };
+	ssize_t i, nr;
+	struct timeval timeout;
 
-    // set recv timeout
-    timeout.tv_sec = timeout_sec;
-    timeout.tv_usec = 0;
-    if (setsockopt (socket_fd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout,
-                sizeof(timeout)) < 0)
-        perror("setsockopt failed\n");
+	// set recv timeout
+	timeout.tv_sec = timeout_sec;
+	timeout.tv_usec = 0;
+	if (setsockopt(socket_fd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout,
+		       sizeof(timeout)) < 0)
+		perror("setsockopt failed\n");
 
-    for (i = CHUNK_SIZE, nr = 0; i == CHUNK_SIZE; )
-    {
-        i = recv(socket_fd, chunk, i, 0);
-        nr += i;
+	for (i = CHUNK_SIZE, nr = 0; i == CHUNK_SIZE;) {
+		i = recv(socket_fd, chunk, i, 0);
+		nr += i;
 
-        // do with socket buffer
-        printf("[recv] %ld - %s\n", i, chunk);
-    }
+		// do with socket buffer
+		printf("[recv] %ld - %s\n", i, chunk);
+	}
 
-    return nr;
+	return nr;
 }
 
-
-int
-main(int argc, const char *argv[])
+int main(int argc, const char *argv[])
 {
-    int socket_fd;
-    ssize_t ns, nr;
+	int socket_fd;
+	ssize_t ns, nr;
 
-    socket_fd = connect_to("127.0.0.1", 4444);
+	socket_fd = connect_to("127.0.0.1", 4444);
 
-    ns = send_all(socket_fd, "This is a demo string.\n");
-    nr = recv_all(socket_fd, 5);
-    close(socket_fd);
+	ns = send_all(socket_fd, "This is a demo string.\n");
+	nr = recv_all(socket_fd, 5);
+	close(socket_fd);
 
-    printf("[*] send = %ld, recv = %ld\n", ns, nr);
+	printf("[*] send = %ld, recv = %ld\n", ns, nr);
 
-    return 0;
+	return 0;
 }
 
 /*

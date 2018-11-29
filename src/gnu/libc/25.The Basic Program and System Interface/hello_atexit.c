@@ -9,31 +9,26 @@
 // The return value from [atexit] is zero on success and nonzero if the function
 // cannot be registered.
 
-
-void
-atexit_callback(void)
+void atexit_callback(void)
 {
-    printf("call atexit callback function\n");
+	printf("call atexit callback function\n");
 }
 
-
-void
-atexit_usage(void)
+void atexit_usage(void)
 {
-    if (atexit(atexit_callback) != 0)
-    {
-        fprintf(stderr, "atexit() failed\n");
-    } else {
-        printf("register atexit callback function\n");
-    }
+	if (atexit(atexit_callback) != 0) {
+		fprintf(stderr, "atexit() failed\n");
+	} else {
+		printf("register atexit callback function\n");
+	}
 }
 
+int main(int argc, char const *argv[])
+{
+	atexit_usage();
+	printf("main function\n");
 
-int main(int argc, char const *argv[]) {
-    atexit_usage();
-    printf("main function\n");
-
-    return 0;
+	return 0;
 }
 
 /*

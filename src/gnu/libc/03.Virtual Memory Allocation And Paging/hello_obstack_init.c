@@ -17,7 +17,6 @@
 // It does not contain any of the objects themselves. You should not try
 // to access the contents of the structure directly;
 
-
     // obstack_alloc_failed_handler
 
 // The value of this variable is a pointer to a function that obstack uses
@@ -42,33 +41,28 @@
 // the chunk. Then other obstacks, or non-obstack allocation, can reuse the
 // space of the chunk.
 
-
 #define obstack_chunk_alloc malloc
 #define obstack_chunk_free free
 
-
-void
-obstack_usage(void)
+void obstack_usage(void)
 {
-    // Here are two examples of how to allocate the space for an obstack and initialize it.
+	// Here are two examples of how to allocate the space for an obstack and initialize it.
 
-    // First, an obstack that is a static variable:
-    static struct obstack myobstack;
-    obstack_init(&myobstack);
+	// First, an obstack that is a static variable:
+	static struct obstack myobstack;
+	obstack_init(&myobstack);
 
-    // Second, an obstack that is itself dynamically allocated:
-    struct obstack *myobstack_ptr = (struct obstack *) malloc(
-        sizeof(struct obstack)
-    );
-    obstack_init(myobstack_ptr);
+	// Second, an obstack that is itself dynamically allocated:
+	struct obstack *myobstack_ptr =
+	    (struct obstack *)malloc(sizeof(struct obstack)
+	    );
+	obstack_init(myobstack_ptr);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    obstack_usage();
-    return 0;
+	obstack_usage();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Obstacks.html#Obstacks

@@ -18,16 +18,17 @@ multi-byte character.
 
 */
 
-int main(int argc, char const *argv[]) {
-  int len;
-  char *pmbnull = NULL;
-  char *pmb = (char *)malloc(MB_CUR_MAX);
+int main(int argc, char const *argv[])
+{
+	int len;
+	char *pmbnull = NULL;
+	char *pmb = (char *)malloc(MB_CUR_MAX);
 
-  wchar_t *pwc = L"Hi";
-  wchar_t *pwcs = (wchar_t *)malloc(sizeof(wchar_t));
+	wchar_t *pwc = L"Hi";
+	wchar_t *pwcs = (wchar_t *) malloc(sizeof(wchar_t));
 
-  printf("Converting to multibyte string\n");
-  len = wcstombs(pmb, pwc, MB_CUR_MAX);
-  printf("Characters converted %d\n", len);
-  return 0;
+	printf("Converting to multibyte string\n");
+	len = wcstombs(pmb, pwc, MB_CUR_MAX);
+	printf("Characters converted %d\n", len);
+	return 0;
 }

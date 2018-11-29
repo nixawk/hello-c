@@ -24,7 +24,6 @@
 // and line. Repetition which are not directly following each other are not
 // caught.
 
-
 // As memtioned above, the [error] and [error_at_line] functions can be
 // customized by defining a variable named [error_print_progname]
 
@@ -40,28 +39,23 @@ error_at_line_usage:3: error message
 
 */
 
-void
-custom_error_print_progname(void)
+void custom_error_print_progname(void)
 {
-    printf("\nfilename: %s\n", program_invocation_short_name);
+	printf("\nfilename: %s\n", program_invocation_short_name);
 }
 
-
-void
-error_at_line_usage(void)
+void error_at_line_usage(void)
 {
-    error_print_progname = custom_error_print_progname;
-    // error_at_line(0, 0, NULL, 0, "error message");
-    error_at_line(0, 0, "file", 1, "error message");
-    error_at_line(0, 0, "error_at_line_usage", 3, "error message");
+	error_print_progname = custom_error_print_progname;
+	// error_at_line(0, 0, NULL, 0, "error message");
+	error_at_line(0, 0, "file", 1, "error message");
+	error_at_line(0, 0, "error_at_line_usage", 3, "error message");
 }
 
-
-int
-main(void)
+int main(void)
 {
-    error_at_line_usage();
-    return 0;
+	error_at_line_usage();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_mono/libc.html#Error-Reporting

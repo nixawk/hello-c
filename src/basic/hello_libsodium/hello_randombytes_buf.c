@@ -10,23 +10,21 @@
 #define BUFSIZE 32
 #endif
 
-int
-main(void)
+int main(void)
 {
-    unsigned char buf[BUFSIZE];
-    char hex[BUFSIZE * 2 + 1];
+	unsigned char buf[BUFSIZE];
+	char hex[BUFSIZE * 2 + 1];
 
-    if (sodium_init() < 0) {
-        /* panic! the library couldn't be initialized, it is not safe to use */
-        exit(EXIT_FAILURE);
-    }
+	if (sodium_init() < 0) {
+		/* panic! the library couldn't be initialized, it is not safe to use */
+		exit(EXIT_FAILURE);
+	}
 
-    randombytes_buf(buf, BUFSIZE);
-    sodium_bin2hex(hex, BUFSIZE * 2 + 1, buf, BUFSIZE);
-    printf("%s\n", hex);
+	randombytes_buf(buf, BUFSIZE);
+	sodium_bin2hex(hex, BUFSIZE * 2 + 1, buf, BUFSIZE);
+	printf("%s\n", hex);
 
-    return 0;
+	return 0;
 }
-
 
 // https://download.libsodium.org/doc/generating_random_data

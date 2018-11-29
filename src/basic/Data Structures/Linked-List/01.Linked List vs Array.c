@@ -30,48 +30,43 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 typedef struct node {
-    int val;
-    struct node * next;
+	int val;
+	struct node *next;
 } node_t;
 
-
-void
-linked_list(void)
+void linked_list(void)
 {
-    node_t node1st;
-    node_t node2nd;
-    node_t node3rd;
+	node_t node1st;
+	node_t node2nd;
+	node_t node3rd;
 
-    node_t * tmpnode;
+	node_t *tmpnode;
 
-    node3rd.val = 3;
-    node3rd.next = NULL;
+	node3rd.val = 3;
+	node3rd.next = NULL;
 
-    node2nd.val = 2;
-    node2nd.next = &node3rd;
+	node2nd.val = 2;
+	node2nd.next = &node3rd;
 
-    node1st.val = 1;
-    node1st.next = &node2nd;
+	node1st.val = 1;
+	node1st.next = &node2nd;
 
-    // Access Order
-    // 1st -> 2nd -> 3rd
+	// Access Order
+	// 1st -> 2nd -> 3rd
 
-    tmpnode = &node1st;
-    while (tmpnode != NULL)
-    {
-        printf("%d\n", tmpnode->val);
-        tmpnode = tmpnode->next;
-    }
+	tmpnode = &node1st;
+	while (tmpnode != NULL) {
+		printf("%d\n", tmpnode->val);
+		tmpnode = tmpnode->next;
+	}
 
 }
 
-int
-main(void)
+int main(void)
 {
-    linked_list();
-    return 0;
+	linked_list();
+	return 0;
 }
 
 // https://www.geeksforgeeks.org/linked-list-vs-array/

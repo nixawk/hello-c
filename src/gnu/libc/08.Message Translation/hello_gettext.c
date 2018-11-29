@@ -20,7 +20,6 @@
 // specialty of the GNU implementation of these function and we will say
 // more about this when we talk about the ways message catalogs are selected
 
-
     // char * dgettext (const char *domainname, const char *msgid)
 
 // The dgettext function acts just like the gettext function. It only takes
@@ -34,26 +33,22 @@
 
     // char * dcgettext (const char *domainname, const char *msgid, int category)
 
-
-void
-gettext_usage(void)
+void gettext_usage(void)
 {
-    errno = 1;
-    printf(gettext("Operation failed: %m\n"));
+	errno = 1;
+	printf(gettext("Operation failed: %m\n"));
 
-    // Operation failed: Operation not permitted.
+	// Operation failed: Operation not permitted.
 
-    // The gettext function does not modify the value of the global errno
-    // variable. Here errno value is used in the printf function while
-    // processing the %m format element and if the gettext function
-    // would change this value (it is called before printf is called)
-    // we would get a wrong message.
+	// The gettext function does not modify the value of the global errno
+	// variable. Here errno value is used in the printf function while
+	// processing the %m format element and if the gettext function
+	// would change this value (it is called before printf is called)
+	// we would get a wrong message.
 }
 
-
-int
-main(void)
+int main(void)
 {
-    gettext_usage();
-    return 0;
+	gettext_usage();
+	return 0;
 }

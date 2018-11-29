@@ -1,26 +1,23 @@
 #include <arpa/inet.h>
 #include <stdio.h>
 
-void
-htons_demo(void)
+void htons_demo(void)
 {
-    short int port = 80;
-    printf("%d -> %#x\n", port, htons(port));
+	short int port = 80;
+	printf("%d -> %#x\n", port, htons(port));
 }
 
-void
-ntohs_demo(void)
+void ntohs_demo(void)
 {
-    short int port = 0x5000;
-    printf("%#x -> %d\n", port, ntohs(port));
+	short int port = 0x5000;
+	printf("%#x -> %d\n", port, ntohs(port));
 }
 
-int
-main(void)
+int main(void)
 {
-    htons_demo();
-    ntohs_demo();
-    return 0;
+	htons_demo();
+	ntohs_demo();
+	return 0;
 }
 
 /*

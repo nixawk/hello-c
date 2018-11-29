@@ -24,34 +24,27 @@
     // EBADF  : The [descriptor] fildes is not valid.
     // EINVAL : No synchronization is possible since the system does not implement this.
 
-
-void
-fsync_usage(void)
+void fsync_usage(void)
 {
-    int fd;
-    int i;
-    char str[] = "hello, world\n";
+	int fd;
+	int i;
+	char str[] = "hello, world\n";
 
-    fd = creat("/tmp/filename", S_IRWXU);
-    if (fd != -1)
-    {
-        for (i = 0; i < 10; i++)
-        {
-            write(fd, str, strlen(str));
-            fsync(fd);
-            printf("write %d times\n", i + 1);
-        }
-        close(fd);
-    }
+	fd = creat("/tmp/filename", S_IRWXU);
+	if (fd != -1) {
+		for (i = 0; i < 10; i++) {
+			write(fd, str, strlen(str));
+			fsync(fd);
+			printf("write %d times\n", i + 1);
+		}
+		close(fd);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    fsync_usage();
-    return 0;
+	fsync_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Synchronizing-I_002fO.html

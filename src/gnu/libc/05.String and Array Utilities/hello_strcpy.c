@@ -3,12 +3,12 @@
 
 int main(void)
 {
-    char src[] = "helloworld";
-    char dest[256];
+	char src[] = "helloworld";
+	char dest[256];
 
-    memset(dest, '\x00', 256);
-    strcpy(dest, src);
+	memset(dest, '\x00', 256);
+	strcpy(dest, src);
 
-    printf("destination string : %s\n", dest);
-    return 0;
+	printf("destination string : %s\n", dest);
+	return 0;
 }

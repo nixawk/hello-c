@@ -17,10 +17,10 @@ This function returns a pointer to the memory area str.
 
 int main(void)
 {
-    char aStr[] = "helloworld";
+	char aStr[] = "helloworld";
 
-    printf("string: %s\n", aStr);
-    memset(aStr, 0, sizeof(aStr));
+	printf("string: %s\n", aStr);
+	memset(aStr, 0, sizeof(aStr));
 
-    return 0;
+	return 0;
 }

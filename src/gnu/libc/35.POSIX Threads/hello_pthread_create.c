@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-
 // int pthread_create(pthread_t *thread, const pthread_attr_t *attr,
 //                    void *(*start_routine) (void *), void *arg);
 
@@ -21,44 +20,38 @@
 // On success, [pthread_create()] returns 0; on error, it returns an
 // error number, and the contents of [*thread] are undefined.
 
-
 /* job for every thread */
 
-static void *
-thread_job(void *arg)
+static void *thread_job(void *arg)
 {
-    char *s = (char *) arg;
+	char *s = (char *)arg;
 
-    printf("%s\n", s);
+	printf("%s\n", s);
 
-    return (void *) strlen(s);
+	return (void *)strlen(s);
 }
 
-int
-main(void)
+int main(void)
 {
-    pthread_t thread;
-    void *retval;
+	pthread_t thread;
+	void *retval;
 
-    if ((pthread_create(&thread, NULL, thread_job, "Hello, World\n")) != 0)
-    {
-        perror("pthread_create");
-        exit(EXIT_FAILURE);
-    }
+	if ((pthread_create(&thread, NULL, thread_job, "Hello, World\n")) != 0) {
+		perror("pthread_create");
+		exit(EXIT_FAILURE);
+	}
 
-    printf("Message from main()\n");
+	printf("Message from main()\n");
 
-    if ((pthread_join(thread, &retval)) != 0)
-    {
-        perror("pthread_join");
-        exit(EXIT_FAILURE);
-    }
+	if ((pthread_join(thread, &retval)) != 0) {
+		perror("pthread_join");
+		exit(EXIT_FAILURE);
+	}
 
-    printf("Thread returned: %ld\n", (long) retval);
+	printf("Thread returned: %ld\n", (long)retval);
 
-    exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
-
 
 /*
 

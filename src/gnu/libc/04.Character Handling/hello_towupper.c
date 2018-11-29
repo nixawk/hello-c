@@ -10,22 +10,17 @@
 
     // towctrans (wc, wctrans ("toupper"))
 
-
-void
-toupper_usage(void)
+void toupper_usage(void)
 {
-    wchar_t ch = L'a';
+	wchar_t ch = L'a';
 
-    printf("[%c] -> [%c]\n", ch, towupper(ch));
+	printf("[%c] -> [%c]\n", ch, towupper(ch));
 }
 
-
-int
-main(void)
+int main(void)
 {
-    toupper_usage();
-    return 0;
+	toupper_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Wide-Character-Case-Conversion.html#Wide-Character-Case-Conversion

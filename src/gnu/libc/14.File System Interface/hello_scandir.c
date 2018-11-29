@@ -28,43 +28,35 @@
 // it is -1 an error occurred (either the directory could not be opened for reading or the
 // malloc call failed) and the global variable [errno] contains more information on the error.
 
-
-int
-selector(const struct dirent *entry)
+int selector(const struct dirent *entry)
 {
-    return (strstr(entry->d_name, "log") == NULL) ? 0 : 1;
+	return (strstr(entry->d_name, "log") == NULL) ? 0 : 1;
 }
 
-
-void
-scandir_usage(void)
+void scandir_usage(void)
 {
-    char *dirpath = "/var/log/";
-    struct dirent **namelist;
-    int n, i;
+	char *dirpath = "/var/log/";
+	struct dirent **namelist;
+	int n, i;
 
-    n = scandir(dirpath, &namelist, selector, alphasort);
-    if (n == -1)
-    {
-        fprintf(stderr, "scandir() failed: %s\n", strerror(errno));
-    }
+	n = scandir(dirpath, &namelist, selector, alphasort);
+	if (n == -1) {
+		fprintf(stderr, "scandir() failed: %s\n", strerror(errno));
+	}
 
-    for (i = 0; i < n; i++)
-    {
-        printf("%s\n", namelist[i]->d_name);
-        free(namelist[i]);
-    }
-    free(namelist);
+	for (i = 0; i < n; i++) {
+		printf("%s\n", namelist[i]->d_name);
+		free(namelist[i]);
+	}
+	free(namelist);
 
-    printf("namelist count: %d\n", n);
+	printf("namelist count: %d\n", n);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    scandir_usage();
-    return 0;
+	scandir_usage();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Scanning-Directory-Content.html#Scanning-Directory-Content

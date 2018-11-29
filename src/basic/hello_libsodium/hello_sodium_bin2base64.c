@@ -38,48 +38,39 @@ for b64_end was not provided.
 #define BUFSIZE 32
 #endif
 
-
-void
-sodium_bin2base64_usage()
+void sodium_bin2base64_usage()
 {
-    unsigned char buf[BUFSIZE];
-    char b64[sodium_base64_ENCODED_LEN(BUFSIZE, sodium_base64_VARIANT_ORIGINAL)];
-    unsigned char bin[BUFSIZE];
+	unsigned char buf[BUFSIZE];
+	char b64[sodium_base64_ENCODED_LEN
+		 (BUFSIZE, sodium_base64_VARIANT_ORIGINAL)];
+	unsigned char bin[BUFSIZE];
 
-    if (sodium_init() < 0)
-    {
-        exit(EXIT_FAILURE);
-    }
+	if (sodium_init() < 0) {
+		exit(EXIT_FAILURE);
+	}
 
-    randombytes_buf(buf, BUFSIZE);
-    sodium_bin2base64(
-        b64, sodium_base64_ENCODED_LEN(BUFSIZE, sodium_base64_VARIANT_ORIGINAL),
-        buf, BUFSIZE,
-        sodium_base64_VARIANT_ORIGINAL
-    );
+	randombytes_buf(buf, BUFSIZE);
+	sodium_bin2base64(b64,
+			  sodium_base64_ENCODED_LEN(BUFSIZE,
+						    sodium_base64_VARIANT_ORIGINAL),
+			  buf, BUFSIZE, sodium_base64_VARIANT_ORIGINAL);
 
-    printf("%s\n", b64);
-    sodium_base642bin(
-        bin, BUFSIZE,
-        b64, sodium_base64_ENCODED_LEN(BUFSIZE, sodium_base64_VARIANT_ORIGINAL),
-        NULL, NULL,
-        NULL, sodium_base64_VARIANT_ORIGINAL
-    );
+	printf("%s\n", b64);
+	sodium_base642bin(bin, BUFSIZE,
+			  b64, sodium_base64_ENCODED_LEN(BUFSIZE,
+							 sodium_base64_VARIANT_ORIGINAL),
+			  NULL, NULL, NULL, sodium_base64_VARIANT_ORIGINAL);
 
-    if (sodium_memcmp(buf, bin, BUFSIZE) == 0)
-    {
-        printf("buf == bin\n");
-    }
+	if (sodium_memcmp(buf, bin, BUFSIZE) == 0) {
+		printf("buf == bin\n");
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    sodium_bin2base64_usage();
-    return 0;
+	sodium_bin2base64_usage();
+	return 0;
 }
-
 
 // reference
 // https://download.libsodium.org/doc/helpers#base64-encoding-decoding

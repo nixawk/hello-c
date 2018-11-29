@@ -8,83 +8,73 @@ void rightrotation_one(int[], int);
 void rightrotation(int[], int, int);
 void printarray(int[], int);
 
-void
-leftrotation_one(int arylst[], int arylen)
+void leftrotation_one(int arylst[], int arylen)
 {
-    int i, temp;
+	int i, temp;
 
-    temp = arylst[0];
-    for (i = 0; i < arylen - 1; i++)
-    {
-        arylst[i] = arylst[i + 1];
-    }
-    arylst[i] = temp;
+	temp = arylst[0];
+	for (i = 0; i < arylen - 1; i++) {
+		arylst[i] = arylst[i + 1];
+	}
+	arylst[i] = temp;
 }
 
-void
-leftrotation(int arylst[], int arylen, int index)
+void leftrotation(int arylst[], int arylen, int index)
 {
-    int i;
+	int i;
 
-    for (i = 0; i < index; i++)
-    {
-        leftrotation_one(arylst, arylen);
-    }
+	for (i = 0; i < index; i++) {
+		leftrotation_one(arylst, arylen);
+	}
 }
 
-void
-rightrotation_one(int arylst[], int arylen)
+void rightrotation_one(int arylst[], int arylen)
 {
-    int i, temp;
+	int i, temp;
 
-    temp = arylst[arylen - 1];
-    for (i = arylen; i > 0; i--)
-    {
-        arylst[i] = arylst[i - 1];
-    }
-    arylst[0] = temp;
+	temp = arylst[arylen - 1];
+	for (i = arylen; i > 0; i--) {
+		arylst[i] = arylst[i - 1];
+	}
+	arylst[0] = temp;
 }
 
-void
-rightrotation(int arylst[], int arylen, int index)
+void rightrotation(int arylst[], int arylen, int index)
 {
-    int i;
+	int i;
 
-    for (i = 0; i < index; i++)
-    {
-        rightrotation_one(arylst, arylen);
-    }
+	for (i = 0; i < index; i++) {
+		rightrotation_one(arylst, arylen);
+	}
 }
 
 void printarray(int arylst[], int arylen)
 {
-    int i;
+	int i;
 
-    for (i = 0; i < arylen; i++)
-    {
-        printf(" %d ", arylst[i]);
-    }
-    printf("\n");
+	for (i = 0; i < arylen; i++) {
+		printf(" %d ", arylst[i]);
+	}
+	printf("\n");
 }
 
-int
-main(int argc, const char *argv[])
+int main(int argc, const char *argv[])
 {
-    int arylst[] = {1, 2, 3, 4, 5, 6, 7};
-    int arylen = sizeof(arylst) / sizeof(*arylst);
+	int arylst[] = { 1, 2, 3, 4, 5, 6, 7 };
+	int arylen = sizeof(arylst) / sizeof(*arylst);
 
-    printf("original array    : ");
-    printarray(arylst, arylen);
+	printf("original array    : ");
+	printarray(arylst, arylen);
 
-    printf("left  rotation(2) : ");
-    leftrotation(arylst, arylen, 2);
-    printarray(arylst, arylen);
+	printf("left  rotation(2) : ");
+	leftrotation(arylst, arylen, 2);
+	printarray(arylst, arylen);
 
-    printf("right rotation(2) : ");
-    rightrotation(arylst, arylen, 2);
-    printarray(arylst, arylen);
+	printf("right rotation(2) : ");
+	rightrotation(arylst, arylen, 2);
+	printarray(arylst, arylen);
 
-    return 0;
+	return 0;
 }
 
 // https://www.geeksforgeeks.org/array-rotation/

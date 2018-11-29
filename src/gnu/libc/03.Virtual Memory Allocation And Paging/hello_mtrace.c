@@ -1,7 +1,6 @@
 #include <mcheck.h>
 #include <stdlib.h>
 
-
 // void mtrace (void)
 // void muntrace (void)
 
@@ -19,7 +18,6 @@
 // closes the protocol file. No calls are protocolled anymore and the program runs 
 // again at full speed.
 
-
 // This is all that is needed if you want to trace the calls during the whole runtime
 // of the program. Alternatively you can stop the tracing at any time with a call to 
 // muntrace. It is even possible to restart the tracing again with a new call to mtrace. 
@@ -27,41 +25,34 @@
 // are not called. Please note that not only the application uses the traced functions,
 // also libraries (including the C library itself) use these functions.
 
-
-
 #define SIZE 256
 
-
-void
-mtrace_usage(void)
+void mtrace_usage(void)
 {
-    char *buf;
+	char *buf;
 
-#ifdef DEBUGGING // gcc -DDEBUGGING -o test test.c
-    mtrace();    /* enable tracing */
+#ifdef DEBUGGING		// gcc -DDEBUGGING -o test test.c
+	mtrace();		/* enable tracing */
 #endif
 
-    buf = (char *)malloc(SIZE);
-    free(buf);
+	buf = (char *)malloc(SIZE);
+	free(buf);
 
-    // This last point is also why it is not a good idea to call [muntrace] before the program
-    // terminates. The libraries are informed about the termination of the program only after
-    // the program returns from main or calls exit and so cannot free the memory they use 
-    // before this time.
+	// This last point is also why it is not a good idea to call [muntrace] before the program
+	// terminates. The libraries are informed about the termination of the program only after
+	// the program returns from main or calls exit and so cannot free the memory they use 
+	// before this time.
 
 #ifdef DEBUGGING
-    muntrace();  /* disable tracing */
+	muntrace();		/* disable tracing */
 #endif
 }
 
-
-int
-main(void)
+int main(void)
 {
-    mtrace_usage();
-    return 0;
+	mtrace_usage();
+	return 0;
 }
-
 
 /*
 

@@ -13,41 +13,35 @@ zeros. It returns 0 if non-zero bits are found.
 #define BUFSIZE 32
 #endif
 
-void
-sodium_is_zero_usage(void)
+void sodium_is_zero_usage(void)
 {
-    unsigned char buf[BUFSIZE];
+	unsigned char buf[BUFSIZE];
 
-    if (sodium_init() < 0)
-    {
-        exit(EXIT_FAILURE);
-    }
+	if (sodium_init() < 0) {
+		exit(EXIT_FAILURE);
+	}
 
-    randombytes_buf(buf, BUFSIZE);
+	randombytes_buf(buf, BUFSIZE);
 
-    if (sodium_is_zero(buf, BUFSIZE) == 1)
-    {
-        printf("buf is filled by 0\n");
-    } else {
-        printf("buf is not filled by 0\n");
-    }
+	if (sodium_is_zero(buf, BUFSIZE) == 1) {
+		printf("buf is filled by 0\n");
+	} else {
+		printf("buf is not filled by 0\n");
+	}
 
-    sodium_memzero(buf, BUFSIZE);
+	sodium_memzero(buf, BUFSIZE);
 
-    if (sodium_is_zero(buf, BUFSIZE) == 1)
-    {
-        printf("buf is filled by 0\n");
-    } else {
-        printf("buf is not filled by 0\n");
-    }
+	if (sodium_is_zero(buf, BUFSIZE) == 1) {
+		printf("buf is filled by 0\n");
+	} else {
+		printf("buf is not filled by 0\n");
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    sodium_is_zero_usage();
-    return 0;
+	sodium_is_zero_usage();
+	return 0;
 }
 
 // reference

@@ -1,6 +1,5 @@
 #include <sys/mman.h>
 
-
     // int mlockall (int flags)
 
 // mlockall locks all the pages in a process' virtual memory address space,
@@ -23,7 +22,6 @@
 // spaces owned by the same process so exec, which replaces a process'
 // address space, wipes out them.
 
-
     // int munlockall (void)
 
 // munlockall unlocks every page in the calling process' virtual address space
@@ -34,23 +32,18 @@
 // reasons that all functions and systems calls can fail, so there are no
 // specific errno values.
 
-
-void
-mlockall_usage(void)
+void mlockall_usage(void)
 {
-    int lock_ret, unlock_ret;
+	int lock_ret, unlock_ret;
 
-    lock_ret = mlockall(MCL_CURRENT);
-    unlock_ret = munlockall();
+	lock_ret = mlockall(MCL_CURRENT);
+	unlock_ret = munlockall();
 }
 
-
-int
-main(void)
+int main(void)
 {
-    mlockall_usage();
-    return 0;
+	mlockall_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_mono/libc.html#Functions-To-Lock-And-Unlock-Pages

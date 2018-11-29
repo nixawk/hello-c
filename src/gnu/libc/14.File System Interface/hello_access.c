@@ -22,22 +22,18 @@
 
 // The return value is 0 if the access is permitted, and -1 otherwise.
 
-void
-access_usage(void)
+void access_usage(void)
 {
-    if (access("/etc/passwd", R_OK | W_OK | X_OK) != 0)
-    {
-        fprintf(stderr, "access() failed: %s\n", strerror(errno));
-        exit(0);
-    }
+	if (access("/etc/passwd", R_OK | W_OK | X_OK) != 0) {
+		fprintf(stderr, "access() failed: %s\n", strerror(errno));
+		exit(0);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    access_usage();
-    return 0;
+	access_usage();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Testing-File-Access.html

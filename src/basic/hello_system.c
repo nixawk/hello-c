@@ -11,20 +11,20 @@ The value returned is -1 on error, and the return status of the command otherwis
 
 */
 
-int main(int argc, char const *argv[]) {
-  int i;
+int main(int argc, char const *argv[])
+{
+	int i;
 
-  if (argc < 2)
-  {
-      printf("[*] Usage: %s <command> <command> ...\n", argv[0]);
-      exit(0);
-  }
+	if (argc < 2) {
+		printf("[*] Usage: %s <command> <command> ...\n", argv[0]);
+		exit(0);
+	}
 
-  for (i = 1; i < argc; ++i) {
-    printf("$ %s\n", argv[i]);
-    system(argv[i]);
-    printf("\n");
-  }
+	for (i = 1; i < argc; ++i) {
+		printf("$ %s\n", argv[i]);
+		system(argv[i]);
+		printf("\n");
+	}
 
-  return 0;
+	return 0;
 }

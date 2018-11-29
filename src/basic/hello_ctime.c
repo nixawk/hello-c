@@ -15,15 +15,15 @@ hh:mm:ss the time, and yyyy the year.
 
 int main(void)
 {
-    time_t *timer;
-    time_t rtimer;
+	time_t *timer;
+	time_t rtimer;
 
-    rtimer = time(timer);
+	rtimer = time(timer);
 
-    printf("Current time = %s", ctime(&rtimer));
-    printf("Current time = %s", ctime(timer));
+	printf("Current time = %s", ctime(&rtimer));
+	printf("Current time = %s", ctime(timer));
 
-    printf("rtimer pointer : %p\n", &rtimer);
-    printf("timer pointer  : %p\n", timer);
-    return 0;
+	printf("rtimer pointer : %p\n", &rtimer);
+	printf("timer pointer  : %p\n", timer);
+	return 0;
 }

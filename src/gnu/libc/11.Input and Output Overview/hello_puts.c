@@ -6,22 +6,17 @@
 // The terminating null character of the string is not written. (Note that fputs does
 // not write a newline as this function does.)
 
-
-void
-puts_usage(void)
+void puts_usage(void)
 {
-    char string[] = "hello, world\n";
+	char string[] = "hello, world\n";
 
-    puts(string);
+	puts(string);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    puts_usage();
-    return 0;
+	puts_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Simple-Output.html#Simple-Output

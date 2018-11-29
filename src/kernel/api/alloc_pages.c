@@ -15,27 +15,26 @@ struct page *pages = NULL;
 static int
 __init alloc_pages_init(void)
 {
-        pages = alloc_pages(GFP_KERNEL, 3);
-        if (!pages)
-        {
-                return -ENOMEM;
-        }
+	pages = alloc_pages(GFP_KERNEL, 3);
+	if (!pages) {
+		return -ENOMEM;
+	}
 
-        printk("alloc_pages successfully !\n");
-        printk("page_address(pages) = 0x%lx\n", (unsigned long)page_address(pages));
+	printk("alloc_pages successfully !\n");
+	printk("page_address(pages) = 0x%lx\n",
+	       (unsigned long)page_address(pages));
 
-        return 0;
+	return 0;
 }
 
 static void
 __exit alloc_pages_exit(void)
 {
-        if (pages)
-        {
-                __free_pages(pages, 3);
-                printk("__free_pages ok!\n");
-        }
-        printk("module exits ok !\n");
+	if (pages) {
+		__free_pages(pages, 3);
+		printk("__free_pages ok!\n");
+	}
+	printk("module exits ok !\n");
 }
 
 module_init(alloc_pages_init);

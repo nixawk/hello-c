@@ -14,29 +14,23 @@
 // from -2^63 to 2^63. This happens transparently for the user since all of the 
 // low-level file handling functions are equally replaced.
 
-
 // int creat64 (const char *filename, mode_t mode)
 
-
-void
-creat_usage(void)
+void creat_usage(void)
 {
-    int fd;
+	int fd;
 
-    fd = creat("/tmp/testfile", S_IRWXU);   /* Linux System Call */
-    if (fd != -1)
-    {
-        printf("file descriptor: %d\n", fd);
-        close(fd);
-    }
+	fd = creat("/tmp/testfile", S_IRWXU);	/* Linux System Call */
+	if (fd != -1) {
+		printf("file descriptor: %d\n", fd);
+		close(fd);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    creat_usage();
-    return 0;
+	creat_usage();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Opening-and-Closing-Files.html#Opening-and-Closing-Files

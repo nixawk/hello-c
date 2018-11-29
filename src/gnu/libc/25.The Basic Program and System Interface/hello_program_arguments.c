@@ -23,13 +23,10 @@
 
 #include <stdio.h>
 
-
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-    printf("argc: %d\n", argc);
-    return 0;
+	printf("argc: %d\n", argc);
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Program-Arguments.html#Program-Arguments

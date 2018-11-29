@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-
 // int fputc (int c, FILE *stream)
 
 // The fputc function converts the character c to type unsigned char, and writes it to
@@ -12,21 +11,16 @@
 // The [fputc_unlocked] function is equivalent to the [fputc] function except that it does
 // not implicitly lock the stream.
 
-
-void
-fputc_usage(void)
+void fputc_usage(void)
 {
-    char ch = 'A';
-    fputc(ch, stdout);
+	char ch = 'A';
+	fputc(ch, stdout);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    fputc_usage();
-    return 0;
+	fputc_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Simple-Output.html#Simple-Output

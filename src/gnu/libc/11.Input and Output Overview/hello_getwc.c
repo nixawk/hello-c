@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <wchar.h>
 
-
 // wint_t getwc (FILE *stream)
 
 // This is just like fgetwc, except that it is permissible for it to be implemented as a macro that 
@@ -10,20 +9,15 @@
 
 // wint_t getwc_unlocked (FILE *stream)
 
-
-void
-getwc_usage()
+void getwc_usage()
 {
-    putwc(getwc(stdin), stdout);
+	putwc(getwc(stdin), stdout);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    getwc_usage();
-    return 0;
+	getwc_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Character-Input.html#Character-Input

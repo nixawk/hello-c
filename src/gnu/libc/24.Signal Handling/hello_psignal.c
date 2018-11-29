@@ -1,11 +1,10 @@
 #include <signal.h>
 
-int
-main(int argc, const char *argv[])
+int main(int argc, const char *argv[])
 {
-    psignal(SIGINT, "This is an interrupt signal message.");
+	psignal(SIGINT, "This is an interrupt signal message.");
 
-    return 0;
+	return 0;
 }
 
 /*

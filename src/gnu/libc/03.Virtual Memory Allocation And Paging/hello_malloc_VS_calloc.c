@@ -1,6 +1,5 @@
 #include <stdlib.h>
 
-
 /*
 
 The name malloc() and calloc() are library functions that allocate memory dynamically.
@@ -24,25 +23,22 @@ calloc()
 
 */
 
-void
-malloc_ex(void)
+void malloc_ex(void)
 {
-    int *ptr = malloc(512);  /* allocate 512 bytes, not init */
-    free(ptr);
+	int *ptr = malloc(512);	/* allocate 512 bytes, not init */
+	free(ptr);
 }
 
-void
-calloc_ex(void)
+void calloc_ex(void)
 {
-    int *ptr = calloc(512, sizeof(char));  /* allocate 512 bytes, and initialize them to 0 */
-    free(ptr);
+	int *ptr = calloc(512, sizeof(char));	/* allocate 512 bytes, and initialize them to 0 */
+	free(ptr);
 }
 
-int
-main(void)
+int main(void)
 {
-    malloc_ex();
-    calloc_ex();
+	malloc_ex();
+	calloc_ex();
 }
 
 // http://www.geeksforgeeks.org/calloc-versus-malloc/

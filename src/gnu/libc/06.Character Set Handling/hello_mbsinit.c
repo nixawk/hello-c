@@ -11,7 +11,6 @@
 // mbstate_t is defined in wchar_t.h. It was introduced in Amendment
 // 1 to ISO C90.
 
-
 // int mbsinit (const mbstate_t *ps)
 
 // The mbsinit function determines whether the state object pointed to
@@ -20,35 +19,29 @@
 // zero. mbsinit was introduced in Amendment 1 to ISO C90 and is
 // declared in wchar.h
 
-
 #define SIZE 512
 
-
-void
-mbsinit_usage(void)
+void mbsinit_usage(void)
 {
-    char outbuf[SIZE];
-    int outbuflen = strlen(outbuf);
+	char outbuf[SIZE];
+	int outbuflen = strlen(outbuf);
 
-    mbstate_t state;
-    memset(&state, '\0', sizeof(state));
+	mbstate_t state;
+	memset(&state, '\0', sizeof(state));
 
-    if (! mbsinit(&state))
-    {
-        const wchar_t empty[] = L"ABCD";
-        const wchar_t *srcp = empty;
+	if (!mbsinit(&state)) {
+		const wchar_t empty[] = L"ABCD";
+		const wchar_t *srcp = empty;
 
-        wcsrtombs(outbuf, &srcp, outbuflen, &state);
-        printf("%s\n", outbuf);
-    }
+		wcsrtombs(outbuf, &srcp, outbuflen, &state);
+		printf("%s\n", outbuf);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    mbsinit_usage();
-    return 0;
+	mbsinit_usage();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_mono/libc.html#Character-Handling

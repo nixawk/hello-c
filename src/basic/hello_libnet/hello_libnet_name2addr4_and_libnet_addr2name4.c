@@ -4,7 +4,6 @@
 
 #include <libnet.h>
 
-
 /*
 
 $ gcc -Wall hello_libnet_name2addr4_and_libnet_addr2name4.c `libnet-config --libs`
@@ -15,75 +14,58 @@ $ sudo ./a.out
 
 */
 
-
-void
-hello_libnet_addr2name4(u_int32_t in)
+void hello_libnet_addr2name4(u_int32_t in)
 {
-    libnet_t *plibnet_t; 
-    char errbuf[LIBNET_ERRBUF_SIZE];
+	libnet_t *plibnet_t;
+	char errbuf[LIBNET_ERRBUF_SIZE];
 
-    plibnet_t = libnet_init(LIBNET_RAW4, NULL, errbuf);
-    if (plibnet_t == NULL)
-    {
-        fprintf(stderr, "libnet_init() failed: %s\n", errbuf);
-        exit(EXIT_FAILURE);
-    }
+	plibnet_t = libnet_init(LIBNET_RAW4, NULL, errbuf);
+	if (plibnet_t == NULL) {
+		fprintf(stderr, "libnet_init() failed: %s\n", errbuf);
+		exit(EXIT_FAILURE);
+	}
 
-    printf(
-        "[*] libnet_addr2name4: [%x] -> [%s]\n",
-        in,
-        libnet_addr2name4(in, LIBNET_DONT_RESOLVE)
-    );
+	printf("[*] libnet_addr2name4: [%x] -> [%s]\n",
+	       in, libnet_addr2name4(in, LIBNET_DONT_RESOLVE)
+	    );
 
-    libnet_destroy(plibnet_t);
+	libnet_destroy(plibnet_t);
 }
 
-
-void
-hello_libnet_name2addr4(char *ip_addr_str)
+void hello_libnet_name2addr4(char *ip_addr_str)
 {
-    libnet_t * plibnet_t;
-    char errbuf[LIBNET_ERRBUF_SIZE];
-    u_int32_t ip_addr;
-    u_int8_t *ip_addr_p;
+	libnet_t *plibnet_t;
+	char errbuf[LIBNET_ERRBUF_SIZE];
+	u_int32_t ip_addr;
+	u_int8_t *ip_addr_p;
 
-    plibnet_t = libnet_init(LIBNET_RAW4, NULL, errbuf);
-    if (plibnet_t == NULL)
-    {
-        fprintf(stderr, "libnet_init() failed: %s\n", errbuf);
-        exit(EXIT_FAILURE);
-    }
+	plibnet_t = libnet_init(LIBNET_RAW4, NULL, errbuf);
+	if (plibnet_t == NULL) {
+		fprintf(stderr, "libnet_init() failed: %s\n", errbuf);
+		exit(EXIT_FAILURE);
+	}
 
-    ip_addr = libnet_name2addr4(plibnet_t, ip_addr_str, LIBNET_DONT_RESOLVE);
-    if (ip_addr != -1)
-    {
-        ip_addr_p = (u_int8_t*)(&ip_addr);
-        printf(
-            "[*] libnet_name2addr4: [\"%s\"] -> [%d.%d.%d.%d]\n",
-            ip_addr_str,
-            ip_addr_p[0],
-            ip_addr_p[1],
-            ip_addr_p[2],
-            ip_addr_p[3]
-        );
-    }
-    else
-    {
-        fprintf(stderr, "Error converting IP address.\n");
-    }
+	ip_addr =
+	    libnet_name2addr4(plibnet_t, ip_addr_str, LIBNET_DONT_RESOLVE);
+	if (ip_addr != -1) {
+		ip_addr_p = (u_int8_t *) (&ip_addr);
+		printf("[*] libnet_name2addr4: [\"%s\"] -> [%d.%d.%d.%d]\n",
+		       ip_addr_str,
+		       ip_addr_p[0], ip_addr_p[1], ip_addr_p[2], ip_addr_p[3]
+		    );
+	} else {
+		fprintf(stderr, "Error converting IP address.\n");
+	}
 
-    libnet_destroy(plibnet_t);
+	libnet_destroy(plibnet_t);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    hello_libnet_addr2name4(0xfeffffff);
-    hello_libnet_name2addr4("255.255.255.254");
-    return 0;
+	hello_libnet_addr2name4(0xfeffffff);
+	hello_libnet_name2addr4("255.255.255.254");
+	return 0;
 }
-
 
 // references
 // http://libnet.sourceforge.net/libnet.html

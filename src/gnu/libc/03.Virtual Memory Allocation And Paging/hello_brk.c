@@ -28,34 +28,27 @@
 
 #define SIZE    512
 
-
-void
-brk_usage(void)
+void brk_usage(void)
 {
-    void *ptr;
+	void *ptr;
 
-    ptr = malloc(SIZE);
-    if (ptr == NULL)
-    {
-        error(EXIT_FAILURE, errno, "malloc() failed");
-    }
+	ptr = malloc(SIZE);
+	if (ptr == NULL) {
+		error(EXIT_FAILURE, errno, "malloc() failed");
+	}
 
-    if (brk(ptr + 0x400) != 0)
-    {
-        error(EXIT_FAILURE, errno, "brk() failed");
-    }
+	if (brk(ptr + 0x400) != 0) {
+		error(EXIT_FAILURE, errno, "brk() failed");
+	}
 
-    free(ptr);
+	free(ptr);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    brk_usage();
-    return 0;
+	brk_usage();
+	return 0;
 }
-
 
 /*
 $ ./hello_brk 

@@ -11,7 +11,6 @@
 // as if they were automatic variables declared in that function. There is
 // no way to free the space explicitly.
 
-
 // Do not use alloca inside the arguments of a function call - you will get
 // unpredictable results, because the stack space for the alloca would
 // appear on the stack in the middle of the space for the function arguments.
@@ -29,27 +28,21 @@
 // However, a slower emulation of alloca written in C is available for use
 // on systems with this deficiency.
 
-
 #define BUFSIZE 512
 
-
-void
-alloca_usage(void)
+void alloca_usage(void)
 {
-    char *src = "hello, world";
-    char *dst = (char *) alloca(BUFSIZE);
-    memcpy(dst, src, strlen(src) + 1);
+	char *src = "hello, world";
+	char *dst = (char *)alloca(BUFSIZE);
+	memcpy(dst, src, strlen(src) + 1);
 
-    printf("dst string: %s\n", dst);
+	printf("dst string: %s\n", dst);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    alloca_usage();
-    return 0;
+	alloca_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_mono/libc.html#Allocation-in-an-Obstack

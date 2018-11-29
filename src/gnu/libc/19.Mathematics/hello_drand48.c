@@ -12,25 +12,21 @@
 // course) chosen to be the least significant bits and they are initialized to
 // 0.
 
-void
-drand48_usage(void)
+void drand48_usage(void)
 {
-    int i;
-    double n;
+	int i;
+	double n;
 
-    for (i = 0; i < 10; i++)
-    {
-        n = drand48();
-        printf("%d. random num: %f\n", i, n);
-    }
+	for (i = 0; i < 10; i++) {
+		n = drand48();
+		printf("%d. random num: %f\n", i, n);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    drand48_usage();
-    return 0;
+	drand48_usage();
+	return 0;
 }
 
 // $ ./a.out

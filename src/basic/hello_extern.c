@@ -9,21 +9,17 @@ of a large program.
 
 #include <stdio.h>
 
-extern void
-print_hello(char *);
+extern void print_hello(char *);
 
-
-void
-print_hello(char *s)
+void print_hello(char *s)
 {
-    printf("hello %s\n", s);
+	printf("hello %s\n", s);
 }
 
-int
-main(void)
+int main(void)
 {
-    print_hello("world");
-    return 0;
+	print_hello("world");
+	return 0;
 }
 
 /*

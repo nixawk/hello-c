@@ -20,24 +20,19 @@
 // usually declared to be a pointer of type wchar_t *, by analogy with string
 // variables and char *.
 
-
-void
-hello_string(void)
+void hello_string(void)
 {
-    char *ch = "hello, world";
-    wchar_t *ws = L"hello, world";
+	char *ch = "hello, world";
+	wchar_t *ws = L"hello, world";
 
-    printf("ch length: %lu\n", strlen(ch));
-    printf("ws length: %lu\n", wcslen(ws));
+	printf("ch length: %lu\n", strlen(ch));
+	printf("ws length: %lu\n", wcslen(ws));
 }
 
-
-int
-main(void)
+int main(void)
 {
-    hello_string();
-    return 0;
+	hello_string();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_mono/libc.html#Character-Handling

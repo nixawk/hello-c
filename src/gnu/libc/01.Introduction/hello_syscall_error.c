@@ -23,19 +23,17 @@ errno to determine the cause of the error.
 
 */
 
-void
-syscall_error(void)
+void syscall_error(void)
 {
-    syscall(__NR_access, "invalid-file-path", R_OK);
-    printf("errno = %d\n", errno);
-    perror("syscall_error");
+	syscall(__NR_access, "invalid-file-path", R_OK);
+	printf("errno = %d\n", errno);
+	perror("syscall_error");
 }
 
-int
-main(void)
+int main(void)
 {
-    syscall_error();
-    return 0;
+	syscall_error();
+	return 0;
 }
 
 /*

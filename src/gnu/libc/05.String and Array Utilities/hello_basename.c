@@ -1,15 +1,12 @@
 #include <stdio.h>
 #include <string.h>
-#include <libgen.h>  /* comment here, the prog may crash. */
-
+#include <libgen.h>		/* comment here, the prog may crash. */
 
 // char * basename (const char *filename)
-
 
 // The GNU version of the [basename] function returns the last component of the path
 // in filename. This function is the preferred usage, since it does not modify the argument,
 // filename, and respects trailing slashes.
-
 
 // char * basename (char *path)
 
@@ -18,19 +15,16 @@
 // of '/' bytes, then "/" will be returned. Also, it path is NULL or an empty string string,
 // then "." is returned. The prototype for the XPG version can be found in libgen.h.
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-    char *prog = basename(argv[0]);
-    // char *path = dirname(argv[0]);
+	char *prog = basename(argv[0]);
+	// char *path = dirname(argv[0]);
 
-    if (argc < 2)
-    {
-        fprintf(stderr, "Usage %s <arg>\n", prog);
-    }
+	if (argc < 2) {
+		fprintf(stderr, "Usage %s <arg>\n", prog);
+	}
 
-    return 0;
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Finding-Tokens-in-a-String.html#Finding-Tokens-in-a-String

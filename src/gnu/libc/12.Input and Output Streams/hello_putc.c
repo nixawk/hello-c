@@ -5,7 +5,6 @@
 // argument more than once, which is an exception to the general rule for
 // macros. putc is usually the best function to use for writing a single character.
 
-
 // Function: int putchar (int c)
 
 // The putchar function is equivalent to putc with stdout as the value of the
@@ -13,21 +12,18 @@
 
 #include <stdio.h>
 
-
-void
-putc_and_putchar(void)
+void putc_and_putchar(void)
 {
-    char c = 'A';
+	char c = 'A';
 
-    putc(c, stdout);
-    putchar(c);
+	putc(c, stdout);
+	putchar(c);
 }
 
-int
-main(void)
+int main(void)
 {
-    putc_and_putchar();
-    return 0;
+	putc_and_putchar();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Simple-Output.html#Simple-Output

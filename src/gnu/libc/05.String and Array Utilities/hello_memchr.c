@@ -8,28 +8,23 @@
 // in the initial size bytes of the object beginning at block.
 // The return value is a pointer to the located byte, or a null pointer if no match was found.
 
-
-void
-memchr_usage(void)
+void memchr_usage(void)
 {
-    const char s[] = "helloworld";
-    int c = 'l';
+	const char s[] = "helloworld";
+	int c = 'l';
 
-    void *ptr = memchr(s, c, strlen(s));
-    if (ptr == NULL)
-    {
-        printf("memchr() failed \n");
-        exit(0);
-    }
+	void *ptr = memchr(s, c, strlen(s));
+	if (ptr == NULL) {
+		printf("memchr() failed \n");
+		exit(0);
+	}
 
-    printf("str pointer : %p, \ndst pointer : %p\n", s, ptr);
+	printf("str pointer : %p, \ndst pointer : %p\n", s, ptr);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    memchr_usage();
+	memchr_usage();
 
-    return 0;
+	return 0;
 }

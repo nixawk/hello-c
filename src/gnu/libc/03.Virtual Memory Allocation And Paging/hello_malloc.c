@@ -20,7 +20,6 @@
 // that calls [malloc] and reports an error if the value is a null pointer,
 // returning only if the value is nonzero.
 
-
     // void free (void *ptr)
 
 // When you no longer need a block that you got with malloc, use the function 
@@ -30,34 +29,30 @@
 
 // The memset() function returns its first argument.
 
-
 typedef struct foo {
-    int x;
+	int x;
 } foo_t;
 
+void malloc_usage(void)
+{
+	foo_t *ptr;
 
-void
-malloc_usage(void) {
-    foo_t *ptr;
+	ptr = (foo_t *) malloc(sizeof(foo_t));
+	if (ptr != NULL) {
+		error(EXIT_FAILURE, errno, "malloc() failed");
+	}
 
-    ptr = (foo_t *) malloc(sizeof(foo_t));
-    if (ptr != NULL) {
-        error(EXIT_FAILURE, errno, "malloc() failed");
-    }
+	memset(ptr, 0, sizeof(foo_t));
+	printf("foo.x = %d\n", ptr->x);
 
-    memset(ptr, 0, sizeof(foo_t));
-    printf("foo.x = %d\n", ptr->x);
-
-    free(ptr);
+	free(ptr);
 }
 
-
-int
-main(void) {
-    malloc_usage();
-    return(0);
+int main(void)
+{
+	malloc_usage();
+	return (0);
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Basic-Allocation.html#Basic-Allocation
 // https://www.gnu.org/software/libc/manual/html_node/Malloc-Examples.html#Malloc-Examples

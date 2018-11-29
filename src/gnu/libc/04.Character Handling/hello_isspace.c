@@ -13,32 +13,26 @@
 // '\t' - horizontal tab
 // '\v' - vertical tab
 
-
-void
-isspace_usage(void)
+void isspace_usage(void)
 {
-    char string[] = " \tA";
-    int i;
+	char string[] = " \tA";
+	int i;
 
-    for (i = 0; i < strlen(string); i++)
-    {
-        if (isspace(string[i]))
-        {
-            printf("[%c] is a whitespace character\n", string[i]);
-        } else {
-            printf("[%c] is not a whitespace character\n", string[i]);
-        }
-    }
+	for (i = 0; i < strlen(string); i++) {
+		if (isspace(string[i])) {
+			printf("[%c] is a whitespace character\n", string[i]);
+		} else {
+			printf("[%c] is not a whitespace character\n",
+			       string[i]);
+		}
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    isspace_usage();
-    return 0;
+	isspace_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Classification-of-Characters.html#Classification-of-Characters
 // https://www.gnu.org/software/libc/manual/html_node/Classification-of-Wide-Characters.html#Classification-of-Wide-Characters

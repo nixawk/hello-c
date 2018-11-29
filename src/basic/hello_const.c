@@ -4,10 +4,9 @@ when initialized, can't change their value. Or in other words, the value assigne
 unmodifiable.
 */
 
-int
-main(void)
+int main(void)
 {
-    const int i = 0;
-    //  i = 1;  // error: assignment of read-only variable ‘i’
-    return 0;
+	const int i = 0;
+	//  i = 1;  // error: assignment of read-only variable ‘i’
+	return 0;
 }

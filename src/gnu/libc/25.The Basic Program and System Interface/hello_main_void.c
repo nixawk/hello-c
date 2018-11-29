@@ -14,13 +14,12 @@ int main()            // int main() can be called with any number of arguments,
 
 */
 
-
 #include <stdio.h>
-int main(void)       // int main(void) can only be called without any argument.
+int main(void)			// int main(void) can only be called without any argument.
 {
-    static int i = 5;
-    if (--i){
-        printf("%d ", i);
-        main(10);    // compilation error.
-    }
+	static int i = 5;
+	if (--i) {
+		printf("%d ", i);
+		main(10);	// compilation error.
+	}
 }

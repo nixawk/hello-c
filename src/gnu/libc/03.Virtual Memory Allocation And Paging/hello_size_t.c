@@ -15,18 +15,15 @@ typedef unsigned long __kernel_size_t;
 
 void show_size_t(void)
 {
-    size_t n = 100;
-    printf("%lu - %lu bytes\n", n, sizeof(n));  // unsigned long
+	size_t n = 100;
+	printf("%lu - %lu bytes\n", n, sizeof(n));	// unsigned long
 }
 
-
-int
-main(void)
+int main(void)
 {
-    show_size_t();
-    return 0;
+	show_size_t();
+	return 0;
 }
-
 
 // https://stackoverflow.com/questions/2550774/what-is-size-t-in-c
 // http://en.cppreference.com/w/c/types/size_t

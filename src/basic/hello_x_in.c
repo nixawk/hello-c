@@ -7,17 +7,15 @@
 // strcasestr
 // strnstr
 
-bool
-in(s, substr)
-    const char *s;
-    const char *substr;
+bool in(s, substr)
+const char *s;
+const char *substr;
 {
-    return strstr(s, substr) != NULL;
+	return strstr(s, substr) != NULL;
 }
 
-int
-main(void)
+int main(void)
 {
-    in("hello", "ll") ? printf("yes\n") : printf("no\n");
-    return 0;
+	in("hello", "ll") ? printf("yes\n") : printf("no\n");
+	return 0;
 }

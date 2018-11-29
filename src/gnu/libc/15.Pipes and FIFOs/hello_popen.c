@@ -8,7 +8,6 @@
 // simpler and easier to use. But it doesn't offer as much flexibility
 // as using the low-level functions directly.
 
-
     // FILE * popen(const char *command, const char *mode)
 
 // The popen function is closely related to the system function. It executes
@@ -28,7 +27,6 @@
 // if the pipe or stream cannot be created, if the subprocess cannot be forked,
 // or if the program cannot be executed.
 
-
     // int pclose(FILE *stream)
 
 // The pclose function is used to close a stream created by popen. It waits
@@ -38,45 +36,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-void
-write_data(FILE *stream)
+void write_data(FILE * stream)
 {
-    int i;
-    for (i = 0; i < 100; i++)
-    {
-        fprintf(stream, "%d\n", i);
-    }
+	int i;
+	for (i = 0; i < 100; i++) {
+		fprintf(stream, "%d\n", i);
+	}
 
-    if (ferror(stream))
-    {
-        fprintf(stderr, "Output to stream failed.\n");
-        exit(EXIT_FAILURE);
-    }
+	if (ferror(stream)) {
+		fprintf(stderr, "Output to stream failed.\n");
+		exit(EXIT_FAILURE);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    FILE *output;
+	FILE *output;
 
-    output = popen("more", "w");
-    if (!output)
-    {
-        fprintf(stderr, "incorrect parameters or too many files.\n");
-        return EXIT_FAILURE;
-    }
+	output = popen("more", "w");
+	if (!output) {
+		fprintf(stderr, "incorrect parameters or too many files.\n");
+		return EXIT_FAILURE;
+	}
 
-    write_data(output);
+	write_data(output);
 
-    if (pclose(output) != 0)
-    {
-        fprintf(stderr, "Could not run more or other error.\n");
-    }
+	if (pclose(output) != 0) {
+		fprintf(stderr, "Could not run more or other error.\n");
+	}
 
-    return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Pipe-to-a-Subprocess.html#Pipe-to-a-Subprocess

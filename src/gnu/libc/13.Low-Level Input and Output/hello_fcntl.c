@@ -11,7 +11,7 @@
 // filedes. Some commands require additional arguments to be supplied. These additional
 // arguments and the return value and error conditions are given in the detailed
 // descriptions of the individual commands.
-    
+
     // F_DUPFD
     // F_GETFD
     // F_SETFD
@@ -32,56 +32,45 @@
 // stay allocated until the program ends. To avoid this calls to fcntl should be protected
 // using cancellation handlers.
 
-
-void
-set_fl(int fd, int flags)
+void set_fl(int fd, int flags)
 {
-    int val;
+	int val;
 
-    if ((val = fcntl(fd, F_GETFL, 0)) < 0)
-    {
-        fprintf(stderr, "fcntl() failed: %s\n.", strerror(errno));
-        exit(1);
-    }
+	if ((val = fcntl(fd, F_GETFL, 0)) < 0) {
+		fprintf(stderr, "fcntl() failed: %s\n.", strerror(errno));
+		exit(1);
+	}
 
-    val |= flags;
+	val |= flags;
 
-    if (fcntl(fd, F_SETFL, val) < 0)
-    {
-        fprintf(stderr, "fcntl() failed: %s\n.", strerror(errno));
-        exit(1);
-    }
+	if (fcntl(fd, F_SETFL, val) < 0) {
+		fprintf(stderr, "fcntl() failed: %s\n.", strerror(errno));
+		exit(1);
+	}
 }
 
-
-void
-clr_fl(int fd, int flags)
+void clr_fl(int fd, int flags)
 {
-    int val;
+	int val;
 
-    if ((val = fcntl(fd, F_GETFL, 0)) < 0)
-    {
-        fprintf(stderr, "fcntl() failed: %s\n.", strerror(errno));
-        exit(1);
-    }
+	if ((val = fcntl(fd, F_GETFL, 0)) < 0) {
+		fprintf(stderr, "fcntl() failed: %s\n.", strerror(errno));
+		exit(1);
+	}
 
-    val |= flags;
+	val |= flags;
 
-    if (fcntl(fd, F_SETFL, val) < 0)
-    {
-        fprintf(stderr, "fcntl() failed: %s\n.", strerror(errno));
-        exit(1);
-    }
+	if (fcntl(fd, F_SETFL, val) < 0) {
+		fprintf(stderr, "fcntl() failed: %s\n.", strerror(errno));
+		exit(1);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    set_fl(STDOUT_FILENO, O_SYNC);
-    clr_fl(STDOUT_FILENO, O_SYNC);
-    return 0;
+	set_fl(STDOUT_FILENO, O_SYNC);
+	clr_fl(STDOUT_FILENO, O_SYNC);
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Control-Operations.html

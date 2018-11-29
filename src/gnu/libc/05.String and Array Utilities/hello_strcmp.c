@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 // int memcmp (const void *a1, const void *a2, size_t size)
 // int wmemcmp (const wchar_t *a1, const wchar_t *a2, size_t size)
 // int strcmp (const char *s1, const char *s2)
@@ -16,31 +15,25 @@
 // int strverscmp (const char *s1, const char *s2)
 // int bcmp (const void *a1, const void *a2, size_t size)
 
-
-void
-strcmp_usage(char *inputstr)
+void strcmp_usage(char *inputstr)
 {
-    char flag[] = "hello";
-    int ret = strcmp(flag, inputstr);
-    // If the two strings are equal, strcmp returns 0.
+	char flag[] = "hello";
+	int ret = strcmp(flag, inputstr);
+	// If the two strings are equal, strcmp returns 0.
 
-    printf("%d\n", ret);  /* ret = s1 - str */
+	printf("%d\n", ret);	/* ret = s1 - str */
 }
 
-
-int
-main(int argc, const char *argv[])
+int main(int argc, const char *argv[])
 {
-    if (argc != 2)
-    {
-        printf("[*] %s <hello>", argv[0]);
-        exit(0);
-    }
+	if (argc != 2) {
+		printf("[*] %s <hello>", argv[0]);
+		exit(0);
+	}
 
-    strcmp_usage((char *)argv[1]);
+	strcmp_usage((char *)argv[1]);
 
-    return 0;
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/String_002fArray-Comparison.html#String_002fArray-Comparison

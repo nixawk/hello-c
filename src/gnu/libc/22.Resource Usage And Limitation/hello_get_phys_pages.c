@@ -2,13 +2,11 @@
 #include <sys/sysinfo.h>
 #include <stdio.h>
 
-
 // Function: long int get_phys_pages (void)
 
 // The get_phys_pages function returns the total number of pages of physical memory
 // the system has. To get the amount of memory this number has to multiplied by the
 // page size.
-
 
 // Function: long int get_avphys_pages (void)
 
@@ -16,18 +14,14 @@
 // memory the system has. To get the amount of memory this number has to multiplied
 // by the page size.
 
-
-void
-get_phys_pages_usage(void)
+void get_phys_pages_usage(void)
 {
-    long int n = get_phys_pages();
-    printf("get_phys_pages() = %ld\n", n);
+	long int n = get_phys_pages();
+	printf("get_phys_pages() = %ld\n", n);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    get_phys_pages_usage();
-    return 0;
+	get_phys_pages_usage();
+	return 0;
 }

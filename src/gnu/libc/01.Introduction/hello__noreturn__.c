@@ -8,8 +8,7 @@
 // that never return. You can declare them noreturn to tell the compiler
 // this fact.
 
-
-void fatal() __attribute__((noreturn));
+void fatal() __attribute__ ((noreturn));
 
 // The noreturn keyword tells the compiler to assume that fatal cannot return.
 // It can then optimize without regard to what would happen if fatal ever did
@@ -20,15 +19,13 @@ void fatal() __attribute__((noreturn));
 // a nonreturn-marked function may still return to the caller by throwing an
 // exception or calling longjmp.
 
-void
-fatal()
+void fatal()
 {
 	printf("This is a noreturn function !\n");
 	exit(1);
 }
 
-int
-main(void)
+int main(void)
 {
 	fatal();
 	return 0;

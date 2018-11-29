@@ -13,25 +13,21 @@
 // in which case the value returned by getcwd can resolve the symbol links 
 // and therefore yield a different result.
 
-void
-get_current_dir_name_usage(void)
+void get_current_dir_name_usage(void)
 {
-    char *path = get_current_dir_name();
-    if (path != NULL)
-    {
-        printf("current directory: %s\n", path);
-    } else {
-        fprintf(stderr, "get_current_dir_name() failed: %s.\n", strerror(errno));
-    }
+	char *path = get_current_dir_name();
+	if (path != NULL) {
+		printf("current directory: %s\n", path);
+	} else {
+		fprintf(stderr, "get_current_dir_name() failed: %s.\n",
+			strerror(errno));
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    get_current_dir_name_usage();
-    return 0;
+	get_current_dir_name_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Working-Directory.html#Working-Directory

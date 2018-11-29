@@ -1,7 +1,6 @@
 #include <sys/time.h>
 #include <stdio.h>
 
-
 // The time_t data type used to represent simple times has a resolution of only
 // second. Some application need more precision.
 
@@ -24,7 +23,6 @@
 // The struct timezone type is obsolete and should never be used. Instead,
 // use the facilities described in Time Zone Functions.
 
-
 // Function: int gettimeofday (struct timeval *tp, struct timezone *tzp)
 
 // The gettimeofday function returns the current calendar time as the elapsed
@@ -39,7 +37,6 @@
     // an obsolete feature of 4.3 BSD. Instead, use the facilities described
     // in Time Zone Functions.
 
-
 // Data Type: struct timeval
 
 // The struct timeval structure represents an elapsed time. It is declared in
@@ -52,31 +49,25 @@
     // This is the rest of elapsed time (a fraction of a second), represented
     // as the number of microseconds. It is always less than one million.
 
-
 // int settimeofday (const struct timeval *tp, const struct timezone *tzp)
 // int adjtime (const struct timeval *delta, struct timeval *olddelta)
 // int adjtimex (struct timex *timex)
 
-
-void
-gettimeofday_usage(void)
+void gettimeofday_usage(void)
 {
-    struct timeval t;
+	struct timeval t;
 
-    gettimeofday(&t, NULL);
+	gettimeofday(&t, NULL);
 
-    printf("timeval.tv_sec  = %ld\n", t.tv_sec);
-    printf("timeval.tv_usec = %d\n", t.tv_usec);
+	printf("timeval.tv_sec  = %ld\n", t.tv_sec);
+	printf("timeval.tv_usec = %d\n", t.tv_usec);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    gettimeofday_usage();
-    return 0;
+	gettimeofday_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/High_002dResolution-Calendar.html#High_002dResolution-Calendar
 // http://man7.org/linux/man-pages/man2/gettimeofday.2.html

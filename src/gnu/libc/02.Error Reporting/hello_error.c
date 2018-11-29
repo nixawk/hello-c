@@ -30,20 +30,17 @@
 // therefore never return. If error returns, the global variable error_message_count
 //  is incremented by one to keep track of the number of errors reported.
 
-
-void
-error_usage(void)
+void error_usage(void)
 {
-    errno = 1;
-    error(EXIT_FAILURE, errno, "errno: %d, %s", errno, "custom error message");
+	errno = 1;
+	error(EXIT_FAILURE, errno, "errno: %d, %s", errno,
+	      "custom error message");
 }
 
-
-int
-main(void)
+int main(void)
 {
-    error_usage();
-    return 0;
+	error_usage();
+	return 0;
 }
 
 /*

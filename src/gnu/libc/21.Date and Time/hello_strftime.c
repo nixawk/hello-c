@@ -16,33 +16,27 @@
 // value indicates the number of characters placed in the array s, not
 // including the terminating null character.
 
-void
-strftime_usage(void)
+void strftime_usage(void)
 {
-    char buf[SIZE];
-    struct tm *tm;
-    time_t time = 1514366148;
+	char buf[SIZE];
+	struct tm *tm;
+	time_t time = 1514366148;
 
-    tm = localtime(&time);
-    if (tm == NULL)
-    {
-        fprintf(stderr, "localtime() failed\n");
-        exit(EXIT_FAILURE);
-    }
+	tm = localtime(&time);
+	if (tm == NULL) {
+		fprintf(stderr, "localtime() failed\n");
+		exit(EXIT_FAILURE);
+	}
 
-    if (strftime(buf, SIZE, "%Y-%m-%d %H:%M:%S%z", tm) != (size_t) 0)
-    {
-        printf("Date: %s\n", buf);
-    }
+	if (strftime(buf, SIZE, "%Y-%m-%d %H:%M:%S%z", tm) != (size_t) 0) {
+		printf("Date: %s\n", buf);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    strftime_usage();
-    return 0;
+	strftime_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Formatting-Calendar-Time.html#Formatting-Calendar-Time

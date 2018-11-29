@@ -21,28 +21,23 @@
 // default facility causes this facility to be associated with the message. See syslog for possible values.
 // A value of zero means the default, which is LOG_USER.
 
-
     // void syslog (int facility_priority, const char *format, …)
     // void closelog (void)
 
-
-void
-syslog_usage(void)
+void syslog_usage(void)
 {
-    openlog("testing", LOG_CONS | LOG_PID, LOG_USER);
-    syslog(LOG_INFO, "this is an information log.");
-    closelog();
+	openlog("testing", LOG_CONS | LOG_PID, LOG_USER);
+	syslog(LOG_INFO, "this is an information log.");
+	closelog();
 
-    // $ cat /var/log/syslog
-    // Oct  3 14:57:06 lab testing[12259]: this is an information log.
+	// $ cat /var/log/syslog
+	// Oct  3 14:57:06 lab testing[12259]: this is an information log.
 }
 
-
-int
-main(void)
+int main(void)
 {
-    syslog_usage();
-    return 0;
+	syslog_usage();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/openlog.html#openlog

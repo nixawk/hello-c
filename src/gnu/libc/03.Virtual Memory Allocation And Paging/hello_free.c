@@ -33,30 +33,25 @@ Valgrind : http://valgrind.org/
 
 */
 
-void
-memory_leak(void)
+void memory_leak(void)
 {
-    int *ptr = malloc(512);
+	int *ptr = malloc(512);
 }
 
-
-void
-avoid_memory_leak(void)
+void avoid_memory_leak(void)
 {
-    int *ptr = malloc(512);
-    free(ptr);
+	int *ptr = malloc(512);
+	free(ptr);
 }
 
+int main(void)
+{
 
-int
-main(void) {
+	memory_leak();
+	avoid_memory_leak();
 
-    memory_leak();
-    avoid_memory_leak();
-
-    return 0;
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Freeing-after-Malloc.html#Freeing-after-Malloc
 // http://www.geeksforgeeks.org/what-is-memory-leak-how-can-we-avoid/

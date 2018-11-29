@@ -14,36 +14,32 @@
 
 // fork VS vfork
 
-void
-vfork_usage(void)
+void vfork_usage(void)
 {
-    int istack = 222;
+	int istack = 222;
 
-    switch (vfork())
-    {
-        case -1:
-            perror("vfork");
-            exit(EXIT_FAILURE);
+	switch (vfork()) {
+	case -1:
+		perror("vfork");
+		exit(EXIT_FAILURE);
 
-        case 0:        /* Child executes first, in parent's memory space */
-            sleep(3);  /* Even if we sleep for a while, parent still is not scheduled. */
-            write(STDOUT_FILENO, "Child executing\n", 16);
-            istack *= 3;
-            exit(EXIT_SUCCESS);
+	case 0:		/* Child executes first, in parent's memory space */
+		sleep(3);	/* Even if we sleep for a while, parent still is not scheduled. */
+		write(STDOUT_FILENO, "Child executing\n", 16);
+		istack *= 3;
+		exit(EXIT_SUCCESS);
 
-        default:
-            write(STDOUT_FILENO, "Parent executing\n", 17);
-            printf("istack=%d\n", istack);
-            exit(EXIT_SUCCESS);
-    }
+	default:
+		write(STDOUT_FILENO, "Parent executing\n", 17);
+		printf("istack=%d\n", istack);
+		exit(EXIT_SUCCESS);
+	}
 }
 
-
-int
-main(void)
+int main(void)
 {
-    vfork_usage();
-    return 0;
+	vfork_usage();
+	return 0;
 }
 
 // https://www.gnu.org/software/libc/manual/html_node/Creating-a-Process.html

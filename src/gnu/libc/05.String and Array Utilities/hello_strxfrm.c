@@ -12,15 +12,16 @@ This function returns the length of the transformed string, not including the te
 
 */
 
-int main(int argc, char const *argv[]) {
-  char dest[20];
-  char src[20];
+int main(int argc, char const *argv[])
+{
+	char dest[20];
+	char src[20];
 
-  int len;
+	int len;
 
-  strcpy(src, "helloworld");
-  len = strxfrm(dest, src, 20);
+	strcpy(src, "helloworld");
+	len = strxfrm(dest, src, 20);
 
-  printf("Length of string |%s| is : |%d|", dest, len);
-  return 0;
+	printf("Length of string |%s| is : |%d|", dest, len);
+	return 0;
 }

@@ -17,16 +17,16 @@ This function returns a pointer to the resulting string dest.
 
 int main(void)
 {
-    char dest[256];
-    char src[256];
-    char *pointer;
+	char dest[256];
+	char src[256];
+	char *pointer;
 
-    strcpy(src, "This is source");
-    strcpy(dest, "This is destination");
+	strcpy(src, "This is source");
+	strcpy(dest, "This is destination");
 
-    pointer = strncat(dest, src, 15);
-    printf("Final destination string : |%s|\n", dest);
-    printf("Final destination string : |%s|\n", pointer);
+	pointer = strncat(dest, src, 15);
+	printf("Final destination string : |%s|\n", dest);
+	printf("Final destination string : |%s|\n", pointer);
 
-    return 0;
+	return 0;
 }

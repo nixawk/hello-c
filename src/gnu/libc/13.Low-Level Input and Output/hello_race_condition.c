@@ -29,84 +29,72 @@ access to the CPU(s).
 void read_demo(const char *);
 void write_demo(const char *, const char *);
 
-
-void
-read_demo(const char *filename)
+void read_demo(const char *filename)
 {
-    char inbuf[BUFSIZE] = {0};
-    ssize_t nr;
-    int fd;
+	char inbuf[BUFSIZE] = { 0 };
+	ssize_t nr;
+	int fd;
 
-    fd = open(filename, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
-    if (fd == -1)
-    {
-        printf("read_demo - failed to open %s\n", filename);
-        exit(EXIT_FAILURE);
-    }
+	fd = open(filename, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+	if (fd == -1) {
+		printf("read_demo - failed to open %s\n", filename);
+		exit(EXIT_FAILURE);
+	}
 
-    nr = read(fd, inbuf, BUFSIZE);
-    if (nr == -1)
-    {
-        printf("read_demo - failed to read %s\n", filename);
-        exit(EXIT_FAILURE);
-    }
+	nr = read(fd, inbuf, BUFSIZE);
+	if (nr == -1) {
+		printf("read_demo - failed to read %s\n", filename);
+		exit(EXIT_FAILURE);
+	}
 
-    printf("\n[*] [PID: %ld] - output: %s\n", (long)getpid(), inbuf);
+	printf("\n[*] [PID: %ld] - output: %s\n", (long)getpid(), inbuf);
 
-    if (close(fd) == -1)
-    {
-        printf("read_demo - failed to close %s\n", filename);
-        exit(EXIT_FAILURE);
-    }
+	if (close(fd) == -1) {
+		printf("read_demo - failed to close %s\n", filename);
+		exit(EXIT_FAILURE);
+	}
 }
 
-void
-write_demo(const char *filename, const char *outbuf)
+void write_demo(const char *filename, const char *outbuf)
 {
-    int fd;
-    ssize_t nw;
+	int fd;
+	ssize_t nw;
 
-    fd = open(filename, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
-    if (fd == -1)
-    {
-        printf("write_demo - failed to open %s\n", filename);
-        exit(EXIT_FAILURE);
-    }
+	fd = open(filename, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+	if (fd == -1) {
+		printf("write_demo - failed to open %s\n", filename);
+		exit(EXIT_FAILURE);
+	}
 
-    nw = write(fd, outbuf, strlen(outbuf));
-    if (nw == -1)
-    {
-        printf("write_demo - failed to write %s\n", filename);
-        exit(EXIT_FAILURE);
-    }
+	nw = write(fd, outbuf, strlen(outbuf));
+	if (nw == -1) {
+		printf("write_demo - failed to write %s\n", filename);
+		exit(EXIT_FAILURE);
+	}
 
-    printf("\n[*] [PID: %ld] - input: %s\n", (long)getpid(), outbuf);
+	printf("\n[*] [PID: %ld] - input: %s\n", (long)getpid(), outbuf);
 
-    if (close(fd) == -1)
-    {
-        printf("write_demo - failed to close %s\n", filename);
-        exit(EXIT_FAILURE);
-    }
+	if (close(fd) == -1) {
+		printf("write_demo - failed to close %s\n", filename);
+		exit(EXIT_FAILURE);
+	}
 }
 
-int
-main(int argc, const char *argv[])
+int main(int argc, const char *argv[])
 {
-    int i;
+	int i;
 
-    if (argc < 3)
-    {
-        printf("[*] Usage: %s <filename> <string>\n", argv[0]);
-        exit(EXIT_FAILURE);
-    }
+	if (argc < 3) {
+		printf("[*] Usage: %s <filename> <string>\n", argv[0]);
+		exit(EXIT_FAILURE);
+	}
 
-    write_demo(argv[1], argv[2]);
-    sleep(2);
-    read_demo(argv[1]);
+	write_demo(argv[1], argv[2]);
+	sleep(2);
+	read_demo(argv[1]);
 
-    exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
-
 
 /* r.sh
 

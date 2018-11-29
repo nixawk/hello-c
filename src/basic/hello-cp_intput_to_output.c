@@ -1,12 +1,11 @@
 #include <stdio.h>
 
-int
-main(void)
+int main(void)
 {
-    int c;
+	int c;
 
-    while ((c = getchar()) != EOF)  /* copy input to output */
-        putchar(c);
+	while ((c = getchar()) != EOF)	/* copy input to output */
+		putchar(c);
 
-    return 0;
+	return 0;
 }

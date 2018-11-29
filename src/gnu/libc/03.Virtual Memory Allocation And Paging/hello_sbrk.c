@@ -11,20 +11,16 @@
 // This means you can use 'sbrk(0)' to find out what the current end of the
 // data segment is.
 
-void
-sbrk_usage(void)
+void sbrk_usage(void)
 {
-    printf("The end of data segment: %p\n", sbrk(0));
+	printf("The end of data segment: %p\n", sbrk(0));
 }
 
-
-int
-main(void)
+int main(void)
 {
-    sbrk_usage();
-    return 0;
+	sbrk_usage();
+	return 0;
 }
-
 
 /*
 $ ./hello_sbrk 

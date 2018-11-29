@@ -3,21 +3,18 @@
 #include <errno.h>
 #include <stdio.h>
 
-
-void
-show_program_invocation_name(void)
+void show_program_invocation_name(void)
 {
-    printf("program_invocation_name: %s\n", program_invocation_name);
-    printf("program_invocation_short_name: %s\n", program_invocation_short_name);
+	printf("program_invocation_name: %s\n", program_invocation_name);
+	printf("program_invocation_short_name: %s\n",
+	       program_invocation_short_name);
 }
 
-int
-main(void)
+int main(void)
 {
-    show_program_invocation_name();
-    return 0;
+	show_program_invocation_name();
+	return 0;
 }
-
 
 /*
 

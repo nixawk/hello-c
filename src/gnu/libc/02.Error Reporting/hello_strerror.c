@@ -21,26 +21,23 @@
 
 // The function [strerror] is declared in [string.h]
 
-
-void
-strerror_usage(void)
+void strerror_usage(void)
 {
-    errno = 1;  // raise an error status
+	errno = 1;		// raise an error status
 
-    // printf("program name: %s\n", program_invocation_short_name);  // #define _GNU_SOURCE
-    // printf("program err : %s\n", strerror(errno));                // errno is global.
+	// printf("program name: %s\n", program_invocation_short_name);  // #define _GNU_SOURCE
+	// printf("program err : %s\n", strerror(errno));                // errno is global.
 
-    // 4.4 Formatting Error Messages
-    printf("%s:%d:%s:%s", __FILE__, __LINE__, __FUNCTION__, strerror(errno));
+	// 4.4 Formatting Error Messages
+	printf("%s:%d:%s:%s", __FILE__, __LINE__, __FUNCTION__,
+	       strerror(errno));
 }
-
 
 int main(void)
 {
-    strerror_usage();
-    return 0;
+	strerror_usage();
+	return 0;
 }
-
 
 // https://www.gnu.org/software/libc/manual/html_node/Error-Messages.html#Error-Messages
 // https://linux.die.net/man/3/program_invocation_short_name

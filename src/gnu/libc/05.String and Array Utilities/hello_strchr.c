@@ -18,26 +18,23 @@
 // New code should always use [strchr] since the name is defined in ISO C,
 // while [index] is a BSD invention which never was available on System V derived systems.
 
-
-void
-strchr_usage(void)
+void strchr_usage(void)
 {
-    char s[] = "helloworld";
-    int c = 'l';
+	char s[] = "helloworld";
+	int c = 'l';
 
-    char *ptr = strchr(s, c);
-    if (ptr == NULL)
-    {
-        printf("strchr() failed \n");
-        exit(0);
-    }
+	char *ptr = strchr(s, c);
+	if (ptr == NULL) {
+		printf("strchr() failed \n");
+		exit(0);
+	}
 
-    printf("%p - %s\n", ptr, ptr);
+	printf("%p - %s\n", ptr, ptr);
 }
 
 int main(void)
 {
-    strchr_usage();
+	strchr_usage();
 
-    return 0;
+	return 0;
 }

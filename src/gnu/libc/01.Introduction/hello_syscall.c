@@ -26,29 +26,26 @@ some general points:
 
 */
 
-void
-syscall_usage(void)
+void syscall_usage(void)
 {
-    const char *path = "/etc/passwd";
-    int rval;
+	const char *path = "/etc/passwd";
+	int rval;
 
-    // syscall(__NR_getuid) is equivalent to getuid()
-    // printf("%ld\n", syscall(__NR_getuid));
+	// syscall(__NR_getuid) is equivalent to getuid()
+	// printf("%ld\n", syscall(__NR_getuid));
 
-    rval = syscall(__NR_access, path, R_OK);  // check read permissions
-    if (rval == 0)
-        printf("%s is readable !\n", path);
-    else
-        printf("%s is not readable !\n", path);
+	rval = syscall(__NR_access, path, R_OK);	// check read permissions
+	if (rval == 0)
+		printf("%s is readable !\n", path);
+	else
+		printf("%s is not readable !\n", path);
 }
 
-
-int
-main(void)
+int main(void)
 {
-    syscall_usage();
+	syscall_usage();
 
-    return 0;
+	return 0;
 }
 
 /*
@@ -118,4 +115,3 @@ program.
 // https://www.win.tue.nl/~aeb/linux/lk/lk-3.html
 // https://github.com/torvalds/linux/tree/master/arch/x86/entry
 // https://github.com/torvalds/linux/blob/master/arch/x86/entry/syscalls/syscall_32.tbl
-

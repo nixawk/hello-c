@@ -28,32 +28,26 @@
     // to determine whether a call failed. The proper way to do that is documented for
     // each function. If the call failed, you can examine [errno].
 
-
-void
-errno_print(int err)
+void errno_print(int err)
 {
-    fprintf(stderr, "errno: %d, %s\n", err, strerror(err));
+	fprintf(stderr, "errno: %d, %s\n", err, strerror(err));
 }
 
-
-void
-errno_usage(void)
+void errno_usage(void)
 {
-    errno_print(errno);  // default errno is 0
-    errno_print(EPERM);
-    errno_print(ENOENT);
-    errno_print(ESRCH);
-    errno_print(EINTR);
-    errno_print(0xFF);   // errmsg for an unknown error code
+	errno_print(errno);	// default errno is 0
+	errno_print(EPERM);
+	errno_print(ENOENT);
+	errno_print(ESRCH);
+	errno_print(EINTR);
+	errno_print(0xFF);	// errmsg for an unknown error code
 }
-
 
 int main(void)
 {
-    errno_usage();
-    return 0;
+	errno_usage();
+	return 0;
 }
-
 
 /*
 

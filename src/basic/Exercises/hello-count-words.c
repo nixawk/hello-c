@@ -8,44 +8,36 @@
 #include <string.h>
 #include <ctype.h>
 
-
-int
-count_words(const char *s)
+int count_words(const char *s)
 {
-    int i, w;
+	int i, w;
 
-    for (i = 0, w = 0; i < strlen(s); i++)
-    {
-        if (!isspace(*(s+i)))
-        {
-            w++;
-            while (!isspace(*(s+i)) && *(s+i) != '\0')
-            {
-                i++;
-            }
-        }
-    }
+	for (i = 0, w = 0; i < strlen(s); i++) {
+		if (!isspace(*(s + i))) {
+			w++;
+			while (!isspace(*(s + i)) && *(s + i) != '\0') {
+				i++;
+			}
+		}
+	}
 
-    return w;
+	return w;
 }
 
-int
-main(int argc, const char *argv[])
+int main(int argc, const char *argv[])
 {
-    int i;
+	int i;
 
-    if (argc < 2)
-    {
-        printf("[*] Usage: %s <str1> <str2> ...\n", argv[0]);
-        return -1;
-    }
+	if (argc < 2) {
+		printf("[*] Usage: %s <str1> <str2> ...\n", argv[0]);
+		return -1;
+	}
 
-    for (i = 1; i < argc; i++)
-    {
-        printf("s = %s, w= %d\n ", argv[i], count_words(argv[i]));
-    }
+	for (i = 1; i < argc; i++) {
+		printf("s = %s, w= %d\n ", argv[i], count_words(argv[i]));
+	}
 
-    return 0;
+	return 0;
 }
 
 /*
