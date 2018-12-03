@@ -23,4 +23,3 @@ int main(void)
 }
 
 /* https://en.cppreference.com/w/c/language/identifier */
-
