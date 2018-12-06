@@ -1,21 +1,18 @@
 #include <gnu/libc-version.h>
+#include <stdlib.h>
 #include <stdio.h>
 
-void glibc_ver(void)
+int main(int argc, char *argv[])
 {
-	printf("gnu_get_libc_version() = %s\n", gnu_get_libc_version());
-}
-
-int main(void)
-{
-	glibc_ver();
-	return 0;
+	printf("GNU libc version: %s\n", gnu_get_libc_version());
+	printf("GNU libc release: %s\n", gnu_get_libc_release());
+	exit(EXIT_SUCCESS);
 }
 
 /*
 
-$ gcc test.c 
 $ ./a.out 
-gnu_get_libc_version() = 2.24
+GNU libc version: 2.27
+GNU libc release: stable
 
 */
