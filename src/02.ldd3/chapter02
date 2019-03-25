@@ -1,0 +1,95 @@
+Quick Reference
+
+This section summarizes the kernel functions, variables, macros, and /proc files
+that we've touched on in this chapter. It is meant to act as a reference. Each 
+item is listed after the relevant header file, if any. A similar section appears
+at the end of almost every chapter from here on, summarizing the new symbols in-
+troduced in the chapter. Entries in this section generally appear in the same o-
+rder in which they were introduced in the chapter:
+
+insmod
+modprobe
+rmmod
+	User-space utilities that load modules into the running kernels and rem-
+	ove them.
+
+#include <linux/init.h>
+module_init(init_function)
+module_exit(cleanup_function)
+	Macros that designate a module's initialization and cleanup functions.
+
+__init
+__initdata
+__exit
+__exitdata
+	Markers for functions (__init and __exit) and data (__initdata and __ex-
+	itdata) that are only used at module initialization or cleanup time. It-
+	ems marked for initialization may be discarded once initialization comp-
+	letes; the exit items may be discarded if module unloading has not been
+	configured into the kernel. These markers work by causing the relevant
+	objects to be placed in a special ELF section in an executable file.
+
+#include <linux/sched.h>
+	One of the most important header files. This file contains definitions
+	of much of the kernel API used by the driver, including functions for
+	sleeping and numerous variable declarations.
+
+struct task_struct *current
+current->pid
+current->comm
+	The processID and command name for the current process.
+
+obj-m
+	A makefile symbol used by the kernel build system to determine which mo-
+	dules should be built in the current directory.
+
+/sys/module
+/proc/modules
+	/sys/module is a sysfs directory hierarchy containing information on cu-
+	rrently loaded modules. /proc/modules is the older, single-file version
+	of that information. Entries contain the module name, the amount of mem-
+	ory each module occupies, and the usage count. Extra strings are append-
+	ed to each line to specify flags that are currently active for the modu-
+	le.
+
+vermagic.o
+	An object file from the kernel source directory that describes the envi-
+	ronment a module was built for.
+
+#include <linux/module.h>
+	Required header. It must be included by a module source.
+
+#include <linux/version.h>
+	A header file containing information on the version of the kernel being
+	built.
+LINUX_VERSION_CODE
+	Integer macro, useful to #ifdef version dependencies
+
+EXPORT_SYMBOL(symbol)
+EXPORT_SYMBOL_GPL(symbol)
+	Macro used to export a symbol to the kernel. The second from exports wi-
+	thout using versioning information, and the third limits the export to
+	GPL-licensed modules.
+
+MODULE_AUTHOR(author);
+MODULE_DESCRIPTION(description);
+MODULE_VERSION(version_string);
+MODULE_DEVICE_TABLE(table_info);
+MODULE_ALIAS(alternate_name);
+	Place documentation on the module in the object file.
+
+module_init(init_function);
+module_exit(cleanup_function);
+	Macro that declares a module's initialization and cleanup functions.
+
+#include <linux/moduleparam.h>
+module_param(variable, type, perm);
+	Macro that creates a module parameter that can be adjusted by the user
+	when the module is loaded (or at boot time for built-in code). The type
+	can be one of bool, charp, int, invbool, long, short, ushort, uint, ulo
+	-ng, or intarray.
+
+#include <linux/kernel.h>
+int printk(const char *fmt, ...);
+	The analogue of printf for kernel code.
+
