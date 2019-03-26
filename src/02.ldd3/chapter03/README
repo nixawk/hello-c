@@ -34,142 +34,47 @@ scullwuid
 
 ----
 
+Char devices are accessed through names in the filesystem. Those names are call-
+ed special files or device files or simply nodes of the filesystem tree; they
+are conventionally located in the /dev directory.
+
 $ ls -ll /dev | grep -E "^c"
-crw-------  1 root root     10, 175 Mar 25 10:38 agpgart
-crw-r--r--  1 root root     10, 235 Mar 25 10:38 autofs
-crw-------  1 root root     10, 234 Mar 25 10:38 btrfs-control
 crw-------  1 root root      5,   1 Mar 25 10:38 console
-crw-------  1 root root     10,  60 Mar 25 10:38 cpu_dma_latency
-crw-------  1 root root     10, 203 Mar 25 10:38 cuse
-crw-rw----+ 1 root audio    14,   9 Mar 25 10:38 dmmidi
-crw-rw----  1 root video    29,   0 Mar 25 10:38 fb0
-crw-rw-rw-  1 root root      1,   7 Mar 25 10:38 full
-crw-rw-rw-  1 root root     10, 229 Mar 25 10:38 fuse
-crw-------  1 root root    242,   0 Mar 25 10:38 hidraw0
-crw-------  1 root root     10, 228 Mar 25 10:38 hpet
-crw-r--r--  1 root root      1,  11 Mar 25 10:38 kmsg
-crw-rw----  1 root disk     10, 237 Mar 25 10:38 loop-control
-crw-rw----  1 root video   241,   0 Mar 25 10:38 media0
-crw-r-----  1 root kmem      1,   1 Mar 25 10:38 mem
-crw-------  1 root root     10,  57 Mar 25 10:38 memory_bandwidth
-crw-rw----+ 1 root audio    14,   2 Mar 25 10:38 midi
-crw-------  1 root root     10,  59 Mar 25 10:38 network_latency
-crw-------  1 root root     10,  58 Mar 25 10:38 network_throughput
-crw-rw-rw-  1 root root      1,   3 Mar 25 10:38 null
-crw-r-----  1 root kmem      1,   4 Mar 25 10:38 port
-crw-------  1 root root    108,   0 Mar 25 10:38 ppp
-crw-------  1 root root     10,   1 Mar 25 10:38 psaux
-crw-rw-rw-  1 root tty       5,   2 Mar 25 16:27 ptmx
-crw-rw-rw-  1 root root      1,   8 Mar 25 10:38 random
-crw-rw-r--  1 root rfkill   10,  56 Mar 25 10:38 rfkill
-crw-------  1 root root    250,   0 Mar 25 10:38 rtc0
-crw-------  1 root root     10, 231 Mar 25 10:38 snapshot
-crw-rw-rw-  1 root tty       5,   0 Mar 25 15:00 tty
-crw--w----  1 root tty       4,   0 Mar 25 10:38 tty0
-crw--w----  1 root tty       4,   1 Mar 25 10:38 tty1
-crw--w----  1 root tty       4,  10 Mar 25 10:38 tty10
-crw--w----  1 root tty       4,  11 Mar 25 10:38 tty11
-crw--w----  1 root tty       4,  12 Mar 25 10:38 tty12
-crw--w----  1 root tty       4,  13 Mar 25 10:38 tty13
-crw--w----  1 root tty       4,  14 Mar 25 10:38 tty14
-crw--w----  1 root tty       4,  15 Mar 25 10:38 tty15
-crw--w----  1 root tty       4,  16 Mar 25 10:38 tty16
-crw--w----  1 root tty       4,  17 Mar 25 10:38 tty17
-crw--w----  1 root tty       4,  18 Mar 25 10:38 tty18
-crw--w----  1 root tty       4,  19 Mar 25 10:38 tty19
-crw--w----  1 root tty       4,   2 Mar 25 10:38 tty2
-crw--w----  1 root tty       4,  20 Mar 25 10:38 tty20
-crw--w----  1 root tty       4,  21 Mar 25 10:38 tty21
-crw--w----  1 root tty       4,  22 Mar 25 10:38 tty22
-crw--w----  1 root tty       4,  23 Mar 25 10:38 tty23
-crw--w----  1 root tty       4,  24 Mar 25 10:38 tty24
-crw--w----  1 root tty       4,  25 Mar 25 10:38 tty25
-crw--w----  1 root tty       4,  26 Mar 25 10:38 tty26
-crw--w----  1 root tty       4,  27 Mar 25 10:38 tty27
-crw--w----  1 root tty       4,  28 Mar 25 10:38 tty28
-crw--w----  1 root tty       4,  29 Mar 25 10:38 tty29
-crw--w----  1 root tty       4,   3 Mar 25 10:38 tty3
-crw--w----  1 root tty       4,  30 Mar 25 10:38 tty30
-crw--w----  1 root tty       4,  31 Mar 25 10:38 tty31
-crw--w----  1 root tty       4,  32 Mar 25 10:38 tty32
-crw--w----  1 root tty       4,  33 Mar 25 10:38 tty33
-crw--w----  1 root tty       4,  34 Mar 25 10:38 tty34
-crw--w----  1 root tty       4,  35 Mar 25 10:38 tty35
-crw--w----  1 root tty       4,  36 Mar 25 10:38 tty36
-crw--w----  1 root tty       4,  37 Mar 25 10:38 tty37
-crw--w----  1 root tty       4,  38 Mar 25 10:38 tty38
-crw--w----  1 root tty       4,  39 Mar 25 10:38 tty39
-crw--w----  1 root tty       4,   4 Mar 25 10:38 tty4
-crw--w----  1 root tty       4,  40 Mar 25 10:38 tty40
-crw--w----  1 root tty       4,  41 Mar 25 10:38 tty41
-crw--w----  1 root tty       4,  42 Mar 25 10:38 tty42
-crw--w----  1 root tty       4,  43 Mar 25 10:38 tty43
-crw--w----  1 root tty       4,  44 Mar 25 10:38 tty44
-crw--w----  1 root tty       4,  45 Mar 25 10:38 tty45
-crw--w----  1 root tty       4,  46 Mar 25 10:38 tty46
-crw--w----  1 root tty       4,  47 Mar 25 10:38 tty47
-crw--w----  1 root tty       4,  48 Mar 25 10:38 tty48
-crw--w----  1 root tty       4,  49 Mar 25 10:38 tty49
-crw--w----  1 root tty       4,   5 Mar 25 10:38 tty5
-crw--w----  1 root tty       4,  50 Mar 25 10:38 tty50
-crw--w----  1 root tty       4,  51 Mar 25 10:38 tty51
-crw--w----  1 root tty       4,  52 Mar 25 10:38 tty52
-crw--w----  1 root tty       4,  53 Mar 25 10:38 tty53
-crw--w----  1 root tty       4,  54 Mar 25 10:38 tty54
-crw--w----  1 root tty       4,  55 Mar 25 10:38 tty55
-crw--w----  1 root tty       4,  56 Mar 25 10:38 tty56
-crw--w----  1 root tty       4,  57 Mar 25 10:38 tty57
-crw--w----  1 root tty       4,  58 Mar 25 10:38 tty58
-crw--w----  1 root tty       4,  59 Mar 25 10:38 tty59
-crw--w----  1 root tty       4,   6 Mar 25 10:38 tty6
-crw--w----  1 root tty       4,  60 Mar 25 10:38 tty60
-crw--w----  1 root tty       4,  61 Mar 25 10:38 tty61
-crw--w----  1 root tty       4,  62 Mar 25 10:38 tty62
-crw--w----  1 root tty       4,  63 Mar 25 10:38 tty63
-crw--w----  1 root tty       4,   7 Mar 25 10:38 tty7
-crw--w----  1 root tty       4,   8 Mar 25 10:38 tty8
-crw--w----  1 root tty       4,   9 Mar 25 10:38 tty9
+crw-rw-rw-  1 root root      1,   3 Mar 26 13:53 null
 crw-rw----  1 root uucp      4,  64 Mar 25 10:38 ttyS0
 crw-rw----  1 root uucp      4,  65 Mar 25 10:38 ttyS1
 crw-rw----  1 root uucp      4,  66 Mar 25 10:38 ttyS2
 crw-rw----  1 root uucp      4,  67 Mar 25 10:38 ttyS3
-crw-------  1 root root     10,  61 Mar 25 10:38 udmabuf
-crw-------  1 root root     10, 239 Mar 25 10:38 uhid
-crw-------  1 root root     10, 223 Mar 25 10:38 uinput
-crw-rw-rw-  1 root root      1,   9 Mar 25 10:38 urandom
-crw-------  1 root root     10, 240 Mar 25 10:38 userio
-crw-rw----  1 root tty       7,   0 Mar 25 10:38 vcs
-crw-rw----  1 root tty       7,   1 Mar 25 10:38 vcs1
-crw-rw----  1 root tty       7,   2 Mar 25 10:38 vcs2
-crw-rw----  1 root tty       7,   3 Mar 25 10:38 vcs3
-crw-rw----  1 root tty       7,   4 Mar 25 10:38 vcs4
-crw-rw----  1 root tty       7,   5 Mar 25 10:38 vcs5
-crw-rw----  1 root tty       7,   6 Mar 25 10:38 vcs6
-crw-rw----  1 root tty       7,   7 Mar 25 10:38 vcs7
-crw-rw----  1 root tty       7, 128 Mar 25 10:38 vcsa
-crw-rw----  1 root tty       7, 129 Mar 25 10:38 vcsa1
-crw-rw----  1 root tty       7, 130 Mar 25 10:38 vcsa2
-crw-rw----  1 root tty       7, 131 Mar 25 10:38 vcsa3
-crw-rw----  1 root tty       7, 132 Mar 25 10:38 vcsa4
-crw-rw----  1 root tty       7, 133 Mar 25 10:38 vcsa5
-crw-rw----  1 root tty       7, 134 Mar 25 10:38 vcsa6
-crw-rw----  1 root tty       7, 135 Mar 25 10:38 vcsa7
-crw-rw----  1 root tty       7,  64 Mar 25 10:38 vcsu
-crw-rw----  1 root tty       7,  65 Mar 25 10:38 vcsu1
-crw-rw----  1 root tty       7,  66 Mar 25 10:38 vcsu2
-crw-rw----  1 root tty       7,  67 Mar 25 10:38 vcsu3
-crw-rw----  1 root tty       7,  68 Mar 25 10:38 vcsu4
-crw-rw----  1 root tty       7,  69 Mar 25 10:38 vcsu5
-crw-rw----  1 root tty       7,  70 Mar 25 10:38 vcsu6
-crw-rw----  1 root tty       7,  71 Mar 25 10:38 vcsu7
-crw-------  1 root root     10,  63 Mar 25 10:38 vga_arbiter
-crw-------  1 root root     10, 137 Mar 25 10:38 vhci
-crw-------  1 root root     10, 238 Mar 25 10:38 vhost-net
-crw-------  1 root root     10, 241 Mar 25 10:38 vhost-vsock
-crw-rw----+ 1 root video    81,   0 Mar 25 10:38 video0
-crw-rw----+ 1 root video    81,   1 Mar 25 10:38 video1
-crw-------  1 root root     10,  55 Mar 25 10:38 vmci
 crw-rw-rw-  1 root root      1,   5 Mar 25 10:38 zero
+
+5 is the major number, and 1 is the minor number.
+
+Traditionally, the major number identifies the driver associated with the devic-
+e. For example, /dev/null and /dev/zero are both managed by driver 1, whereas
+virtual consoles and serial terminals are managed by driver 4. Modern Linux
+kernels allow multiple drivers to share major numbers, but most devices that
+you will see still organized on the one-major-one-driver principle.
+
+The minor number is used by the kernel to determine exactly which device is
+being referred to.
+
+----
+
+How to access char device ?
+
+|--------------------------| -----|
+| MKDEV                    |      |
+| register_chrdev_region   |      |----- register device
+|--------------------------|      |
+| alloc_chrdev_region      |      |
+|--------------------------| -----|
+| cdev_init                |      |----- init/add char device
+| cdev_add                 |      |
+|--------------------------| -----|
+| cdev_del                 |      |----- del char device
+|--------------------------| -----|
+| unregister_chrdev_region |      |----- unregister device
+|--------------------------| -----|
 
 ----
 
