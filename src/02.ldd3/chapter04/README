@@ -1,0 +1,26 @@
+
+:: Debugging by Printing
+
+It is possible to read and modify the console loglevel using the text file
+/proc/sys/kernel/printk. The file hosts four integer values:
+
+	the current loglevel
+	the default level for messages that lack an explicit loglevel
+	the minimum allowed loglevel
+	the boot-time default loglevel
+
+$ cat /proc/sys/kernel/printk
+1		4		1		4
+current		default		minimum		boot-time-default
+
+
+$ sudo sh -c 'echo 8 > /proc/sys/kernel/printk'
+$ sudo insmod ./hello.ko
+$ sudo rmmod hello
+
+
+https://elinux.org/Debugging_by_printing
+https://www.kernel.org/doc/html/v4.15/dev-tools/index.html
+https://media.ccc.de/v/froscon2017-1925-linux_kernel_debugging_for_sysadmins
+https://medium.com/square-corner-blog/a-short-guide-to-kernel-debugging-e6fdbe7bfcdf
+
