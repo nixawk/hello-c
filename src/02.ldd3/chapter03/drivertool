@@ -1,0 +1,105 @@
+#!/bin/bash
+
+# os    : arch linux
+# kernel: 5.0.3
+# author: nixawk
+
+module="hellochar"
+device="hellochar"
+mode="666"
+
+
+function isroot {
+	if [ "$UID" != 0 ]; then
+		echo "[!] the script must be run with root"
+		exit 1
+	fi
+}
+
+function load {
+	# invoke insmod with all arguments we got
+	# and use a pathname, as newer modutils don't look in. by default
+	/sbin/insmod ./$module.ko $* || exit 1
+
+	# remove stale nodes
+	rm -f /dev/${device}[0-3]
+
+	# major=$(awk "\\$2==\"$module\" {print \\$1}" /proc/devices)
+	major=$(awk '$2 == "hellochar" {print $1}' /proc/devices)
+
+	mknod /dev/${device}0 c $major 0
+	mknod /dev/${device}1 c $major 1
+	mknod /dev/${device}2 c $major 2
+	mknod /dev/${device}3 c $major 3
+
+	# give appropriate group/permissions, and change the group.
+	# Not all distributions have staff, some have "wheel" instead.
+	group="staff"
+	grep -q '^staff:' /etc/group || group="wheel"
+
+	chgrp $group /dev/${device}[0-3]
+	chmod $mode /dev/${device}[0-3]
+}
+
+function unload {
+	rm -f /dev/${device}[0-4]
+	rmmod $module
+}
+
+function test {
+	cat /etc/passwd > /dev/${device}0
+	cat /etc/passwd > /dev/${device}1
+	cat /etc/passwd > /dev/${device}2
+	cat /etc/passwd > /dev/${device}3
+}
+
+function main {
+	isroot
+
+	if [ "$1" == "load" ]; then
+		echo "[*] load device"
+		load
+
+	elif [ "$1" == "unload" ]; then
+		echo "[*] unload device"
+		unload
+	elif [ "$1" == "test" ]; then
+		echo "[*] test device"
+		test
+	else
+		echo "[*] Usage: $0 <load | unload | test>"
+	fi
+}
+
+main $*
+
+
+# $ sudo ./drivertool
+# [*] Usage: ./drivertool <load | unload | test>
+# 
+# $ sudo ./drivertool load
+# [*] load device
+# 
+# $ sudo ./drivertool test
+# [*] test device
+# 
+# $ dmesg -k | grep hellochar
+# ....
+# [ 3925.315580] NAME: hellochar, METHOD: hello_init, MAHOR: 239, MINOR: 0
+# [ 3928.713465] NAME: hellochar, METHOD: dev_open, MAJOR: 239, MINOR: 0
+# [ 3928.713782] NAME: hellochar, METHOD: dev_write, MAJOR: 239, MINOR: 0
+# [ 3928.713792] NAME: hellochar, METHOD: dev_release, MAJOR: 239, MINOR: 0
+# [ 3928.714251] NAME: hellochar, METHOD: dev_open, MAJOR: 239, MINOR: 1
+# [ 3928.714571] NAME: hellochar, METHOD: dev_write, MAJOR: 239, MINOR: 1
+# [ 3928.714580] NAME: hellochar, METHOD: dev_release, MAJOR: 239, MINOR: 1
+# [ 3928.714791] NAME: hellochar, METHOD: dev_open, MAJOR: 239, MINOR: 2
+# [ 3928.715052] NAME: hellochar, METHOD: dev_write, MAJOR: 239, MINOR: 2
+# [ 3928.715061] NAME: hellochar, METHOD: dev_release, MAJOR: 239, MINOR: 2
+# [ 3928.715267] NAME: hellochar, METHOD: dev_open, MAJOR: 239, MINOR: 3
+# [ 3928.715528] NAME: hellochar, METHOD: dev_write, MAJOR: 239, MINOR: 3
+# [ 3928.715537] NAME: hellochar, METHOD: dev_release, MAJOR: 239, MINOR: 3
+# 
+# $ sudo ./drivertool unload
+# [*] unload device
+# 
+
