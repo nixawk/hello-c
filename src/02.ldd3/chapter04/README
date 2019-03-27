@@ -39,7 +39,7 @@ TFTP server (on systems that can boot from Ethernet).
 - https://wiki.archlinux.org/index.php/Kernel/Traditional_compilation
 
 Build the kernel with this series applied, enabling CONFIG_DEBUG_INFO (but leave
-CONFIG_DEBUG_INFO_REDUCED off)
+CONFIG_DEBUG_INFO_REDUCED off), enabling CONFIG_GDB_SCRIPTS.
 
 2. Install GDB and Qemu
 
@@ -126,51 +126,46 @@ CONFIG_DEBUG_INFO_REDUCED off)
 
 5. Debug Linux Kernel With GDB
 
-	~/Projects/kernelbuild/linux-5.0.3 ➭ gdb vmlinux
-	GNU gdb (GDB) 8.2.1
-	Copyright (C) 2018 Free Software Foundation, Inc.
-	License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
-	This is free software: you are free to change and redistribute it.
-	There is NO WARRANTY, to the extent permitted by law.
-	Type "show copying" and "show warranty" for details.
-	This GDB was configured as "x86_64-pc-linux-gnu".
-	Type "show configuration" for configuration details.
-	For bug reporting instructions, please see:
-	<http://www.gnu.org/software/gdb/bugs/>.
-	Find the GDB manual and other documentation resources online at:
-	    <http://www.gnu.org/software/gdb/documentation/>.
+	$ gdb -q vmlinux
+	Reading symbols from vmlinux...done.
+	warning: File "/home/debug/Projects/kernelbuild/linux-5.0.3/scripts/gdb/vmlinux-gdb.py" auto-loading has been declined by your `auto-load safe-path' set to "$debugdir:$datadir/auto-load".
+	To enable execution of this file add
+		add-auto-load-safe-path /home/debug/Projects/kernelbuild/linux-5.0.3/scripts/gdb/vmlinux-gdb.py
+	line to your configuration file "/home/debug/.gdbinit".
+	To completely disable this security protection add
+		set auto-load safe-path /
+	line to your configuration file "/home/debug/.gdbinit".
+	For more information about this security protection see the
+	"Auto-loading safe path" section in the GDB manual.  E.g., run from the shell:
+		info "(gdb)Auto-loading safe path"
 
-	For help, type "help".
-	Type "apropos word" to search for commands related to "word"...
-	Reading symbols from vmlinux...(no debugging symbols found)...done.
-	(gdb) target remote localhost:1234
-	Remote debugging using localhost:1234
-	0xffffffff89a4b852 in ?? ()
-	(gdb) break start_kernel
-	Breakpoint 1 at 0xffffffff826ccc08
-	(gdb)
-	Display all 190 possibilities? (y or n)
-	(gdb) info functions
-	All defined functions:
+	$ cat ~/.gdbinit
+	add-auto-load-safe-path /home/debug/Projects/kernelbuild/linux-5.0.3/scripts/gdb/vmlinux-gdb.py
 
-	Non-debugging symbols:
-	0xffffffff81000000  _stext
-	0xffffffff81000000  _text
-	0xffffffff81000000  startup_64
-	0xffffffff81000030  secondary_startup_64
-	0xffffffff810000e0  verify_cpu
-	0xffffffff810001e0  start_cpu0
-	0xffffffff810001f0  __startup_64
-	0xffffffff81000410  pvh_start_xen
-	0xffffffff81001000  hypercall_page
-	0xffffffff81001000  xen_hypercall_set_trap_table
-	0xffffffff81001020  xen_hypercall_mmu_update
-	0xffffffff81001040  xen_hypercall_set_gdt
-	0xffffffff81001060  xen_hypercall_stack_switch
-	0xffffffff81001080  xen_hypercall_set_callbacks
-	0xffffffff810010a0  xen_hypercall_fpu_taskswitch
-	0xffffffff810010c0  xen_hypercall_sched_op_compat
-	0xffffffff810010e0  xen_hypercall_platform_op
+	$ gdb -q vmlinux
+	Reading symbols from vmlinux...done.
+	(gdb) target remote :1234
+	Remote debugging using :1234
+	0xffffffffaa64b852 in ?? ()
+
+	(gdb) apropos lx-
+	lx-cmdline --  Report the Linux Commandline used in the current kernel
+	lx-cpus -- List CPU status arrays
+	lx-dmesg -- Print Linux kernel log buffer
+	lx-fdtdump -- Output Flattened Device Tree header and dump FDT blob to the filename
+	lx-iomem -- Identify the IO memory resource locations defined by the kernel
+	lx-ioports -- Identify the IO port resource locations defined by the kernel
+	lx-list-check -- Verify a list consistency
+	lx-lsmod -- List currently loaded modules
+	lx-mounts -- Report the VFS mounts of the current process namespace
+	lx-ps -- Dump Linux tasks
+	lx-symbols -- (Re-)load symbols of Linux kernel and currently loaded modules
+	lx-version --  Report the Linux Version of the current kernel
+
+	(gdb) lx-symbols
+	loading vmlinux
+	Python Exception <class 'gdb.MemoryError'> Cannot access memory at address 0xffffffff8225f770:
+	Error occurred in Python command: Cannot access memory at address 0xffffffff8225f770
 
 
 :: References
