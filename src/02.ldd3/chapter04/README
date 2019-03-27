@@ -38,9 +38,12 @@ TFTP server (on systems that can boot from Ethernet).
 - https://www.kernel.org/doc/html/latest/admin-guide/README.html
 - https://wiki.archlinux.org/index.php/Kernel/Traditional_compilation
 
+Build the kernel with this series applied, enabling CONFIG_DEBUG_INFO (but leave
+CONFIG_DEBUG_INFO_REDUCED off)
+
 2. Install GDB and Qemu
 
-sudo pacman -S gdb qemu
+	sudo pacman -S gdb qemu
 
 3. Create initramfs
 
@@ -173,7 +176,7 @@ sudo pacman -S gdb qemu
 :: References
 
 https://elinux.org/Debugging_by_printing
-https://www.kernel.org/doc/html/v4.15/dev-tools/index.html
+https://www.kernel.org/doc/html/latest/dev-tools/gdb-kernel-debugging.html
 https://media.ccc.de/v/froscon2017-1925-linux_kernel_debugging_for_sysadmins
 https://medium.com/square-corner-blog/a-short-guide-to-kernel-debugging-e6fdbe7bfcdf
 https://stackoverflow.com/questions/11408041/how-to-debug-the-linux-kernel-with-gdb-and-qemu
@@ -183,8 +186,8 @@ http://www.linuxfromscratch.org/lfs/view/stable/
 https://www.youtube.com/watch?v=nv0CjGdOLxY
 https://github.com/midfingr/youtube_notes/blob/master/qemu_arch
 https://consen.github.io/2018/01/17/debug-linux-kernel-with-qemu-and-gdb/
-https://busybox.net/
 https://www.thegeekstuff.com/2011/02/linux-boot-process/
 https://en.wikipedia.org/wiki/Vmlinux
 https://en.wikipedia.org/wiki/Initial_ramdisk
+https://lwn.net/Articles/533552/
 
