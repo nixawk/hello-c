@@ -18,9 +18,124 @@ $ sudo sh -c 'echo 8 > /proc/sys/kernel/printk'
 $ sudo insmod ./hello.ko
 $ sudo rmmod hello
 
+:: Debugging by Qemu
+
+On Linux systems, vmlinux is a statically linked executable file that contains
+the Linux kernel in one of the object file formats supported by Linux, which
+includes ELF, COFF and a.out. The vmlinux file might be required for kernel
+debugging, symbol table generation or other operations, but must be made
+bootable before being used as an operating system kernel by adding a multiboot
+header, bootsector and setup routines.
+
+An image of this initial root file system must be stored somewhere accessible
+by the Linux bootloader to the boot firmware of the computer. This can be the
+root file system itself, a boot image on an optical disc, a small partition on
+a local disk (a boot paratition, usually using ext4 or FAT file systems), or a
+TFTP server (on systems that can boot from Ethernet).
+
+1. Compile linux kernel
+
+- https://www.kernel.org/doc/html/latest/admin-guide/README.html
+- https://wiki.archlinux.org/index.php/Kernel/Traditional_compilation
+
+2. Install GDB and Qemu
+
+sudo pacman -S gdb qemu
+
+3. Create initramfs
+
+	#!/bin/bash
+
+	# Os     : Arch Linux
+	# Kernel : 5.0.3
+
+	INIT_DIR=$(pwd)
+	BBOX_URL="https://busybox.net/downloads/busybox-1.30.1.tar.bz2"
+	BBOX_FILENAME=$(basename ${BBOX_URL})
+	BBOX_DIRNAME=$(basename ${BBOX_FILENAME} ".tar.bz2")
+	RAM_FILENAME="${INIT_DIR}/initramfs.cpio.gz"
+
+	function download_busybox {
+		wget -c ${BBOX_URL} 2>/dev/null
+	}
+
+	function compile_busybox {
+		tar xvf ${BBOX_FILENAME} && cd "${INIT_DIR}/${BBOX_DIRNAME}/"
+		echo "[*] Settings > Build options > Build static binary (no shared libs)"
+		echo "[!] Please enter to continue"
+		read tmpvar
+		make menuconfig && make -j2 && make install
+	}
+
+	function config_busybox {
+		cd "${INIT_DIR}/${BBOX_DIRNAME}/"
+		rm -rf initramfs/ && cp -rf _install/ initramfs/
+		rm -f initramfs/linuxrc
+		mkdir -p initramfs/{dev,proc,sys}
+		sudo cp -a /dev/{null,console,tty,tty1,tty2,tty3,tty4} initramfs/dev/
+
+	cat > "${INIT_DIR}/${BBOX_DIRNAME}/initramfs/init" << EOF
+	#!/bin/busybox sh
+	mount -t proc none /proc
+	mount -t sysfs none /sys
+
+	exec /sbin/init
+	EOF
+
+		chmod a+x initramfs/init
+		cd "${INIT_DIR}/${BBOX_DIRNAME}/initramfs/"
+		find . -print0 | cpio --null -ov --format=newc | gzip -9 > "${RAM_FILENAME}"
+		echo "[*] output: ${RAM_FILENAME}"
+
+	}
+
+	download_busybox
+	compile_busybox
+	config_busybox
+
+4. Boot Linux Kernel With Qemu
+
+	#!/bin/bash
+
+	KER_FILENAME="/home/debug/Projects/kernelbuild/linux-5.0.3/arch/x86/boot/bzImage"
+	RAM_FILENAME="/home/debug/Projects/kerneldebug/initramfs.cpio.gz"
+
+	qemu-system-x86_64 -s -kernel "${KER_FILENAME}" -initrd "${RAM_FILENAME}" -nographic -append "console=ttyS0"
+
+	$ ./qemuboot_vmlinux.sh
+	SeaBIOS (version 1.12.0-20181126_142135-anatol)
+
+
+	iPXE (http://ipxe.org) 00:03.0 C980 PCI2.10 PnP PMM+07F92120+07EF2120 C980
+
+
+
+	Booting from ROM...
+	Probing EDD (edd=off to disable)... o
+	[    0.019814] Spectre V2 : Spectre mitigation: LFENCE not serializing, switching to generic retpoline
+	can't run '/etc/init.d/rcS': No such file or directory
+
+	Please press Enter to activate this console.
+	/ #  uname -a
+	Linux archlinux 5.0.3 #2 SMP PREEMPT Mon Mar 25 10:27:13 CST 2019 x86_64 GNU/Linux
+	/ #
+
+
+:: References
 
 https://elinux.org/Debugging_by_printing
 https://www.kernel.org/doc/html/v4.15/dev-tools/index.html
 https://media.ccc.de/v/froscon2017-1925-linux_kernel_debugging_for_sysadmins
 https://medium.com/square-corner-blog/a-short-guide-to-kernel-debugging-e6fdbe7bfcdf
+https://stackoverflow.com/questions/11408041/how-to-debug-the-linux-kernel-with-gdb-and-qemu
+http://nickdesaulniers.github.io/blog/2018/10/24/booting-a-custom-linux-kernel-in-qemu-and-debugging-it-with-gdb/
+https://wiki.archlinux.org/index.php/mkinitcpio
+http://www.linuxfromscratch.org/lfs/view/stable/
+https://www.youtube.com/watch?v=nv0CjGdOLxY
+https://github.com/midfingr/youtube_notes/blob/master/qemu_arch
+https://consen.github.io/2018/01/17/debug-linux-kernel-with-qemu-and-gdb/
+https://busybox.net/
+https://www.thegeekstuff.com/2011/02/linux-boot-process/
+https://en.wikipedia.org/wiki/Vmlinux
+https://en.wikipedia.org/wiki/Initial_ramdisk
 
