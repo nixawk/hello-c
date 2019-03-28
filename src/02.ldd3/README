@@ -1,4 +1,196 @@
 :: ldd3
 
-https://lwn.net/Kernel/LDD3/
+	- https://lwn.net/Kernel/LDD3/
+
+
+:: How to setup a linux kernel debug lab ?
+
+	If your os is ubuntu/debian, please read:
+
+	- https://mudongliang.github.io/2017/09/21/set-up-qemu-for-kernel-development.html
+	- https://www.collabora.com/news-and-blog/blog/2017/01/16/setting-up-qemu-kvm-for-kernel-development/
+
+	If your os is archlinux, please read:
+
+	- https://medium.com/@clem.boin/creating-a-minimal-kernel-development-setup-using-qemu-and-archlinux-987896954d84
+	- https://www.collabora.com/news-and-blog/blog/2019/03/20/bootstraping-a-minimal-arch-linux-image/
+	- https://stackoverflow.com/questions/17242403/linux-running-self-compiled-kernel-in-qemu-vfs-unable-to-mount-root-fs-on-unk
+
+	If you want to debug linux kernel, please prepare a custom compiled
+	vmlinux and a disk (rootfs) for linux kernel.
+
+::: create a disk
+
+	(host) $ sudo pacman -S arch-install-scripts qemu
+	(host) $ qemu-img create kernel-dev-archlinux.img 5G
+	(host) $ mkfs.ext4 kernel-dev-archlinux.img
+	(host) $ mkdir archlinux
+	(host) $ sudo mount kernel-dev-archlinux.img archlinux
+	(host) $ sudo pacstrap archlinux/ base base-devel
+	(host) $ sudo umount archlinux/
+
+::: compile linux kernel
+
+	Build the kernel with this series applied, enabling CONFIG_DEBUG_INFO
+        (but leave CONFIG_DEBUG_INFO_REDUCED off), enabling CONFIG_GDB_SCRIPTS.
+
+		CONFIG_DEBUG_INFO=y
+		CONFIG_GDB_SCRIPTS=y
+
+	(host) $ git clone --depth=1 git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+	(host) $ cd linux
+	(host) $ make x86_64_defconfig
+	(host) $ make kvmconfig
+	(host) $ make -j8
+
+::: boot linux kernel
+
+	(host) $ qemu-system-x86_64 -hda /home/debug/Projects/kernelbuild/kernel-dev-archlinux.img -m 4G -nographic -kernel /home/debug/Projects/kernelbuild/linux-5.0.4/arch/x86/boot/bzImage -append "root=/dev/sda rw console=ttyS0 loglevel=5"
+	WARNING: Image format was not specified for 'arch_disk.raw' and probing guessed raw.
+	         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+	         Specify the 'raw' format explicitly to remove the restrictions.
+	SeaBIOS (version 1.12.0-20181126_142135-anatol)
+
+
+	iPXE (http://ipxe.org) 00:03.0 C980 PCI2.10 PnP PMM+BFF92110+BFEF2110 C980
+
+
+
+	Booting from ROM..
+	[    1.379142] Spectre V2 : Spectre mitigation: LFENCE not serializing, switching to generic retpoline
+	[    1.648039] Huh? What family is it: 0x6?!
+	[    1.915492] acpi PNP0A03:00: fail to add MMCONFIG information, can't access extended PCI configuration space under this bridge.
+	[    2.708178] sd 0:0:0:0: [sda] Optimal transfer size 0 bytes < PAGE_SIZE (4096 bytes)
+	[    3.129100] platform regulatory.0: Direct firmware load for regulatory.db failed with error -2
+
+	Welcome to Arch Linux!
+
+	[    5.418935] systemd[1]: File /usr/lib/systemd/system/systemd-journald.service:12 configures an IP firewall (IPAddressDeny=any), but the local system does not support BPF/cgroup based firewalling.
+	[    5.425989] systemd[1]: Proceeding WITHOUT firewalling in effect! (This warning is only shown for the first loaded unit using IP firewalling.)
+	[  OK  ] Created slice system-serial\x2dgetty.slice.
+	[  OK  ] Reached target Remote File Systems.
+	[  OK  ] Created slice system-getty.slice.
+	[  OK  ] Listening on udev Control Socket.
+	[  OK  ] Listening on initctl Compatibility Named Pipe.
+	[  OK  ] Listening on udev Kernel Socket.
+	[  OK  ] Started Dispatch Password …ts to Console Directory Watch.
+	[  OK  ] Created slice User and Session Slice.
+	[  OK  ] Reached target Slices.
+	[  OK  ] Listening on LVM2 metadata daemon socket.
+	[  OK  ] Listening on LVM2 poll daemon socket.
+	[  OK  ] Started Forward Password R…uests to Wall Directory Watch.
+	[  OK  ] Reached target Local Encrypted Volumes.
+	[  OK  ] Listening on Process Core Dump Socket.
+	[  OK  ] Set up automount Arbitrary…s File System Automount Point.
+	[  OK  ] Reached target Swap.
+	[  OK  ] Reached target Paths.
+	[  OK  ] Listening on Journal Socket (/dev/log).
+	[  OK  ] Listening on Journal Socket.
+	         Starting Apply Kernel Variables...
+	         Mounting POSIX Message Queue File System...
+	         Mounting Huge Pages File System...
+	         Starting Remount Root and Kernel File Systems...
+	[  OK  ] Listening on Journal Audit Socket.
+	         Starting Journal Service...
+	         Mounting Temporary Directory (/tmp)...
+	         Mounting Kernel Debug File System...
+	[  OK  ] Listening on Device-mapper event daemon FIFOs.
+	         Starting Monitoring of LVM…meventd or progress polling...
+	         Starting udev Coldplug all Devices...
+	[  OK  ] Started Apply Kernel Variables.
+	[  OK  ] Mounted POSIX Message Queue File System.
+	[  OK  ] Mounted Huge Pages File System.
+	[  OK  ] Started Remount Root and Kernel File Systems.
+	[  OK  ] Mounted Temporary Directory (/tmp).
+	[  OK  ] Mounted Kernel Debug File System.
+	[  OK  ] Started LVM2 metadata daemon.
+	         Starting Create Static Device Nodes in /dev...
+	         Starting Load/Save Random Seed...
+	[  OK  ] Started Load/Save Random Seed.
+	[  OK  ] Started Create Static Device Nodes in /dev.
+	         Starting udev Kernel Device Manager...
+	[  OK  ] Started udev Coldplug all Devices.
+	[  OK  ] Started Journal Service.
+	         Starting Flush Journal to Persistent Storage...
+	[   16.562309] systemd-journald[1106]: File /var/log/journal/67d19e85c78d4c5c8067c9e6c615e802/system.journal corrupted or uncleanly shut down, renaming and replacing.
+	[  OK  ] Started udev Kernel Device Manager.
+	[  OK  ] Started Flush Journal to Persistent Storage.
+	[  OK  ] Found device /dev/ttyS0.
+	[  OK  ] Started Monitoring of LVM2… dmeventd or progress polling.
+	[  OK  ] Reached target Local File Systems (Pre).
+	[  OK  ] Reached target Local File Systems.
+	         Starting Create Volatile Files and Directories...
+	[  OK  ] Listening on Load/Save RF …itch Status /dev/rfkill Watch.
+	[  OK  ] Started Create Volatile Files and Directories.
+	         Starting Update UTMP about System Boot/Shutdown...
+	[  OK  ] Started Update UTMP about System Boot/Shutdown.
+	[  OK  ] Reached target System Initialization.
+	[  OK  ] Started Daily rotation of log files.
+	[  OK  ] Started Daily man-db regeneration.
+	[  OK  ] Listening on D-Bus System Message Bus Socket.
+	[  OK  ] Reached target Sockets.
+	[  OK  ] Started Daily verification of password and group files.
+	[  OK  ] Started Daily Cleanup of Temporary Directories.
+	[  OK  ] Reached target Timers.
+	[  OK  ] Reached target Basic System.
+	[  OK  ] Started D-Bus System Message Bus.
+	         Starting Permit User Sessions...
+	         Starting Login Service...
+	[  OK  ] Started Permit User Sessions.
+	[  OK  ] Started Serial Getty on ttyS0.
+	[  OK  ] Started Getty on tty1.
+	[  OK  ] Reached target Login Prompts.
+	[  OK  ] Started Login Service.
+	[  OK  ] Reached target Multi-User System.
+	[  OK  ] Reached target Graphical Interface.
+
+	Arch Linux 5.0.4 (ttyS0)
+
+	archlinux login:
+
+::: debug linux kernel
+
+	(host) $ gdb -q vmlinux
+	Reading symbols from vmlinux...done.
+	(gdb) target remote :1234
+	Remote debugging using :1234
+	0xffffffff9a831dc4 in ?? ()
+	(gdb) break start_kernel
+	Breakpoint 1 at 0xffffffff82989ab0: file init/main.c, line 538.
+	(gdb) continue
+	Continuing.
+	^C
+	Program received signal SIGINT, Interrupt.
+	0xffffffff9a831dc4 in ?? ()
+	(gdb) lx-version
+	Python Exception <class 'gdb.MemoryError'> Cannot access memory at address 0xffffffff82000080:
+	Error occurred in Python command: Cannot access memory at address 0xffffffff82000080
+	(gdb) info functions
+	All defined functions:
+
+	File ./arch/x86/include/asm//msr-trace.h:
+	21:	static void perf_trace_msr_trace_class(void *, unsigned int, u64, int);
+	21:	static int trace_event_define_fields_msr_trace_class(struct trace_event_call *);
+	21:	static void trace_event_raw_event_msr_trace_class(void *, unsigned int, u64, int);
+	21:	static enum print_line_t trace_raw_output_msr_trace_class(struct trace_iterator *, int, struct trace_event *);
+	......
+
+::: errors
+
+	If you have the following error, please rebuild your kernel.
+
+	    [    0.955796] ---[ end Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0) ]---
+
+
+:: references
+
+http://lockett.altervista.org/linuxboot/linuxboot.html
+http://nickdesaulniers.github.io/blog/2018/10/24/booting-a-custom-linux-kernel-in-qemu-and-debugging-it-with-gdb/
+https://github.com/google/syzkaller/blob/master/tools/create-image.sh
+https://medium.com/@clem.boin/creating-a-minimal-kernel-development-setup-using-qemu-and-archlinux-987896954d84
+https://mudongliang.github.io/2017/09/21/set-up-qemu-for-kernel-development.html
+https://stackoverflow.com/questions/17242403/linux-running-self-compiled-kernel-in-qemu-vfs-unable-to-mount-root-fs-on-unk
+https://www.collabora.com/news-and-blog/blog/2017/01/16/setting-up-qemu-kvm-for-kernel-development/
+https://www.collabora.com/news-and-blog/blog/2019/03/20/bootstraping-a-minimal-arch-linux-image/
+https://github.com/nixawk/hello-c/tree/master/src/02.ldd3/chapter04
 
