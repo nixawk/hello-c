@@ -45,7 +45,7 @@
 
 ::: boot linux kernel
 
-	(host) $ qemu-system-x86_64 -hda /home/debug/Projects/kernelbuild/kernel-dev-archlinux.img -m 4G -nographic -kernel /home/debug/Projects/kernelbuild/linux-5.0.4/arch/x86/boot/bzImage -append "root=/dev/sda rw console=ttyS0 loglevel=5"
+	(host) $ qemu-system-x86_64 -hda /home/debug/Projects/kernelbuild/kernel-dev-archlinux.img -m 4G -nographic -kernel /home/debug/Projects/kernelbuild/linux-5.0.4/arch/x86/boot/bzImage -append "root=/dev/sda rw console=ttyS0 loglevel=5" -s
 	WARNING: Image format was not specified for 'arch_disk.raw' and probing guessed raw.
 	         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
 	         Specify the 'raw' format explicitly to remove the restrictions.
@@ -213,6 +213,7 @@
 
 	function boot_linux_kernel {
 	    qemu-system-x86_64 -hda "${INIT_DIR}/${IMG_NAME}" \
+		-s \
 		-m ${CPU_SIZE} \
 		-nographic \
 		-kernel "${INIT_DIR}/linux/arch/x86/boot/bzImage" \
