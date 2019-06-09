@@ -37,6 +37,9 @@ demo_g_thread_new(void)
                         (gpointer)t_args
                 );
                 g_thread_join(thread);
+
+                if (t_args)
+                        g_free(t_args);
         }
 
 }
