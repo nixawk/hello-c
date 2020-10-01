@@ -1,8 +1,8 @@
 #include <stdio.h>
 
-void keyword_continue(void)
+void keyword_continue(int i)
 {
-	for (int i = 0; i < 15; i++) {
+	for (; i < 15; i++) {
 		if (i % 2 == 0)
 			continue;
 		printf("%d ", i);
@@ -11,8 +11,9 @@ void keyword_continue(void)
 }
 
 int main(void)
-{
-	keyword_continue();
+{ int x;
+  scanf("%d',&x);
+	keyword_continue(x);
 	return 0;
 }
 
