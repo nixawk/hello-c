@@ -13,14 +13,14 @@
 #include <stdio.h>
 
 void foo(void)
-{
-	return;
-	printf("never here\n");
+{        printf("always here\n");    /*visites here*/
+	return;                     /*returns to main*/
+	printf("never here\n");    /* never comes here*/
 }
 
 int main(void)
 {
-	foo();
+	foo();                   /*funtion call*/
 	return 0;
 }
 
