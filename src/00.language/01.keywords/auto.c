@@ -11,7 +11,7 @@ void keyword_auto(void)
 
 int main(void)
 {
-	keyword_auto();
+	keyword_auto();       /* call to function */
 	return 0;
 }
 
