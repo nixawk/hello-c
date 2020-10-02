@@ -1,6 +1,6 @@
 #include <stdio.h>
-
-void recurse(int count)
+void recurse(int); //funtion prototype
+void recurse(int count) //function defenition
 {
 	if (count >= 10) {
 		printf("Bingo !\n");
@@ -12,6 +12,6 @@ void recurse(int count)
 
 int main(void)
 {
-	recurse(1);
+	recurse(1); //function call or recursive call as it is recursive function
 	return 0;
 }
